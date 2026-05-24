@@ -1,7 +1,7 @@
-import { auth, currentUser } from '@clerk/nextjs/server';
-import { UserButton } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { supabaseAdmin } from '@/lib/supabase/server';
+import { createSupabaseServerClient, supabaseAdmin } from '@/lib/supabase/server';
+import UserDropdown from '@/components/layout/UserDropdown';
 
 type Order = {
   id: string;
@@ -33,14 +33,22 @@ const statusColor = (status: string) => {
   }
 };
 
-export default async function AccountPage() {
-  const { userId } = await auth();
-  const user = await currentUser();
+export const dynamic = 'force-dynamic';
 
+export default async function AccountPage() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect('/sign-in?next=/account');
+
+  // Use service role for the read since we have user.id verified server-side.
+  // (RLS policy also allows the user to read via auth.uid() — both work.)
   const { data: orders, error } = await supabaseAdmin
     .from('orders')
     .select('id, stripe_session_id, payment_status, fulfillment_status, total_cents, tracking_number, tracking_carrier, created_at')
-    .eq('user_id', userId!)
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .returns<Order[]>();
 
@@ -55,11 +63,9 @@ export default async function AccountPage() {
             <h1 className="text-4xl sm:text-5xl font-bold uppercase tracking-tight text-zinc-950 mt-2">
               Your account
             </h1>
-            <p className="text-zinc-500 text-sm mt-1">
-              {user?.emailAddresses[0]?.emailAddress}
-            </p>
+            <p className="text-zinc-500 text-sm mt-1">{user.email}</p>
           </div>
-          <UserButton />
+          <UserDropdown theme="dark" />
         </div>
 
         <section>
@@ -75,9 +81,9 @@ export default async function AccountPage() {
 
           {!error && (!orders || orders.length === 0) && (
             <div className="rounded-2xl border border-dashed border-zinc-300 bg-white/50 px-6 py-12 text-center">
-              <p className="text-zinc-500 text-sm">You haven't placed any orders yet.</p>
+              <p className="text-zinc-500 text-sm">You haven&apos;t placed any orders yet.</p>
               <Link
-                href="/#merchandise"
+                href="/merchandise"
                 className="inline-block mt-4 bg-zinc-950 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-zinc-700 transition-colors"
               >
                 Shop merch

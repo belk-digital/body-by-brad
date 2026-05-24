@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { UserButton } from '@clerk/nextjs';
 import { isAdmin } from '@/lib/auth/isAdmin';
 import AdminTabs from './AdminTabs';
+import UserDropdown from '@/components/layout/UserDropdown';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   if (!(await isAdmin())) {
@@ -19,7 +19,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </Link>
             <AdminTabs />
           </div>
-          <UserButton />
+          <UserDropdown theme="dark" />
         </div>
       </header>
       <main className="max-w-6xl mx-auto px-4 sm:px-8 py-10">{children}</main>

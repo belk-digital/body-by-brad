@@ -14,6 +14,7 @@ dist-ssr
 out
 .claude
 tsconfig.tsbuildinfo
+.env
 *.local
 
 # Editor directories and files

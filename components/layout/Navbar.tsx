@@ -1,35 +1,34 @@
 'use client';
 
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoCartOutline, IoPersonOutline } from 'react-icons/io5';
-import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { logoUrl, socialMenuItems } from '@/lib/constants';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useCart } from '@/lib/cart/CartContext';
+import { useAuth } from '@/lib/auth/AuthContext';
 import HamburgerMenu from '@/components/ui/HamburgerMenu';
 import TextRoll from '@/components/ui/TextRoll';
+import UserDropdown from '@/components/layout/UserDropdown';
 
 function AuthSlot({ theme }: { theme: 'light' | 'dark' }) {
-  const { isLoaded, isSignedIn } = useUser();
-  if (!isLoaded) {
-    return <div className="w-[26px] h-[26px]" aria-hidden />;
+  const { user, loading } = useAuth();
+  if (loading) {
+    return <div className="w-7 h-7" aria-hidden />;
   }
-  if (isSignedIn) {
-    return (
-      <UserButton appearance={{ elements: { avatarBox: 'w-7 h-7' } }} />
-    );
+  if (user) {
+    return <UserDropdown theme={theme} />;
   }
   return (
-    <SignInButton mode="redirect">
-      <button
-        aria-label="Sign in"
-        className={`hover:opacity-70 transition-opacity cursor-pointer ${
-          theme === 'light' ? 'text-white' : 'text-black'
-        }`}
-      >
-        <IoPersonOutline size={24} />
-      </button>
-    </SignInButton>
+    <Link
+      href="/sign-in"
+      aria-label="Sign in"
+      className={`hover:opacity-70 transition-opacity ${
+        theme === 'light' ? 'text-white' : 'text-black'
+      }`}
+    >
+      <IoPersonOutline size={24} />
+    </Link>
   );
 }
 
