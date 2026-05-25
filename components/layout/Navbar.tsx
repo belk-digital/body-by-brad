@@ -239,7 +239,7 @@ export default function Navbar({
         transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
         className="font-satoshi z-[60] absolute top-0 left-0 right-0 px-4 pt-5 sm:px-7 sm:pt-7 md:px-12 md:pt-9 flex items-center justify-between"
       >
-        <div className="flex w-24 items-center justify-start gap-2 sm:w-32 sm:gap-3">
+        <div className="flex flex-1 items-center justify-start gap-2 sm:gap-3">
           <HamburgerMenu
             checked={isMenuOpen}
             onToggle={onMenuToggle}
@@ -276,7 +276,7 @@ export default function Navbar({
           />
         </a>
 
-        <div className="flex items-center justify-end gap-5 sm:gap-6 md:gap-8">
+        <div className="flex flex-1 items-center justify-end gap-5 sm:gap-6 md:gap-8">
           <button
             aria-label="Cart"
             onClick={openCart}
@@ -312,7 +312,7 @@ export default function Navbar({
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
             className="font-satoshi z-[60] fixed top-4 left-4 right-4 md:top-6 md:left-8 md:right-8 bg-[#F5F0E1] rounded-full shadow-lg px-6 py-4 flex items-center justify-between"
           >
-            <div className="flex w-24 items-center justify-start gap-2 sm:w-32 sm:gap-3">
+            <div className="flex flex-1 items-center justify-start gap-2 sm:gap-3">
               <HamburgerMenu
                 checked={isMenuOpen}
                 onToggle={onMenuToggle}
@@ -349,7 +349,7 @@ export default function Navbar({
               />
             </a>
 
-            <div className="flex items-center justify-end gap-5 sm:gap-6 md:gap-8">
+            <div className="flex flex-1 items-center justify-end gap-5 sm:gap-6 md:gap-8">
               <div className="hidden sm:flex gap-0.5 rounded-full bg-black/10 p-0.5">
                 {(['en', 'es'] as const).map((l) => (
                   <button

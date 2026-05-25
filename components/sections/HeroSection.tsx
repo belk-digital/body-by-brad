@@ -1,10 +1,23 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, type Variants } from 'framer-motion';
-import { heroBackgroundUrl, heroModelUrl } from '@/lib/constants';
+import { useEffect, useRef, useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useMotionTemplate,
+  useScroll,
+  useSpring,
+  useTransform,
+  type Variants,
+} from 'framer-motion';
+import {
+  bradImagePool,
+  heroBackgroundUrl,
+  heroModelUrl,
+} from '@/lib/constants';
 import { useLanguage } from '@/lib/LanguageContext';
-import CountUp from '@/components/ui/CountUp';
+import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 type HeroSectionProps = {
   isLoading: boolean;
@@ -13,191 +26,231 @@ type HeroSectionProps = {
 export default function HeroSection({ isLoading }: HeroSectionProps) {
   const { t } = useLanguage();
 
-  const [modelX] = useState<number>(() => {
-    if (typeof window === 'undefined') return 42;
-    const w = window.innerWidth;
-    if (w < 640) return Math.round(w * 0.22); // ~79px @360, ~86px @390, ~91px @414
-    if (w < 768) return 65;
-    return 42;
-  });
+  const modelMaskRef = useRef<HTMLDivElement>(null);
 
-  const [modelY] = useState<number>(() => {
-    if (typeof window === 'undefined') return 42;
-    if (window.innerWidth < 640) return 20;
-    if (window.innerWidth < 768) return 32;
-    return 42;
-  });
+  const cursorX = useMotionValue(-400);
+  const cursorY = useMotionValue(-400);
+  const springX = useSpring(cursorX, { damping: 24, stiffness: 220, mass: 0.5 });
+  const springY = useSpring(cursorY, { damping: 24, stiffness: 220, mass: 0.5 });
+  const maskImage = useMotionTemplate`radial-gradient(circle 180px at ${springX}px ${springY}px, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%)`;
+
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, [0, 800], [0, 220]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!modelMaskRef.current) return;
+    const rect = modelMaskRef.current.getBoundingClientRect();
+    cursorX.set(e.clientX - rect.left);
+    cursorY.set(e.clientY - rect.top);
+  };
+
+  const handleMouseLeave = () => {
+    cursorX.set(-400);
+    cursorY.set(-400);
+  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+      transition: { staggerChildren: 0.18, delayChildren: 0.35 },
     },
   };
 
-  const titleVariants: Variants = {
-    hidden: { y: 100, opacity: 0, filter: 'blur(18px)' },
-    visible: {
-      y: 0,
-      opacity: 1,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring',
-        stiffness: 50,
-        damping: 20,
-        filter: { duration: 0.9, ease: 'easeOut' },
-      },
-    },
-  };
-
-  const fadeVariants: Variants = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 28, filter: 'blur(10px)' },
     visible: {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-        filter: { duration: 0.7, ease: 'easeOut' },
-      },
+      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
     },
   };
+
+  const headlineLine: Variants = {
+    hidden: { opacity: 0, x: -120, filter: 'blur(14px)' },
+    visible: {
+      opacity: 1,
+      x: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  const [thumbnailTick, setThumbnailTick] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setThumbnailTick((value) => value + 1),
+      1200,
+    );
+    return () => window.clearInterval(id);
+  }, []);
+  const thumbnailImage = bradImagePool[thumbnailTick % bradImagePool.length];
 
   return (
     <>
-      {/* Background image */}
       <motion.img
         initial={{ scale: 1.1, opacity: 0 }}
         animate={isLoading ? { scale: 1.1, opacity: 0 } : { scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: 'easeOut' }}
+        transition={{ duration: 1.8, ease: 'easeOut' }}
         className="absolute inset-0 z-0 h-full w-full object-cover"
         src={heroBackgroundUrl}
-        alt="Background"
+        alt="Body By Brad"
         loading="eager"
         fetchPriority="high"
       />
 
-      {/* Model image */}
-      <motion.img
-        initial={{ x: 80, y: 42, scale: 1.42, opacity: 0 }}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-b from-black/45 via-black/15 to-black/75" />
+
+      <div
+        className="pointer-events-none absolute inset-0 z-15"
+        style={{
+          background:
+            'radial-gradient(ellipse 52% 68% at 50% 58%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.85) 100%)',
+        }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 60, scale: 1.06 }}
         animate={
           isLoading
-            ? { x: 80, y: 42, scale: 1.42, opacity: 0 }
-            : { x: modelX, y: modelY, scale: 1.42, opacity: 1 }
+            ? { opacity: 0, y: 60, scale: 1.06 }
+            : { opacity: 1, y: 0, scale: 1 }
         }
-        transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
-        className="pointer-events-none absolute inset-0 z-20 h-full w-full object-contain object-bottom grayscale"
-        src={heroModelUrl}
-        alt="Fitness model preparing to train"
-        loading="eager"
-        fetchPriority="high"
-      />
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+        className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-[82%] w-full"
+      >
+        <motion.div
+          ref={modelMaskRef}
+          style={{ y: parallaxY }}
+          className="relative h-full w-full"
+        >
+          <img
+            src={heroModelUrl}
+            alt="Body By Brad model"
+            className="absolute inset-0 mx-auto h-full w-full object-cover object-bottom grayscale select-none sm:object-contain"
+            loading="eager"
+            fetchPriority="high"
+            draggable={false}
+          />
+          <motion.img
+            src={heroModelUrl}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 mx-auto h-full w-full object-cover object-bottom select-none sm:object-contain"
+            style={{
+              maskImage,
+              WebkitMaskImage: maskImage,
+            }}
+            loading="eager"
+            draggable={false}
+          />
+        </motion.div>
+      </motion.div>
 
-      {/* Foreground content — z-30 so Framer's stacking context sits above the model (z-20) */}
       <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         variants={containerVariants}
         initial="hidden"
         animate={isLoading ? 'hidden' : 'visible'}
         className="relative z-30 h-full w-full"
       >
-        {/* "built" — mobile: left-aligned stack | sm: staircase | md: desktop diagonal */}
-        <motion.h1
-          variants={titleVariants}
-          className="
-            hero-title absolute z-10 text-[#DFF994] leading-none
-            text-[25vw] font-semibold left-4       top-[15%]
-            sm:text-[14vw] sm:font-bold   sm:left-6    sm:top-[18%]
-            md:text-[13vw] md:font-medium md:left-10   md:top-[22%]
-          "
-        >
-          built
-        </motion.h1>
-
-        {/* "for" */}
-        <motion.h1
-          variants={titleVariants}
-          className="
-            hero-title absolute z-30 text-[#DFF994] leading-none
-            text-[25vw] font-semibold left-4       top-[37%]
-            sm:text-[14vw] sm:font-bold   sm:left-[28%] sm:top-[36%]
-            md:text-[13vw] md:font-medium md:left-[28%] md:top-[62%]
-          "
-        >
-          for
-        </motion.h1>
-
-        {/* "more" */}
-        <motion.h1
-          variants={titleVariants}
-          className="
-            hero-title absolute z-10 text-[#DFF994] leading-none
-            text-[25vw] font-semibold left-4       top-[58%]
-            sm:text-[14vw] sm:font-bold   sm:left-[52%] sm:top-[54%]
-            md:text-[13vw] md:font-medium md:left-auto  md:right-10 md:top-[48%]
-          "
-        >
-          more
-        </motion.h1>
-
-        {/* Subtext top-right — tablet + desktop only */}
         <motion.p
-          variants={fadeVariants}
+          variants={fadeUp}
           className="
-            hidden
-            sm:block sm:absolute sm:right-6 sm:top-[20%] sm:z-30
-            sm:max-w-55 sm:text-[13px]
-            md:right-10 md:top-[32%] md:max-w-65 md:text-[15px]
-            leading-snug text-white/90 text-right
+            absolute left-4 top-[18%] max-w-[78vw] text-[13px] leading-snug text-white
+            sm:left-6 sm:top-[18%] sm:max-w-[44vw] sm:text-[14px]
+            md:left-10 md:top-[20%] md:max-w-sm md:text-[15px]
           "
         >
           {t.heroDescRight}
         </motion.p>
 
-        {/* Description paragraph */}
-        <motion.p
-          variants={fadeVariants}
+        <motion.div
+          variants={fadeUp}
           className="
-            absolute z-30 leading-snug text-white
-            left-4    top-[76%]   max-w-[60vw]  text-[13px] font-bold
-            sm:left-6 sm:top-[72%] sm:max-w-[44vw] sm:text-[13px] sm:font-semibold
-            md:left-10 md:top-[50%] md:max-w-60 md:text-[15px] md:font-normal md:text-white/90
+            hidden sm:flex sm:absolute sm:right-6 sm:top-[18%]
+            md:right-10 md:top-[20%]
+            flex-col items-end text-white
           "
         >
-          {t.heroDescLeft}
-        </motion.p>
-
-        {/* Bottom gradient */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-25 h-48 bg-linear-to-b from-transparent to-black" />
-
-        {/* Stat — bottom-left */}
-        <motion.div
-          variants={fadeVariants}
-          className="absolute left-4 bottom-6 z-30 sm:left-6 md:left-20 md:bottom-24"
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight tabular-nums">
-              <CountUp end={8} prefix="+" delay={1100} start={!isLoading} />
-            </span>
-            <div className="hidden md:block h-px w-24 bg-white/40 rotate-[-20deg]" />
-          </div>
-          <p className="text-[11px] sm:text-xs md:text-sm text-white/70 mt-1">{t.yearsLabel}</p>
+          <AnimatedCounter
+            endValue={1.2}
+            prefix="+"
+            suffix="k"
+            decimals={1}
+            duration={2}
+            delay={1.1}
+            easing="easeOut"
+            start={!isLoading}
+            className="text-[42px] md:text-[64px] font-bold leading-none tracking-tight tabular-nums"
+          />
+          <span className="mt-1 text-[12px] md:text-sm text-white/80">{t.sessionsLabel}</span>
         </motion.div>
 
-        {/* Stat — bottom-right */}
         <motion.div
-          variants={fadeVariants}
-          className="absolute right-4 bottom-6 z-30 sm:right-6 md:right-20 md:bottom-20"
+          variants={fadeUp}
+          className="
+            hidden sm:flex sm:absolute sm:right-6 sm:top-[40%]
+            md:right-10 md:top-[42%]
+            flex-col items-end text-white
+          "
         >
-          <div className="flex items-center gap-3 justify-end">
-            <div className="hidden md:block h-px w-24 bg-white/40 rotate-[-20deg]" />
-            <span className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight tabular-nums">
-              <CountUp end={1.2} prefix="+" suffix="k" decimals={1} delay={1300} start={!isLoading} />
-            </span>
-          </div>
-          <p className="text-[11px] sm:text-xs md:text-sm text-white/70 mt-1 text-right">{t.sessionsLabel}</p>
+          <AnimatedCounter
+            endValue={8}
+            prefix="+"
+            decimals={0}
+            duration={2}
+            delay={1.3}
+            easing="easeOut"
+            start={!isLoading}
+            className="text-[42px] md:text-[64px] font-bold leading-none tracking-tight tabular-nums"
+          />
+          <span className="mt-1 text-[12px] md:text-sm text-white/80">{t.yearsLabel}</span>
         </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          className="
+            hidden md:block absolute right-10 bottom-14 z-30
+            w-55 lg:w-65 aspect-16/10 overflow-hidden rounded-md
+            shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]
+          "
+        >
+          <AnimatePresence initial={false}>
+            <motion.img
+              key={thumbnailImage}
+              src={thumbnailImage}
+              alt="Body By Brad"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.55, ease: 'easeInOut' }}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading={thumbnailTick === 0 ? 'eager' : 'lazy'}
+              draggable={false}
+            />
+          </AnimatePresence>
+        </motion.div>
+
+        <h1
+          className="
+            absolute left-4 bottom-8 z-30 max-w-[88vw] font-bold uppercase leading-[0.95] tracking-tight text-white
+            text-[7.5vw] sm:left-6 sm:bottom-10 sm:max-w-[52vw] sm:text-[5.8vw]
+            md:left-10 md:bottom-14 md:max-w-[44vw] md:text-[4.4vw]
+          "
+        >
+          <motion.span variants={headlineLine} className="block">
+            {t.heroHeadline1}
+          </motion.span>
+          <motion.span variants={headlineLine} className="block">
+            {t.heroHeadline2}
+          </motion.span>
+          <motion.span variants={headlineLine} className="block">
+            {t.heroHeadline3}
+          </motion.span>
+        </h1>
       </motion.div>
     </>
   );

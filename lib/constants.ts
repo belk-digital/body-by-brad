@@ -4,12 +4,24 @@ export const logoUrl =
   'https://res.cloudinary.com/dgrrovta3/image/upload/v1779060049/Gemini_Generated_Image_xb9w0txb9w0txb9ww-removebg-preview_u9i0kp.png';
 
 export const heroBackgroundUrl =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,c_crop,g_north_west,h_768,w_1279/Gemini_Generated_Image_t0sivbt0sivbt0si_iwqxhp.png';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779681529/Gemini_Generated_Image_yj1702yj1702yj179_mcmh8e.png';
 
 export const heroModelUrl =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto/v1778894870/Untitled_flr1cs.png';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779680306/Untitled_-_May_25_2026_at_09.06.33_qw0wai.png';
 
 export const stairSteps = Array.from({ length: 9 });
+
+export const bradImagePool = [
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_2_zimcoc.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378588/New_Project_7_z0buwe.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_4_jikyyg.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378588/New_Project_3_yd6ba6.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_1_svqowp.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_6_kckuio.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_ecmghv.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_5_v1vfcy.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/v1778894870/Untitled_flr1cs.png',
+];
 
 export const mainMenuItems = [
   'About',

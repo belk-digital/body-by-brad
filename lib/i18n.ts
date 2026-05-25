@@ -14,8 +14,11 @@ const en = {
   // ── Hero ─────────────────────────────────────────────────────────────────
   heroDescRight: "Charleston's premier destination for elite fitness, bringing high-performance coaching and results-driven training to South Carolina.",
   heroDescLeft: 'personal training built around your goals, strength level, schedule, and long-term fitness',
-  yearsLabel: 'years training clients',
-  sessionsLabel: 'sessions coached',
+  heroHeadline1: 'WHERE EFFORT',
+  heroHeadline2: 'BECOMES',
+  heroHeadline3: 'TRANSFORMATION',
+  yearsLabel: 'years of clients',
+  sessionsLabel: 'clients served',
 
   // ── Who We Are ───────────────────────────────────────────────────────────
   whoLabel: 'WHO WE ARE',
@@ -139,8 +142,11 @@ const es: typeof en = {
   // ── Hero ─────────────────────────────────────────────────────────────────
   heroDescRight: 'El destino premier de Charleston para el fitness de élite, con coaching de alto rendimiento y entrenamiento orientado a resultados en Carolina del Sur.',
   heroDescLeft: 'entrenamiento personalizado diseñado en torno a tus metas, nivel de fuerza, horario y bienestar a largo plazo',
-  yearsLabel: 'años entrenando clientes',
-  sessionsLabel: 'sesiones entrenadas',
+  heroHeadline1: 'DONDE EL ESFUERZO',
+  heroHeadline2: 'SE CONVIERTE EN',
+  heroHeadline3: 'TRANSFORMACIÓN',
+  yearsLabel: 'años de clientes',
+  sessionsLabel: 'clientes atendidos',
 
   // ── Who We Are ───────────────────────────────────────────────────────────
   whoLabel: 'QUIÉNES SOMOS',

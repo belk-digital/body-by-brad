@@ -1,25 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "lenis/react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { bradImagePool } from "@/lib/constants";
 
-// 9 images → 3×3 grid that fits comfortably within the viewport
-const GRID_IMAGES = [
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_2_zimcoc.webp",  alt: "BBB 1" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378588/New_Project_7_z0buwe.webp",  alt: "BBB 2" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_4_jikyyg.webp",  alt: "BBB 3" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378588/New_Project_3_yd6ba6.webp",  alt: "BBB 4" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_1_svqowp.webp",  alt: "BBB 5" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_6_kckuio.webp",  alt: "BBB 6" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_ecmghv.webp",    alt: "BBB 7" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_5_v1vfcy.webp",  alt: "BBB 8" },
-  { src: "https://res.cloudinary.com/dgrrovta3/image/upload/v1778894870/Untitled_flr1cs.png",        alt: "BBB 9" },
-];
+const SLOT_COUNT = 9;
+const CYCLE_MS = 1200;
 
 export default function CTASection() {
   const { t } = useLanguage();
@@ -31,6 +22,21 @@ export default function CTASection() {
   const gridRef     = useRef<HTMLUListElement>(null);
   const itemRefs    = useRef<(HTMLLIElement | null)[]>([]);
   const titleOffsetY = useRef(0);
+
+  const [tick, setTick] = useState(0);
+  const currentImages = useMemo(
+    () =>
+      Array.from(
+        { length: SLOT_COUNT },
+        (_, i) => bradImagePool[(i + tick) % bradImagePool.length],
+      ),
+    [tick],
+  );
+
+  useEffect(() => {
+    const id = window.setInterval(() => setTick((value) => value + 1), CYCLE_MS);
+    return () => window.clearInterval(id);
+  }, []);
 
   useLenis(() => { ScrollTrigger.update(); });
 
@@ -48,19 +54,15 @@ export default function CTASection() {
 
       if (!section || !content || !title || !desc || !btn || !grid || !items.length) return;
 
-      // Distribute items across 3 columns: col0=[0,3,6], col1=[1,4,7], col2=[2,5,8]
       const columns: HTMLLIElement[][] = [[], [], []];
       items.forEach((item, i) => columns[i % 3].push(item));
 
-      // ── Initial state ──────────────────────────────────────────────────────────
       gsap.set([desc, btn], { opacity: 0 });
 
-      // Offset title downward so it appears visually centered in the content area
       const dy = (content.offsetHeight - title.offsetHeight) / 2;
       titleOffsetY.current = (dy / content.offsetHeight) * 100;
       gsap.set(title, { yPercent: titleOffsetY.current });
 
-      // ── Toggle text content in/out ─────────────────────────────────────────────
       const toggleContent = (visible: boolean) => {
         gsap.timeline({ defaults: { overwrite: true } })
           .to(title, {
@@ -79,7 +81,6 @@ export default function CTASection() {
           );
       };
 
-      // ── Title fade-in as section scrolls into view ─────────────────────────────
       gsap.from(title, {
         opacity: 0,
         duration: 0.7,
@@ -91,13 +92,12 @@ export default function CTASection() {
         },
       });
 
-      // ── Grid reveal: columns fly in from above / below ─────────────────────────
       const wh = window.innerHeight;
       const revealDist = wh - (wh - grid.offsetHeight) / 2;
 
       const revealTl = gsap.timeline();
       columns.forEach((col, ci) => {
-        const fromTop = ci % 2 === 0; // col 0 & 2 from top, col 1 from bottom
+        const fromTop = ci % 2 === 0;
         revealTl.from(
           col,
           {
@@ -109,7 +109,6 @@ export default function CTASection() {
         );
       });
 
-      // ── Grid zoom: scale up then spread columns apart ──────────────────────────
       const zoomTl = gsap.timeline({ defaults: { duration: 1, ease: "power3.inOut" } });
       zoomTl.to(grid, { scale: 2.05 });
       zoomTl.to(columns[0], { xPercent: -40 }, "<");
@@ -124,7 +123,6 @@ export default function CTASection() {
         "-=0.5",
       );
 
-      // ── Master pinned timeline ─────────────────────────────────────────────────
       const mainTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -151,37 +149,45 @@ export default function CTASection() {
       ref={sectionRef}
       className="relative h-screen bg-white overflow-hidden"
     >
-      {/* Gallery grid — centered in the section */}
       <div className="absolute inset-0 flex items-center justify-center">
         <ul
           ref={gridRef}
           className="grid grid-cols-3 gap-3"
           style={{ width: "min(630px, 92vw)", willChange: "transform" }}
         >
-          {GRID_IMAGES.map((img, i) => (
+          {currentImages.map((src, i) => (
             <li
               key={i}
               ref={(el) => { itemRefs.current[i] = el; }}
               className="relative aspect-square overflow-hidden rounded-xl"
               style={{ willChange: "transform" }}
             >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                loading={i === 0 ? "eager" : "lazy"}
-                className="object-cover"
-                sizes="210px"
-              />
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={src}
+                  initial={{ opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.55, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={src}
+                    alt="Body By Brad"
+                    fill
+                    loading={tick === 0 ? "eager" : "lazy"}
+                    className="object-cover"
+                    sizes="210px"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </li>
           ))}
         </ul>
       </div>
 
-      {/* White overlay — washes images so dark text stays readable */}
       <div className="absolute inset-0 z-10 pointer-events-none bg-white/50" />
 
-      {/* CTA text */}
       <div
         ref={contentRef}
         className="absolute inset-0 z-20 flex flex-col items-center pt-24 pointer-events-none"
@@ -203,7 +209,6 @@ export default function CTASection() {
           {t.ctaDesc}
         </p>
 
-        {/* Animated slide-fill button — same pattern as FeaturedSection */}
         <motion.a
           ref={btnRef}
           href="#"

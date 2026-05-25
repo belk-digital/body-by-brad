@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { LanguageProvider } from '@/lib/LanguageContext';
 
-import StairsPreloader from '@/components/StairsPreloader';
+import ImagePreloader from '@/components/ImagePreloader';
 import Navbar from '@/components/layout/Navbar';
 import HeroSection from '@/components/sections/HeroSection';
 import WhoWeAreSection from '@/components/sections/WhoWeAreSection';
@@ -45,7 +45,7 @@ export default function App() {
   useEffect(() => {
     const loadingTimer = window.setTimeout(() => {
       setIsLoading(false);
-    }, 2600);
+    }, 3500);
 
     return () => window.clearTimeout(loadingTimer);
   }, []);
@@ -56,7 +56,7 @@ export default function App() {
       <div className="relative w-full bg-black overflow-x-hidden selection:bg-[#DFF994]/30 selection:text-[#DFF994]">
         <section className="relative h-dvh w-full overflow-hidden bg-black">
           <AnimatePresence>
-            {isLoading && <StairsPreloader />}
+            {isLoading && <ImagePreloader size="sm" />}
           </AnimatePresence>
 
           <Navbar
