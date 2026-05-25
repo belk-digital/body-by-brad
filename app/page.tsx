@@ -45,7 +45,7 @@ export default function App() {
   useEffect(() => {
     const loadingTimer = window.setTimeout(() => {
       setIsLoading(false);
-    }, 3500);
+    }, 4500);
 
     return () => window.clearTimeout(loadingTimer);
   }, []);

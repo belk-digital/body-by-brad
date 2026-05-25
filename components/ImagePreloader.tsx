@@ -35,8 +35,8 @@ export default function ImagePreloader({
   const count = PANEL_COUNT[size];
   const panels = buildPanels(count, images);
 
-  const stagger = 0.45;
-  const cycleDuration = 1.4;
+  const stagger = 1.2;
+  const cycleDuration = 1.5;
 
   return (
     <motion.div
@@ -58,8 +58,8 @@ export default function ImagePreloader({
               initial={{
                 y: '60vh',
                 opacity: 0,
-                width: '60vmin',
-                height: '60vmin',
+                width: '70vmin',
+                height: '40vmin',
                 borderRadius: 0,
               }}
               animate={
@@ -67,8 +67,8 @@ export default function ImagePreloader({
                   ? {
                       y: ['60vh', '0vh', '0vh'],
                       opacity: [0, 1, 1],
-                      width: ['60vmin', '60vmin', '100vw'],
-                      height: ['60vmin', '60vmin', '100vh'],
+                      width: ['70vmin', '70vmin', '100vw'],
+                      height: ['40vmin', '40vmin', '100vh'],
                     }
                   : {
                       y: ['60vh', '0vh', '0vh', '-80vh'],
