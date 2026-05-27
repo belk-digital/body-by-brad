@@ -20,6 +20,20 @@ const en = {
   yearsLabel: 'years of clients',
   sessionsLabel: 'clients served',
 
+  // ── About hero ───────────────────────────────────────────────────────────
+  aboutHeroDesc: 'Body By Brad is built on discipline, community, and a results-driven approach to coaching, training, and lasting transformation.',
+  aboutHeroL1: 'MORE THAN A',
+  aboutHeroL2: 'FITNESS COACH',
+  aboutBioParagraphs: [
+    'After playing football at The Citadel and graduating in 2019, I stepped into Corporate America with ambition and a full head of steam. It didn’t take long to realize that the traditional path wasn’t where I was meant to be.',
+    'I walked away from the desk job, earned my ISSA certification, and built what would become Body By Brad — a fitness and lifestyle brand rooted in energy, community, and intentional movement.',
+    'Since then, I’ve had the opportunity to inspire thousands of people through high-energy workouts, unforgettable events, online coaching, and a mindset built around consistency, confidence, and showing up for yourself. Known for my motivating coaching style, contagious energy, and fire playlists, my goal has always been to make fitness something people genuinely look forward to.',
+    'Whether you’re training with me in a group class, joining a community run, following an online program, or working one-on-one, my focus is the same: helping people build strength, confidence, discipline, and routines that actually last.',
+    'Fitness changed my life — and now I’m here to help others change theirs. Come redefine your routine with me!',
+  ],
+  aboutBioName: 'Coach Brad',
+  aboutBioRole: 'Founder & Head Coach',
+
   // ── Who We Are ───────────────────────────────────────────────────────────
   whoLabel: 'WHO WE ARE',
   whoLine1: 'THE MAN',
@@ -92,8 +106,8 @@ const en = {
   bmiObeseTip: "A structured program can get you back on track. Let's get started today.",
 
   // ── Testimonials ─────────────────────────────────────────────────────────
-  testimonialsL1: 'What they',
-  testimonialsL2: 'are saying',
+  testimonialsL1: 'WHAT THEY',
+  testimonialsL2: 'ARE SAYING',
 
   // ── FAQ ──────────────────────────────────────────────────────────────────
   faqLabel: 'FAQ',
@@ -126,6 +140,39 @@ const en = {
   ctaL2: 'Movement',
   ctaDesc: "Train harder. Live better. Build the physique you’ve always wanted with Charleston’s elite coach.",
   ctaBtn: 'Book a Free Call',
+
+  // ── Contact ──────────────────────────────────────────────────────────────
+  contactHeroDesc: "A record of defining moments that reflect Body By Brad's pursuit of excellence and transformation.",
+  contactHeroL1: 'STAY CONNECTED',
+  contactHeroL2: 'WITH BRAD',
+  contactDetailsTitle: 'CONTACT DETAILS',
+  contactStudioLabel: 'STUDIO ADDRESS',
+  contactStudioAddress: ['185 King Street', 'Charleston, SC 29401', 'United States'],
+  contactPhoneLabel: 'PHONE',
+  contactPhoneNumber: '+1 (843) 555-0149',
+  contactPhoneNote: 'Available during training hours',
+  contactEmailLabel: 'EMAIL',
+  contactEmailValue: 'contact@bodybybrad.com',
+  contactFormHeadingL1: 'GET IN TOUCH',
+  contactFormHeadingL2: '',
+  contactFormSubtitle: 'Send us a message and our team will get back to you shortly.',
+  contactFormPersonalLabel: 'PERSONAL INFO',
+  contactFormCoachingLabel: 'COACHING',
+  contactFormFullName: 'Full Name',
+  contactFormFullNamePh: 'Full Name*',
+  contactFormEmail: 'Email',
+  contactFormEmailPh: 'example@gmail.com*',
+  contactFormPhone: 'Phone',
+  contactFormPhonePh: '+1 234 567 8900',
+  contactFormAgeGroup: 'Age Group',
+  contactFormAgeGroupOptions: ['Select…', '18–24', '25–34', '35–44', '45–54', '55+'],
+  contactFormCoachingType: 'Type of Coaching',
+  contactFormCoachingTypeOptions: ['Select…', 'Personal Training', 'Group Fitness', 'Online Coaching', 'Event Booking'],
+  contactFormExperience: 'Experience Level',
+  contactFormExperienceOptions: ['Select…', 'Beginner', 'Intermediate', 'Advanced'],
+  contactFormMessage: 'Message',
+  contactFormMessagePh: 'Type here…',
+  contactFormSubmit: 'Submit',
 };
 
 const es: typeof en = {
@@ -147,6 +194,20 @@ const es: typeof en = {
   heroHeadline3: 'TRANSFORMACIÓN',
   yearsLabel: 'años de clientes',
   sessionsLabel: 'clientes atendidos',
+
+  // ── About hero ───────────────────────────────────────────────────────────
+  aboutHeroDesc: 'Body By Brad se construye sobre disciplina, comunidad y un enfoque orientado a resultados en coaching, entrenamiento y transformación duradera.',
+  aboutHeroL1: 'MÁS QUE UN',
+  aboutHeroL2: 'COACH DE FITNESS',
+  aboutBioParagraphs: [
+    'Después de jugar fútbol americano en The Citadel y graduarme en 2019, di el salto al mundo corporativo con ambición y todo el ímpetu. No tardé mucho en darme cuenta de que el camino tradicional no era para mí.',
+    'Dejé el trabajo de escritorio, obtuve mi certificación ISSA y construí lo que se convertiría en Body By Brad — una marca de fitness y estilo de vida basada en energía, comunidad y movimiento intencional.',
+    'Desde entonces, he tenido la oportunidad de inspirar a miles de personas a través de entrenamientos llenos de energía, eventos inolvidables, coaching en línea y una mentalidad basada en la constancia, la confianza y estar presente para uno mismo. Conocido por mi estilo motivador, mi energía contagiosa y mis playlists con fuego, mi meta siempre ha sido que el fitness sea algo que la gente espere con ganas.',
+    'Ya sea entrenando conmigo en una clase grupal, uniéndote a una corrida comunitaria, siguiendo un programa en línea o trabajando uno a uno, mi enfoque es el mismo: ayudar a la gente a construir fuerza, confianza, disciplina y rutinas que realmente perduren.',
+    'El fitness cambió mi vida — y ahora estoy aquí para ayudar a otros a cambiar la suya. ¡Ven a redefinir tu rutina conmigo!',
+  ],
+  aboutBioName: 'Coach Brad',
+  aboutBioRole: 'Fundador y Coach Principal',
 
   // ── Who We Are ───────────────────────────────────────────────────────────
   whoLabel: 'QUIÉNES SOMOS',
@@ -220,8 +281,8 @@ const es: typeof en = {
   bmiObeseTip: 'Un programa estructurado puede ponerte de nuevo en camino. Empecemos hoy.',
 
   // ── Testimonials ─────────────────────────────────────────────────────────
-  testimonialsL1: 'Lo que dicen',
-  testimonialsL2: 'nuestros clientes',
+  testimonialsL1: 'LO QUE DICEN',
+  testimonialsL2: 'NUESTROS CLIENTES',
 
   // ── FAQ ──────────────────────────────────────────────────────────────────
   faqLabel: 'PREGUNTAS',
@@ -254,6 +315,39 @@ const es: typeof en = {
   ctaL2: 'Movimiento',
   ctaDesc: 'Entrena más duro. Vive mejor. Construye el físico que siempre quisiste con el entrenador élite de Charleston.',
   ctaBtn: 'Reserva una Llamada',
+
+  // ── Contact ──────────────────────────────────────────────────────────────
+  contactHeroDesc: 'Un registro de momentos definitorios que reflejan la búsqueda de excelencia y transformación de Body By Brad.',
+  contactHeroL1: 'MANTENTE CONECTADO',
+  contactHeroL2: 'CON BRAD',
+  contactDetailsTitle: 'DATOS DE CONTACTO',
+  contactStudioLabel: 'DIRECCIÓN DEL ESTUDIO',
+  contactStudioAddress: ['185 King Street', 'Charleston, SC 29401', 'Estados Unidos'],
+  contactPhoneLabel: 'TELÉFONO',
+  contactPhoneNumber: '+1 (843) 555-0149',
+  contactPhoneNote: 'Disponible durante horario de entrenamiento',
+  contactEmailLabel: 'CORREO',
+  contactEmailValue: 'contact@bodybybrad.com',
+  contactFormHeadingL1: 'CONTÁCTANOS',
+  contactFormHeadingL2: '',
+  contactFormSubtitle: 'Envíanos un mensaje y nuestro equipo te responderá pronto.',
+  contactFormPersonalLabel: 'INFO PERSONAL',
+  contactFormCoachingLabel: 'COACHING',
+  contactFormFullName: 'Nombre Completo',
+  contactFormFullNamePh: 'Nombre Completo*',
+  contactFormEmail: 'Correo',
+  contactFormEmailPh: 'ejemplo@gmail.com*',
+  contactFormPhone: 'Teléfono',
+  contactFormPhonePh: '+1 234 567 8900',
+  contactFormAgeGroup: 'Grupo de Edad',
+  contactFormAgeGroupOptions: ['Selecciona…', '18–24', '25–34', '35–44', '45–54', '55+'],
+  contactFormCoachingType: 'Tipo de Coaching',
+  contactFormCoachingTypeOptions: ['Selecciona…', 'Entrenamiento Personal', 'Clases Grupales', 'Coaching Online', 'Reserva de Evento'],
+  contactFormExperience: 'Nivel de Experiencia',
+  contactFormExperienceOptions: ['Selecciona…', 'Principiante', 'Intermedio', 'Avanzado'],
+  contactFormMessage: 'Mensaje',
+  contactFormMessagePh: 'Escribe aquí…',
+  contactFormSubmit: 'Enviar',
 };
 
 export const translations = { en, es };

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import { IoCartOutline } from 'react-icons/io5';
 
@@ -10,12 +10,15 @@ import { LanguageProvider } from '@/lib/LanguageContext';
 import { supabaseBrowser } from '@/lib/supabase/browser';
 import type { Product } from '@/lib/types';
 
+import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
+import MerchandiseHeroSection from '@/components/sections/MerchandiseHeroSection';
 import Footer from '@/components/layout/Footer';
 
 const fmtUsd = (cents: number) => (cents / 100).toFixed(0);
 
 function MerchandiseContent() {
+  const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [products, setProducts] = useState<Product[] | null>(null);
@@ -30,6 +33,11 @@ function MerchandiseContent() {
   });
 
   useEffect(() => {
+    const t = window.setTimeout(() => setIsLoading(false), 2200);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
     supabaseBrowser
       .from('products')
       .select('id, name, description, price_cents, original_price_cents, image, stock, active, category')
@@ -42,45 +50,18 @@ function MerchandiseContent() {
 
   return (
     <div className="relative w-full bg-[#f5f0e1] overflow-x-hidden">
-      <section className="relative w-full bg-black overflow-hidden">
-        <img
-          src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779379374/IMG_3076_llkeme.webp"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          fetchPriority="high"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-black/55" />
+      <AnimatePresence>
+        {isLoading && <StairsPreloader />}
+      </AnimatePresence>
 
+      <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-black">
         <Navbar
-          isLoading={false}
+          isLoading={isLoading}
           isMenuOpen={isMenuOpen}
           isScrolled={isScrolled}
           onMenuToggle={setIsMenuOpen}
         />
-
-        <div className="relative z-10 pt-32 pb-20 sm:pt-40 sm:pb-28 px-4 sm:px-7 md:px-12 text-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="overflow-hidden mb-4">
-              <motion.h1
-                className="font-satoshi text-5xl sm:text-7xl md:text-8xl font-bold uppercase tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
-                initial={{ y: '100%', opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-              >
-                Merchandise
-              </motion.h1>
-            </div>
-            <motion.p
-              className="font-satoshi text-zinc-200 text-sm sm:text-base max-w-xl leading-relaxed"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.5 }}
-            >
-              Built for the gym. Made for everywhere else.
-            </motion.p>
-          </div>
-        </div>
+        <MerchandiseHeroSection isLoading={isLoading} />
       </section>
 
       <section className="font-satoshi w-full bg-[#f5f0e1] py-16 md:py-24 px-4 sm:px-7 md:px-12">

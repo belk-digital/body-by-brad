@@ -12,6 +12,8 @@ import ImagePreloader from '@/components/ImagePreloader';
 import Navbar from '@/components/layout/Navbar';
 import HeroSection from '@/components/sections/HeroSection';
 import WhoWeAreSection from '@/components/sections/WhoWeAreSection';
+import ServicesGridSection from '@/components/sections/ServicesGridSection';
+import PackagesPreviewSection from '@/components/sections/PackagesPreviewSection';
 import OurServicesSection from '@/components/sections/OurServicesSection';
 import FeaturedSection from '@/components/sections/FeaturedSection';
 import MerchSection from '@/components/sections/MerchSection';
@@ -69,10 +71,13 @@ export default function App() {
           <HeroSection isLoading={isLoading} />
         </section>
 
+        <WhoWeAreSection />
+        <ServicesGridSection />
+        
         <div className="bg-[#007AE5]">
-          <WhoWeAreSection />
           <OurServicesSection />
         </div>
+        <PackagesPreviewSection />
         <FeaturedSection />
         <MerchSection />
         <BMISection />

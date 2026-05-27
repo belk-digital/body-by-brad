@@ -115,6 +115,10 @@ function MenuOverlay() {
               lower === 'events' ? '/events' :
               lower === 'packages' || lower === 'paquetes' ? '/packages' :
               lower === 'merchandise' || lower === 'mercancía' || lower === 'mercancia' ? '/merchandise' :
+              lower === 'services' || lower === 'servicios' ? '/services' :
+              lower === 'contact' || lower === 'contacto' ? '/contact' :
+              lower === 'about' || lower === 'nosotros' ? '/about' :
+              lower === 'blog' ? '/blog' :
               '#';
             return (
             <a
@@ -215,6 +219,7 @@ type NavbarProps = {
   isMenuOpen: boolean;
   isScrolled: boolean;
   onMenuToggle: (open: boolean) => void;
+  theme?: 'light' | 'dark';
 };
 
 export default function Navbar({
@@ -222,10 +227,17 @@ export default function Navbar({
   isMenuOpen,
   isScrolled,
   onMenuToggle,
+  theme = 'light',
 }: NavbarProps) {
   const { t, lang, setLang } = useLanguage();
   const { count: cartCount, open: openCart, hydrated } = useCart();
   const displayCount = hydrated ? cartCount : 0;
+  const isDark = theme === 'dark';
+  const heroFg = isDark ? '#0a0a0a' : '#FFFFFF';
+  const heroTextClass = isDark ? 'text-black' : 'text-white';
+  const heroLogoFilter = isDark
+    ? 'brightness-0'
+    : 'brightness-0 invert drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]';
   return (
     <>
       <AnimatePresence>
@@ -245,13 +257,13 @@ export default function Navbar({
             onToggle={onMenuToggle}
             size={42}
             strokeWidth={2.2}
-            strokeColor="#FFFFFF"
+            strokeColor={heroFg}
           />
           <AnimatePresence>
             {isMenuOpen && (
               <motion.button
                 type="button"
-                className="text-sm font-semibold sm:text-base text-white"
+                className={`text-sm font-semibold sm:text-base ${heroTextClass}`}
                 onClick={() => onMenuToggle(false)}
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -272,7 +284,7 @@ export default function Navbar({
           <img
             src={logoUrl}
             alt="Body By Brad"
-            className="w-auto h-[52px] sm:h-[62px] md:h-[72px] brightness-0 invert drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
+            className={`w-auto h-[52px] sm:h-[62px] md:h-[72px] ${heroLogoFilter}`}
           />
         </a>
 
@@ -280,7 +292,7 @@ export default function Navbar({
           <button
             aria-label="Cart"
             onClick={openCart}
-            className="relative text-white hover:opacity-70 transition-opacity cursor-pointer"
+            className={`relative hover:opacity-70 transition-opacity cursor-pointer ${heroTextClass}`}
           >
             <IoCartOutline size={26} />
             {displayCount > 0 && (
@@ -289,10 +301,10 @@ export default function Navbar({
               </span>
             )}
           </button>
-          <AuthSlot theme="light" />
+          <AuthSlot theme={isDark ? 'dark' : 'light'} />
           <a
             href="#"
-            className="hidden sm:flex items-center gap-1 font-semibold text-white sm:gap-1.5 sm:text-sm md:text-lg"
+            className={`hidden sm:flex items-center gap-1 font-semibold sm:gap-1.5 sm:text-sm md:text-lg ${heroTextClass}`}
           >
             <TextRoll className="whitespace-nowrap pb-[0.2em] pt-[0.1em]">{t.getStarted}</TextRoll>
             <span aria-hidden="true" className="text-lg leading-none md:text-xl">
