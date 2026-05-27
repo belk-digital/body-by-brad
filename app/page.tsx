@@ -74,9 +74,7 @@ export default function App() {
         <WhoWeAreSection />
         <ServicesGridSection />
         
-        <div className="bg-[#007AE5]">
-          <OurServicesSection />
-        </div>
+        <OurServicesSection />
         <PackagesPreviewSection />
         <FeaturedSection />
         <MerchSection />

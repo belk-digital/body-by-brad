@@ -76,24 +76,24 @@ export const merchItems = [
 
 export const serviceSlides = [
   {
-    image: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779357779/Black_Modern_Gym_Fitness_Instagram_Post_oecoec.png',
+    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=85',
     heading:
-      'One-on-one coaching built around your body, your goals, and your schedule.',
-    cta: 'Explore Personal Training',
+      'High-energy group bootcamps that build community, burn calories, and push limits.',
+    cta: 'View Upcoming Classes',
     tagline: 'Move together',
   },
   {
-    image: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779361534/Black_Modern_Gym_Fitness_Instagram_Post_1_xvnngn.png',
+    image: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=1200&q=85',
     heading:
-      'Sustainable fat loss systems built around your real lifestyle.',
-    cta: 'View Group Classes',
+      "Charleston's legendary Cooldown events — fitness, fun, and good vibes all in one.",
+    cta: 'See Event Schedule',
     tagline: 'Train anywhere',
   },
   {
-    image: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779362309/virtual_x53cc4.png',
+    image: 'https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=1200&q=85',
     heading:
-      'Train anywhere. Weekly check-ins, video reviews, full accountability.',
-    cta: 'Get Your Program',
+      'Outdoor pop-up sessions and community challenges open to all fitness levels.',
+    cta: 'Join the Community',
     tagline: 'Built for results',
   },
 ];

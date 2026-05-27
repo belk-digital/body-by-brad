@@ -44,13 +44,13 @@ const en = {
   whoBio2: "Since then, I have been fortunate enough to curate an incredible following and inspire thousands of people through my energy, positive mindset, and fire playlists. Whether it's through my group fitness classes, events, online programming, or one on one training, I devote myself to tailoring clients' fitness needs and helping them reach (and exceed!) their goals. Come put in the work with me!",
 
   // ── Services ─────────────────────────────────────────────────────────────
-  servicesTitle: 'Services we offer',
-  servicesHighlights: 'Experience Highlights',
-  servicesJourney: 'Start your journey',
+  servicesTitle: 'Fitness Events',
+  servicesHighlights: 'Upcoming Events',
+  servicesJourney: 'Join an event',
   servicesSlides: [
-    { heading: 'One-on-one coaching built around your body, your goals, and your schedule.', cta: 'Explore Personal Training' },
-    { heading: 'Sustainable fat loss systems built around your real lifestyle.', cta: 'View Group Classes' },
-    { heading: 'Train anywhere. Weekly check-ins, video reviews, full accountability.', cta: 'Get Your Program' },
+    { heading: 'High-energy group bootcamps that build community, burn calories, and push limits.', cta: 'View Upcoming Classes' },
+    { heading: "Charleston's legendary Cooldown events — fitness, fun, and good vibes all in one.", cta: 'See Event Schedule' },
+    { heading: 'Outdoor pop-up sessions and community challenges open to all fitness levels.', cta: 'Join the Community' },
   ],
 
   // ── Featured ─────────────────────────────────────────────────────────────
@@ -219,9 +219,9 @@ const es: typeof en = {
   whoBio2: 'Desde entonces, he tenido la fortuna de reunir una comunidad increíble e inspirar a miles de personas con mi energía, mentalidad positiva y playlists de fuego. Ya sea a través de mis clases grupales, eventos, programas en línea o entrenamiento personal, me dedico a adaptar las necesidades físicas de mis clientes y ayudarles a alcanzar (¡y superar!) sus metas. ¡Ven a entrenar conmigo!',
 
   // ── Services ─────────────────────────────────────────────────────────────
-  servicesTitle: 'Servicios que ofrecemos',
-  servicesHighlights: 'Puntos Destacados',
-  servicesJourney: 'Comienza tu camino',
+  servicesTitle: 'Eventos de Fitness',
+  servicesHighlights: 'Próximos Eventos',
+  servicesJourney: 'Únete a un evento',
   servicesSlides: [
     { heading: 'Coaching personalizado diseñado alrededor de tu cuerpo, tus metas y tu horario.', cta: 'Explorar Entrenamiento Personal' },
     { heading: 'Clases grupales de alta energía que construyen comunidad real y superan todos los límites.', cta: 'Ver Clases Grupales' },

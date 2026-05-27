@@ -111,15 +111,15 @@ export default function OurServicesSection() {
   return (
     <>
       {/* ── Mobile layout — stacked scroll cards ──────────────────────────── */}
-      <section className="md:hidden bg-[#007AE5] font-satoshi pt-14 pb-16">
+      <section className="md:hidden font-satoshi pt-14 pb-16" style={{ backgroundColor: '#E6FF2B' }}>
 
         {/* Section label */}
-        <p className="px-5 mb-3 text-[11px] uppercase tracking-[0.25em] text-white/50 font-semibold">
+        <p className="px-5 mb-3 text-[11px] uppercase tracking-[0.25em] font-semibold" style={{ color: 'rgba(26,26,26,0.5)' }}>
           {t.servicesHighlights}
         </p>
 
         {/* Section title */}
-        <h2 className="px-5 mb-12 text-3xl sm:text-4xl font-bold text-white leading-tight">
+        <h2 className="px-5 mb-12 text-3xl sm:text-4xl font-bold leading-tight" style={{ color: '#1A1A1A' }}>
           {t.servicesTitle}
         </h2>
 
@@ -139,16 +139,19 @@ export default function OurServicesSection() {
 
               {/* Number + text */}
               <div className="flex items-start gap-5 mt-5">
-                <span className="text-white/40 text-sm font-medium w-5 shrink-0 pt-0.5 tabular-nums">
+                <span className="text-sm font-medium w-5 shrink-0 pt-0.5 tabular-nums" style={{ color: 'rgba(26,26,26,0.4)' }}>
                   {i + 1}
                 </span>
                 <div className="flex flex-col gap-3">
-                  <p className="text-white font-semibold text-[1.05rem] leading-snug">
+                  <p className="font-semibold text-[1.05rem] leading-snug" style={{ color: '#1A1A1A' }}>
                     {t.servicesSlides[i].heading}
                   </p>
                   <a
                     href="#"
-                    className="w-fit text-sm font-semibold underline underline-offset-4 text-white/60 hover:text-white transition-colors"
+                    className="w-fit text-sm font-semibold underline underline-offset-4 transition-colors"
+                    style={{ color: 'rgba(26,26,26,0.6)' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#1A1A1A')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(26,26,26,0.6)')}
                   >
                     {t.servicesSlides[i].cta}
                   </a>
@@ -159,7 +162,7 @@ export default function OurServicesSection() {
         </div>
 
         {/* Bottom label */}
-        <p className="mt-14 px-5 text-[11px] uppercase tracking-[0.25em] text-white/50 font-semibold">
+        <p className="mt-14 px-5 text-[11px] uppercase tracking-[0.25em] font-semibold" style={{ color: 'rgba(26,26,26,0.5)' }}>
           {t.servicesJourney}
         </p>
       </section>
@@ -168,12 +171,13 @@ export default function OurServicesSection() {
       <section
         ref={sectionRef}
         id="services"
-        className="hidden md:block relative h-screen w-full bg-[#007AE5] font-satoshi"
+        className="hidden md:block relative h-screen w-full font-satoshi"
+        style={{ backgroundColor: '#E6FF2B' }}
       >
         <div
           ref={titleRef}
           className="absolute font-bold whitespace-nowrap pointer-events-none select-none"
-          style={{ fontSize: '6vw', zIndex: 20, color: '#F5F0E1' }}
+          style={{ fontSize: '6vw', zIndex: 20, color: '#1A1A1A' }}
         >
           {t.servicesTitle}
         </div>
@@ -199,12 +203,13 @@ export default function OurServicesSection() {
             className="absolute flex flex-col gap-5"
             style={{ right: '2%', top: '32%', width: '20%', zIndex: 10 }}
           >
-            <p className="text-[1.4rem] lg:text-[1.65rem] font-semibold leading-tight text-white">
+            <p className="text-[1.4rem] lg:text-[1.65rem] font-semibold leading-tight" style={{ color: '#1A1A1A' }}>
               {t.servicesSlides[i].heading}
             </p>
             <a
               href="#"
-              className="w-fit text-sm font-semibold underline underline-offset-4 text-white hover:opacity-60 transition-opacity"
+              className="w-fit text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-60"
+              style={{ color: '#1A1A1A' }}
             >
               {t.servicesSlides[i].cta}
             </a>
@@ -212,10 +217,10 @@ export default function OurServicesSection() {
         ))}
 
         <div className="absolute bottom-5 left-[3%] right-[3%] z-20 flex items-end justify-between pointer-events-none">
-          <span className="text-[11px] uppercase tracking-[0.2em] text-white/60 font-semibold">
+          <span className="text-[11px] uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgba(26,26,26,0.5)' }}>
             {t.servicesHighlights}
           </span>
-          <span className="text-[11px] uppercase tracking-[0.2em] text-white/60 font-semibold">
+          <span className="text-[11px] uppercase tracking-[0.2em] font-semibold" style={{ color: 'rgba(26,26,26,0.5)' }}>
             {t.servicesJourney}
           </span>
         </div>
