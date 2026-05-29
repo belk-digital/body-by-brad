@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { IoChevronForward } from 'react-icons/io5';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -31,9 +31,9 @@ const BLOG_POSTS = [
   },
 ];
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 44 },
-  visible: (i: number) => ({
+  visible: (i: any) => ({
     opacity: 1,
     y: 0,
     transition: { duration: 0.75, delay: i * 0.13, ease: [0.16, 1, 0.3, 1] },
