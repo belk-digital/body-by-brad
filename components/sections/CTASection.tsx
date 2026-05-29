@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "lenis/react";
@@ -10,7 +10,6 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { bradImagePool } from "@/lib/constants";
 
 const SLOT_COUNT = 9;
-const CYCLE_MS = 1200;
 
 export default function CTASection() {
   const { t } = useLanguage();
@@ -23,20 +22,7 @@ export default function CTASection() {
   const itemRefs    = useRef<(HTMLLIElement | null)[]>([]);
   const titleOffsetY = useRef(0);
 
-  const [tick, setTick] = useState(0);
-  const currentImages = useMemo(
-    () =>
-      Array.from(
-        { length: SLOT_COUNT },
-        (_, i) => bradImagePool[(i + tick) % bradImagePool.length],
-      ),
-    [tick],
-  );
-
-  useEffect(() => {
-    const id = window.setInterval(() => setTick((value) => value + 1), CYCLE_MS);
-    return () => window.clearInterval(id);
-  }, []);
+  const staticImages = bradImagePool.slice(0, SLOT_COUNT);
 
   useLenis(() => { ScrollTrigger.update(); });
 
@@ -155,32 +141,21 @@ export default function CTASection() {
           className="grid grid-cols-3 gap-3"
           style={{ width: "min(630px, 92vw)", willChange: "transform" }}
         >
-          {currentImages.map((src, i) => (
+          {staticImages.map((src, i) => (
             <li
               key={i}
               ref={(el) => { itemRefs.current[i] = el; }}
               className="relative aspect-square overflow-hidden rounded-xl"
               style={{ willChange: "transform" }}
             >
-              <AnimatePresence initial={false}>
-                <motion.div
-                  key={src}
-                  initial={{ opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.55, ease: "easeInOut" }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={src}
-                    alt="Body By Brad"
-                    fill
-                    loading={tick === 0 ? "eager" : "lazy"}
-                    className="object-cover"
-                    sizes="210px"
-                  />
-                </motion.div>
-              </AnimatePresence>
+              <Image
+                src={src}
+                alt="Body By Brad"
+                fill
+                loading={i === 0 ? "eager" : "lazy"}
+                className="object-cover"
+                sizes="210px"
+              />
             </li>
           ))}
         </ul>

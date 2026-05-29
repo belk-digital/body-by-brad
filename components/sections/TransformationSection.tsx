@@ -16,7 +16,7 @@ export default function TransformationSection() {
 
   return (
     <section className="font-satoshi bg-[#f5f0e1] py-20 md:py-28 px-4 sm:px-7 md:px-12">
-      <div className="max-w-7xl mx-auto">
+      <div>
 
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">

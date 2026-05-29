@@ -114,14 +114,14 @@ export default function TestimonialsSection() {
   return (
     <section ref={sectionRef} id="testimonials" className="relative font-satoshi bg-white">
       {/* ── Mobile (< 768px): normal scroll layout ── */}
-      <div className="md:hidden px-6 py-20">
+      <div className="md:hidden px-4 sm:px-7 md:px-12 py-20">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-bold leading-[0.88] mb-14 select-none"
-          style={{ fontSize: 'clamp(52px, 16vw, 110px)', color: '#2d2d2a', letterSpacing: '-0.02em' }}
+          style={{ fontSize: 'clamp(32px, 8vw, 72px)', color: '#2d2d2a', letterSpacing: '-0.02em' }}
         >
           {t.testimonialsL1}
           <br />
@@ -155,7 +155,7 @@ export default function TestimonialsSection() {
         {/* Overlay for readability */}
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(255,255,255,0.55)', zIndex: 0 }}
+          style={{ backgroundColor: 'rgba(0,0,0,0.55)', zIndex: 0 }}
         />
 
         {/* Background heading — z-index 1, sits behind cards */}
@@ -166,8 +166,8 @@ export default function TestimonialsSection() {
           <h2
             className="font-bold leading-[0.88] text-center"
             style={{
-              fontSize: 'clamp(64px, 15vw, 220px)',
-              color: '#2d2d2a',
+              fontSize: 'clamp(36px, 7vw, 100px)',
+              color: '#ffffff',
               letterSpacing: '-0.02em',
             }}
           >

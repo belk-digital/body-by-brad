@@ -46,10 +46,10 @@ export default function WhoWeAreSection() {
         variants={container}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
-        className="mx-auto max-w-7xl"
+        className="w-full"
       >
         {/* ── Label ─────────────────────────────────────────────────────── */}
-        <motion.div variants={fadeUp} className="mb-8 flex items-center justify-center gap-2.5 md:mb-10">
+        <motion.div variants={fadeUp} className="mb-8 flex items-center justify-start gap-2.5 md:mb-10">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-950">
             <Dumbbell size={14} className="text-white" />
           </span>
@@ -62,8 +62,8 @@ export default function WhoWeAreSection() {
         <motion.h2
           variants={fadeUp}
           className="
-            mb-16 text-center font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950
-            text-[clamp(2rem,5.2vw,5.2rem)]
+            mb-16 text-left font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950
+            text-[clamp(2rem,4.5vw,4.5rem)]
             md:mb-20
           "
         >

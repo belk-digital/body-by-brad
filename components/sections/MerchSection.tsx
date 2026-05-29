@@ -29,7 +29,7 @@ export default function MerchSection() {
       id="merchandise"
       className="font-satoshi w-full bg-[#f5f0e1] py-20 md:py-28 px-4 sm:px-7 md:px-12"
     >
-      <div className="max-w-7xl mx-auto">
+      <div>
         <div className="mb-10 md:mb-14 flex items-end justify-between gap-6">
           <div>
             <div className="overflow-hidden mb-4">

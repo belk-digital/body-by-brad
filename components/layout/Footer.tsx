@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 import { logoUrl, socialMenuItems, policyMenuItems } from '@/lib/constants';
 import TextRoll from '@/components/ui/TextRoll';
 
@@ -15,12 +16,44 @@ const navHref = (item: string) => {
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const brandRef = useRef<HTMLDivElement>(null);
+  const [fitnessFontSize, setFitnessFontSize] = useState<number>(120);
+
+  useEffect(() => {
+    const measure = () => {
+      const container = brandRef.current;
+      if (!container) return;
+      const containerWidth = container.clientWidth;
+
+      const probe = document.createElement('span');
+      probe.textContent = 'FITNESS';
+      Object.assign(probe.style, {
+        position: 'absolute',
+        visibility: 'hidden',
+        whiteSpace: 'nowrap',
+        fontSize: '100px',
+        fontWeight: '600',
+        fontFamily: getComputedStyle(container).fontFamily,
+        textTransform: 'uppercase',
+      });
+      document.body.appendChild(probe);
+      const ratio = probe.offsetWidth / 100;
+      document.body.removeChild(probe);
+
+      setFitnessFontSize(containerWidth / ratio);
+    };
+
+    document.fonts.ready.then(measure);
+    const ro = new ResizeObserver(measure);
+    if (brandRef.current) ro.observe(brandRef.current);
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <footer className="font-satoshi bg-[#007AE5] px-4 sm:px-7 md:px-12 pt-16 md:pt-20 overflow-hidden">
+    <footer className="font-satoshi bg-[#191919] px-4 sm:px-7 md:px-12 pt-12 md:pt-20 overflow-x-hidden">
 
       {/* Top row — tagline + nav */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[42%_1fr] gap-12 md:gap-8 pb-14 border-b border-white/15">
+      <div className="grid grid-cols-1 md:grid-cols-[42%_1fr] gap-8 pb-10 md:pb-14 border-b border-white/15">
 
         {/* Left — tagline */}
         <motion.div
@@ -29,10 +62,10 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-white text-xl sm:text-2xl md:text-3xl font-semibold leading-snug max-w-sm">
+          <p className="text-white text-lg sm:text-2xl md:text-3xl font-semibold leading-snug max-w-sm">
             Elite personal training &amp; outdoor fitness events in Charleston, SC.
           </p>
-          <div className="flex gap-4 mt-8">
+          <div className="flex flex-wrap gap-4 mt-6 md:mt-8">
             {socialMenuItems.map((s, i) => (
               <motion.a
                 key={s}
@@ -55,7 +88,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-2 gap-x-8 gap-y-0 self-start"
+          className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-0 self-start"
         >
           {[NAV_COL_1, NAV_COL_2].map((col, ci) => (
             <div key={ci} className="flex flex-col">
@@ -78,32 +111,22 @@ export default function Footer() {
       </div>
 
       {/* Middle — giant brand name */}
-      <div className="flex items-center gap-3 md:gap-5 py-6 md:py-8">
-        <motion.img
-          src={logoUrl}
-          alt="Body By Brad"
-          initial={{ opacity: 0, scale: 0.85 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="brightness-0 invert shrink-0"
-          style={{ height: 'clamp(2.8rem, 7vw, 6.5rem)', width: 'auto' }}
-        />
+      <div ref={brandRef} className="py-6 md:py-8">
         <motion.h2
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
-          className="text-white font-extrabold uppercase leading-none tracking-tight"
-          style={{ fontSize: 'clamp(2.5rem, 11.5vw, 12rem)', whiteSpace: 'nowrap' }}
+          className="text-[#CCFF00] font-semibold uppercase leading-[0.88] tracking-tight"
         >
-          Body By Brad
+          <span className="block" style={{ fontSize: 'clamp(1rem, 4.5vw, 5rem)' }}>BBB</span>
+          <span className="block" style={{ fontSize: fitnessFontSize }}>Fitness</span>
         </motion.h2>
       </div>
 
       {/* Bottom bar — copyright + policy */}
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/15">
-        <div className="flex flex-col items-start gap-1 text-xs text-white/50">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/15">
+        <div className="flex flex-col items-center sm:items-start gap-1 text-xs text-white/50 text-center sm:text-left">
           <p>&copy; {year} Body By Brad. All rights reserved.</p>
           <p>
             Designed and developed by{' '}
@@ -117,7 +140,7 @@ export default function Footer() {
             </a>
           </p>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap justify-center sm:justify-end items-center gap-4 sm:gap-6">
           {policyMenuItems.map((p) => (
             <a
               key={p}

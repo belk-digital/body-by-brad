@@ -17,6 +17,7 @@ import PackagesPreviewSection from '@/components/sections/PackagesPreviewSection
 import OurServicesSection from '@/components/sections/OurServicesSection';
 import FeaturedSection from '@/components/sections/FeaturedSection';
 import MerchSection from '@/components/sections/MerchSection';
+import SupplementsSection from '@/components/sections/SupplementsSection';
 import BMISection from '@/components/sections/BMISection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import FAQSection from '@/components/sections/FAQSection';
@@ -78,6 +79,7 @@ export default function App() {
         <PackagesPreviewSection />
         <FeaturedSection />
         <MerchSection />
+        <SupplementsSection />
         <BMISection />
         <TransformationSection />
         <TestimonialsSection />

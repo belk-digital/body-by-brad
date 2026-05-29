@@ -322,7 +322,7 @@ export default function Navbar({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -80, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="font-satoshi z-[60] fixed top-4 left-4 right-4 md:top-6 md:left-8 md:right-8 bg-[#F5F0E1] rounded-full shadow-lg px-6 py-4 flex items-center justify-between"
+            className="font-satoshi z-[60] fixed top-4 left-4 right-4 md:top-6 md:left-8 md:right-8 bg-[#191919] rounded-full shadow-lg px-6 py-4 flex items-center justify-between"
           >
             <div className="flex flex-1 items-center justify-start gap-2 sm:gap-3">
               <HamburgerMenu
@@ -330,13 +330,13 @@ export default function Navbar({
                 onToggle={onMenuToggle}
                 size={42}
                 strokeWidth={2.2}
-                strokeColor="#000000"
+                strokeColor="#ffffff"
               />
               <AnimatePresence>
                 {isMenuOpen && (
                   <motion.button
                     type="button"
-                    className="text-sm font-semibold sm:text-base text-black"
+                    className="text-sm font-semibold sm:text-base text-white"
                     onClick={() => onMenuToggle(false)}
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -357,18 +357,18 @@ export default function Navbar({
               <img
                 src={logoUrl}
                 alt="Body By Brad"
-                className="w-auto h-[42px] sm:h-[48px] brightness-0"
+                className="w-auto h-[42px] sm:h-[48px] brightness-0 invert"
               />
             </a>
 
             <div className="flex flex-1 items-center justify-end gap-5 sm:gap-6 md:gap-8">
-              <div className="hidden sm:flex gap-0.5 rounded-full bg-black/10 p-0.5">
+              <div className="hidden sm:flex gap-0.5 rounded-full bg-white/10 p-0.5">
                 {(['en', 'es'] as const).map((l) => (
                   <button
                     key={l}
                     onClick={() => setLang(l)}
                     className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                      lang === l ? 'bg-zinc-950 text-white' : 'text-black/50 hover:text-black'
+                      lang === l ? 'bg-white text-[#191919]' : 'text-white/50 hover:text-white'
                     }`}
                   >
                     {l}
@@ -378,7 +378,7 @@ export default function Navbar({
               <button
                 aria-label="Cart"
                 onClick={openCart}
-                className="relative text-black hover:opacity-70 transition-opacity cursor-pointer"
+                className="relative text-white hover:opacity-70 transition-opacity cursor-pointer"
               >
                 <IoCartOutline size={26} />
                 {displayCount > 0 && (
@@ -387,10 +387,10 @@ export default function Navbar({
                   </span>
                 )}
               </button>
-              <AuthSlot theme="dark" />
+              <AuthSlot theme="light" />
               <a
                 href="#"
-                className="hidden sm:flex items-center gap-1 font-semibold text-black sm:gap-1.5 sm:text-sm md:text-lg"
+                className="hidden sm:flex items-center gap-1 font-semibold text-white sm:gap-1.5 sm:text-sm md:text-lg"
               >
                 <TextRoll className="whitespace-nowrap pb-[0.2em] pt-[0.1em]">
                   get started

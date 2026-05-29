@@ -10,7 +10,7 @@ export default function FeaturedSection() {
       id="featured"
       className="font-satoshi w-full bg-[#f5f0e1] py-20 md:py-28 px-4 sm:px-7 md:px-12"
     >
-      <div className="max-w-7xl mx-auto">
+      <div>
 
         {/* Header */}
         <div className="mb-8 md:mb-12 max-w-lg">

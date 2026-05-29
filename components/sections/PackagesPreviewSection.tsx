@@ -73,7 +73,7 @@ export default function PackagesPreviewSection() {
         variants={container}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
-        className="mx-auto max-w-7xl"
+        className="w-full"
       >
         {/* ── Header ──────────────────────────────────────────────── */}
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6 md:mb-14">
