@@ -37,32 +37,32 @@ const EMPTY: FormState = {
 };
 
 const inputCls =
-  'w-full rounded-xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#E6FF2B] focus:bg-white/8 transition-all';
+  'w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 placeholder:text-zinc-400 outline-none focus:border-zinc-950 focus:ring-2 focus:ring-zinc-950/8 transition-all';
 
 const selectCls =
-  'w-full rounded-xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-white outline-none focus:border-[#E6FF2B] transition-all appearance-none cursor-pointer';
+  'w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 outline-none focus:border-zinc-950 transition-all appearance-none cursor-pointer';
 
 function Field({ label, required, error, children }: {
   label: string; required?: boolean; error?: string; children: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-        {label}{required && <span className="text-[#E6FF2B] ml-0.5">*</span>}
+      <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+        {label}{required && <span className="text-[#1A1A1A] ml-0.5">*</span>}
       </label>
       {children}
-      {error && <span className="text-red-400 text-xs">{error}</span>}
+      {error && <span className="text-red-500 text-xs">{error}</span>}
     </div>
   );
 }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-white/8">
-      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E6FF2B] shrink-0">
-        <Dumbbell size={10} className="text-[#1A1A1A]" />
+    <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-zinc-100">
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1A1A1A] shrink-0">
+        <Dumbbell size={10} className="text-[#E6FF2B]" />
       </span>
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#E6FF2B]">{children}</h2>
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-950">{children}</h2>
     </div>
   );
 }
@@ -122,14 +122,14 @@ export default function RegisterPage() {
   return (
     <LanguageProvider>
       <ReactLenis root>
-        <div className="relative w-full min-h-screen font-satoshi bg-[#1A1A1A] overflow-x-hidden">
+        <div className="relative w-full min-h-screen font-satoshi bg-[#f5f4f3] overflow-x-hidden">
 
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
           </AnimatePresence>
 
           {/* ── Hero ──────────────────────────────────────────────────────── */}
-          <section className="relative bg-[#1A1A1A] pt-36 pb-16 px-4 sm:px-7 md:px-12 overflow-hidden border-b border-white/8">
+          <section className="relative bg-[#1A1A1A] pt-36 pb-16 px-4 sm:px-7 md:px-12 overflow-hidden">
             <Navbar
               isLoading={isLoading}
               isMenuOpen={isMenuOpen}
@@ -178,29 +178,29 @@ export default function RegisterPage() {
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                  className="bg-[#252525] rounded-3xl p-10 md:p-16 text-center max-w-xl mx-auto"
+                  className="bg-white rounded-3xl p-10 md:p-16 text-center max-w-xl mx-auto shadow-sm"
                 >
-                  <div className="w-16 h-16 rounded-full bg-[#E6FF2B]/15 flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-8 h-8 text-[#E6FF2B]" />
+                  <div className="w-16 h-16 rounded-full bg-[#E6FF2B]/20 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-8 h-8 text-[#1A1A1A]" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold uppercase text-white mb-3">
+                  <h2 className="text-2xl md:text-3xl font-extrabold uppercase text-zinc-950 mb-3">
                     You&apos;re Registered!
                   </h2>
-                  <p className="text-white/50 text-sm leading-relaxed mb-8">
-                    Thanks, <strong className="text-white">{form.firstName}</strong>! We&apos;ve received your
-                    registration for <strong className="text-[#E6FF2B]">{form.event}</strong>.
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                    Thanks, <strong className="text-zinc-950">{form.firstName}</strong>! We&apos;ve received your
+                    registration for <strong className="text-zinc-950">{form.event}</strong>.
                     Check your inbox for a confirmation email.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <a
                       href="/events"
-                      className="px-7 py-3 rounded-full bg-[#E6FF2B] text-[#1A1A1A] text-[11px] font-extrabold uppercase tracking-widest hover:opacity-90 transition-opacity"
+                      className="px-7 py-3 rounded-full bg-[#1A1A1A] text-white text-[11px] font-extrabold uppercase tracking-widest hover:opacity-80 transition-opacity"
                     >
                       Back to Events
                     </a>
                     <a
                       href="/"
-                      className="px-7 py-3 rounded-full border border-white/15 text-white/60 text-[11px] font-extrabold uppercase tracking-widest hover:border-white/40 hover:text-white transition-all"
+                      className="px-7 py-3 rounded-full border-2 border-zinc-200 text-zinc-600 text-[11px] font-extrabold uppercase tracking-widest hover:border-zinc-950 hover:text-zinc-950 transition-all"
                     >
                       Go Home
                     </a>
@@ -221,7 +221,7 @@ export default function RegisterPage() {
                 >
 
                   {/* ── Left — main fields ──────────────────────────── */}
-                  <div className="bg-[#252525] rounded-3xl p-6 md:p-10 flex flex-col gap-8">
+                  <div className="bg-white rounded-3xl p-6 md:p-10 shadow-sm flex flex-col gap-8">
 
                     {/* Personal Info */}
                     <div>
@@ -252,7 +252,7 @@ export default function RegisterPage() {
                               <option value="">Choose an event…</option>
                               {EVENTS.map((e) => <option key={e} value={e}>{e}</option>)}
                             </select>
-                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">▼</span>
                           </div>
                         </Field>
                         <Field label="Fitness Level" required error={errors.fitnessLevel}>
@@ -261,7 +261,7 @@ export default function RegisterPage() {
                               <option value="">Select level…</option>
                               {FITNESS_LEVELS.map((l) => <option key={l} value={l}>{l}</option>)}
                             </select>
-                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">▼</span>
                           </div>
                         </Field>
                         <Field label="How did you hear about us?">
@@ -270,7 +270,7 @@ export default function RegisterPage() {
                               <option value="">Select…</option>
                               {HEAR_OPTIONS.map((h) => <option key={h} value={h}>{h}</option>)}
                             </select>
-                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">▼</span>
                           </div>
                         </Field>
                       </div>
@@ -313,25 +313,25 @@ export default function RegisterPage() {
                           <div
                             className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
                               form.agreed
-                                ? 'bg-[#E6FF2B] border-[#E6FF2B]'
-                                : 'border-white/20 group-hover:border-white/40'
+                                ? 'bg-[#1A1A1A] border-[#1A1A1A]'
+                                : 'border-zinc-300 group-hover:border-zinc-500'
                             }`}
                           >
                             {form.agreed && (
-                              <svg className="w-3 h-3 text-[#1A1A1A]" fill="none" viewBox="0 0 12 12">
+                              <svg className="w-3 h-3 text-[#E6FF2B]" fill="none" viewBox="0 0 12 12">
                                 <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
                             )}
                           </div>
                         </div>
-                        <span className="text-xs text-white/40 leading-relaxed">
+                        <span className="text-xs text-zinc-500 leading-relaxed">
                           I agree to the{' '}
-                          <a href="#" className="text-[#E6FF2B] underline underline-offset-2 hover:opacity-75">Terms &amp; Conditions</a>
+                          <a href="#" className="text-zinc-950 underline underline-offset-2 hover:opacity-60">Terms &amp; Conditions</a>
                           {' '}and confirm that the information provided is accurate.
                           I understand that participation in outdoor fitness events carries inherent risks.
                         </span>
                       </label>
-                      {errors.agreed && <p className="text-red-400 text-xs mt-1.5 ml-8">{errors.agreed}</p>}
+                      {errors.agreed && <p className="text-red-500 text-xs mt-1.5 ml-8">{errors.agreed}</p>}
                     </div>
                   </div>
 
@@ -356,14 +356,14 @@ export default function RegisterPage() {
                     </div>
 
                     {/* What to bring */}
-                    <div className="bg-[#252525] rounded-3xl p-6">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B] mb-4">
+                    <div className="bg-white rounded-3xl p-6 shadow-sm">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-400 mb-4">
                         What to Bring
                       </p>
                       <ul className="space-y-2.5">
                         {BRING_ITEMS.map((item) => (
-                          <li key={item} className="flex items-center gap-2.5 text-sm text-white/60">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#E6FF2B] shrink-0" />
+                          <li key={item} className="flex items-center gap-2.5 text-sm text-zinc-600">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#1A1A1A] shrink-0" />
                             {item}
                           </li>
                         ))}
@@ -374,20 +374,20 @@ export default function RegisterPage() {
                     <motion.button
                       type="submit"
                       disabled={submitting}
-                      className="relative overflow-hidden rounded-full border-2 border-[#E6FF2B] py-4 px-8 text-[11px] font-extrabold uppercase tracking-widest w-full cursor-pointer disabled:opacity-50 flex items-center justify-between"
+                      className="relative overflow-hidden rounded-full border-2 border-[#1A1A1A] py-4 px-8 text-[11px] font-extrabold uppercase tracking-widest w-full cursor-pointer disabled:opacity-50 flex items-center justify-between"
                       initial="rest"
                       whileHover={submitting ? 'rest' : 'hover'}
                       animate="rest"
                     >
                       <motion.span
-                        className="absolute inset-0 bg-[#E6FF2B]"
+                        className="absolute inset-0 bg-[#1A1A1A]"
                         style={{ transformOrigin: 'left' }}
                         variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
                         transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
                       />
                       <motion.span
                         className="relative z-10"
-                        variants={{ rest: { color: '#E6FF2B' }, hover: { color: '#1A1A1A' } }}
+                        variants={{ rest: { color: '#1A1A1A' }, hover: { color: '#E6FF2B' } }}
                         transition={{ duration: 0.32, ease: 'easeInOut' }}
                       >
                         {submitting ? 'Submitting…' : 'Register Now'}
@@ -395,8 +395,8 @@ export default function RegisterPage() {
                       <motion.span
                         className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
                         variants={{
-                          rest:  { backgroundColor: '#E6FF2B', color: '#1A1A1A' },
-                          hover: { backgroundColor: '#1A1A1A', color: '#E6FF2B' },
+                          rest:  { backgroundColor: '#1A1A1A', color: '#E6FF2B' },
+                          hover: { backgroundColor: '#E6FF2B', color: '#1A1A1A' },
                         }}
                         transition={{ duration: 0.32, ease: 'easeInOut' }}
                       >
@@ -414,7 +414,7 @@ export default function RegisterPage() {
                       </motion.span>
                     </motion.button>
 
-                    <p className="text-center text-white/25 text-xs">
+                    <p className="text-center text-zinc-400 text-xs">
                       Free to attend — no payment required at this stage.
                     </p>
                   </div>
