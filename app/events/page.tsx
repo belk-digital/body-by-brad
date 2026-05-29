@@ -46,6 +46,21 @@ const EVENT_IMAGES = [
   { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779364141/IMG_2932_1_xphbar.webp',       alt: 'BBB Merch Drop' },
 ];
 
+const MASONRY_IMAGES = [
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg', alt: 'Cooldown Event Charleston', ratio: '3/4' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779141500/IMG_3056_fvrulw.jpg',        alt: 'BBB Group Training',       ratio: '1/1' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779139531/IMG_3076_zziehi.jpg',        alt: 'Community Workout',        ratio: '4/5' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779139268/IMG_3044_vsxjow.jpg',        alt: 'Training Session',         ratio: '3/4' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779233545/IMG_0593_nbc9pi.jpg',        alt: 'Client Results',           ratio: '5/4' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779233552/IMG_0591_cyzuem.jpg',        alt: 'BBB Results',              ratio: '1/1' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779364141/IMG_2932_1_xphbar.webp',     alt: 'BBB Merch Drop',           ratio: '3/4' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_2_zimcoc.webp',  alt: 'Body By Brad Event',       ratio: '4/5' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378588/New_Project_7_z0buwe.webp',  alt: 'BBB Community',            ratio: '5/4' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_4_jikyyg.webp',  alt: 'BBB Training',             ratio: '1/1' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378588/New_Project_3_yd6ba6.webp',  alt: 'BBB Workout',              ratio: '3/4' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_1_svqowp.webp',  alt: 'BBB Lifestyle',            ratio: '4/3' },
+];
+
 const UPCOMING_EVENTS = [
   { title: 'Summer Cooldown 2026 Now Open',  desc: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed.', href: '#' },
   { title: 'BBB Outdoor HIIT – July Edition', desc: 'High-intensity interval training on the waterfront. Push your limits with Coach Brad and the BBB community.', href: '#' },
@@ -255,6 +270,31 @@ export default function EventsPage() {
                 </motion.h2>
               </div>
               <EventsCarousel images={EVENT_IMAGES} showPagination showNavigation loop autoplay />
+
+              {/* Masonry gallery */}
+              <div className="mt-12 md:mt-16 columns-2 sm:columns-3 lg:columns-4 gap-3">
+                {MASONRY_IMAGES.map((img, i) => (
+                  <motion.div
+                    key={i}
+                    className="break-inside-avoid mb-3 overflow-hidden rounded-2xl group cursor-pointer"
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.55, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        loading="lazy"
+                        className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        style={{ aspectRatio: img.ratio }}
+                      />
+                      <div className="absolute inset-0 bg-[#E6FF2B]/0 group-hover:bg-[#E6FF2B]/10 transition-colors duration-300" />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
           </section>
 
           {/* Upcoming Events */}
