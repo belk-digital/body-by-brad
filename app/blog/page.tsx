@@ -18,42 +18,60 @@ const HERO_IMAGE =
 const FEATURED_POSTS = [
   {
     id: 1,
-    date: 'Apr 4, 2026',
+    category: 'MINDSET',
+    date: 'APR 4, 2026',
     title: 'THE MINDSET BEHIND EVERY TRANSFORMATION',
     image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80',
+    authorName: 'Coach Brad',
+    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
   },
   {
     id: 2,
-    date: 'Apr 10, 2026',
+    category: 'TRAINING',
+    date: 'APR 10, 2026',
     title: "FROM THE GYM TO YOUR GOALS: BRAD'S METHOD",
     image: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=900&q=80',
+    authorName: 'Coach Brad',
+    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
   },
   {
     id: 3,
-    date: 'Apr 18, 2026',
+    category: 'NUTRITION',
+    date: 'APR 18, 2026',
     title: 'FITNESS, NUTRITION, AND PEAK PERFORMANCE',
     image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80',
+    authorName: 'Rita M.',
+    authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=80&q=80',
   },
   {
     id: 4,
-    date: 'Apr 25, 2026',
+    category: 'ROUTINE',
+    date: 'APR 25, 2026',
     title: 'BUILDING DISCIPLINE: THE BODY BY BRAD APPROACH',
     image: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80',
+    authorName: 'Gladys A.',
+    authorAvatar: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?auto=format&fit=crop&w=80&q=80',
   },
 ];
 
 const LATEST_POSTS = [
   {
     id: 5,
-    date: 'Apr 29, 2026',
+    category: 'FITNESS',
+    date: 'APR 29, 2026',
     title: 'LESSONS FROM 500+ CLIENT TRANSFORMATIONS',
     image: 'https://images.unsplash.com/photo-1554284126-aa88f22d8b74?auto=format&fit=crop&w=900&q=80',
+    authorName: 'Amanda B.',
+    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
   },
   {
     id: 6,
-    date: 'May 2, 2026',
+    category: 'WORKOUT',
+    date: 'MAY 2, 2026',
     title: 'FROM FIRST REP TO FULL ROUTINE: THE BBB MINDSET',
     image: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=900&q=80',
+    authorName: 'Coach Brad',
+    authorAvatar: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?auto=format&fit=crop&w=80&q=80',
   },
 ];
 
@@ -66,28 +84,53 @@ function BlogCard({ post, delay = 0 }: { post: typeof FEATURED_POSTS[0]; delay?:
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 36 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+      initial={{ opacity: 0, y: 44 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 44 }}
+      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay }}
       className="group cursor-pointer"
     >
-      <div className="overflow-hidden w-full aspect-video">
-        <motion.img
+      {/* Image */}
+      <div className="relative rounded-2xl overflow-hidden aspect-4/3">
+        <img
           src={post.image}
           alt={post.title}
-          className="w-full h-full object-cover"
-          whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
           draggable={false}
         />
+        {/* Category / date bar */}
+        <div
+          className="absolute bottom-0 left-0 right-0 flex items-center gap-2 px-4 py-3"
+          style={{ background: 'rgba(0,0,0,0.65)' }}
+        >
+          <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#E6FF2B' }}>
+            {post.category}
+          </span>
+          <span className="text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            / {post.date}
+          </span>
+        </div>
       </div>
-      <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#007AE5]">
-        {post.date}
-      </p>
-      <h3 className="mt-1.5 font-bold uppercase leading-snug tracking-tight text-zinc-950 text-base sm:text-lg">
+
+      {/* Title */}
+      <h3
+        className="mt-4 font-extrabold uppercase leading-tight"
+        style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: '#1A1A1A', letterSpacing: '0.01em' }}
+      >
         {post.title}
       </h3>
+
+      {/* Author */}
+      <div className="mt-3 flex items-center gap-2.5">
+        <img
+          src={post.authorAvatar}
+          alt={post.authorName}
+          className="w-7 h-7 rounded-full object-cover shrink-0"
+        />
+        <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: '#1A1A1A' }}>
+          {post.authorName}
+        </span>
+      </div>
     </motion.article>
   );
 }

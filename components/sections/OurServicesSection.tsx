@@ -119,7 +119,7 @@ export default function OurServicesSection() {
         </p>
 
         {/* Section title */}
-        <h2 className="px-5 mb-12 text-3xl sm:text-4xl font-bold leading-tight" style={{ color: '#1A1A1A' }}>
+        <h2 className="px-5 mb-12 text-3xl sm:text-4xl font-bold leading-tight uppercase" style={{ color: '#1A1A1A' }}>
           {t.servicesTitle}
         </h2>
 
@@ -143,12 +143,12 @@ export default function OurServicesSection() {
                   {i + 1}
                 </span>
                 <div className="flex flex-col gap-3">
-                  <p className="font-semibold text-[1.05rem] leading-snug" style={{ color: '#1A1A1A' }}>
+                  <p className="font-semibold text-[1.05rem] leading-snug uppercase" style={{ color: '#1A1A1A' }}>
                     {t.servicesSlides[i].heading}
                   </p>
                   <a
                     href="#"
-                    className="w-fit text-sm font-semibold underline underline-offset-4 transition-colors"
+                    className="w-fit text-sm font-semibold underline underline-offset-4 transition-colors uppercase"
                     style={{ color: 'rgba(26,26,26,0.6)' }}
                     onMouseEnter={e => (e.currentTarget.style.color = '#1A1A1A')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'rgba(26,26,26,0.6)')}
@@ -176,7 +176,7 @@ export default function OurServicesSection() {
       >
         <div
           ref={titleRef}
-          className="absolute font-bold whitespace-nowrap pointer-events-none select-none"
+          className="absolute font-bold whitespace-nowrap pointer-events-none select-none uppercase"
           style={{ fontSize: '6vw', zIndex: 20, color: '#1A1A1A' }}
         >
           {t.servicesTitle}
@@ -203,12 +203,12 @@ export default function OurServicesSection() {
             className="absolute flex flex-col gap-5"
             style={{ right: '2%', top: '32%', width: '20%', zIndex: 10 }}
           >
-            <p className="text-[1.4rem] lg:text-[1.65rem] font-semibold leading-tight" style={{ color: '#1A1A1A' }}>
+            <p className="text-[1.4rem] lg:text-[1.65rem] font-semibold leading-tight uppercase" style={{ color: '#1A1A1A' }}>
               {t.servicesSlides[i].heading}
             </p>
             <a
               href="#"
-              className="w-fit text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-60"
+              className="w-fit text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-60 uppercase"
               style={{ color: '#1A1A1A' }}
             >
               {t.servicesSlides[i].cta}

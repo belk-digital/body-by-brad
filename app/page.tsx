@@ -23,6 +23,7 @@ import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import FAQSection from '@/components/sections/FAQSection';
 import TransformationSection from '@/components/sections/TransformationSection';
 import CTASection from '@/components/sections/CTASection';
+import BlogSection from '@/components/sections/BlogSection';
 import Footer from '@/components/layout/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -85,6 +86,7 @@ export default function App() {
         <TestimonialsSection />
         <FAQSection />
         <CTASection />
+        <BlogSection />
         <Footer />
       </div>
     </ReactLenis>

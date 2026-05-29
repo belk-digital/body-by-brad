@@ -3,7 +3,8 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import { useEffect, useRef, useState } from 'react';
-import { PauseIcon } from 'lucide-react';
+import { PauseIcon, Dumbbell } from 'lucide-react';
+import { IoChevronForward } from 'react-icons/io5';
 
 import { LanguageProvider } from '@/lib/LanguageContext';
 import { socialMenuItems } from '@/lib/constants';
@@ -81,7 +82,7 @@ export default function EventsPage() {
           </AnimatePresence>
 
           {/* Full-screen hero — dark bg so white navbar is legible */}
-          <section className="relative min-h-screen w-full overflow-hidden bg-[#007AE5] flex items-center">
+          <section className="relative min-h-screen w-full overflow-hidden bg-[#1A1A1A] flex items-center">
 
             <Navbar
               isLoading={isLoading}
@@ -100,10 +101,10 @@ export default function EventsPage() {
               <div className="grid grid-cols-1 md:grid-cols-[42%_1fr] md:grid-rows-[1fr_auto] gap-3 md:h-[calc(100vh-11rem)]">
 
                 {/* Card 1 — Cream info */}
-                <div className="bg-[#f5f0e1] rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-80 md:min-h-0">
+                <div className="bg-[#E6FF2B] rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-80 md:min-h-0">
                   {/* Top: title + description */}
                   <div>
-                    <h2 className="text-zinc-950 font-extrabold text-3xl md:text-4xl lg:text-[2.75rem] leading-tight mb-3">
+                    <h2 className="text-zinc-950 font-extrabold text-3xl md:text-4xl lg:text-[2.75rem] leading-tight mb-3 uppercase">
                       Charleston Cooldown
                       <br />
                       2026
@@ -117,32 +118,34 @@ export default function EventsPage() {
                   {/* Bottom: button pinned by justify-between */}
                   <motion.a
                     href="/register"
-                    className="mt-6 inline-flex items-center gap-2.5 relative overflow-hidden rounded-full border-2 border-zinc-950 px-5 py-2.5 text-sm font-semibold w-fit cursor-pointer"
+                    className="relative mt-6 flex w-full items-center justify-between overflow-hidden rounded-full border-2 border-[#1A1A1A] py-3 pl-5 pr-2 cursor-pointer"
                     initial="rest"
                     whileHover="hover"
                     animate="rest"
                   >
                     <motion.span
-                      className="absolute inset-0 bg-zinc-950"
-                      variants={{ rest: { y: '101%' }, hover: { y: 0 } }}
-                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                      className="absolute inset-0 bg-[#1A1A1A]"
+                      style={{ transformOrigin: 'left' }}
+                      variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
                     />
                     <motion.span
-                      className="relative z-10"
-                      variants={{ rest: { color: '#09090b' }, hover: { color: '#f5f0e1' } }}
-                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      className="relative z-10 text-[10px] font-extrabold uppercase tracking-widest"
+                      variants={{ rest: { color: '#1A1A1A' }, hover: { color: '#E6FF2B' } }}
+                      transition={{ duration: 0.32, ease: 'easeInOut' }}
                     >
                       Register Here
                     </motion.span>
                     <motion.span
-                      className="relative z-10 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold leading-none"
+                      className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
                       variants={{
-                        rest: { backgroundColor: 'rgba(0,0,0,0.08)', color: '#09090b' },
-                        hover: { backgroundColor: '#f5f0e1', color: '#09090b' },
+                        rest:  { backgroundColor: '#1A1A1A', color: '#E6FF2B' },
+                        hover: { backgroundColor: '#E6FF2B', color: '#1A1A1A' },
                       }}
-                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      transition={{ duration: 0.32, ease: 'easeInOut' }}
                     >
-                      &#8599;
+                      <IoChevronForward size={11} />
+                      <IoChevronForward size={11} className="-ml-1.5" />
                     </motion.span>
                   </motion.a>
                 </div>
@@ -168,7 +171,7 @@ export default function EventsPage() {
                         style={{
                           width:  i === 2 ? 18 : 7,
                           height: 7,
-                          backgroundColor: i === 2 ? '#007AE5' : 'rgba(255,255,255,0.65)',
+                          backgroundColor: i === 2 ? '#E6FF2B' : 'rgba(255,255,255,0.65)',
                         }}
                       />
                     ))}
@@ -225,55 +228,106 @@ export default function EventsPage() {
           </section>
 
           {/* Event Highlights */}
-          <section className="bg-white py-20 md:py-28 px-4 sm:px-7 md:px-12">
-            <div className="max-w-7xl mx-auto">
-              <div className="mb-10 md:mb-14">
-                <motion.span
+          <section className="bg-[#1a1a1a] py-20 md:py-28 px-4 sm:px-7 md:px-12">
+            <div className="mb-10 md:mb-14">
+                <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4 }}
-                  className="text-xs uppercase tracking-[0.25em] text-[#007AE5] font-semibold"
+                  className="mb-3 flex items-center gap-2"
                 >
-                  Highlights
-                </motion.span>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E6FF2B]">
+                    <Dumbbell size={12} className="text-zinc-950" />
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B]">
+                    Highlights
+                  </span>
+                </motion.div>
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 mt-2 leading-tight uppercase"
+                  className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)]"
                 >
-                  Event Highlights
+                  EVENT HIGHLIGHTS
                 </motion.h2>
               </div>
               <EventsCarousel images={EVENT_IMAGES} showPagination showNavigation loop autoplay />
-            </div>
           </section>
 
           {/* Upcoming Events */}
-          <section id="register" className="bg-[#f5f4f3] py-20 md:py-28 px-4 sm:px-7 md:px-12">
-            <div className="max-w-7xl mx-auto">
+          <section id="register" className="bg-[#1a1a1a] py-20 md:py-28 px-4 sm:px-7 md:px-12">
+            <div className="mb-10 md:mb-14 flex flex-wrap items-end justify-between gap-6">
+                <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                    className="mb-3 flex items-center gap-2"
+                  >
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E6FF2B]">
+                      <Dumbbell size={12} className="text-zinc-950" />
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B]">
+                      Don&apos;t miss out
+                    </span>
+                  </motion.div>
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                    className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)]"
+                  >
+                    UPCOMING
+                    <br />
+                    EVENTS
+                  </motion.h2>
+                </div>
 
-              <div className="mb-10 md:mb-14">
-                <motion.span
+                {/* Register button */}
+                <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  className="text-xs uppercase tracking-[0.25em] text-[#007AE5] font-semibold"
+                  transition={{ duration: 0.4, delay: 0.15 }}
                 >
-                  Don&apos;t miss out
-                </motion.span>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 mt-2 leading-tight uppercase"
-                >
-                  Upcoming
-                </motion.h2>
+                  <motion.a
+                    href="/register"
+                    className="relative flex items-center gap-0 overflow-hidden rounded-full border-2 border-[#E6FF2B] py-2 pl-6 pr-2 text-[11px] font-extrabold uppercase tracking-widest"
+                    initial="rest"
+                    whileHover="hover"
+                    animate="rest"
+                  >
+                    <motion.span
+                      className="absolute inset-0 bg-[#E6FF2B]"
+                      style={{ transformOrigin: 'left' }}
+                      variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                    />
+                    <motion.span
+                      className="relative z-10 mr-3"
+                      variants={{ rest: { color: '#E6FF2B' }, hover: { color: '#09090b' } }}
+                      transition={{ duration: 0.32, ease: 'easeInOut' }}
+                    >
+                      Register Now
+                    </motion.span>
+                    <motion.span
+                      className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                      variants={{
+                        rest:  { backgroundColor: '#E6FF2B', color: '#09090b' },
+                        hover: { backgroundColor: '#09090b', color: '#E6FF2B' },
+                      }}
+                      transition={{ duration: 0.32, ease: 'easeInOut' }}
+                    >
+                      <IoChevronForward size={11} />
+                      <IoChevronForward size={11} className="-ml-1.5" />
+                    </motion.span>
+                  </motion.a>
+                </motion.div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-[38%_1fr] gap-4">
@@ -293,7 +347,10 @@ export default function EventsPage() {
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                    <h3 className="text-white font-extrabold text-2xl md:text-3xl leading-tight mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B] mb-2">
+                      BBB Community
+                    </p>
+                    <h3 className="text-white font-extrabold uppercase text-2xl md:text-3xl leading-tight mb-3">
                       Our Programs &amp;
                       <br />
                       Events
@@ -315,56 +372,70 @@ export default function EventsPage() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] }}
-                      className="flex items-start justify-between gap-4 rounded-2xl px-6 py-5 group transition-shadow hover:shadow-md"
-                      style={{ backgroundColor: i === 0 ? '#6B6FCE' : '#ffffff' }}
+                      className="flex items-start justify-between gap-4 rounded-2xl px-6 py-5 group transition-opacity hover:opacity-90"
+                      style={{ backgroundColor: i === 0 ? '#E6FF2B' : '#252525' }}
                     >
                       <div className="flex-1 min-w-0">
                         <h3
-                          className="font-bold text-base md:text-lg leading-snug mb-1.5"
-                          style={{ color: i === 0 ? '#ffffff' : '#09090b' }}
+                          className="font-extrabold uppercase text-sm md:text-base leading-snug mb-1.5 tracking-tight"
+                          style={{ color: i === 0 ? '#09090b' : '#ffffff' }}
                         >
                           {event.title}
                         </h3>
                         <p
-                          className="text-sm leading-relaxed line-clamp-2"
-                          style={{ color: i === 0 ? 'rgba(255,255,255,0.65)' : '#71717a' }}
+                          className="text-xs leading-relaxed line-clamp-2"
+                          style={{ color: i === 0 ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.5)' }}
                         >
                           {event.desc}
                         </p>
                       </div>
                       <div
-                        className="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold transition-transform group-hover:scale-110"
+                        className="shrink-0 flex h-8 w-8 items-center justify-center rounded-full transition-transform group-hover:scale-110"
                         style={{
-                          backgroundColor: i === 0 ? 'rgba(255,255,255,0.2)' : '#f4f4f5',
-                          color: i === 0 ? '#ffffff' : '#09090b',
+                          backgroundColor: i === 0 ? '#09090b' : '#E6FF2B',
+                          color:           i === 0 ? '#E6FF2B' : '#09090b',
                         }}
                       >
-                        &#8599;
+                        <IoChevronForward size={11} />
+                        <IoChevronForward size={11} className="-ml-1.5" />
                       </div>
                     </motion.a>
                   ))}
                 </div>
 
               </div>
-            </div>
           </section>
 
           {/* Follow Us On Social Media */}
           <section className="bg-white py-20 md:py-28 px-4 sm:px-7 md:px-12">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
 
               {/* Left — heading + social links */}
               <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                  className="mb-3 flex items-center gap-2"
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1A1A1A]">
+                    <Dumbbell size={12} className="text-[#E6FF2B]" />
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.24em]" style={{ color: 'rgba(26,26,26,0.5)' }}>
+                    Stay Connected
+                  </span>
+                </motion.div>
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                  className="text-4xl sm:text-5xl md:text-[3.25rem] font-extrabold text-zinc-950 leading-tight mb-10"
+                  className="font-extrabold uppercase leading-none tracking-tight text-[#1A1A1A] text-[clamp(2rem,4.5vw,4.5rem)] mb-10"
                 >
-                  Follow Us On
+                  FOLLOW US ON
                   <br />
-                  Social Media
+                  SOCIAL MEDIA
                 </motion.h2>
 
                 <div className="flex flex-col">
@@ -376,14 +447,15 @@ export default function EventsPage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: i * 0.07 }}
-                      className="flex items-center justify-between py-5 border-b border-zinc-200 group"
+                      className="flex items-center justify-between py-4 border-b border-zinc-200 group"
                     >
-                      <span className="text-zinc-500 text-sm font-medium group-hover:text-zinc-950 transition-colors duration-200">
+                      <span className="text-[11px] font-extrabold uppercase tracking-widest text-zinc-950 group-hover:text-[#1A1A1A] transition-colors duration-200">
                         {item}
                       </span>
-                      <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm text-zinc-400 group-hover:text-zinc-950 group-hover:bg-zinc-100 transition-all duration-200">
-                        &#8599;
-                      </span>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 group-hover:bg-[#1A1A1A] transition-all duration-200">
+                        <IoChevronForward size={11} className="text-zinc-950 group-hover:text-[#E6FF2B] transition-colors duration-200" />
+                        <IoChevronForward size={11} className="-ml-1.5 text-zinc-950 group-hover:text-[#E6FF2B] transition-colors duration-200" />
+                      </div>
                     </motion.a>
                   ))}
                 </div>
@@ -395,7 +467,7 @@ export default function EventsPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.15 }}
-                className="rounded-2xl overflow-hidden aspect-[4/3] w-full"
+                className="rounded-2xl overflow-hidden aspect-4/3 w-full"
               >
                 <img
                   src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779139531/IMG_3076_zziehi.jpg"

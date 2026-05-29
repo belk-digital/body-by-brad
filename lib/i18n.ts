@@ -4,7 +4,7 @@ const en = {
   // ── Navbar / Menu overlay ─────────────────────────────────────────────────
   close: 'Close',
   getStarted: 'get started',
-  menuItems: ['About', 'Services', 'Packages', 'Events', 'Results', 'Blog', 'Merchandise', 'Areas We Serve', 'Contact'],
+  menuItems: ['Home', 'About', 'Services', 'Packages', 'Events', 'Results', 'Blog', 'Merchandise', 'Contact'],
   policyItems: ['Privacy Policy', 'Terms of Use', 'Client Agreement'],
   latestEvents: 'Latest Events',
   cooldownMarquee: 'Cooldown Event · Charleston SC · Register Now · ',
@@ -173,13 +173,19 @@ const en = {
   contactFormMessage: 'Message',
   contactFormMessagePh: 'Type here…',
   contactFormSubmit: 'Submit',
+
+  // ── Blog ─────────────────────────────────────────────────────────────────
+  blogLabel: 'Blog & News',
+  blogHeadingL1: 'TAKE THE FIRST STEP',
+  blogHeadingL2: 'TO STRENGTH',
+  blogMoreNews: 'More News',
 };
 
 const es: typeof en = {
   // ── Navbar / Menu overlay ─────────────────────────────────────────────────
   close: 'Cerrar',
   getStarted: 'comenzar',
-  menuItems: ['Nosotros', 'Servicios', 'Paquetes', 'Eventos', 'Resultados', 'Blog', 'Merch', 'Áreas que Servimos', 'Contacto'],
+  menuItems: ['Inicio', 'Nosotros', 'Servicios', 'Paquetes', 'Eventos', 'Resultados', 'Blog', 'Merch', 'Contacto'],
   policyItems: ['Política de Privacidad', 'Términos de Uso', 'Acuerdo del Cliente'],
   latestEvents: 'Últimos Eventos',
   cooldownMarquee: 'Evento Cooldown · Charleston SC · Regístrate · ',
@@ -348,6 +354,12 @@ const es: typeof en = {
   contactFormMessage: 'Mensaje',
   contactFormMessagePh: 'Escribe aquí…',
   contactFormSubmit: 'Enviar',
+
+  // ── Blog ─────────────────────────────────────────────────────────────────
+  blogLabel: 'Blog y Noticias',
+  blogHeadingL1: 'DA EL PRIMER PASO',
+  blogHeadingL2: 'HACIA LA FUERZA',
+  blogMoreNews: 'Más Noticias',
 };
 
 export const translations = { en, es };
