@@ -3,7 +3,8 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import { useEffect, useRef, useState } from 'react';
-import { CheckCircleIcon } from 'lucide-react';
+import { Dumbbell, CheckCircle2 } from 'lucide-react';
+import { IoChevronForward } from 'react-icons/io5';
 
 import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
@@ -18,54 +19,53 @@ const EVENTS = [
 
 const FITNESS_LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Elite'];
 
-const HEAR_OPTIONS = [
-  'Instagram',
-  'Facebook',
-  'YouTube',
-  'Friend / Referral',
-  'Google Search',
-  'Other',
-];
+const HEAR_OPTIONS = ['Instagram', 'Facebook', 'YouTube', 'Friend / Referral', 'Google Search', 'Other'];
+
+const BRING_ITEMS = ['Water bottle', 'Athletic shoes', 'Comfortable workout gear', 'Sunscreen & hat', 'Positive energy!'];
 
 type FormState = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  event: string;
-  fitnessLevel: string;
-  heardFrom: string;
-  emergencyName: string;
-  emergencyPhone: string;
-  notes: string;
-  agreed: boolean;
+  firstName: string; lastName: string; email: string; phone: string;
+  event: string; fitnessLevel: string; heardFrom: string;
+  emergencyName: string; emergencyPhone: string;
+  notes: string; agreed: boolean;
 };
 
 const EMPTY: FormState = {
   firstName: '', lastName: '', email: '', phone: '',
   event: '', fitnessLevel: '', heardFrom: '',
-  emergencyName: '', emergencyPhone: '',
-  notes: '', agreed: false,
+  emergencyName: '', emergencyPhone: '', notes: '', agreed: false,
 };
 
-function Field({
-  label, required, children,
-}: { label: string; required?: boolean; children: React.ReactNode }) {
+const inputCls =
+  'w-full rounded-xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#E6FF2B] focus:bg-white/8 transition-all';
+
+const selectCls =
+  'w-full rounded-xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-white outline-none focus:border-[#E6FF2B] transition-all appearance-none cursor-pointer';
+
+function Field({ label, required, error, children }: {
+  label: string; required?: boolean; error?: string; children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-semibold uppercase tracking-widest text-zinc-500">
-        {label}{required && <span className="text-[#007AE5] ml-0.5">*</span>}
+      <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+        {label}{required && <span className="text-[#E6FF2B] ml-0.5">*</span>}
       </label>
       {children}
+      {error && <span className="text-red-400 text-xs">{error}</span>}
     </div>
   );
 }
 
-const inputCls =
-  'w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 placeholder:text-zinc-400 outline-none focus:border-[#007AE5] focus:ring-2 focus:ring-[#007AE5]/15 transition-all';
-
-const selectCls =
-  'w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 outline-none focus:border-[#007AE5] focus:ring-2 focus:ring-[#007AE5]/15 transition-all appearance-none cursor-pointer';
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-white/8">
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E6FF2B] shrink-0">
+        <Dumbbell size={10} className="text-[#1A1A1A]" />
+      </span>
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#E6FF2B]">{children}</h2>
+    </div>
+  );
+}
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading]   = useState(true);
@@ -96,16 +96,16 @@ export default function RegisterPage() {
 
   const validate = (): boolean => {
     const e: Partial<Record<keyof FormState, string>> = {};
-    if (!form.firstName.trim())    e.firstName    = 'Required';
-    if (!form.lastName.trim())     e.lastName     = 'Required';
-    if (!form.email.trim())        e.email        = 'Required';
+    if (!form.firstName.trim())      e.firstName      = 'Required';
+    if (!form.lastName.trim())       e.lastName       = 'Required';
+    if (!form.email.trim())          e.email          = 'Required';
     else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Invalid email';
-    if (!form.phone.trim())        e.phone        = 'Required';
-    if (!form.event)               e.event        = 'Please select an event';
-    if (!form.fitnessLevel)        e.fitnessLevel = 'Please select a level';
-    if (!form.emergencyName.trim()) e.emergencyName = 'Required';
+    if (!form.phone.trim())          e.phone          = 'Required';
+    if (!form.event)                 e.event          = 'Please select an event';
+    if (!form.fitnessLevel)          e.fitnessLevel   = 'Please select a level';
+    if (!form.emergencyName.trim())  e.emergencyName  = 'Required';
     if (!form.emergencyPhone.trim()) e.emergencyPhone = 'Required';
-    if (!form.agreed)              e.agreed       = 'You must agree to continue';
+    if (!form.agreed)                e.agreed         = 'You must agree to continue';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -122,14 +122,14 @@ export default function RegisterPage() {
   return (
     <LanguageProvider>
       <ReactLenis root>
-        <div className="relative w-full min-h-screen font-satoshi bg-[#f5f4f3] overflow-x-hidden">
+        <div className="relative w-full min-h-screen font-satoshi bg-[#1A1A1A] overflow-x-hidden">
 
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
           </AnimatePresence>
 
-          {/* Hero — blue, contains Navbar */}
-          <section className="relative bg-[#007AE5] pt-36 pb-16 px-4 sm:px-7 md:px-12 overflow-hidden">
+          {/* ── Hero ──────────────────────────────────────────────────────── */}
+          <section className="relative bg-[#1A1A1A] pt-36 pb-16 px-4 sm:px-7 md:px-12 overflow-hidden border-b border-white/8">
             <Navbar
               isLoading={isLoading}
               isMenuOpen={isMenuOpen}
@@ -137,334 +137,291 @@ export default function RegisterPage() {
               onMenuToggle={setIsMenuOpen}
             />
 
-            {/* Decorative circles */}
-            <div className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5" />
-            <div className="pointer-events-none absolute -bottom-12 -left-12 w-64 h-64 rounded-full bg-white/5" />
-
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isLoading ? { opacity: 0, y: 24 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.4 }}
-              className="relative z-10 max-w-7xl mx-auto"
+              className="relative z-10"
             >
-              <span className="text-white/60 text-xs font-semibold uppercase tracking-[0.25em]">
-                Body By Brad
-              </span>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E6FF2B]">
+                  <Dumbbell size={12} className="text-[#1A1A1A]" />
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B]">
+                  Body By Brad
+                </span>
+              </div>
               <h1
-                className="text-white font-extrabold leading-none mt-3 uppercase"
+                className="text-white font-extrabold leading-none uppercase tracking-tight"
                 style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)' }}
               >
                 Event
                 <br />
                 Registration
               </h1>
-              <p className="text-white/65 text-sm md:text-base mt-4 max-w-md leading-relaxed">
+              <p className="text-white/40 text-sm md:text-base mt-4 max-w-md leading-relaxed">
                 Secure your spot at one of Charleston&apos;s premier outdoor fitness events.
                 Fill in your details below and we&apos;ll confirm your registration.
               </p>
             </motion.div>
           </section>
 
-          {/* Form */}
-          <section className="px-4 sm:px-7 md:px-12 py-16 md:py-24">
-            <div className="max-w-7xl mx-auto">
+          {/* ── Form ──────────────────────────────────────────────────────── */}
+          <section className="px-4 sm:px-7 md:px-12 py-16 md:py-20">
 
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  /* ── Success state ─────────────────────────────── */
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                    className="bg-white rounded-3xl p-10 md:p-16 text-center max-w-xl mx-auto shadow-sm"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-[#007AE5]/10 flex items-center justify-center mx-auto mb-6">
-                      <CheckCircleIcon className="w-8 h-8 text-[#007AE5]" />
+            <AnimatePresence mode="wait">
+              {submitted ? (
+
+                /* ── Success ──────────────────────────────────────────── */
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                  className="bg-[#252525] rounded-3xl p-10 md:p-16 text-center max-w-xl mx-auto"
+                >
+                  <div className="w-16 h-16 rounded-full bg-[#E6FF2B]/15 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-8 h-8 text-[#E6FF2B]" />
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-extrabold uppercase text-white mb-3">
+                    You&apos;re Registered!
+                  </h2>
+                  <p className="text-white/50 text-sm leading-relaxed mb-8">
+                    Thanks, <strong className="text-white">{form.firstName}</strong>! We&apos;ve received your
+                    registration for <strong className="text-[#E6FF2B]">{form.event}</strong>.
+                    Check your inbox for a confirmation email.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a
+                      href="/events"
+                      className="px-7 py-3 rounded-full bg-[#E6FF2B] text-[#1A1A1A] text-[11px] font-extrabold uppercase tracking-widest hover:opacity-90 transition-opacity"
+                    >
+                      Back to Events
+                    </a>
+                    <a
+                      href="/"
+                      className="px-7 py-3 rounded-full border border-white/15 text-white/60 text-[11px] font-extrabold uppercase tracking-widest hover:border-white/40 hover:text-white transition-all"
+                    >
+                      Go Home
+                    </a>
+                  </div>
+                </motion.div>
+
+              ) : (
+
+                /* ── Form ─────────────────────────────────────────────── */
+                <motion.form
+                  key="form"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-5 items-start"
+                >
+
+                  {/* ── Left — main fields ──────────────────────────── */}
+                  <div className="bg-[#252525] rounded-3xl p-6 md:p-10 flex flex-col gap-8">
+
+                    {/* Personal Info */}
+                    <div>
+                      <SectionHeading>Personal Information</SectionHeading>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <Field label="First Name" required error={errors.firstName}>
+                          <input type="text" placeholder="John" value={form.firstName} onChange={set('firstName')} className={inputCls} />
+                        </Field>
+                        <Field label="Last Name" required error={errors.lastName}>
+                          <input type="text" placeholder="Doe" value={form.lastName} onChange={set('lastName')} className={inputCls} />
+                        </Field>
+                        <Field label="Email Address" required error={errors.email}>
+                          <input type="email" placeholder="john@example.com" value={form.email} onChange={set('email')} className={inputCls} />
+                        </Field>
+                        <Field label="Phone Number" required error={errors.phone}>
+                          <input type="tel" placeholder="+1 (555) 000-0000" value={form.phone} onChange={set('phone')} className={inputCls} />
+                        </Field>
+                      </div>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-extrabold text-zinc-950 mb-3">
-                      You&apos;re Registered!
-                    </h2>
-                    <p className="text-zinc-500 text-sm leading-relaxed mb-8">
-                      Thanks, <strong className="text-zinc-950">{form.firstName}</strong>! We&apos;ve received your registration
-                      for <strong className="text-zinc-950">{form.event}</strong>. Check your inbox for a confirmation email.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <a
-                        href="/events"
-                        className="px-7 py-3 rounded-full bg-[#007AE5] text-white text-sm font-bold hover:bg-blue-700 transition-colors"
-                      >
-                        Back to Events
-                      </a>
-                      <a
-                        href="/"
-                        className="px-7 py-3 rounded-full border-2 border-zinc-200 text-zinc-700 text-sm font-bold hover:border-zinc-950 transition-colors"
-                      >
-                        Go Home
-                      </a>
-                    </div>
-                  </motion.div>
 
-                ) : (
-                  /* ── Form ──────────────────────────────────────── */
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                    onSubmit={handleSubmit}
-                    noValidate
-                    className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 items-start"
-                  >
-                    {/* Left — main form card */}
-                    <div className="bg-white rounded-3xl p-6 md:p-10 shadow-sm flex flex-col gap-8">
-
-                      {/* Personal Info */}
-                      <div>
-                        <h2 className="text-lg font-extrabold text-zinc-950 mb-5 pb-3 border-b border-zinc-100">
-                          Personal Information
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <Field label="First Name" required>
-                            <input
-                              type="text"
-                              placeholder="John"
-                              value={form.firstName}
-                              onChange={set('firstName')}
-                              className={inputCls}
-                            />
-                            {errors.firstName && <span className="text-red-500 text-xs">{errors.firstName}</span>}
-                          </Field>
-                          <Field label="Last Name" required>
-                            <input
-                              type="text"
-                              placeholder="Doe"
-                              value={form.lastName}
-                              onChange={set('lastName')}
-                              className={inputCls}
-                            />
-                            {errors.lastName && <span className="text-red-500 text-xs">{errors.lastName}</span>}
-                          </Field>
-                          <Field label="Email Address" required>
-                            <input
-                              type="email"
-                              placeholder="john@example.com"
-                              value={form.email}
-                              onChange={set('email')}
-                              className={inputCls}
-                            />
-                            {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
-                          </Field>
-                          <Field label="Phone Number" required>
-                            <input
-                              type="tel"
-                              placeholder="+1 (555) 000-0000"
-                              value={form.phone}
-                              onChange={set('phone')}
-                              className={inputCls}
-                            />
-                            {errors.phone && <span className="text-red-500 text-xs">{errors.phone}</span>}
-                          </Field>
-                        </div>
-                      </div>
-
-                      {/* Event Details */}
-                      <div>
-                        <h2 className="text-lg font-extrabold text-zinc-950 mb-5 pb-3 border-b border-zinc-100">
-                          Event Details
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <Field label="Select Event" required>
-                            <div className="relative">
-                              <select
-                                value={form.event}
-                                onChange={set('event')}
-                                className={selectCls}
-                              >
-                                <option value="">Choose an event…</option>
-                                {EVENTS.map((e) => <option key={e} value={e}>{e}</option>)}
-                              </select>
-                              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">▼</span>
-                            </div>
-                            {errors.event && <span className="text-red-500 text-xs">{errors.event}</span>}
-                          </Field>
-                          <Field label="Fitness Level" required>
-                            <div className="relative">
-                              <select
-                                value={form.fitnessLevel}
-                                onChange={set('fitnessLevel')}
-                                className={selectCls}
-                              >
-                                <option value="">Select level…</option>
-                                {FITNESS_LEVELS.map((l) => <option key={l} value={l}>{l}</option>)}
-                              </select>
-                              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">▼</span>
-                            </div>
-                            {errors.fitnessLevel && <span className="text-red-500 text-xs">{errors.fitnessLevel}</span>}
-                          </Field>
-                          <Field label="How did you hear about us?">
-                            <div className="relative">
-                              <select
-                                value={form.heardFrom}
-                                onChange={set('heardFrom')}
-                                className={selectCls}
-                              >
-                                <option value="">Select…</option>
-                                {HEAR_OPTIONS.map((h) => <option key={h} value={h}>{h}</option>)}
-                              </select>
-                              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">▼</span>
-                            </div>
-                          </Field>
-                        </div>
-                      </div>
-
-                      {/* Emergency Contact */}
-                      <div>
-                        <h2 className="text-lg font-extrabold text-zinc-950 mb-5 pb-3 border-b border-zinc-100">
-                          Emergency Contact
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <Field label="Contact Name" required>
-                            <input
-                              type="text"
-                              placeholder="Jane Doe"
-                              value={form.emergencyName}
-                              onChange={set('emergencyName')}
-                              className={inputCls}
-                            />
-                            {errors.emergencyName && <span className="text-red-500 text-xs">{errors.emergencyName}</span>}
-                          </Field>
-                          <Field label="Contact Phone" required>
-                            <input
-                              type="tel"
-                              placeholder="+1 (555) 000-0000"
-                              value={form.emergencyPhone}
-                              onChange={set('emergencyPhone')}
-                              className={inputCls}
-                            />
-                            {errors.emergencyPhone && <span className="text-red-500 text-xs">{errors.emergencyPhone}</span>}
-                          </Field>
-                        </div>
-                      </div>
-
-                      {/* Notes */}
-                      <Field label="Medical conditions / additional notes">
-                        <textarea
-                          rows={4}
-                          placeholder="Any injuries, allergies, or things we should know…"
-                          value={form.notes}
-                          onChange={set('notes')}
-                          className={`${inputCls} resize-none`}
-                        />
-                      </Field>
-
-                      {/* Terms */}
-                      <div>
-                        <label className="flex items-start gap-3 cursor-pointer group">
-                          <div className="relative mt-0.5 shrink-0">
-                            <input
-                              type="checkbox"
-                              checked={form.agreed}
-                              onChange={(e) => setForm((f) => ({ ...f, agreed: e.target.checked }))}
-                              className="sr-only"
-                            />
-                            <div
-                              className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                                form.agreed ? 'bg-[#007AE5] border-[#007AE5]' : 'border-zinc-300 group-hover:border-zinc-500'
-                              }`}
-                            >
-                              {form.agreed && (
-                                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
-                                  <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
+                    {/* Event Details */}
+                    <div>
+                      <SectionHeading>Event Details</SectionHeading>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <Field label="Select Event" required error={errors.event}>
+                          <div className="relative">
+                            <select value={form.event} onChange={set('event')} className={selectCls}>
+                              <option value="">Choose an event…</option>
+                              {EVENTS.map((e) => <option key={e} value={e}>{e}</option>)}
+                            </select>
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
                           </div>
-                          <span className="text-xs text-zinc-500 leading-relaxed">
-                            I agree to the{' '}
-                            <a href="#" className="text-[#007AE5] underline underline-offset-2">Terms &amp; Conditions</a>
-                            {' '}and confirm that the information provided is accurate.
-                            I understand that participation in outdoor fitness events carries inherent risks.
-                          </span>
-                        </label>
-                        {errors.agreed && <p className="text-red-500 text-xs mt-1.5 ml-8">{errors.agreed}</p>}
+                        </Field>
+                        <Field label="Fitness Level" required error={errors.fitnessLevel}>
+                          <div className="relative">
+                            <select value={form.fitnessLevel} onChange={set('fitnessLevel')} className={selectCls}>
+                              <option value="">Select level…</option>
+                              {FITNESS_LEVELS.map((l) => <option key={l} value={l}>{l}</option>)}
+                            </select>
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
+                          </div>
+                        </Field>
+                        <Field label="How did you hear about us?">
+                          <div className="relative">
+                            <select value={form.heardFrom} onChange={set('heardFrom')} className={selectCls}>
+                              <option value="">Select…</option>
+                              {HEAR_OPTIONS.map((h) => <option key={h} value={h}>{h}</option>)}
+                            </select>
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
+                          </div>
+                        </Field>
                       </div>
                     </div>
 
-                    {/* Right — summary + submit */}
-                    <div className="flex flex-col gap-4 lg:sticky lg:top-28">
-
-                      {/* Event summary card */}
-                      <div className="bg-[#007AE5] rounded-3xl p-6 text-white">
-                        <p className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-3">
-                          Selected Event
-                        </p>
-                        <p className="font-extrabold text-lg leading-snug">
-                          {form.event || 'No event selected yet'}
-                        </p>
-                        {form.event && (
-                          <div className="mt-4 pt-4 border-t border-white/15 text-xs text-white/70 leading-relaxed space-y-1">
-                            <p>📍 Charleston, SC</p>
-                            <p>🎽 Fitness Level: {form.fitnessLevel || '—'}</p>
-                            <p>✉️ {form.email || '—'}</p>
-                          </div>
-                        )}
+                    {/* Emergency Contact */}
+                    <div>
+                      <SectionHeading>Emergency Contact</SectionHeading>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <Field label="Contact Name" required error={errors.emergencyName}>
+                          <input type="text" placeholder="Jane Doe" value={form.emergencyName} onChange={set('emergencyName')} className={inputCls} />
+                        </Field>
+                        <Field label="Contact Phone" required error={errors.emergencyPhone}>
+                          <input type="tel" placeholder="+1 (555) 000-0000" value={form.emergencyPhone} onChange={set('emergencyPhone')} className={inputCls} />
+                        </Field>
                       </div>
+                    </div>
 
-                      {/* What to bring card */}
-                      <div className="bg-[#f5f0e1] rounded-3xl p-6">
-                        <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">
-                          What to Bring
-                        </p>
-                        <ul className="text-sm text-zinc-700 space-y-2">
-                          {['Water bottle', 'Athletic shoes', 'Comfortable workout gear', 'Sunscreen & hat', 'Positive energy!'].map((item) => (
-                            <li key={item} className="flex items-center gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#007AE5] shrink-0" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    {/* Notes */}
+                    <Field label="Medical conditions / additional notes">
+                      <textarea
+                        rows={4}
+                        placeholder="Any injuries, allergies, or things we should know…"
+                        value={form.notes}
+                        onChange={set('notes')}
+                        className={`${inputCls} resize-none`}
+                      />
+                    </Field>
 
-                      {/* Submit button */}
-                      <motion.button
-                        type="submit"
-                        disabled={submitting}
-                        className="relative overflow-hidden rounded-2xl bg-zinc-950 px-8 py-4 text-sm font-bold text-white uppercase tracking-widest w-full cursor-pointer disabled:opacity-60"
-                        initial="rest"
-                        whileHover={submitting ? 'rest' : 'hover'}
-                        animate="rest"
-                      >
-                        <motion.span
-                          className="absolute inset-0 bg-[#007AE5]"
-                          variants={{ rest: { x: '-101%' }, hover: { x: 0 } }}
-                          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                        />
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                          {submitting ? (
-                            <>
-                              <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                    {/* Terms */}
+                    <div>
+                      <label className="flex items-start gap-3 cursor-pointer group">
+                        <div className="relative mt-0.5 shrink-0">
+                          <input
+                            type="checkbox"
+                            checked={form.agreed}
+                            onChange={(e) => setForm((f) => ({ ...f, agreed: e.target.checked }))}
+                            className="sr-only"
+                          />
+                          <div
+                            className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
+                              form.agreed
+                                ? 'bg-[#E6FF2B] border-[#E6FF2B]'
+                                : 'border-white/20 group-hover:border-white/40'
+                            }`}
+                          >
+                            {form.agreed && (
+                              <svg className="w-3 h-3 text-[#1A1A1A]" fill="none" viewBox="0 0 12 12">
+                                <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
-                              Submitting…
-                            </>
-                          ) : (
-                            <>Register Now &#8599;</>
-                          )}
+                            )}
+                          </div>
+                        </div>
+                        <span className="text-xs text-white/40 leading-relaxed">
+                          I agree to the{' '}
+                          <a href="#" className="text-[#E6FF2B] underline underline-offset-2 hover:opacity-75">Terms &amp; Conditions</a>
+                          {' '}and confirm that the information provided is accurate.
+                          I understand that participation in outdoor fitness events carries inherent risks.
                         </span>
-                      </motion.button>
+                      </label>
+                      {errors.agreed && <p className="text-red-400 text-xs mt-1.5 ml-8">{errors.agreed}</p>}
+                    </div>
+                  </div>
 
-                      <p className="text-center text-zinc-400 text-xs">
-                        Free to attend &mdash; no payment required at this stage.
+                  {/* ── Right — summary + submit ─────────────────────── */}
+                  <div className="flex flex-col gap-4 lg:sticky lg:top-28">
+
+                    {/* Event summary */}
+                    <div className="bg-[#E6FF2B] rounded-3xl p-6">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-black/50 mb-3">
+                        Selected Event
                       </p>
+                      <p className="font-extrabold text-[#1A1A1A] text-lg leading-snug uppercase">
+                        {form.event || 'No event selected yet'}
+                      </p>
+                      {form.event && (
+                        <div className="mt-4 pt-4 border-t border-black/10 text-xs text-black/55 leading-relaxed space-y-1.5">
+                          <p>📍 Charleston, SC</p>
+                          <p>🎽 Fitness Level: {form.fitnessLevel || '—'}</p>
+                          <p>✉️ {form.email || '—'}</p>
+                        </div>
+                      )}
                     </div>
 
-                  </motion.form>
-                )}
-              </AnimatePresence>
+                    {/* What to bring */}
+                    <div className="bg-[#252525] rounded-3xl p-6">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B] mb-4">
+                        What to Bring
+                      </p>
+                      <ul className="space-y-2.5">
+                        {BRING_ITEMS.map((item) => (
+                          <li key={item} className="flex items-center gap-2.5 text-sm text-white/60">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E6FF2B] shrink-0" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-            </div>
+                    {/* Submit */}
+                    <motion.button
+                      type="submit"
+                      disabled={submitting}
+                      className="relative overflow-hidden rounded-full border-2 border-[#E6FF2B] py-4 px-8 text-[11px] font-extrabold uppercase tracking-widest w-full cursor-pointer disabled:opacity-50 flex items-center justify-between"
+                      initial="rest"
+                      whileHover={submitting ? 'rest' : 'hover'}
+                      animate="rest"
+                    >
+                      <motion.span
+                        className="absolute inset-0 bg-[#E6FF2B]"
+                        style={{ transformOrigin: 'left' }}
+                        variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                        transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                      />
+                      <motion.span
+                        className="relative z-10"
+                        variants={{ rest: { color: '#E6FF2B' }, hover: { color: '#1A1A1A' } }}
+                        transition={{ duration: 0.32, ease: 'easeInOut' }}
+                      >
+                        {submitting ? 'Submitting…' : 'Register Now'}
+                      </motion.span>
+                      <motion.span
+                        className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                        variants={{
+                          rest:  { backgroundColor: '#E6FF2B', color: '#1A1A1A' },
+                          hover: { backgroundColor: '#1A1A1A', color: '#E6FF2B' },
+                        }}
+                        transition={{ duration: 0.32, ease: 'easeInOut' }}
+                      >
+                        {submitting ? (
+                          <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 24 24" fill="none">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                          </svg>
+                        ) : (
+                          <>
+                            <IoChevronForward size={11} />
+                            <IoChevronForward size={11} className="-ml-1.5" />
+                          </>
+                        )}
+                      </motion.span>
+                    </motion.button>
+
+                    <p className="text-center text-white/25 text-xs">
+                      Free to attend — no payment required at this stage.
+                    </p>
+                  </div>
+
+                </motion.form>
+              )}
+            </AnimatePresence>
           </section>
 
           <Footer />
