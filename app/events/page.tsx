@@ -71,6 +71,7 @@ export default function EventsPage() {
   const [isLoading, setIsLoading]   = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(4);
   const prevScrollY = useRef(0);
   const cd = useCountdown(NEXT_EVENT);
 
@@ -270,31 +271,6 @@ export default function EventsPage() {
                 </motion.h2>
               </div>
               <EventsCarousel images={EVENT_IMAGES} showPagination showNavigation loop autoplay />
-
-              {/* Masonry gallery */}
-              <div className="mt-12 md:mt-16 columns-2 sm:columns-3 lg:columns-4 gap-3">
-                {MASONRY_IMAGES.map((img, i) => (
-                  <motion.div
-                    key={i}
-                    className="break-inside-avoid mb-3 overflow-hidden rounded-2xl group cursor-pointer"
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 0.55, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        loading="lazy"
-                        className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        style={{ aspectRatio: img.ratio }}
-                      />
-                      <div className="absolute inset-0 bg-[#E6FF2B]/0 group-hover:bg-[#E6FF2B]/10 transition-colors duration-300" />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
           </section>
 
           {/* Upcoming Events */}
@@ -444,6 +420,103 @@ export default function EventsPage() {
                 </div>
 
               </div>
+          </section>
+
+          {/* Gallery */}
+          <section className="bg-[#1a1a1a] py-20 md:py-28 px-4 sm:px-7 md:px-12">
+            <div className="mb-10 md:mb-12 flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                  className="mb-3 flex items-center gap-2"
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E6FF2B]">
+                    <Dumbbell size={12} className="text-zinc-950" />
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B]">
+                    Our Gallery
+                  </span>
+                </motion.div>
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                  className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)]"
+                >
+                  MOMENTS &amp;
+                  <br />
+                  MEMORIES
+                </motion.h2>
+              </div>
+            </div>
+
+            {/* Masonry grid */}
+            <div className="columns-2 sm:columns-3 lg:columns-4 gap-3">
+              <AnimatePresence>
+                {MASONRY_IMAGES.slice(0, visibleCount).map((img, i) => (
+                  <motion.div
+                    key={img.src}
+                    className="break-inside-avoid mb-3 overflow-hidden rounded-2xl group cursor-pointer"
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: (i % 4) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        loading="lazy"
+                        className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        style={{ aspectRatio: img.ratio }}
+                      />
+                      <div className="absolute inset-0 bg-[#E6FF2B]/0 group-hover:bg-[#E6FF2B]/10 transition-colors duration-300" />
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+
+            {/* Show More button */}
+            {visibleCount < MASONRY_IMAGES.length && (
+              <div className="mt-10 flex justify-center">
+                <motion.button
+                  onClick={() => setVisibleCount((c) => Math.min(c + 4, MASONRY_IMAGES.length))}
+                  className="relative flex items-center gap-0 overflow-hidden rounded-full border-2 border-[#E6FF2B] py-2 pl-6 pr-2 text-[11px] font-extrabold uppercase tracking-widest cursor-pointer"
+                  initial="rest"
+                  whileHover="hover"
+                  animate="rest"
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-[#E6FF2B]"
+                    style={{ transformOrigin: 'left' }}
+                    variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                    transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                  <motion.span
+                    className="relative z-10 mr-3"
+                    variants={{ rest: { color: '#E6FF2B' }, hover: { color: '#09090b' } }}
+                    transition={{ duration: 0.32, ease: 'easeInOut' }}
+                  >
+                    Show More
+                  </motion.span>
+                  <motion.span
+                    className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                    variants={{
+                      rest:  { backgroundColor: '#E6FF2B', color: '#09090b' },
+                      hover: { backgroundColor: '#09090b', color: '#E6FF2B' },
+                    }}
+                    transition={{ duration: 0.32, ease: 'easeInOut' }}
+                  >
+                    <IoChevronForward size={11} />
+                    <IoChevronForward size={11} className="-ml-1.5" />
+                  </motion.span>
+                </motion.button>
+              </div>
+            )}
           </section>
 
           {/* Follow Us On Social Media */}
