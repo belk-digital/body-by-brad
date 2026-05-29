@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import { useEffect, useRef, useState } from 'react';
-import { PauseIcon, Dumbbell } from 'lucide-react';
+import { PauseIcon, PlayIcon, Dumbbell } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 
 import { LanguageProvider } from '@/lib/LanguageContext';
@@ -72,7 +72,17 @@ export default function EventsPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [visibleCount, setVisibleCount] = useState(4);
+  const [heroSlide, setHeroSlide]   = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
   const prevScrollY = useRef(0);
+
+  useEffect(() => {
+    if (heroPaused) return;
+    const id = setInterval(() => {
+      setHeroSlide((s) => (s + 1) % EVENT_IMAGES.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, [heroPaused]);
   const cd = useCountdown(NEXT_EVENT);
 
   const { scrollY } = useScroll();
@@ -166,28 +176,41 @@ export default function EventsPage() {
                   </motion.a>
                 </div>
 
-                {/* Card 2 — Full-bleed image, spans both rows */}
+                {/* Card 2 — Auto-sliding images, spans both rows */}
                 <div className="md:row-span-2 relative rounded-2xl overflow-hidden h-56 sm:h-72 md:h-auto">
-                  <img
-                    src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg"
-                    alt="Cooldown Event"
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                  />
-                  {/* Pause badge */}
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-zinc-800 text-[11px] font-semibold px-3 py-1.5 rounded-full whitespace-nowrap shadow-sm">
-                    <PauseIcon className="w-3 h-3" />
-                    Pause slide
-                  </div>
-                  {/* Carousel dots */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
-                    {[0, 1, 2, 3].map((i) => (
-                      <div
+                  {EVENT_IMAGES.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img.src}
+                      alt={img.alt}
+                      className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+                        i === heroSlide ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  ))}
+
+                  {/* Pause / Resume button */}
+                  <button
+                    onClick={() => setHeroPaused((p) => !p)}
+                    className="absolute top-3 left-1/2 z-10 -translate-x-1/2 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-zinc-800 text-[11px] font-semibold px-3 py-1.5 rounded-full whitespace-nowrap shadow-sm hover:bg-white transition-colors cursor-pointer"
+                  >
+                    {heroPaused
+                      ? <><PlayIcon className="w-3 h-3" /> Resume slide</>
+                      : <><PauseIcon className="w-3 h-3" /> Pause slide</>
+                    }
+                  </button>
+
+                  {/* Dots */}
+                  <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 flex items-center gap-1.5">
+                    {EVENT_IMAGES.map((_, i) => (
+                      <button
                         key={i}
-                        className="rounded-full transition-all"
+                        onClick={() => setHeroSlide(i)}
+                        className="rounded-full transition-all cursor-pointer"
                         style={{
-                          width:  i === 2 ? 18 : 7,
+                          width:  i === heroSlide ? 18 : 7,
                           height: 7,
-                          backgroundColor: i === 2 ? '#E6FF2B' : 'rgba(255,255,255,0.65)',
+                          backgroundColor: i === heroSlide ? '#E6FF2B' : 'rgba(255,255,255,0.65)',
                         }}
                       />
                     ))}
