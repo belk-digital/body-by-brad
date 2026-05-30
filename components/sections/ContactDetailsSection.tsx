@@ -2,107 +2,96 @@
 
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+
+const SC_MAP_EMBED =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d432918.2!2d-80.1!3d32.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88fe7a42d49b3b87%3A0x88fe7a42d49b3b87!2sCharleston%2C%20SC!5e0!3m2!1sen!2sus!4v1716000000000';
 
 export default function ContactDetailsSection() {
   const { t } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
 
-  const containerVariants: Variants = {
+  const stagger: Variants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-    },
-  };
-
-  const cardReveal: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.14, delayChildren: 0.15 } },
   };
 
   const itemReveal: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-    },
+    hidden: { opacity: 0, x: 28 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
   };
 
+  const contacts = [
+    {
+      Icon: Mail,
+      value: t.contactEmailValue,
+      label: t.contactEmailLabel,
+      href: `mailto:${t.contactEmailValue}`,
+    },
+    {
+      Icon: Phone,
+      value: t.contactPhoneNumber,
+      label: t.contactPhoneLabel,
+      href: `tel:${t.contactPhoneNumber.replace(/[\s()+-]/g, '')}`,
+    },
+    {
+      Icon: MapPin,
+      value: t.contactStudioAddress.join(', '),
+      label: t.contactStudioLabel,
+      href: null,
+    },
+  ];
+
   return (
-    <section
-      ref={ref}
-      className="relative w-full bg-[#005BB5] px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24"
-    >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        className="mx-auto max-w-6xl"
-      >
+    <section ref={ref} className="relative w-full bg-white">
+      <div className="flex flex-col md:flex-row min-h-[400px] md:min-h-[480px]">
+        {/* Map — left ~58% */}
+        <div className="w-full md:w-[58%] h-[280px] md:h-auto">
+          <iframe
+            title="Body By Brad — Charleston, South Carolina"
+            src={SC_MAP_EMBED}
+            className="w-full h-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+
+        {/* Contact info cards — right ~42% */}
         <motion.div
-          variants={cardReveal}
-          className="
-            grid grid-cols-1 gap-10 rounded-sm bg-[#F9F7F2]
-            px-6 py-10
-            sm:px-10 sm:py-14
-            md:grid-cols-[1fr_1fr] md:gap-16 md:px-14 md:py-20
-            lg:px-20 lg:py-24
-          "
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="w-full md:w-[42%] flex flex-col divide-y divide-gray-200 border-t border-gray-200 md:border-t-0 md:border-l md:border-gray-200"
         >
-          <div className="flex items-end md:items-end">
-            <h2 className="font-bold uppercase leading-[0.95] tracking-tight text-[#684556] text-[10vw] sm:text-[7vw] md:text-[4vw] lg:text-[3.2rem]">
-              {t.contactDetailsTitle}
-            </h2>
-          </div>
-
-          <div className="md:border-l md:border-[#898A8D]/30 md:pl-12">
-            <motion.div variants={itemReveal} className="mb-8">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#684556]">
-                {t.contactStudioLabel}
-              </p>
-              {t.contactStudioAddress.map((line) => (
-                <p key={line} className="text-sm leading-relaxed text-[#898A8D] md:text-base">
-                  {line}
-                </p>
-              ))}
+          {contacts.map(({ Icon, value, label, href }) => (
+            <motion.div
+              key={label}
+              variants={itemReveal}
+              className="flex items-center gap-5 px-8 py-9 md:px-10 md:py-10"
+            >
+              <div className="w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center flex-shrink-0">
+                <Icon className="w-5 h-5 text-gray-700" strokeWidth={1.5} />
+              </div>
+              <div>
+                {href ? (
+                  <a
+                    href={href}
+                    className="font-semibold text-gray-900 text-sm md:text-base hover:text-[#007AE5] transition-colors"
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <p className="font-semibold text-gray-900 text-sm md:text-base">{value}</p>
+                )}
+                <p className="text-gray-500 text-xs uppercase tracking-widest mt-0.5">{label}</p>
+              </div>
             </motion.div>
-
-            <motion.div variants={itemReveal} className="mb-8">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#684556]">
-                {t.contactPhoneLabel}
-              </p>
-              <a
-                href={`tel:${t.contactPhoneNumber.replace(/\s|\(|\)|-/g, '')}`}
-                className="text-sm text-[#898A8D] transition-colors hover:text-[#684556] md:text-base"
-              >
-                {t.contactPhoneNumber}
-              </a>
-              <p className="mt-1 text-xs text-[#898A8D]/80 md:text-sm">
-                {t.contactPhoneNote}
-              </p>
-            </motion.div>
-
-            <motion.div variants={itemReveal}>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#684556]">
-                {t.contactEmailLabel}
-              </p>
-              <a
-                href={`mailto:${t.contactEmailValue}`}
-                className="text-sm font-medium text-[#007AE5] underline-offset-4 transition-all hover:underline md:text-base"
-              >
-                {t.contactEmailValue}
-              </a>
-            </motion.div>
-          </div>
+          ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

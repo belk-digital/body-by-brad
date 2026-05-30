@@ -2,9 +2,9 @@
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, AnimatePresence } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
-import { IoCartOutline, IoChevronBack } from 'react-icons/io5';
+import { ShoppingCart, ChevronLeft, Check } from 'lucide-react';
 
 import { LanguageProvider } from '@/lib/LanguageContext';
 import { useCart } from '@/lib/cart/CartContext';
@@ -25,7 +25,7 @@ const FIT_INFO = [
   'Designed and printed in the USA.',
 ];
 
-const fmtUsd = (cents: number) => (cents / 100).toFixed(0);
+const fmtUsd = (cents: number) => `$${(cents / 100).toFixed(0)}`;
 
 type Tab = 'info' | 'description';
 
@@ -40,6 +40,9 @@ function DetailContent({ product }: { product: Product }) {
 
   const { addItem, open } = useCart();
   const soldOut = product.stock <= 0;
+  const hasDiscount =
+    product.original_price_cents != null &&
+    product.original_price_cents > product.price_cents;
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -60,13 +63,15 @@ function DetailContent({ product }: { product: Product }) {
       quantity: qty,
     });
     setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
+    setTimeout(() => setAdded(false), 1800);
     open();
   };
 
   return (
-    <div className="relative w-full bg-white overflow-x-hidden">
-      <section className="relative w-full bg-black">
+    <div className="relative w-full bg-white overflow-x-hidden font-satoshi">
+
+      {/* Navbar */}
+      <div className="relative w-full bg-black">
         <Navbar
           isLoading={false}
           isMenuOpen={isMenuOpen}
@@ -74,199 +79,262 @@ function DetailContent({ product }: { product: Product }) {
           onMenuToggle={setIsMenuOpen}
         />
         <div className="h-24 sm:h-28" aria-hidden />
-      </section>
+      </div>
 
-      <section className="font-satoshi w-full bg-white py-10 md:py-16 px-4 sm:px-7 md:px-12">
-        <div className="max-w-6xl mx-auto">
+      {/* Back link bar */}
+      <div className="w-full border-b border-gray-100 px-4 sm:px-7 md:px-12">
+        <div className="max-w-7xl mx-auto">
           <Link
             href="/merchandise"
-            className="inline-flex items-center gap-1 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 py-4 text-[11px] font-bold uppercase tracking-[0.18em] text-gray-400 hover:text-gray-900 transition-colors"
           >
-            <IoChevronBack size={14} /> Back to merchandise
+            <ChevronLeft className="w-3.5 h-3.5" strokeWidth={2.5} />
+            Back to Merchandise
           </Link>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-            {/* Image gallery */}
-            <div className="space-y-4">
-              {product.image && (
-                <motion.div
-                  className="relative rounded-2xl overflow-hidden bg-[#fdf6ec] aspect-square"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </motion.div>
-              )}
-              {product.image && (
-                <motion.div
-                  className="relative rounded-2xl overflow-hidden bg-[#fdf6ec] aspect-square hidden md:block"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
-                >
-                  <img
-                    src={product.image}
-                    alt={`${product.name} back view`}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </motion.div>
+      {/* Main grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-7 md:px-12 py-10 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 lg:gap-20">
+
+          {/* ── Left: images ───────────────────────────────────────── */}
+          <div className="space-y-3">
+            {product.image && (
+              <motion.div
+                className="relative bg-[#f5f5f5] aspect-square overflow-hidden"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </motion.div>
+            )}
+
+            {/* Second image (back view) */}
+            {product.image && (
+              <motion.div
+                className="relative bg-[#f5f5f5] aspect-square overflow-hidden hidden md:block"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              >
+                <img
+                  src={product.image}
+                  alt={`${product.name} detail`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </motion.div>
+            )}
+          </div>
+
+          {/* ── Right: details ─────────────────────────────────────── */}
+          <motion.div
+            className="md:sticky md:top-28 self-start"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+          >
+            {/* Category */}
+            {product.category && (
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-gray-400 mb-3">
+                {product.category}
+              </p>
+            )}
+
+            {/* Name */}
+            <h1 className="font-bold tracking-tight text-gray-900 leading-tight mb-5
+              text-4xl sm:text-5xl md:text-4xl lg:text-5xl">
+              {product.name}
+            </h1>
+
+            {/* Price */}
+            <div className="flex items-baseline gap-3 mb-5">
+              <span className="text-2xl font-bold text-gray-900">
+                {fmtUsd(product.price_cents)} USD
+              </span>
+              {hasDiscount && (
+                <span className="text-base text-gray-400 line-through">
+                  {fmtUsd(product.original_price_cents!)} USD
+                </span>
               )}
             </div>
 
-            {/* Details */}
-            <motion.div
-              className="md:sticky md:top-28 self-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
-            >
-              {product.category && (
-                <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-semibold mb-3">
-                  {product.category}
-                </p>
-              )}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 mb-4">
-                {product.name}
-              </h1>
+            {/* Description */}
+            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">
+              {product.description}
+            </p>
 
-              <div className="flex items-baseline gap-3 mb-5">
-                <span className="text-2xl font-bold text-zinc-950">
-                  ${fmtUsd(product.price_cents)} USD
+            {/* Size */}
+            <div className="mb-7">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">
+                  SIZE
                 </span>
-                {product.original_price_cents &&
-                  product.original_price_cents > product.price_cents && (
-                    <span className="text-base text-zinc-400 line-through">
-                      ${fmtUsd(product.original_price_cents)} USD
-                    </span>
-                  )}
+                <span className="text-xs text-gray-400">
+                  {product.stock} in stock
+                </span>
               </div>
-
-              <p className="text-zinc-600 text-sm leading-relaxed mb-8">
-                {product.description}
-              </p>
-
-              {/* Size selector */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">
-                    Size
-                  </label>
-                  <span className="text-xs text-zinc-400">
-                    {product.stock} in stock
-                  </span>
-                </div>
-                <div className="grid grid-cols-5 gap-2">
-                  {SIZES.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => setSize(s)}
-                      disabled={soldOut}
-                      className={`py-3 rounded-lg text-sm font-semibold border transition-colors ${
-                        size === s
-                          ? 'border-zinc-950 bg-zinc-950 text-white'
-                          : 'border-zinc-200 text-zinc-700 hover:border-zinc-900'
-                      } disabled:opacity-40 disabled:cursor-not-allowed`}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quantity */}
-              <div className="mb-6">
-                <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold block mb-2">
-                  Quantity
-                </label>
-                <div className="inline-flex items-center gap-1 border border-zinc-200 rounded-lg px-2 py-1">
+              <div className="grid grid-cols-5 gap-2">
+                {SIZES.map((s) => (
                   <button
+                    key={s}
                     type="button"
-                    onClick={() => setQty(Math.max(1, qty - 1))}
-                    className="w-8 h-8 flex items-center justify-center text-zinc-600 hover:text-zinc-900 text-lg"
+                    onClick={() => setSize(s)}
+                    disabled={soldOut}
+                    className={`py-3.5 text-sm font-semibold border transition-all duration-150 ${
+                      size === s
+                        ? 'border-gray-900 bg-gray-900 text-white'
+                        : 'border-gray-200 text-gray-600 hover:border-gray-600 hover:text-gray-900'
+                    } disabled:opacity-30 disabled:cursor-not-allowed`}
                   >
-                    −
+                    {s}
                   </button>
-                  <span className="w-8 text-center text-sm font-medium text-zinc-950">{qty}</span>
-                  <button
-                    type="button"
-                    onClick={() => setQty(Math.min(product.stock, qty + 1))}
-                    className="w-8 h-8 flex items-center justify-center text-zinc-600 hover:text-zinc-900 text-lg"
-                  >
-                    +
-                  </button>
-                </div>
+                ))}
               </div>
+            </div>
 
-              {/* Add to Cart */}
-              <motion.button
-                type="button"
-                onClick={onAdd}
-                disabled={soldOut}
-                className={`flex items-center justify-center gap-2 w-full py-4 rounded-full text-sm font-semibold transition-colors ${
-                  soldOut
-                    ? 'bg-zinc-300 text-zinc-500 cursor-not-allowed'
-                    : 'bg-zinc-950 text-white hover:bg-zinc-700'
-                }`}
-                animate={added ? { backgroundColor: '#10b981' } : undefined}
-                whileTap={!soldOut ? { scale: 0.98 } : undefined}
-              >
-                {soldOut ? (
-                  <span>Sold out</span>
-                ) : added ? (
-                  <span>✓ Added to Cart</span>
+            {/* Quantity */}
+            <div className="mb-7">
+              <span className="block text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500 mb-3">
+                QUANTITY
+              </span>
+              <div className="inline-flex items-center border border-gray-200">
+                <button
+                  type="button"
+                  onClick={() => setQty(Math.max(1, qty - 1))}
+                  className="w-11 h-11 flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-50 text-lg transition-colors select-none"
+                >
+                  −
+                </button>
+                <span className="w-11 text-center text-sm font-semibold text-gray-900 border-x border-gray-200">
+                  {qty}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setQty(Math.min(product.stock, qty + 1))}
+                  className="w-11 h-11 flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-50 text-lg transition-colors select-none"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Add to Cart */}
+            <motion.button
+              type="button"
+              onClick={onAdd}
+              disabled={soldOut}
+              whileTap={!soldOut ? { scale: 0.98 } : undefined}
+              className={`relative flex items-center justify-center gap-2.5 w-full py-4 rounded-full text-sm font-bold uppercase tracking-wider overflow-hidden transition-colors ${
+                soldOut
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-900 text-white hover:bg-black cursor-pointer'
+              }`}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {added ? (
+                  <motion.span
+                    key="added"
+                    className="flex items-center gap-2"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Check className="w-4 h-4" strokeWidth={2.5} />
+                    Added to Cart
+                  </motion.span>
+                ) : soldOut ? (
+                  <motion.span key="soldout" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    Sold Out
+                  </motion.span>
                 ) : (
-                  <>
-                    <IoCartOutline size={18} />
-                    <span>Add to Cart</span>
-                  </>
+                  <motion.span
+                    key="buy"
+                    className="flex items-center gap-2.5"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ShoppingCart className="w-4 h-4" strokeWidth={2} />
+                    Add to Cart
+                  </motion.span>
                 )}
-              </motion.button>
+              </AnimatePresence>
+            </motion.button>
 
-              <p className="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold text-center mt-4">
-                Free shipping on orders over ${FREE_SHIPPING_THRESHOLD} USD
-              </p>
+            {/* Free shipping */}
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 text-center mt-4">
+              Free shipping on orders over ${FREE_SHIPPING_THRESHOLD} USD
+            </p>
 
-              {/* Tabs */}
-              <div className="mt-10">
-                <div className="flex gap-2 mb-4">
-                  {(['info', 'description'] as const).map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      onClick={() => setTab(t)}
-                      className={`px-5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors ${
-                        tab === t
-                          ? 'bg-zinc-950 text-white'
-                          : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
-                      }`}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div>
+            {/* Divider */}
+            <div className="w-full h-px bg-gray-100 mt-10 mb-8" />
 
+            {/* Tabs */}
+            <div>
+              <div className="flex gap-0 mb-6 border-b border-gray-100">
+                {(['info', 'description'] as const).map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setTab(t)}
+                    className={`relative px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] transition-colors ${
+                      tab === t ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'
+                    }`}
+                  >
+                    {t}
+                    {tab === t && (
+                      <motion.div
+                        layoutId="tab-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              <AnimatePresence mode="wait" initial={false}>
                 {tab === 'info' ? (
-                  <ul className="space-y-2 text-sm text-zinc-700 leading-relaxed list-disc pl-5">
+                  <motion.ul
+                    key="info"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22 }}
+                    className="space-y-2.5"
+                  >
                     {FIT_INFO.map((line) => (
-                      <li key={line}>{line}</li>
+                      <li key={line} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#CBFF00] mt-2 flex-shrink-0" />
+                        {line}
+                      </li>
                     ))}
-                  </ul>
+                  </motion.ul>
                 ) : (
-                  <p className="text-sm text-zinc-700 leading-relaxed">
+                  <motion.p
+                    key="desc"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22 }}
+                    className="text-sm text-gray-600 leading-relaxed"
+                  >
                     {product.description ?? 'No additional description available.'}
-                  </p>
+                  </motion.p>
                 )}
-              </div>
-            </motion.div>
-          </div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>

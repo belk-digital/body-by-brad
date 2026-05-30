@@ -41,7 +41,7 @@ export default function ContactPage() {
             {isLoading && <StairsPreloader />}
           </AnimatePresence>
 
-          <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-black">
+          <section className="relative h-[50dvh] min-h-[360px] w-full overflow-hidden bg-black">
             <Navbar
               isLoading={isLoading}
               isMenuOpen={isMenuOpen}

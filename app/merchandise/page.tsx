@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
-import { IoCartOutline } from 'react-icons/io5';
+import { ChevronRight, ShoppingBag } from 'lucide-react';
 
 import { LanguageProvider } from '@/lib/LanguageContext';
 import { supabaseBrowser } from '@/lib/supabase/browser';
@@ -15,7 +15,126 @@ import Navbar from '@/components/layout/Navbar';
 import MerchandiseHeroSection from '@/components/sections/MerchandiseHeroSection';
 import Footer from '@/components/layout/Footer';
 
-const fmtUsd = (cents: number) => (cents / 100).toFixed(0);
+const fmtUsd = (cents: number) => `$${(cents / 100).toFixed(0)}`;
+
+function ProductCard({ product, index }: { product: Product; index: number }) {
+  const soldOut = product.stock <= 0;
+  const hasDiscount =
+    product.original_price_cents != null &&
+    product.original_price_cents > product.price_cents;
+
+  return (
+    <motion.div
+      className="flex flex-col"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-5% 0px' }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
+    >
+      {/* Image */}
+      <Link href={`/merchandise/${product.id}`} className="block group mb-5">
+        <div className="relative bg-[#f0f0f0] aspect-[4/5] overflow-hidden">
+          {/* Category badge */}
+          {product.category && (
+            <span className="absolute top-4 left-4 z-10 bg-white text-gray-900 text-[9px] font-bold uppercase tracking-[0.18em] px-3 py-1.5">
+              {product.category}
+            </span>
+          )}
+
+          {/* Status badge */}
+          <span
+            className={`absolute top-4 right-4 z-10 text-[9px] font-bold uppercase tracking-[0.18em] px-3 py-1.5 ${
+              soldOut ? 'bg-red-600 text-white' : 'bg-gray-900 text-white'
+            }`}
+          >
+            {soldOut ? 'Sold Out' : 'New'}
+          </span>
+
+          {/* Discount ribbon */}
+          {hasDiscount && !soldOut && (
+            <span className="absolute bottom-4 left-4 z-10 bg-[#CBFF00] text-gray-900 text-[9px] font-bold uppercase tracking-[0.18em] px-3 py-1.5">
+              Sale
+            </span>
+          )}
+
+          {/* Product image */}
+          {product.image ? (
+            <motion.img
+              src={product.image}
+              alt={product.name}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity ${
+                soldOut ? 'opacity-40' : ''
+              }`}
+              whileHover={!soldOut ? { scale: 1.06 } : undefined}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <ShoppingBag className="w-12 h-12 text-gray-300" />
+            </div>
+          )}
+        </div>
+      </Link>
+
+      {/* Info */}
+      <div className="flex flex-col flex-1">
+        <h3 className="font-bold uppercase tracking-tight text-gray-900 leading-tight mb-1.5
+          text-xl sm:text-2xl">
+          {product.name}
+        </h3>
+
+        <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">
+          {product.description}
+        </p>
+
+        {/* Price row */}
+        <div className="flex items-baseline gap-2.5 mb-5">
+          <span className="font-bold text-gray-900 text-xl">
+            {fmtUsd(product.price_cents)}
+          </span>
+          {hasDiscount && (
+            <span className="text-gray-400 text-sm line-through">
+              {fmtUsd(product.original_price_cents!)}
+            </span>
+          )}
+        </div>
+
+        {/* CTA */}
+        {soldOut ? (
+          <div className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-gray-100 text-gray-400 text-sm font-bold uppercase tracking-wider">
+            Sold Out
+          </div>
+        ) : (
+          <Link
+            href={`/merchandise/${product.id}`}
+            className="inline-flex items-center justify-center gap-2.5 w-full
+              pl-6 pr-2 py-2 rounded-full bg-gray-900 text-white
+              font-bold uppercase text-sm tracking-wider
+              hover:bg-black transition-colors"
+          >
+            <span className="flex-1 text-center">Buy Now</span>
+            <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 flex-shrink-0">
+              <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+            </span>
+          </Link>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function SkeletonCard() {
+  return (
+    <div className="flex flex-col gap-4 animate-pulse">
+      <div className="bg-gray-100 aspect-[4/5]" />
+      <div className="h-7 bg-gray-100 rounded w-3/4" />
+      <div className="h-4 bg-gray-100 rounded w-full" />
+      <div className="h-4 bg-gray-100 rounded w-2/3" />
+      <div className="h-6 bg-gray-100 rounded w-1/4" />
+      <div className="h-12 bg-gray-100 rounded-full" />
+    </div>
+  );
+}
 
 function MerchandiseContent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,12 +168,13 @@ function MerchandiseContent() {
   }, []);
 
   return (
-    <div className="relative w-full bg-[#f5f0e1] overflow-x-hidden">
+    <div className="relative w-full bg-white overflow-x-hidden font-satoshi">
       <AnimatePresence>
         {isLoading && <StairsPreloader />}
       </AnimatePresence>
 
-      <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-black">
+      {/* Hero — half height */}
+      <section className="relative h-[50dvh] min-h-[340px] w-full overflow-hidden bg-black">
         <Navbar
           isLoading={isLoading}
           isMenuOpen={isMenuOpen}
@@ -64,110 +184,67 @@ function MerchandiseContent() {
         <MerchandiseHeroSection isLoading={isLoading} />
       </section>
 
-      <section className="font-satoshi w-full bg-[#f5f0e1] py-16 md:py-24 px-4 sm:px-7 md:px-12">
+      {/* Products */}
+      <section className="w-full bg-white py-16 md:py-24 px-4 sm:px-7 md:px-12">
         <div className="max-w-7xl mx-auto">
+
+          {/* Section header */}
+          <motion.div
+            className="mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-10% 0px' }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#CBFF00] flex-shrink-0" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-gray-500">
+                Merchandise
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+              <div>
+                <h2 className="font-bold uppercase tracking-tight text-gray-900 leading-none mb-3
+                  text-[10vw] sm:text-[6vw] md:text-[4.5vw] lg:text-5xl">
+                  OUR COLLECTION
+                </h2>
+                <p className="text-gray-500 text-sm sm:text-base max-w-md leading-relaxed">
+                  Premium fitness apparel built for performance and made for the streets.
+                </p>
+              </div>
+
+              {products && products.length > 0 && (
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-gray-400 whitespace-nowrap">
+                  {products.length} {products.length === 1 ? 'item' : 'items'}
+                </p>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Divider */}
+          <div className="w-full h-px bg-gray-100 mb-12 md:mb-16" />
+
+          {/* Grid */}
           {products === null ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-              {Array.from({ length: 2 }).map((_, i) => (
-                <div key={i} className="flex flex-col gap-4 animate-pulse">
-                  <div className="rounded-2xl bg-zinc-200/60 aspect-[4/5]" />
-                  <div className="h-8 bg-zinc-200/60 rounded w-2/3" />
-                  <div className="h-4 bg-zinc-200/60 rounded w-full" />
-                  <div className="h-12 bg-zinc-200/60 rounded-full" />
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <SkeletonCard key={i} />
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="text-center text-zinc-500 py-20">
-              No merchandise available yet. Check back soon.
+            <div className="flex flex-col items-center justify-center py-28 text-center">
+              <ShoppingBag className="w-12 h-12 text-gray-200 mb-4" />
+              <p className="font-bold uppercase tracking-widest text-gray-400 text-sm">
+                No items available yet
+              </p>
+              <p className="text-gray-400 text-sm mt-1">Check back soon for new drops.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-              {products.map((product, i) => {
-                const soldOut = product.stock <= 0;
-                return (
-                  <motion.div
-                    key={product.id}
-                    className="flex flex-col"
-                    initial={{ opacity: 0, y: 48 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-5% 0px' }}
-                    transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: i * 0.15 }}
-                  >
-                    <Link
-                      href={`/merchandise/${product.id}`}
-                      className="block group"
-                    >
-                      <motion.div
-                        className="relative rounded-2xl overflow-hidden bg-zinc-100 aspect-[4/5] mb-6"
-                        whileHover={!soldOut ? { scale: 1.01 } : undefined}
-                        transition={{ duration: 0.4, ease: 'easeOut' }}
-                      >
-                        {product.category && (
-                          <span className="absolute top-4 left-4 z-10 bg-white text-zinc-950 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-                            {product.category}
-                          </span>
-                        )}
-                        <span
-                          className={`absolute top-4 right-4 z-10 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full ${
-                            soldOut ? 'bg-red-600 text-white' : 'bg-zinc-900 text-white'
-                          }`}
-                        >
-                          {soldOut ? 'Sold out' : 'New'}
-                        </span>
-                        {product.image && (
-                          <motion.img
-                            src={product.image}
-                            alt={product.name}
-                            className={`absolute inset-0 h-full w-full object-cover ${
-                              soldOut ? 'opacity-50' : ''
-                            }`}
-                            whileHover={!soldOut ? { scale: 1.05 } : undefined}
-                            transition={{ duration: 0.6, ease: 'easeOut' }}
-                          />
-                        )}
-                      </motion.div>
-                    </Link>
-
-                    <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-zinc-950 mb-2">
-                      {product.name}
-                    </h2>
-                    <p className="text-zinc-500 text-base leading-relaxed mb-5 max-w-md">
-                      {product.description}
-                    </p>
-                    <div className="flex items-baseline gap-3 mb-6">
-                      <span className="text-2xl font-bold text-zinc-950">
-                        ${fmtUsd(product.price_cents)}
-                      </span>
-                      {product.original_price_cents &&
-                        product.original_price_cents > product.price_cents && (
-                          <span className="text-base text-zinc-400 line-through">
-                            ${fmtUsd(product.original_price_cents)}
-                          </span>
-                        )}
-                    </div>
-
-                    <Link
-                      href={`/merchandise/${product.id}`}
-                      aria-disabled={soldOut}
-                      className={`flex items-center justify-center gap-2 w-full py-4 rounded-full text-sm font-semibold transition-colors ${
-                        soldOut
-                          ? 'bg-zinc-300 text-zinc-500 pointer-events-none'
-                          : 'bg-zinc-950 text-white hover:bg-zinc-700'
-                      }`}
-                    >
-                      {soldOut ? (
-                        <span>Sold out</span>
-                      ) : (
-                        <>
-                          <IoCartOutline size={18} />
-                          <span>Buy Now</span>
-                        </>
-                      )}
-                    </Link>
-                  </motion.div>
-                );
-              })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {products.map((product, i) => (
+                <ProductCard key={product.id} product={product} index={i} />
+              ))}
             </div>
           )}
         </div>
