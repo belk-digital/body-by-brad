@@ -9,8 +9,8 @@ export default function StairsPreloader() {
       className="fixed inset-0 z-50 overflow-hidden"
       style={{ backgroundColor: '#1a1a1a' }}
       exit={{
-        opacity: 0,
-        transition: { delay: 0.2, duration: 0.25 },
+        backgroundColor: 'rgba(26,26,26,0)',
+        transition: { delay: 0.55, duration: 0.35 },
       }}
     >
       {/* Stair panels — lime, staggered rise from bottom */}
@@ -37,7 +37,7 @@ export default function StairsPreloader() {
         className="absolute inset-0 z-10 flex items-center justify-center px-6"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -16, transition: { duration: 0.25 } }}
+        exit={{ opacity: 0, transition: { duration: 0.2 } }}
         transition={{ delay: 0.52, duration: 0.55, ease: 'easeOut' }}
       >
         <div className="text-center">
