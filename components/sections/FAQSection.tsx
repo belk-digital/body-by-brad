@@ -18,7 +18,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
   return (
     <section
       id="faq"
-      className="font-satoshi relative w-full bg-[#1a1a1a] overflow-hidden"
+      className="font-satoshi relative w-full bg-[#E6FF2B] overflow-hidden"
     >
       {/* Coach Brad image — bleeds from bottom left */}
       <img
@@ -48,16 +48,16 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E6FF2B]">
-                <Dumbbell size={12} className="text-zinc-950" />
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1a1a1a]">
+                <Dumbbell size={12} className="text-[#E6FF2B]" />
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B]">
+              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#1a1a1a]">
                 {t.faqLabel}
               </span>
             </motion.div>
 
             <motion.h2
-              className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)] mb-5"
+              className="font-extrabold uppercase leading-none tracking-tight text-[#1a1a1a] text-[clamp(2rem,4.5vw,4.5rem)] mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -69,7 +69,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
             </motion.h2>
 
             <motion.p
-              className="text-white/40 text-sm leading-relaxed max-w-xs"
+              className="text-black/50 text-sm leading-relaxed max-w-xs"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -94,7 +94,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                   key={i}
                   className={`border-b transition-colors duration-200 ${
                     i === 0 ? 'border-t' : ''
-                  } ${isOpen ? 'border-white/15' : 'border-white/8'}`}
+                  } ${isOpen ? 'border-black/15' : 'border-black/10'}`}
                 >
                   <button
                     className="w-full flex items-center justify-between gap-6 py-5 text-left cursor-pointer group"
@@ -102,12 +102,12 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                   >
                     {/* Number + question */}
                     <div className="flex items-start gap-4 min-w-0">
-                      <span className="shrink-0 text-[10px] font-bold tabular-nums text-[#E6FF2B]/60 mt-0.5 w-5">
+                      <span className="shrink-0 text-[10px] font-bold tabular-nums text-black/40 mt-0.5 w-5">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span
                         className={`text-sm md:text-[15px] font-semibold leading-snug transition-colors duration-200 ${
-                          isOpen ? 'text-white' : 'text-white/60 group-hover:text-white/90'
+                          isOpen ? 'text-[#1a1a1a]' : 'text-black/55 group-hover:text-black/90'
                         }`}
                       >
                         {item.q}
@@ -118,13 +118,13 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                     <motion.div
                       className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full transition-colors duration-200"
                       style={{
-                        backgroundColor: isOpen ? '#E6FF2B' : 'rgba(255,255,255,0.06)',
+                        backgroundColor: isOpen ? '#1a1a1a' : 'rgba(0,0,0,0.08)',
                       }}
                       animate={{ rotate: isOpen ? 0 : 0 }}
                     >
                       {isOpen
-                        ? <Minus size={13} className="text-[#1A1A1A]" />
-                        : <Plus size={13} className="text-white/60" />
+                        ? <Minus size={13} className="text-[#E6FF2B]" />
+                        : <Plus size={13} className="text-black/60" />
                       }
                     </motion.div>
                   </button>
@@ -139,7 +139,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                         transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                         className="overflow-hidden"
                       >
-                        <p className="text-white/45 text-sm leading-relaxed pb-5 pl-9 pr-4">
+                        <p className="text-black/55 text-sm leading-relaxed pb-5 pl-9 pr-4">
                           {item.a}
                         </p>
                       </motion.div>

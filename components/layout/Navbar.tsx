@@ -99,11 +99,19 @@ function MenuOverlay() {
             ))}
           </div>
           <div className="flex flex-col gap-1 text-sm font-medium text-white opacity-50">
-            {t.policyItems.map((item) => (
-              <a key={item} href="#" className="transition-opacity hover:opacity-100">
-                {item}
-              </a>
-            ))}
+            {t.policyItems.map((item) => {
+              const lower = item.toLowerCase();
+              const href =
+                lower.includes('privacy')   ? '/privacy-policy' :
+                lower.includes('terms')     ? '/terms' :
+                lower.includes('agreement') ? '/terms' :
+                '#';
+              return (
+                <a key={item} href={href} className="transition-opacity hover:opacity-100">
+                  {item}
+                </a>
+              );
+            })}
           </div>
         </div>
 

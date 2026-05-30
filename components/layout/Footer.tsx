@@ -150,15 +150,19 @@ export default function Footer() {
           </p>
         </div>
         <div className="flex flex-wrap justify-center sm:justify-end items-center gap-4 sm:gap-6">
-          {policyMenuItems.map((p) => (
-            <a
-              key={p}
-              href="#"
-              className="text-white/50 text-xs hover:text-white transition-colors"
-            >
-              {p}
-            </a>
-          ))}
+          {policyMenuItems.map((p) => {
+            const lower = p.toLowerCase();
+            const href =
+              lower.includes('privacy')   ? '/privacy-policy' :
+              lower.includes('terms')     ? '/terms' :
+              lower.includes('agreement') ? '/terms' :
+              '#';
+            return (
+              <a key={p} href={href} className="text-white/50 text-xs hover:text-white transition-colors">
+                {p}
+              </a>
+            );
+          })}
         </div>
       </div>
 
