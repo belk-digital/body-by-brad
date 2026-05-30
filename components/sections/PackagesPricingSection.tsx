@@ -94,7 +94,7 @@ function PlanCard({ plan, delay = 0 }: { plan: Plan; delay?: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay }}
       className="flex overflow-hidden rounded-2xl"
       style={{ backgroundColor: cardBg }}
     >
@@ -140,7 +140,7 @@ function PlanCard({ plan, delay = 0 }: { plan: Plan; delay?: number }) {
             className="absolute inset-0"
             style={{ backgroundColor: btnFill, transformOrigin: 'left' }}
             variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
           />
           {/* Label */}
           <motion.span
@@ -217,7 +217,7 @@ export default function PackagesPricingSection() {
   };
   const fadeUp: Variants = {
     hidden:  { opacity: 0, y: 24, filter: 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   return (
@@ -293,7 +293,7 @@ function EliteCard({ plan }: { plan: Plan }) {
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.2 }}
       className="flex overflow-hidden rounded-2xl"
       style={{ backgroundColor: CARD_BG }}
     >
@@ -335,7 +335,7 @@ function EliteCard({ plan }: { plan: Plan }) {
             className="absolute inset-0"
             style={{ backgroundColor: ACCENT, transformOrigin: 'left' }}
             variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
           />
           <motion.span
             className="relative z-10 text-[10px] font-extrabold uppercase tracking-widest"

@@ -36,7 +36,7 @@ export default function TransformationSection() {
               initial={{ y: "100%", opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
             >
               {t.transformL1} {t.transformL2}
             </motion.h2>
@@ -64,7 +64,7 @@ export default function TransformationSection() {
               viewport={{ once: true, margin: "-5% 0px" }}
               transition={{
                 duration: 0.65,
-                ease: [0.4, 0, 0.2, 1],
+                ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
                 delay: i * 0.1,
               }}
             >

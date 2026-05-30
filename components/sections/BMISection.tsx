@@ -474,7 +474,7 @@ export default function BMISection() {
         <motion.div className="absolute top-0 h-full"
           style={{ width: '50%', left: '50%', backgroundColor: '#1a1a1a' }}
           animate={{ x: result ? '-100%' : '0%' }}
-          transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}>
+          transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}>
           <div className="h-full flex flex-col justify-center px-8 md:px-10 lg:px-14 py-8 overflow-y-auto">
             {FormContent}
           </div>

@@ -61,7 +61,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: 0.1 }}
             >
               {t.faqHeadingL1}
               <br />
@@ -85,7 +85,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
             {faqItems.map((item, i) => {
               const isOpen = openIndex === i;
@@ -136,7 +136,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
+                        transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                         className="overflow-hidden"
                       >
                         <p className="text-white/45 text-sm leading-relaxed pb-5 pl-9 pr-4">

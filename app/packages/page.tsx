@@ -103,7 +103,7 @@ function PricingContent() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: 0.1 }}
             >
               HOW IT
               <br />
@@ -120,7 +120,7 @@ function PricingContent() {
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.1 }}
               className="relative bg-[#252525] rounded-2xl p-7 flex flex-col gap-5 overflow-hidden group hover:bg-[#2c2c2c] transition-colors"
             >
               {/* Watermark number */}

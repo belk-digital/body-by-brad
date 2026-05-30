@@ -48,7 +48,7 @@ export default function ContactFormSection() {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -75,7 +75,7 @@ export default function ContactFormSection() {
           <motion.div
             initial={{ scale: 1.08 }}
             animate={leftInView ? { scale: 1 } : {}}
-            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="absolute inset-0"
           >
             <img
@@ -91,7 +91,7 @@ export default function ContactFormSection() {
           <motion.div
             initial={{ y: 40, opacity: 0 }}
             animate={leftInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="absolute bottom-0 left-0 right-0 grid grid-cols-2"
           >
             {/* Emergency contact */}

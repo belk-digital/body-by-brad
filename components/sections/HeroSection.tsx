@@ -63,7 +63,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -73,7 +73,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
       opacity: 1,
       x: 0,
       filter: 'blur(0px)',
-      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -117,7 +117,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
             ? { opacity: 0, y: 60, scale: 1.06 }
             : { opacity: 1, y: 0, scale: 1 }
         }
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.25 }}
         className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-[82%] w-full"
       >
         <motion.div

@@ -27,7 +27,7 @@ export default function AboutHeroSection({ isLoading }: AboutHeroSectionProps) {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -37,7 +37,7 @@ export default function AboutHeroSection({ isLoading }: AboutHeroSectionProps) {
       opacity: 1,
       x: 0,
       filter: 'blur(0px)',
-      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -47,7 +47,7 @@ export default function AboutHeroSection({ isLoading }: AboutHeroSectionProps) {
       opacity: 1,
       scale: 1,
       x: 0,
-      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.2 },
     },
   };
 

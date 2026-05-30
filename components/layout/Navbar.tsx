@@ -42,7 +42,7 @@ function MenuOverlay() {
       initial={{ y: '-100%' }}
       animate={{ y: 0 }}
       exit={{ y: '-100%' }}
-      transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
     >
       {/* Mobile language switcher - top left */}
       <motion.div
@@ -360,7 +360,7 @@ export default function Navbar({
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -80, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
             className="font-satoshi z-60 fixed top-4 left-4 right-4 md:top-6 md:left-8 md:right-8 bg-[#191919] rounded-full shadow-lg px-6 py-4 flex items-center justify-between"
           >
             <div className="flex flex-1 items-center justify-start gap-2 sm:gap-3">

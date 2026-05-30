@@ -125,7 +125,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
+          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.1 }}
           className="text-[#CCFF00] font-semibold uppercase leading-[0.88] tracking-tight"
         >
           <span className="block" style={{ fontSize: 'clamp(1rem, 4.5vw, 5rem)' }}>BBB</span>

@@ -46,7 +46,7 @@ export default function SupplementsSection() {
                 initial={{ y: '100%', opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true, margin: '-10% 0px' }}
-                transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+                transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
               >
                 Fuel Your Gains
               </motion.h2>
@@ -81,7 +81,7 @@ export default function SupplementsSection() {
             <motion.span
               className="absolute inset-0 bg-zinc-900"
               variants={{ rest: { y: '101%' }, hover: { y: 0 } }}
-              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
             />
             <motion.span
               className="relative z-10 flex items-center gap-2"
@@ -107,7 +107,7 @@ export default function SupplementsSection() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-5% 0px' }}
-              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1], delay: i * 0.1 }}
+              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: i * 0.1 }}
               whileHover="hover"
               animate="rest"
             >

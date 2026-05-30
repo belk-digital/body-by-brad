@@ -121,7 +121,7 @@ export default function EventsPage() {
             <motion.div
               initial={{ opacity: 0, y: 32 }}
               animate={isLoading ? { opacity: 0, y: 32 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.45 }}
+              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.45 }}
               className="w-full px-4 sm:px-7 md:px-12 pt-28 pb-10 md:pt-32 md:pb-12"
             >
               <div className="grid grid-cols-1 md:grid-cols-[42%_1fr] md:grid-rows-[1fr_auto] gap-3 md:h-[calc(100vh-11rem)]">
@@ -153,7 +153,7 @@ export default function EventsPage() {
                       className="absolute inset-0 bg-[#1A1A1A]"
                       style={{ transformOrigin: 'left' }}
                       variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                     />
                     <motion.span
                       className="relative z-10 text-[10px] font-extrabold uppercase tracking-widest"
@@ -287,7 +287,7 @@ export default function EventsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
                   className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)]"
                 >
                   EVENT HIGHLIGHTS
@@ -318,7 +318,7 @@ export default function EventsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                    transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
                     className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)]"
                   >
                     UPCOMING
@@ -345,7 +345,7 @@ export default function EventsPage() {
                       className="absolute inset-0 bg-[#E6FF2B]"
                       style={{ transformOrigin: 'left' }}
                       variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                     />
                     <motion.span
                       className="relative z-10 mr-3"
@@ -376,7 +376,7 @@ export default function EventsPage() {
                   initial={{ opacity: 0, x: -24 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                   className="relative rounded-2xl overflow-hidden min-h-72 md:min-h-0"
                 >
                   <img
@@ -410,7 +410,7 @@ export default function EventsPage() {
                       initial={{ opacity: 0, x: 24 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] }}
+                      transition={{ duration: 0.5, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                       className="flex items-start justify-between gap-4 rounded-2xl px-6 py-5 group transition-opacity hover:opacity-90"
                       style={{ backgroundColor: i === 0 ? '#E6FF2B' : '#252525' }}
                     >
@@ -467,7 +467,7 @@ export default function EventsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
                   className="font-extrabold uppercase leading-none tracking-tight text-white text-[clamp(2rem,4.5vw,4.5rem)]"
                 >
                   MOMENTS &amp;
@@ -486,7 +486,7 @@ export default function EventsPage() {
                     className="break-inside-avoid mb-3 overflow-hidden rounded-2xl group cursor-pointer"
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.55, delay: (i % 4) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.55, delay: (i % 4) * 0.07, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                   >
                     <div className="relative overflow-hidden">
                       <img
@@ -517,7 +517,7 @@ export default function EventsPage() {
                     className="absolute inset-0 bg-[#E6FF2B]"
                     style={{ transformOrigin: 'left' }}
                     variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                    transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                   />
                   <motion.span
                     className="relative z-10 mr-3"
@@ -566,7 +566,7 @@ export default function EventsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+                  transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
                   className="font-extrabold uppercase leading-none tracking-tight text-[#1A1A1A] text-[clamp(2rem,4.5vw,4.5rem)] mb-10"
                 >
                   FOLLOW US ON
@@ -602,7 +602,7 @@ export default function EventsPage() {
                 initial={{ opacity: 0, x: 32 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.15 }}
+                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.15 }}
                 className="rounded-2xl overflow-hidden aspect-4/3 w-full"
               >
                 <img

@@ -28,12 +28,12 @@ export default function WhoWeAreSection() {
 
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 32, filter: 'blur(6px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   const imageReveal: Variants = {
     hidden: { opacity: 0, scale: 1.06 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   return (
@@ -144,7 +144,7 @@ export default function WhoWeAreSection() {
                   className="absolute inset-0 bg-zinc-950"
                   style={{ transformOrigin: 'left' }}
                   variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                  transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                 />
                 {/* Label */}
                 <motion.span

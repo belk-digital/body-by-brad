@@ -20,7 +20,7 @@ export default function FeaturedSection() {
               initial={{ y: '100%', opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-10% 0px' }}
-              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
             >
               {t.featuredHeadingL1}
               <br />
@@ -48,7 +48,7 @@ export default function FeaturedSection() {
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
             >
               <img
                 src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg"
@@ -62,7 +62,7 @@ export default function FeaturedSection() {
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
+              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.1 }}
             >
               <h3 className="text-xl sm:text-2xl font-bold uppercase leading-tight mb-3">
                 {t.eventsCardTitleL1}
@@ -86,7 +86,7 @@ export default function FeaturedSection() {
                   <motion.span
                     className="absolute inset-0 bg-white"
                     variants={{ rest: { y: '101%' }, hover: { y: 0 } }}
-                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                   />
                 </span>
                 <motion.span
@@ -112,7 +112,7 @@ export default function FeaturedSection() {
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
+              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.1 }}
             >
               <h3 className="text-xl sm:text-2xl font-bold uppercase leading-tight mb-3 text-white">
                 {t.merchCardTitleL1}
@@ -134,7 +134,7 @@ export default function FeaturedSection() {
                   className="absolute inset-0"
                   style={{ backgroundColor: '#DFF994' }}
                   variants={{ rest: { y: '101%' }, hover: { y: 0 } }}
-                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                 />
                 <motion.span
                   className="relative z-10"
@@ -151,7 +151,7 @@ export default function FeaturedSection() {
               initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
             >
               <img
                 src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779379374/IMG_3076_llkeme.webp"

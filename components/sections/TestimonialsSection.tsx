@@ -119,7 +119,7 @@ export default function TestimonialsSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="font-bold leading-[0.88] mb-14 select-none"
           style={{ fontSize: 'clamp(32px, 8vw, 72px)', color: '#2d2d2a', letterSpacing: '-0.02em' }}
         >
@@ -134,7 +134,7 @@ export default function TestimonialsSection() {
               initial={{ y: 60, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             >
               <TCard t={t} />
             </motion.div>

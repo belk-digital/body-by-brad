@@ -86,7 +86,7 @@ function BlogCard({ post, delay = 0 }: { post: typeof FEATURED_POSTS[0]; delay?:
       ref={ref}
       initial={{ opacity: 0, y: 44 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 44 }}
-      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay }}
       className="group cursor-pointer"
     >
       {/* Image */}
@@ -168,20 +168,20 @@ function BlogContent() {
   };
   const imageZoom: Variants = {
     hidden: { scale: 1.1 },
-    visible: { scale: 1, transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] } },
+    visible: { scale: 1, transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 20, filter: 'blur(6px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
   const headlineLine: Variants = {
     hidden: { opacity: 0, x: -60, filter: 'blur(8px)' },
-    visible: { opacity: 1, x: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, x: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   const sectionHead: Variants = {
     hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   return (

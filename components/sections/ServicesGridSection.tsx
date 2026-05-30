@@ -21,11 +21,11 @@ export default function ServicesGridSection() {
   };
   const fadeUp: Variants = {
     hidden:  { opacity: 0, y: 24, filter: 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
   const cardIn: Variants = {
     hidden:  { opacity: 0, y: 32 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   const iconBox = (Icon: React.ElementType) => (
@@ -82,7 +82,7 @@ export default function ServicesGridSection() {
                 className="absolute inset-0 bg-[#E6FF2B]"
                 style={{ transformOrigin: 'left' }}
                 variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
               />
 
               {/* Label */}
@@ -148,7 +148,7 @@ export default function ServicesGridSection() {
                   <motion.span
                     className="absolute -bottom-0.5 left-0 h-[1.5px] bg-[#E6FF2B]"
                     variants={{ rest: { width: '0%' }, hover: { width: '100%' } }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                   />
                 </motion.a>
               )}
@@ -191,7 +191,7 @@ export default function ServicesGridSection() {
               <motion.span
                 className="absolute -bottom-0.5 left-0 h-[1.5px] bg-[#E6FF2B]"
                 variants={{ rest: { width: '0%' }, hover: { width: '100%' } }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
               />
             </motion.a>
           </motion.div>

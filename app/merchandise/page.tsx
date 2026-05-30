@@ -29,7 +29,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-5% 0px' }}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: index * 0.1 }}
     >
       {/* Image */}
       <Link href={`/merchandise/${product.id}`} className="block group mb-5">
@@ -194,7 +194,7 @@ function MerchandiseContent() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
             <div className="flex items-center gap-2.5 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-[#CBFF00] flex-shrink-0" />

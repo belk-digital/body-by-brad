@@ -20,7 +20,7 @@ export default function ContactDetailsSection() {
 
   const itemReveal: Variants = {
     hidden: { opacity: 0, x: 28 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
   };
 
   const contacts = [

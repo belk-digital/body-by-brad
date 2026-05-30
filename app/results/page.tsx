@@ -49,7 +49,7 @@ function ReviewCard({
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-5% 0px' }}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: index * 0.07 }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: index * 0.07 }}
     >
       <Stars />
       <p
@@ -121,7 +121,7 @@ function ResultsPageContent() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={!isLoading ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.3 }}
           >
             <div className="flex items-center gap-2 mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#E6FF2B]" />
@@ -150,7 +150,7 @@ function ResultsPageContent() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.07 }}
               >
                 <p className="font-extrabold text-zinc-950 leading-none text-3xl sm:text-4xl mb-1">
                   {s.value}
@@ -174,7 +174,7 @@ function ResultsPageContent() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
             <div className="flex items-center gap-2.5 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-[#E6FF2B] shrink-0" />
@@ -224,7 +224,7 @@ function ResultsPageContent() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-5% 0px' }}
-                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.1 }}
               >
                 <BeforeAfterSlider
                   before={src}
@@ -254,7 +254,7 @@ function ResultsPageContent() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
             <div className="flex items-center gap-2.5 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-[#E6FF2B] shrink-0" />

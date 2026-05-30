@@ -153,7 +153,7 @@ function PodiumCard({ athlete, rank, metric, maxVal }: {
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: rank * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: rank * 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       className={`relative rounded-2xl p-5 flex flex-col gap-4 ${
         isFirst ? 'bg-[#E6FF2B]' : 'bg-[#252525]'
       }`}
@@ -226,7 +226,7 @@ function LeaderRow({ athlete, rank, metric, maxVal }: {
       initial={{ opacity: 0, x: -16 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: (rank - 3) * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: (rank - 3) * 0.06, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       className="flex items-center gap-4 bg-[#252525] rounded-2xl px-5 py-4 group hover:bg-[#2e2e2e] transition-colors"
     >
       {/* Rank */}
@@ -320,7 +320,7 @@ function LeaderboardContent() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.2 }}
         >
           <div className="flex items-center gap-2 mb-4">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E6FF2B]">
@@ -352,7 +352,7 @@ function LeaderboardContent() {
               className="absolute inset-0 bg-[#E6FF2B]"
               style={{ transformOrigin: 'left' }}
               variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-              transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
             />
             <motion.span
               className="relative z-10 mr-3"

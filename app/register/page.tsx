@@ -140,7 +140,7 @@ export default function RegisterPage() {
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isLoading ? { opacity: 0, y: 24 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.4 }}
+              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] as [number, number, number, number], delay: 0.4 }}
               className="relative z-10"
             >
               <div className="flex items-center gap-2 mb-4">
@@ -177,7 +177,7 @@ export default function RegisterPage() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                   className="bg-white rounded-3xl p-10 md:p-16 text-center max-w-xl mx-auto shadow-sm"
                 >
                   <div className="w-16 h-16 rounded-full bg-[#E6FF2B]/20 flex items-center justify-center mx-auto mb-6">
@@ -214,7 +214,7 @@ export default function RegisterPage() {
                   key="form"
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                   onSubmit={handleSubmit}
                   noValidate
                   className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-5 items-start"
@@ -383,7 +383,7 @@ export default function RegisterPage() {
                         className="absolute inset-0 bg-[#1A1A1A]"
                         style={{ transformOrigin: 'left' }}
                         variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-                        transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                        transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                       />
                       <motion.span
                         className="relative z-10"

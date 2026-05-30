@@ -24,7 +24,7 @@ export default function PackagesHeroSection({ isLoading }: PackagesHeroSectionPr
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -34,7 +34,7 @@ export default function PackagesHeroSection({ isLoading }: PackagesHeroSectionPr
       opacity: 1,
       x: 0,
       filter: 'blur(0px)',
-      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 
@@ -42,7 +42,7 @@ export default function PackagesHeroSection({ isLoading }: PackagesHeroSectionPr
     hidden: { scale: 1.12 },
     visible: {
       scale: 1,
-      transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
 

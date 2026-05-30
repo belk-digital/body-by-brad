@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { IoChevronForward } from 'react-icons/io5';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -31,12 +31,12 @@ const BLOG_POSTS = [
   },
 ];
 
-const cardVariants: Variants = {
+const cardVariants = {
   hidden: { opacity: 0, y: 44 },
-  visible: (i: any) => ({
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.75, delay: i * 0.13, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.75, delay: i * 0.13, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   }),
 };
 
@@ -80,7 +80,7 @@ export default function BlogSection() {
             className="absolute inset-0 bg-[#1A1A1A]"
             style={{ transformOrigin: 'left' }}
             variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
           />
           <motion.span
             className="relative z-10 mr-3"
@@ -108,7 +108,7 @@ export default function BlogSection() {
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="font-extrabold uppercase leading-[0.92] mb-12 md:mb-16"
         style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', color: '#1A1A1A', letterSpacing: '-0.02em' }}
       >
