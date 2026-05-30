@@ -94,6 +94,11 @@ export default function BeforeAfterSlider({
       <span className="absolute bottom-3 left-3 pointer-events-none text-[10px] font-bold uppercase tracking-widest text-white bg-black/50 px-2.5 py-1 rounded-full">
         Before
       </span>
+
+      {/* After label */}
+      <span className="absolute bottom-3 right-3 pointer-events-none text-[10px] font-bold uppercase tracking-widest text-white bg-black/50 px-2.5 py-1 rounded-full">
+        After
+      </span>
     </div>
   );
 }

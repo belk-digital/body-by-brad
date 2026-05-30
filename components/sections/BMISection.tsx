@@ -385,10 +385,18 @@ export default function BMISection() {
         </div>
       </div>
 
-      <button onClick={handleClear}
-        className="mt-6 text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer">
-        ← Recalculate
-      </button>
+      <div className="mt-6 flex items-center justify-between">
+        <button onClick={handleClear}
+          className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer">
+          ← Recalculate
+        </button>
+        <a
+          href={`/results?kcal=${result.kcal}&goal=${goal}&weight=${weight}`}
+          className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-zinc-950 hover:text-[#111] transition-colors cursor-pointer"
+        >
+          Full Plan →
+        </a>
+      </div>
     </div>
   ) : null;
 

@@ -38,7 +38,7 @@ function MenuOverlay() {
   const { lang, setLang, t } = useLanguage();
   return (
     <motion.div
-      className="font-satoshi fixed inset-0 z-50 overflow-hidden bg-[#E6FF2B] text-[#1A1A1A]"
+      className="font-satoshi fixed inset-0 z-50 overflow-hidden bg-[#1a1a1a] text-white"
       initial={{ y: '-100%' }}
       animate={{ y: 0 }}
       exit={{ y: '-100%' }}
@@ -52,13 +52,13 @@ function MenuOverlay() {
         exit={{ opacity: 0, x: -20 }}
         transition={{ delay: 0.25, duration: 0.4, ease: 'easeOut' }}
       >
-        <div className="flex gap-1 rounded-full bg-black/10 p-1 w-fit">
+        <div className="flex gap-1 rounded-full bg-white/10 p-1 w-fit">
           {(['en', 'es'] as const).map((l) => (
             <button
               key={l}
               onClick={() => setLang(l)}
               className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                lang === l ? 'bg-[#1A1A1A] text-[#E6FF2B]' : 'text-black/50 hover:text-black'
+                lang === l ? 'bg-white text-[#1a1a1a]' : 'text-white/50 hover:text-white'
               }`}
             >
               {l}
@@ -78,27 +78,27 @@ function MenuOverlay() {
         {/* Left column — lang toggle top, socials middle, policy bottom */}
         <div className="hidden w-36 shrink-0 flex-col justify-between py-10 md:flex lg:w-44">
           {/* Language switcher */}
-          <div className="flex gap-1 rounded-full bg-black/10 p-1 w-fit">
+          <div className="flex gap-1 rounded-full bg-white/10 p-1 w-fit">
             {(['en', 'es'] as const).map((l) => (
               <button
                 key={l}
                 onClick={() => setLang(l)}
                 className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                  lang === l ? 'bg-[#1A1A1A] text-[#E6FF2B]' : 'text-black/50 hover:text-black'
+                  lang === l ? 'bg-white text-[#1a1a1a]' : 'text-white/50 hover:text-white'
                 }`}
               >
                 {l}
               </button>
             ))}
           </div>
-          <div className="flex flex-col gap-2 text-base font-semibold text-[#1A1A1A]">
+          <div className="flex flex-col gap-2 text-base font-semibold text-white">
             {socialMenuItems.map((item) => (
               <a key={item} href="#" className="relative flex cursor-pointer overflow-visible opacity-70 hover:opacity-100 transition-opacity">
                 <TextRoll className="transition-colors">{item}</TextRoll>
               </a>
             ))}
           </div>
-          <div className="flex flex-col gap-1 text-sm font-medium text-[#1A1A1A] opacity-50">
+          <div className="flex flex-col gap-1 text-sm font-medium text-white opacity-50">
             {t.policyItems.map((item) => (
               <a key={item} href="#" className="transition-opacity hover:opacity-100">
                 {item}
@@ -112,20 +112,23 @@ function MenuOverlay() {
           {t.menuItems.map((item) => {
             const lower = item.toLowerCase();
             const href =
-              lower === 'home' || lower === 'inicio' ? '/' :
-              lower === 'events' || lower === 'eventos' ? '/events' :
-              lower === 'packages' || lower === 'paquetes' ? '/packages' :
-              lower === 'merchandise' || lower === 'mercancía' || lower === 'mercancia' || lower === 'merch' ? '/merchandise' :
-              lower === 'services' || lower === 'servicios' ? '/services' :
-              lower === 'contact' || lower === 'contacto' ? '/contact' :
-              lower === 'about' || lower === 'nosotros' ? '/about' :
-              lower === 'blog' ? '/blog' :
+              lower === 'home'        || lower === 'inicio'     ? '/' :
+              lower === 'about'       || lower === 'nosotros'   ? '/about' :
+              lower === 'services'    || lower === 'servicios'  ? '/services' :
+              lower === 'packages'    || lower === 'paquetes'   ? '/packages' :
+              lower === 'events'      || lower === 'eventos'    ? '/events' :
+              lower === 'results'     || lower === 'resultados' ? '/results' :
+              lower === 'blog'                                  ? '/blog' :
+              lower === 'merchandise' || lower === 'mercancía'
+                                      || lower === 'mercancia'
+                                      || lower === 'merch'     ? '/merchandise' :
+              lower === 'contact'     || lower === 'contacto'   ? '/contact' :
               '#';
             return (
             <a
               key={item}
               href={href}
-              className="relative flex cursor-pointer overflow-visible text-[#1A1A1A] hover:opacity-60 transition-opacity"
+              className="relative flex cursor-pointer overflow-visible text-white hover:opacity-60 transition-opacity"
             >
               <TextRoll center className="uppercase transition-colors">
                 {item}
@@ -137,69 +140,95 @@ function MenuOverlay() {
           {/* Mobile social links — below nav items */}
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-1 md:hidden">
             {socialMenuItems.map((item) => (
-              <a key={item} href="#" className="text-[3.5vw] sm:text-[2.8vw] font-semibold text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity uppercase tracking-wide">
+              <a key={item} href="#" className="text-[3.5vw] sm:text-[2.8vw] font-semibold text-white opacity-60 hover:opacity-100 transition-opacity uppercase tracking-wide">
                 {item}
               </a>
             ))}
           </div>
         </div>
 
-        {/* Latest Events card (middle) */}
-        <a href="/events" className="hidden flex-1 min-w-0 flex-col justify-center py-10 md:flex">
-          <div className="flex h-full max-h-[78%] flex-col overflow-hidden rounded-xl border border-black/10 bg-black/5 hover:border-black/25 transition-colors">
-            {/* Event Image */}
-            <div className="relative flex-1 overflow-hidden rounded-t-2xl bg-black/5">
-              <img
-                src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg"
-                alt="Cooldown Event"
-                className="absolute inset-0 h-full w-full object-cover object-bottom"
-              />
-            </div>
-            {/* Event info + marquee */}
-            <div className="bg-[#1A1A1A] text-white px-4 py-3">
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest opacity-60">
-                {t.latestEvents}
-              </p>
-              <div className="flex items-center gap-2">
-                <div className="overflow-hidden flex-1">
-                  <motion.div
-                    className="flex gap-12 text-sm font-medium whitespace-nowrap"
-                    animate={{ x: ['0%', '-50%'] }}
-                    transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-                  >
-                    <span>{t.cooldownMarquee}</span>
-                    <span>{t.cooldownMarquee}</span>
-                  </motion.div>
-                </div>
-                <span className="shrink-0 text-lg">→</span>
-              </div>
-            </div>
-          </div>
-        </a>
+        {/* Right column — two stacked pricing-style cards */}
+        <div className="hidden w-[42%] shrink-0 flex-col gap-3 justify-center py-10 ml-auto md:flex">
 
-        {/* Right column — Merchandise card */}
-        <a href="/merchandise" className="hidden w-[26%] max-w-[320px] shrink-0 flex-col justify-center py-10 md:flex">
-          <div className="flex h-full max-h-[78%] flex-col overflow-hidden rounded-xl border border-black/10 bg-black/5 hover:border-black/25 transition-colors">
-            {/* Merch Image */}
-            <div className="relative flex-1 overflow-hidden rounded-t-2xl bg-black/5">
-              <img
-                src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779364141/IMG_2932_1_xphbar.webp"
-                alt="Body By Brad Merchandise"
-                className="absolute inset-0 h-full w-full object-cover object-top"
-              />
-            </div>
-            {/* Merch info */}
-            <div className="bg-[#1A1A1A] text-white px-4 py-3">
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest opacity-60">
-                {t.merchandiseLabel}
-              </p>
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-medium">{t.shopNow}</span>
-                <span className="shrink-0 text-lg">→</span>
+          {/* Events card */}
+          <a
+            href="/events"
+            className="group flex flex-1 overflow-hidden rounded-2xl"
+            style={{ backgroundColor: '#E6FF2B' }}
+          >
+            {/* Text side */}
+            <div className="flex flex-col justify-between p-5">
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-black/50 mb-3">
+                  {t.latestEvents}
+                </p>
+                <p className="font-extrabold uppercase tracking-tight text-black leading-[0.95] text-lg">
+                  Cooldown<br />Events
+                </p>
+              </div>
+              <div className="flex items-center gap-2 mt-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black text-[#E6FF2B] text-xs font-bold transition-opacity group-hover:opacity-80">
+                  ↗
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-black/50">
+                  Register
+                </span>
               </div>
             </div>
-          </div>
-        </a>
+
+            {/* Image — floating inside card */}
+            <div className="flex-1 min-w-0 p-3 flex">
+              <div className="w-full overflow-hidden rounded-xl">
+                <img
+                  src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg"
+                  alt="Cooldown Event"
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  draggable={false}
+                />
+              </div>
+            </div>
+          </a>
+
+          {/* Merchandise card */}
+          <a
+            href="/merchandise"
+            className="group flex flex-1 overflow-hidden rounded-2xl"
+            style={{ backgroundColor: '#E6FF2B' }}
+          >
+            {/* Text side */}
+            <div className="flex flex-col justify-between p-5">
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-black/50 mb-3">
+                  {t.merchandiseLabel}
+                </p>
+                <p className="font-extrabold uppercase tracking-tight text-black leading-[0.95] text-lg">
+                  New<br />Drops
+                </p>
+              </div>
+              <div className="flex items-center gap-2 mt-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black text-[#E6FF2B] text-xs font-bold transition-opacity group-hover:opacity-80">
+                  ↗
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-black/50">
+                  {t.shopNow}
+                </span>
+              </div>
+            </div>
+
+            {/* Image — floating inside card */}
+            <div className="flex-1 min-w-0 p-3 flex">
+              <div className="w-full overflow-hidden rounded-xl">
+                <img
+                  src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779364141/IMG_2932_1_xphbar.webp"
+                  alt="Body By Brad Merchandise"
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  draggable={false}
+                />
+              </div>
+            </div>
+          </a>
+
+        </div>
       </motion.div>
 
       {/* Mobile-only get started button — bottom of overlay */}
@@ -211,8 +240,8 @@ function MenuOverlay() {
         transition={{ delay: 0.35, duration: 0.4, ease: 'easeOut' }}
       >
         <a
-          href="#"
-          className="flex items-center justify-center gap-2 w-full bg-[#1A1A1A] text-[#E6FF2B] py-4 rounded-full font-bold text-sm uppercase tracking-wide"
+          href="/contact"
+          className="flex items-center justify-center gap-2 w-full bg-white text-[#1a1a1a] py-4 rounded-full font-bold text-sm uppercase tracking-wide"
         >
           {t.getStarted}
           <span className="text-base leading-none">↗</span>
@@ -313,7 +342,7 @@ export default function Navbar({
           </button>
           <AuthSlot theme={isDark ? 'dark' : 'light'} />
           <a
-            href="#"
+            href="/contact"
             className={`hidden sm:flex items-center gap-1 font-semibold sm:gap-1.5 sm:text-sm md:text-lg ${heroTextClass}`}
           >
             <TextRoll className="whitespace-nowrap pb-[0.2em] pt-[0.1em]">{t.getStarted}</TextRoll>
@@ -399,7 +428,7 @@ export default function Navbar({
               </button>
               <AuthSlot theme="light" />
               <a
-                href="#"
+                href="/contact"
                 className="hidden sm:flex items-center gap-1 font-semibold text-white sm:gap-1.5 sm:text-sm md:text-lg"
               >
                 <TextRoll className="whitespace-nowrap pb-[0.2em] pt-[0.1em]">

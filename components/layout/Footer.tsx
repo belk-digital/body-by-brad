@@ -8,10 +8,19 @@ import TextRoll from '@/components/ui/TextRoll';
 const NAV_COL_1 = ['About', 'Services', 'Packages', 'Events', 'Results'];
 const NAV_COL_2 = ['Blog', 'Merchandise', 'Areas We Serve', 'Contact', 'Register'];
 
-const navHref = (item: string) => {
-  if (item.toLowerCase() === 'events')   return '/events';
-  if (item.toLowerCase() === 'register') return '/register';
-  return '#';
+const navHref = (item: string): string => {
+  switch (item.toLowerCase()) {
+    case 'about':         return '/about';
+    case 'services':      return '/services';
+    case 'packages':      return '/packages';
+    case 'events':        return '/events';
+    case 'results':       return '/results';
+    case 'blog':          return '/blog';
+    case 'merchandise':   return '/merchandise';
+    case 'contact':       return '/contact';
+    case 'register':      return '/register';
+    default:              return '#';
+  }
 };
 
 export default function Footer() {
