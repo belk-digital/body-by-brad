@@ -16,7 +16,6 @@ import ServicesGridSection from '@/components/sections/ServicesGridSection';
 import PackagesPreviewSection from '@/components/sections/PackagesPreviewSection';
 import OurServicesSection from '@/components/sections/OurServicesSection';
 import FeaturedSection from '@/components/sections/FeaturedSection';
-import MerchSection from '@/components/sections/MerchSection';
 import SupplementsSection from '@/components/sections/SupplementsSection';
 import BMISection from '@/components/sections/BMISection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
@@ -79,7 +78,7 @@ export default function App() {
         <OurServicesSection />
         <PackagesPreviewSection />
         <FeaturedSection />
-        <MerchSection />
+        {/* <MerchSection /> */}
         <SupplementsSection />
         <BMISection />
         <TransformationSection />
