@@ -131,7 +131,7 @@ function PageContent() {
         {isLoading && <StairsPreloader />}
       </AnimatePresence>
 
-      <section className="relative h-[40dvh] min-h-72 w-full overflow-hidden bg-black">
+      <section className="relative h-[50dvh] min-h-[340px] w-full overflow-hidden bg-black">
         <Navbar
           isLoading={isLoading}
           isMenuOpen={isMenuOpen}
