@@ -115,7 +115,7 @@ function ServiceCard({
   service: (typeof SERVICES)[0];
   delay?: number;
 }) {
-  const ref    = useRef<HTMLDivElement>(null);
+  const ref    = useRef<HTMLAnchorElement>(null);
   const inView = useInView(ref, { once: true, margin: '-8% 0px' });
 
   return (

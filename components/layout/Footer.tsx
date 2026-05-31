@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { logoUrl, socialMenuItems, policyMenuItems } from '@/lib/constants';
 import TextRoll from '@/components/ui/TextRoll';
 
@@ -28,6 +29,15 @@ export default function Footer() {
   const year = new Date().getFullYear();
   const brandRef = useRef<HTMLDivElement>(null);
   const [fitnessFontSize, setFitnessFontSize] = useState<number>(120);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubscribed(true);
+    setEmail('');
+  };
 
   useEffect(() => {
     const measure = () => {
@@ -60,22 +70,36 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="font-satoshi bg-[#191919] px-4 sm:px-7 md:px-12 pt-12 md:pt-20 overflow-x-hidden">
+    <footer className="font-satoshi bg-[#191919] px-4 sm:px-7 md:px-12 pt-10 sm:pt-14 md:pt-20 overflow-x-hidden">
 
-      {/* Top row — tagline + nav */}
-      <div className="grid grid-cols-1 md:grid-cols-[42%_1fr] gap-8 pb-10 md:pb-14 border-b border-white/15">
+      {/* Top row — logo/tagline/social/newsletter + nav */}
+      <div className="grid grid-cols-1 md:grid-cols-[44%_1fr] gap-10 md:gap-8 pb-10 md:pb-14 border-b border-white/15">
 
-        {/* Left — tagline */}
+        {/* Left column */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="self-start flex flex-col gap-6"
         >
-          <p className="text-white text-lg sm:text-2xl md:text-3xl font-semibold leading-snug max-w-sm">
-            Elite personal training &amp; outdoor fitness events in Charleston, SC.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-6 md:mt-8">
+          {/* Logo + divider + tagline */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            <a href="/" aria-label="Body By Brad home" className="shrink-0">
+              <img
+                src={logoUrl}
+                alt="Body By Brad logo"
+                className="h-20 sm:h-24 md:h-28 w-auto object-contain hover:opacity-80 transition-opacity"
+              />
+            </a>
+            <div className="w-px self-stretch bg-white/25" />
+            <p className="text-white text-base sm:text-lg md:text-xl font-semibold leading-snug max-w-[12rem] sm:max-w-xs">
+              Elite personal training &amp; outdoor fitness events in Charleston, SC.
+            </p>
+          </div>
+
+          {/* Social links */}
+          <div className="flex flex-wrap gap-3 sm:gap-4">
             {socialMenuItems.map((s, i) => (
               <motion.a
                 key={s}
@@ -90,6 +114,36 @@ export default function Footer() {
               </motion.a>
             ))}
           </div>
+
+          {/* Newsletter */}
+          <div className="pt-5 border-t border-white/15">
+            {subscribed ? (
+              <p className="text-[#CCFF00] text-xs font-semibold uppercase tracking-widest">You&apos;re in — welcome to BBB.</p>
+            ) : (
+              <>
+                <form onSubmit={handleSubscribe} className="flex items-center gap-3 border-b border-white/15 pb-2.5">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    className="flex-1 min-w-0 bg-transparent text-white/80 placeholder:text-white/30 text-sm outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="group flex items-center gap-1.5 text-xs font-semibold text-white/60 hover:text-white uppercase tracking-widest transition-colors shrink-0"
+                  >
+                    Subscribe
+                    <ArrowUpRight size={11} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </button>
+                </form>
+                <p className="text-white/40 text-xs leading-snug mt-3">
+                  Join our newsletter for training tips, event announcements, and exclusive updates.
+                </p>
+              </>
+            )}
+          </div>
         </motion.div>
 
         {/* Right — two-column nav */}
@@ -98,7 +152,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-0 self-start"
+          className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-0 self-start pt-2 md:pt-0 border-t border-white/15 md:border-t-0"
         >
           {[NAV_COL_1, NAV_COL_2].map((col, ci) => (
             <div key={ci} className="flex flex-col">
@@ -121,7 +175,7 @@ export default function Footer() {
       </div>
 
       {/* Middle — giant brand name */}
-      <div ref={brandRef} className="py-6 md:py-8">
+      <div ref={brandRef} className="py-5 md:py-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
