@@ -84,8 +84,8 @@ export default function App() {
         <TransformationSection />
         <TestimonialsSection />
         <FAQSection />
-        <CTASection />
         <BlogSection />
+        <CTASection />
         <Footer />
       </div>
     </ReactLenis>

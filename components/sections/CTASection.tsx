@@ -1,138 +1,106 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
-import { bradImagePool } from "@/lib/constants";
 
-const STATS = [
-  { value: "+8",         label: "Years Coaching" },
-  { value: "+1.2k",      label: "Sessions Delivered" },
-  { value: "Charleston", label: "Based In SC" },
-];
+const CTA_BG =
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1920/v1780256038/IMG_6574_rrhzzv.jpg';
 
-const MOSAIC = bradImagePool.slice(0, 4);
-
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay },
-});
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 export default function CTASection() {
   const { t } = useLanguage();
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
+  };
+
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 22 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+  };
+
+  const imageZoom: Variants = {
+    hidden: { scale: 1.06 },
+    visible: { scale: 1, transition: { duration: 1.8, ease } },
+  };
+
   return (
-    <section className="font-satoshi bg-[#111111] overflow-hidden">
-      <div className="px-6 sm:px-10 md:px-16 pt-24 pb-14 md:pt-32 md:pb-20">
+    <section
+      className="font-satoshi relative w-full overflow-hidden"
+      style={{ minHeight: 'clamp(460px, 62vh, 780px)' }}
+    >
+      {/* Background image with subtle zoom-in */}
+      <motion.div
+        variants={imageZoom}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={CTA_BG}
+          alt="Body By Brad"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </motion.div>
 
-        {/* ── Main content ────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-10 items-center mb-16 md:mb-24">
+      {/* Left-side gradient for text legibility */}
+      <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-transparent" />
+      {/* Bottom vignette */}
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/35" />
 
-          {/* Left — copy + CTA */}
-          <div>
+      {/* Content — eyebrow top, headline + CTA bottom */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative z-10 flex flex-col justify-between px-6 sm:px-10 md:px-16"
+        style={{
+          minHeight: 'clamp(460px, 62vh, 780px)',
+          paddingTop: 'clamp(1.75rem, 3.5vh, 3rem)',
+          paddingBottom: 'clamp(2.25rem, 4.5vh, 4rem)',
+        }}
+      >
+        {/* Eyebrow — top-left */}
+        <motion.p
+          variants={fadeUp}
+          className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/55"
+        >
+          {t.ctaLabel}
+        </motion.p>
 
-            {/* Eyebrow */}
-            <motion.div
-              className="flex items-center gap-2.5 mb-10"
-              {...fadeUp(0)}
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E6FF2B]">
-                <span className="h-1.5 w-1.5 rounded-full bg-zinc-950" />
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#E6FF2B]">
-                {t.ctaLabel}
-              </span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h2
-              className="font-extrabold uppercase leading-[0.88] tracking-tight mb-8"
-              style={{ fontSize: "clamp(3rem, 8vw, 7.5rem)" }}
-              {...fadeUp(0.08)}
-            >
-              <span className="text-white block">{t.ctaL1}</span>
-              <span
-                className="block"
-                style={{ WebkitTextStroke: "2px #E6FF2B", color: "transparent" }}
-              >
-                {t.ctaL2}
-              </span>
-            </motion.h2>
-
-            {/* Description */}
-            <motion.p
-              className="text-white/45 text-base md:text-lg leading-relaxed max-w-sm mb-12"
-              {...fadeUp(0.16)}
-            >
-              {t.ctaDesc}
-            </motion.p>
-
-            {/* CTA button */}
-            <motion.div {...fadeUp(0.24)}>
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-3 bg-[#E6FF2B] text-zinc-950 font-bold uppercase tracking-widest text-sm px-8 py-4 rounded-full hover:bg-white transition-colors duration-300"
-              >
-                {t.ctaBtn}
-                <ArrowUpRight
-                  size={16}
-                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right — staggered image mosaic */}
-          <motion.div
-            className="grid grid-cols-2 gap-3"
-            initial={{ opacity: 0, x: 32 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.1 }}
+        {/* Headline + CTA — bottom-left */}
+        <div>
+          <motion.h2
+            variants={fadeUp}
+            className="font-extrabold uppercase leading-[0.88] tracking-tight text-white mb-7"
+            style={{ fontSize: 'clamp(3rem, 8vw, 8.5rem)', fontFamily: 'Unbounded, sans-serif' }}
           >
-            {/* Column 1 */}
-            <div className="flex flex-col gap-3">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                <Image src={MOSAIC[0]} alt="Body By Brad" fill className="object-cover" sizes="22vw" loading="eager" />
-              </div>
-              <div className="relative aspect-square rounded-2xl overflow-hidden">
-                <Image src={MOSAIC[2]} alt="Body By Brad" fill className="object-cover" sizes="22vw" loading="lazy" />
-              </div>
-            </div>
+            <span className="block">{t.ctaL1}</span>
+            <span className="block">{t.ctaL2}</span>
+          </motion.h2>
 
-            {/* Column 2 — offset down for organic feel */}
-            <div className="flex flex-col gap-3 mt-8">
-              <div className="relative aspect-square rounded-2xl overflow-hidden">
-                <Image src={MOSAIC[1]} alt="Body By Brad" fill className="object-cover" sizes="22vw" loading="lazy" />
-              </div>
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                <Image src={MOSAIC[3]} alt="Body By Brad" fill className="object-cover" sizes="22vw" loading="lazy" />
-              </div>
-            </div>
+          <motion.div variants={fadeUp}>
+            <a
+              href="/contact"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-white/70 px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition-all duration-300 hover:bg-white hover:text-zinc-950 hover:border-white"
+            >
+              {t.ctaBtn}
+              <ArrowUpRight
+                size={13}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </a>
           </motion.div>
         </div>
-
-        {/* ── Stats bar ────────────────────────────────────────────────── */}
-        <motion.div
-          className="pt-8 border-t border-white/10 grid grid-cols-3 gap-6"
-          {...fadeUp(0.1)}
-        >
-          {STATS.map((s, i) => (
-            <div key={i} className="flex flex-col">
-              <span className="text-white font-extrabold text-2xl md:text-4xl tracking-tight tabular-nums leading-none">
-                {s.value}
-              </span>
-              <span className="text-white/35 text-[11px] md:text-sm mt-2 uppercase tracking-wider font-medium">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
-
-      </div>
+      </motion.div>
     </section>
   );
 }

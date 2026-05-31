@@ -19,6 +19,7 @@ const navHref = (item: string): string => {
     case 'merchandise':   return '/merchandise';
     case 'contact':       return '/contact';
     case 'register':      return '/register';
+    case 'areas we serve': return '/areas-we-serve';
     default:              return '#';
   }
 };

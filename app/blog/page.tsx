@@ -7,8 +7,36 @@ import { ReactLenis } from 'lenis/react';
 import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
+import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import Footer from '@/components/layout/Footer';
+
+const BLOG_FAQ = [
+  {
+    q: 'What topics does the BBB blog cover?',
+    a: "The blog covers everything that drives real transformation — training techniques, nutrition strategies, mindset shifts, discipline-building habits, and behind-the-scenes looks at the BBB coaching method.",
+  },
+  {
+    q: 'How often is new content published?',
+    a: "New posts go up regularly, with topics rotating across training, nutrition, mindset, and client stories. Follow @bodybybrad on Instagram to get notified the moment a new article drops.",
+  },
+  {
+    q: 'Who writes the blog posts?',
+    a: "Most articles are written by Coach Brad himself, drawing from his 5+ years of coaching experience and 200+ client transformations. Some posts feature guest contributions from the BBB community.",
+  },
+  {
+    q: 'Can I apply the blog advice to my own training?',
+    a: "Absolutely — the content is designed to be immediately actionable. That said, for personalized guidance tailored to your body and goals, working directly with Brad through a coaching program will always get you there faster.",
+  },
+  {
+    q: 'Is there a way to suggest a blog topic?',
+    a: "Yes! Reach out through the Contact page or DM on Instagram with your question or topic idea. Brad loves hearing what the community wants to read about next.",
+  },
+  {
+    q: 'Can I share blog posts with friends?',
+    a: "Please do. Every article is free to read and share. If a post helps you, chances are it will help someone you know too — pass it along.",
+  },
+];
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -281,6 +309,7 @@ function BlogContent() {
         </div>
       </section>
 
+      <FAQSection items={BLOG_FAQ} />
       <CTASection />
       <Footer />
     </div>

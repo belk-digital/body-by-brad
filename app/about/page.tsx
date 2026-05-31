@@ -10,7 +10,35 @@ import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import AboutHeroSection from '@/components/sections/AboutHeroSection';
 import AboutBioSection from '@/components/sections/AboutBioSection';
+import FAQSection from '@/components/sections/FAQSection';
 import Footer from '@/components/layout/Footer';
+
+const ABOUT_FAQ = [
+  {
+    q: 'Who is Coach Brad?',
+    a: 'Coach Brad is an elite personal trainer and fitness coach based in Charleston, SC. With 5+ years of experience and 200+ client transformations, he specializes in personalized programming, accountability coaching, and community-driven fitness.',
+  },
+  {
+    q: 'What is your coaching philosophy?',
+    a: "Brad's philosophy is built on three pillars: personalized programming, consistent accountability, and a winning mindset. Every plan is built around who you are — your body, your schedule, your goals — not a generic template.",
+  },
+  {
+    q: 'Do you work with complete beginners?',
+    a: "Absolutely. Whether you've never stepped into a gym or you're returning after a long break, Brad meets you exactly where you are and builds a plan that grows with you.",
+  },
+  {
+    q: 'What makes Body By Brad different from other coaches?',
+    a: "BBB is more than a training plan — it's a community. Brad personally checks in with every client, tracks your progress, and adjusts your program as you evolve. You're never just a number here.",
+  },
+  {
+    q: 'Where are you based and who can you train?',
+    a: "Brad is based in Charleston, SC, and offers in-person training throughout the Lowcountry. Online coaching is available worldwide — wherever you are, there's a plan for you.",
+  },
+  {
+    q: 'How do I get in touch with Coach Brad?',
+    a: "You can reach Brad through the Contact page, DM on Instagram, or by booking a free 15-minute discovery call. He personally responds to every message.",
+  },
+];
 
 export default function AboutPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,7 +80,7 @@ export default function AboutPage() {
           </section>
 
           <AboutBioSection />
-
+          <FAQSection items={ABOUT_FAQ} />
           <Footer />
         </div>
       </ReactLenis>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 
 const PACKAGES_HERO_IMAGE =
@@ -53,15 +54,16 @@ export default function PackagesHeroSection({ isLoading }: PackagesHeroSectionPr
       animate={isLoading ? 'hidden' : 'visible'}
       className="relative h-full w-full overflow-hidden bg-black"
     >
-      <motion.img
-        variants={imageZoom}
-        src={PACKAGES_HERO_IMAGE}
-        alt="Body By Brad coaching packages"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-        loading="eager"
-        fetchPriority="high"
-        draggable={false}
-      />
+      <motion.div variants={imageZoom} className="absolute inset-0">
+        <Image
+          src={PACKAGES_HERO_IMAGE}
+          alt="Body By Brad coaching packages"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/75" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-transparent to-transparent" />

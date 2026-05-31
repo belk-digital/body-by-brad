@@ -9,8 +9,36 @@ import { testimonialsData } from '@/lib/constants';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
+import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import Footer from '@/components/layout/Footer';
+
+const RESULTS_FAQ = [
+  {
+    q: 'Are these real client results?',
+    a: "Every transformation on this page is from a real Body By Brad client. No filters, no staging — just the results of consistent training and coaching. Names and photos are shared with client permission.",
+  },
+  {
+    q: 'How long does it take to see real results?',
+    a: "Most clients notice meaningful changes within 4–8 weeks of consistent training and nutrition. Bigger transformations — the ones you see here — typically reflect 3–6 months of committed work. Your timeline depends on your starting point and how consistently you execute the plan.",
+  },
+  {
+    q: 'What do I need to commit to on my end?',
+    a: "Consistency is everything. Brad builds the plan and holds you accountable, but you have to show up and execute. That means training as scheduled, dialing in your nutrition, and communicating openly during weekly check-ins.",
+  },
+  {
+    q: 'Do you work with people of all fitness levels?',
+    a: "Yes — from people who have never worked out before to competitive athletes looking to level up. Brad meets you where you are and builds a progressive plan that challenges you without overwhelming you.",
+  },
+  {
+    q: 'Can I submit my own transformation?',
+    a: "Absolutely. Brad loves celebrating client wins. If you have completed a program and want to share your results, reach out via Instagram DM or the Contact page.",
+  },
+  {
+    q: 'How do I start my own transformation?',
+    a: "Hit the button below, reach out through the Contact page, or DM @bodybybrad on Instagram. Brad will schedule a free 15-minute call to talk goals and map out your plan.",
+  },
+];
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const TRANSFORMATIONS = [
@@ -296,6 +324,7 @@ function ResultsPageContent() {
         </div>
       </section>
 
+      <FAQSection items={RESULTS_FAQ} />
       <CTASection />
       <Footer />
     </div>

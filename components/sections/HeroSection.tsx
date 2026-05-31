@@ -11,6 +11,7 @@ import {
   useTransform,
   type Variants,
 } from 'framer-motion';
+import Image from 'next/image';
 import {
   bradImagePool,
   heroBackgroundUrl,
@@ -89,16 +90,21 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
 
   return (
     <>
-      <motion.img
+      <motion.div
         initial={{ scale: 1.1, opacity: 0 }}
         animate={isLoading ? { scale: 1.1, opacity: 0 } : { scale: 1, opacity: 1 }}
         transition={{ duration: 1.8, ease: 'easeOut' }}
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        src={heroBackgroundUrl}
-        alt="Body By Brad"
-        loading="eager"
-        fetchPriority="high"
-      />
+        className="absolute inset-0 z-0"
+      >
+        <Image
+          src={heroBackgroundUrl}
+          alt="Body By Brad"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      </motion.div>
 
       <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-b from-black/45 via-black/15 to-black/75" />
 
@@ -125,13 +131,13 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
           style={{ y: parallaxY }}
           className="relative h-full w-full"
         >
-          <img
+          <Image
             src={heroModelUrl}
             alt="Body By Brad model"
-            className="absolute inset-0 mx-auto h-full w-full object-cover object-bottom grayscale select-none sm:object-contain"
-            loading="eager"
-            fetchPriority="high"
-            draggable={false}
+            fill
+            priority
+            className="object-cover object-bottom grayscale select-none sm:object-contain"
+            sizes="(max-width: 640px) 100vw, 60vw"
           />
           <motion.img
             src={heroModelUrl}
@@ -219,18 +225,23 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
           "
         >
           <AnimatePresence initial={false}>
-            <motion.img
+            <motion.div
               key={thumbnailImage}
-              src={thumbnailImage}
-              alt="Body By Brad"
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.55, ease: 'easeInOut' }}
-              className="absolute inset-0 h-full w-full object-cover"
-              loading={thumbnailTick === 0 ? 'eager' : 'lazy'}
-              draggable={false}
-            />
+              className="absolute inset-0"
+            >
+              <Image
+                src={thumbnailImage}
+                alt="Body By Brad"
+                fill
+                className="object-cover"
+                sizes="20vw"
+                priority={thumbnailTick === 0}
+              />
+            </motion.div>
           </AnimatePresence>
         </motion.div>
 

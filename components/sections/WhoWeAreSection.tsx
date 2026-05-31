@@ -62,8 +62,8 @@ export default function WhoWeAreSection() {
         <motion.h2
           variants={fadeUp}
           className="
-            mb-16 text-left font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950
-            text-[clamp(2rem,4.5vw,4.5rem)]
+            mb-8 text-left font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950
+            text-[clamp(1rem,5vw,4.5rem)]
             md:mb-20
           "
         >

@@ -42,7 +42,7 @@ export default function SupplementsSection() {
 
             <div className="overflow-hidden">
               <motion.h2
-                className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-zinc-950"
+                className="text-3xl sm:text-4xl md:text-6xl font-bold uppercase tracking-tight text-zinc-950"
                 initial={{ y: '100%', opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true, margin: '-10% 0px' }}

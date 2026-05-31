@@ -1,10 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const ABOUT_HERO_IMAGE =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779735223/DSC00643_onxic2.webp';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1200/v1779735223/DSC00643_onxic2.webp';
 
 type AboutHeroSectionProps = {
   isLoading: boolean;
@@ -92,13 +93,13 @@ export default function AboutHeroSection({ isLoading }: AboutHeroSectionProps) {
         variants={imageReveal}
         className="relative overflow-hidden rounded-2xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] min-h-[55vh] md:h-full md:min-h-0"
       >
-        <img
+        <Image
           src={heroImage}
           alt="Body By Brad community"
-          className="h-full w-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-          draggable={false}
+          fill
+          priority
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 55vw"
         />
       </motion.div>
     </motion.div>

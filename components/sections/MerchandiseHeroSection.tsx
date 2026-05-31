@@ -1,9 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, type Variants } from 'framer-motion';
 
 const MERCH_HERO_IMAGE =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779379374/IMG_3076_llkeme.webp';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1920/v1779379374/IMG_3076_llkeme.webp';
 
 type MerchandiseHeroSectionProps = {
   isLoading: boolean;
@@ -43,15 +44,16 @@ export default function MerchandiseHeroSection({ isLoading }: MerchandiseHeroSec
       animate={isLoading ? 'hidden' : 'visible'}
       className="relative h-full w-full overflow-hidden bg-black"
     >
-      <motion.img
-        variants={imageZoom}
-        src={MERCH_HERO_IMAGE}
-        alt="Body By Brad merchandise"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-        loading="eager"
-        fetchPriority="high"
-        draggable={false}
-      />
+      <motion.div variants={imageZoom} className="absolute inset-0">
+        <Image
+          src={MERCH_HERO_IMAGE}
+          alt="Body By Brad merchandise"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </motion.div>
 
       <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/25 to-black/70" />
       <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/30" />

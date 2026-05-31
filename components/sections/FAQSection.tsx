@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Dumbbell, Plus, Minus } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -21,18 +22,15 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
       className="font-satoshi relative w-full bg-[#E6FF2B] overflow-hidden"
     >
       {/* Coach Brad image — bleeds from bottom left */}
-      <img
-        src={MODEL_URL}
-        alt="Coach Brad"
-        className="hidden md:block absolute bottom-0 left-0 pointer-events-none select-none"
-        style={{
-          height: '72%',
-          width: 'auto',
-          maxWidth: '26%',
-          objectFit: 'contain',
-          objectPosition: 'bottom left',
-        }}
-      />
+      <div className="hidden md:block absolute bottom-0 left-0 pointer-events-none select-none" style={{ height: '72%', width: '26%' }}>
+        <Image
+          src={MODEL_URL}
+          alt="Coach Brad"
+          fill
+          className="object-contain object-bottom"
+          sizes="26vw"
+        />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 px-4 sm:px-7 md:px-12 py-20 md:py-28">

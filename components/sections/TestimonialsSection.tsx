@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function TCard({ t }: { t: TestimonialItem }) {
   return (
-    <div style={{ width: 300 }}>
+    <div className="w-full max-w-75">
       {/* iMessage bubble */}
       <div className="relative">
         <div

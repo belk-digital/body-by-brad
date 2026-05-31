@@ -47,7 +47,13 @@ export default function BlogSection() {
     <section className="bg-white font-satoshi px-5 sm:px-8 md:px-12 lg:px-20 py-16 md:py-24">
       {/* Header row */}
       <div className="flex items-center justify-between mb-6 md:mb-8">
-        <div className="flex items-center gap-2.5">
+        <motion.div
+          className="flex items-center gap-2.5"
+          initial={{ opacity: 0, x: -16 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-5% 0px' }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
           <div
             className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
             style={{ backgroundColor: '#1A1A1A' }}
@@ -66,8 +72,14 @@ export default function BlogSection() {
           >
             {t.blogLabel}
           </span>
-        </div>
+        </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, x: 16 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-5% 0px' }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
         <motion.a
           href="/blog"
           className="relative flex items-center gap-0 overflow-hidden rounded-full border-2
@@ -101,6 +113,7 @@ export default function BlogSection() {
             <IoChevronForward size={11} className="-ml-1.5" />
           </motion.span>
         </motion.a>
+        </motion.div>
       </div>
 
       {/* Heading */}
@@ -110,7 +123,7 @@ export default function BlogSection() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="font-extrabold uppercase leading-[0.92] mb-12 md:mb-16"
-        style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', color: '#1A1A1A', letterSpacing: '-0.02em' }}
+        style={{ fontSize: 'clamp(1rem, 5vw, 4.5rem)', color: '#1A1A1A', letterSpacing: '-0.02em' }}
       >
         {t.blogHeadingL1}
         <br />

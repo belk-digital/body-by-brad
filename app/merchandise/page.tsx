@@ -13,7 +13,35 @@ import type { Product } from '@/lib/types';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import MerchandiseHeroSection from '@/components/sections/MerchandiseHeroSection';
+import FAQSection from '@/components/sections/FAQSection';
 import Footer from '@/components/layout/Footer';
+
+const MERCH_FAQ = [
+  {
+    q: 'What sizes does BBB merchandise come in?',
+    a: "Most items are available in sizes S through XXL. Size availability varies by product and drop — check the individual product page for specific sizing info before ordering.",
+  },
+  {
+    q: 'How long does shipping take?',
+    a: "Standard shipping takes 5–7 business days within the US. You will receive a tracking number by email once your order ships.",
+  },
+  {
+    q: 'What is your return and exchange policy?',
+    a: "Unworn items in original condition can be returned or exchanged within 30 days of delivery. Items marked as final sale are not eligible. To start a return, reach out through the Contact page.",
+  },
+  {
+    q: 'Do you ship internationally?',
+    a: "Currently we ship within the United States only. International shipping is something we are actively working on — follow @bodybybrad on Instagram for updates.",
+  },
+  {
+    q: 'Are some items limited edition or limited stock?',
+    a: "Yes. Certain drops are limited run and will not be restocked once sold out. When you see something you like, grab it — these move fast.",
+  },
+  {
+    q: 'How do I know which size to order?',
+    a: "Each product page includes a size guide with measurements. When in doubt, size up — BBB gear is designed with an athletic, fitted feel and runs true to size.",
+  },
+];
 
 const fmtUsd = (cents: number) => `$${(cents / 100).toFixed(0)}`;
 
@@ -250,6 +278,7 @@ function MerchandiseContent() {
         </div>
       </section>
 
+      <FAQSection items={MERCH_FAQ} />
       <Footer />
     </div>
   );

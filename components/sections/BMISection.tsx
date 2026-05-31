@@ -405,7 +405,13 @@ export default function BMISection() {
 
       {/* ── Mobile / Tablet (< md) ───────────────────────────────────────────── */}
       <div className="md:hidden px-4 sm:px-6 py-12 sm:py-16">
-        <div className="mb-8 sm:mb-10">
+        <motion.div
+          className="mb-8 sm:mb-10"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-5% 0px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        >
           <Gauge size={36} strokeWidth={1.5} color="#1a1a1a" className="mb-5" />
           <h2 className="font-extrabold uppercase leading-tight text-zinc-950 mb-4"
             style={{ fontSize: 'clamp(2rem,10vw,3rem)' }}>
@@ -415,11 +421,18 @@ export default function BMISection() {
             style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: 'rgba(0,0,0,0.5)' }}>
             Calculate your daily calorie needs and optimal macronutrient ratios. Enter your age, height, weight, gender, and activity level.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="rounded-2xl p-4 sm:p-6 mb-6" style={{ backgroundColor: '#1a1a1a' }}>
+        <motion.div
+          className="rounded-2xl p-4 sm:p-6 mb-6"
+          style={{ backgroundColor: '#1a1a1a' }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-5% 0px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.15 }}
+        >
           {FormContent}
-        </div>
+        </motion.div>
 
         <AnimatePresence>
           {result && (

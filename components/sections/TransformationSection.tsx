@@ -61,14 +61,18 @@ export default function TransformationSection() {
             {t.transformDesc}
           </motion.p>
 
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          >
           <motion.a
             href="/results"
             className="relative flex items-center gap-0 overflow-hidden rounded-full border-2 border-zinc-900 py-2 pl-6 pr-2 text-[11px] font-extrabold uppercase tracking-widest w-fit"
             initial="rest"
             whileHover="hover"
             animate="rest"
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
           >
             <motion.span
               className="absolute inset-0 bg-zinc-900"
@@ -95,6 +99,7 @@ export default function TransformationSection() {
               <IoChevronForward size={11} className="-ml-1.5" />
             </motion.span>
           </motion.a>
+          </motion.div>
         </div>
       </div>
 
