@@ -279,7 +279,7 @@ export default function Navbar({
   const { t, lang, setLang } = useLanguage();
   const { count: cartCount, open: openCart, hydrated } = useCart();
   const displayCount = hydrated ? cartCount : 0;
-  const isDark = theme === 'dark';
+  const isDark = theme === 'dark' && !isMenuOpen;
   const heroFg = isDark ? '#0a0a0a' : '#FFFFFF';
   const heroTextClass = isDark ? 'text-black' : 'text-white';
   const heroLogoFilter = isDark
@@ -348,7 +348,7 @@ export default function Navbar({
               </span>
             )}
           </button>
-          <AuthSlot theme={isDark ? 'dark' : 'light'} />
+          <AuthSlot theme={theme === 'dark' && !isMenuOpen ? 'dark' : 'light'} />
           <a
             href="/contact"
             className={`hidden sm:flex items-center gap-1 font-semibold sm:gap-1.5 sm:text-sm md:text-lg ${heroTextClass}`}

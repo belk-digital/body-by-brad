@@ -21,20 +21,23 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
       id="faq"
       className="font-satoshi relative w-full bg-[#E6FF2B] overflow-hidden"
     >
-      {/* Coach Brad image — bleeds from bottom left */}
-      <div className="hidden md:block absolute bottom-0 left-0 pointer-events-none select-none" style={{ height: '72%', width: '26%' }}>
+      {/* Coach Brad image — only lg+, avoids overlapping heading on tablet */}
+      <div
+        className="hidden lg:block absolute bottom-0 left-0 pointer-events-none select-none"
+        style={{ height: '70%', width: '24%' }}
+      >
         <Image
           src={MODEL_URL}
           alt="Coach Brad"
           fill
           className="object-contain object-bottom"
-          sizes="26vw"
+          sizes="(min-width: 1024px) 24vw, 0vw"
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-4 sm:px-7 md:px-12 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-[42%_58%] gap-12 md:gap-16">
+      <div className="relative z-10 px-4 sm:px-7 md:px-12 py-14 sm:py-20 md:py-24 lg:py-28">
+        <div className="grid grid-cols-1 md:grid-cols-[42%_58%] gap-8 sm:gap-10 md:gap-12 lg:gap-16">
 
           {/* ── Left — heading ──────────────────────────────────────────── */}
           <div className="flex flex-col justify-start">
@@ -55,7 +58,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
             </motion.div>
 
             <motion.h2
-              className="font-extrabold uppercase leading-none tracking-tight text-[#1a1a1a] text-[clamp(2rem,4.5vw,4.5rem)] mb-5"
+              className="font-extrabold uppercase leading-none tracking-tight text-[#1a1a1a] text-[clamp(2rem,4.5vw,4.5rem)] mb-4 sm:mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -95,16 +98,16 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                   } ${isOpen ? 'border-black/15' : 'border-black/10'}`}
                 >
                   <button
-                    className="w-full flex items-center justify-between gap-6 py-5 text-left cursor-pointer group"
+                    className="w-full flex items-center justify-between gap-3 sm:gap-6 py-4 sm:py-5 text-left cursor-pointer group"
                     onClick={() => setOpenIndex(isOpen ? null : i)}
                   >
                     {/* Number + question */}
-                    <div className="flex items-start gap-4 min-w-0">
+                    <div className="flex items-start gap-3 sm:gap-4 min-w-0">
                       <span className="shrink-0 text-[10px] font-bold tabular-nums text-black/40 mt-0.5 w-5">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span
-                        className={`text-sm md:text-[15px] font-semibold leading-snug transition-colors duration-200 ${
+                        className={`text-[13px] sm:text-sm md:text-[15px] font-semibold leading-snug transition-colors duration-200 ${
                           isOpen ? 'text-[#1a1a1a]' : 'text-black/55 group-hover:text-black/90'
                         }`}
                       >
@@ -137,7 +140,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
                         transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                         className="overflow-hidden"
                       >
-                        <p className="text-black/55 text-sm leading-relaxed pb-5 pl-9 pr-4">
+                        <p className="text-black/55 text-[13px] sm:text-sm leading-relaxed pb-4 sm:pb-5 pl-8 sm:pl-9 pr-2 sm:pr-4">
                           {item.a}
                         </p>
                       </motion.div>
