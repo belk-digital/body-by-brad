@@ -3,20 +3,42 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { FaInstagram } from 'react-icons/fa';
-import { bradImagePool } from '@/lib/constants';
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const IMAGES = bradImagePool.slice(0, 6);
+type GalleryItem = { type: 'image' | 'video'; src: string; aspect: string };
 
-// Varied aspect ratios for masonry feel
-const ASPECTS = [
-  'aspect-[3/4]',
-  'aspect-square',
-  'aspect-[3/4]',
-  'aspect-square',
-  'aspect-[3/4]',
-  'aspect-square',
+const ITEMS: GalleryItem[] = [
+  {
+    type: 'image',
+    src: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780296636/New_content._No_cover._Catch_the_rest_of_the_SouthernHospitality_Reunion_looks_at_our_link_in_b_p1bxsz.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    type: 'image',
+    src: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780296634/Are_you_working_out_or_working_on_your_excusesGet_your_tickets_to_the_Keep_It_Moving_Tour_ASAP_xepq3r.jpg',
+    aspect: 'aspect-square',
+  },
+  {
+    type: 'video',
+    src: 'https://res.cloudinary.com/dgrrovta3/video/upload/v1780296576/If_you_want_to_reclaim_your_health_this_time_next_Christmas_let_me_help_you_No_matter_where_yo_j9ezyv.mp4',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    type: 'image',
+    src: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780296632/Congratulations_to_shopmaggiejewelry_for_another_month_in_britishvogue_you_have_a_gift_and_I_m_mr0sij.jpg',
+    aspect: 'aspect-square',
+  },
+  {
+    type: 'image',
+    src: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780296631/Is_it_clocking_to_you_uquftm.jpg',
+    aspect: 'aspect-[3/4]',
+  },
+  {
+    type: 'video',
+    src: 'https://res.cloudinary.com/dgrrovta3/video/upload/v1780296629/Welcome_to_Chapter_29_Just_me_trying_to_cram_10_years_of_growth_into_12_months_First_video_jtvssh.mp4',
+    aspect: 'aspect-square',
+  },
 ];
 
 export default function AboutGallerySection() {
@@ -74,7 +96,7 @@ export default function AboutGallerySection() {
 
         {/* 3-col masonry grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {IMAGES.map((src, i) => (
+          {ITEMS.map((item, i) => (
             <motion.a
               key={i}
               href="https://instagram.com/bradnboujee_"
@@ -84,14 +106,25 @@ export default function AboutGallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-5% 0px' }}
               transition={{ duration: 0.6, ease, delay: i * 0.07 }}
-              className={`group relative rounded-xl overflow-hidden block ${ASPECTS[i]}`}
+              className={`group relative rounded-xl overflow-hidden block ${item.aspect}`}
             >
-              <img
-                src={src}
-                alt={`Brad Carter training moment ${i + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+              {item.type === 'video' ? (
+                <video
+                  src={item.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={`Brad Carter Instagram post ${i + 1}`}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              )}
               <div className="absolute inset-0 bg-zinc-950/0 group-hover:bg-zinc-950/30 transition-all duration-300 flex items-center justify-center">
                 <FaInstagram
                   size={28}
