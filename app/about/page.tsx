@@ -10,17 +10,28 @@ import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import AboutHeroSection from '@/components/sections/AboutHeroSection';
 import AboutBioSection from '@/components/sections/AboutBioSection';
+import AboutStatsSection from '@/components/sections/AboutStatsSection';
+import AboutOriginSection from '@/components/sections/AboutOriginSection';
+import AboutPhilosophySection from '@/components/sections/AboutPhilosophySection';
+import AboutRunClubSection from '@/components/sections/AboutRunClubSection';
+import AboutInstagramSection from '@/components/sections/AboutInstagramSection';
+import TransformationSection from '@/components/sections/TransformationSection';
+import CTASection from '@/components/sections/CTASection';
 import FAQSection from '@/components/sections/FAQSection';
 import Footer from '@/components/layout/Footer';
 
 const ABOUT_FAQ = [
   {
     q: 'Who is Coach Brad?',
-    a: 'Coach Brad is an elite personal trainer and fitness coach based in Charleston, SC. With 5+ years of experience and 200+ client transformations, he specializes in personalized programming, accountability coaching, and community-driven fitness.',
+    a: 'Coach Brad is an elite personal trainer and fitness coach based in Charleston, SC. With 8+ years of experience and 200+ client transformations, he specializes in personalized programming, accountability coaching, and community-driven fitness.',
   },
   {
     q: 'What is your coaching philosophy?',
     a: "Brad's philosophy is built on three pillars: personalized programming, consistent accountability, and a winning mindset. Every plan is built around who you are — your body, your schedule, your goals — not a generic template.",
+  },
+  {
+    q: 'What is Let\'s Run Charleston?',
+    a: "Let's Run Charleston — also known as the Cooldown Run Club — is a weekly community run event founded by Brad. It's open to all fitness levels, from first-time joggers to seasoned runners. No experience or registration required — just show up.",
   },
   {
     q: 'Do you work with complete beginners?',
@@ -67,6 +78,7 @@ export default function AboutPage() {
             {isLoading && <StairsPreloader />}
           </AnimatePresence>
 
+          {/* Hero */}
           <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-white">
             <Navbar
               isLoading={isLoading}
@@ -75,12 +87,36 @@ export default function AboutPage() {
               onMenuToggle={setIsMenuOpen}
               theme="dark"
             />
-
             <AboutHeroSection isLoading={isLoading} />
           </section>
 
+          {/* Bio quote */}
           <AboutBioSection />
+
+          {/* Stats bar */}
+          <AboutStatsSection />
+
+          {/* Brad's origin story */}
+          <AboutOriginSection />
+
+          {/* Coaching philosophy pillars */}
+          <AboutPhilosophySection />
+
+          {/* Let's Run Charleston */}
+          <AboutRunClubSection />
+
+          {/* Instagram grid */}
+          <AboutInstagramSection />
+
+          {/* Transformation results */}
+          <TransformationSection />
+
+          {/* CTA */}
+          <CTASection />
+
+          {/* FAQ */}
           <FAQSection items={ABOUT_FAQ} />
+
           <Footer />
         </div>
       </ReactLenis>
