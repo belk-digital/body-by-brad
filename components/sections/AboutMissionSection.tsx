@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -115,12 +116,15 @@ export default function AboutMissionSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-10% 0px' }}
           transition={{ duration: 1.0, ease }}
-          className="relative rounded-2xl overflow-hidden aspect-[3/4] w-full"
+          className="relative rounded-2xl overflow-hidden aspect-3/4 w-full"
         >
-          <img
+          <Image
             src={PHOTO}
             alt="Coach Brad Carter"
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
           />
         </motion.div>
 

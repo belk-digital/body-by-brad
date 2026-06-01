@@ -1,6 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { FaInstagram } from 'react-icons/fa';
 
@@ -40,6 +42,30 @@ const ITEMS: GalleryItem[] = [
     aspect: 'aspect-square',
   },
 ];
+
+function VideoTile({ src, className }: { src: string; className: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const inView = useInView(ref, { margin: '-10% 0px' });
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (inView) v.play().catch(() => {});
+    else v.pause();
+  }, [inView]);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      muted
+      loop
+      playsInline
+      preload="none"
+      className={className}
+    />
+  );
+}
 
 export default function AboutGallerySection() {
   return (
@@ -109,19 +135,17 @@ export default function AboutGallerySection() {
               className={`group relative rounded-xl overflow-hidden block ${item.aspect}`}
             >
               {item.type === 'video' ? (
-                <video
+                <VideoTile
                   src={item.src}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
-                <img
+                <Image
                   src={item.src}
                   alt={`Brad Carter Instagram post ${i + 1}`}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
                 />
               )}

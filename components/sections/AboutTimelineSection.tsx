@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { bradImagePool } from '@/lib/constants';
 
@@ -105,10 +106,12 @@ export default function AboutTimelineSection() {
                 transition={{ duration: 0.65, ease, delay: (i % 4) * 0.08 }}
                 className="relative rounded-2xl overflow-hidden min-h-[220px] md:min-h-[280px]"
               >
-                <img
+                <Image
                   src={item.src}
                   alt={`Brad Carter training moment ${item.idx + 1}`}
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, 25vw"
                   loading="lazy"
                 />
               </motion.div>
