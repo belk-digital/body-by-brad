@@ -32,13 +32,13 @@ const ITEMS: GalleryItem[] = [
     aspect: 'aspect-square',
   },
   {
-    type: 'image',
-    src: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780296631/Is_it_clocking_to_you_uquftm.jpg',
+    type: 'video',
+    src: 'https://res.cloudinary.com/dgrrovta3/video/upload/v1780296629/Welcome_to_Chapter_29_Just_me_trying_to_cram_10_years_of_growth_into_12_months_First_video_jtvssh.mp4',
     aspect: 'aspect-[3/4]',
   },
   {
-    type: 'video',
-    src: 'https://res.cloudinary.com/dgrrovta3/video/upload/v1780296629/Welcome_to_Chapter_29_Just_me_trying_to_cram_10_years_of_growth_into_12_months_First_video_jtvssh.mp4',
+    type: 'image',
+    src: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780296631/Is_it_clocking_to_you_uquftm.jpg',
     aspect: 'aspect-square',
   },
 ];
