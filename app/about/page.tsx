@@ -9,12 +9,12 @@ import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import AboutHeroSection from '@/components/sections/AboutHeroSection';
-import AboutBioSection from '@/components/sections/AboutBioSection';
+import AboutTimelineSection from '@/components/sections/AboutTimelineSection';
+import AboutMissionSection from '@/components/sections/AboutMissionSection';
 import AboutStatsSection from '@/components/sections/AboutStatsSection';
-import AboutOriginSection from '@/components/sections/AboutOriginSection';
-import AboutPhilosophySection from '@/components/sections/AboutPhilosophySection';
+import AboutGallerySection from '@/components/sections/AboutGallerySection';
+import AboutRecognitionSection from '@/components/sections/AboutRecognitionSection';
 import AboutRunClubSection from '@/components/sections/AboutRunClubSection';
-import AboutInstagramSection from '@/components/sections/AboutInstagramSection';
 import TransformationSection from '@/components/sections/TransformationSection';
 import CTASection from '@/components/sections/CTASection';
 import FAQSection from '@/components/sections/FAQSection';
@@ -30,7 +30,7 @@ const ABOUT_FAQ = [
     a: "Brad's philosophy is built on three pillars: personalized programming, consistent accountability, and a winning mindset. Every plan is built around who you are — your body, your schedule, your goals — not a generic template.",
   },
   {
-    q: 'What is Let\'s Run Charleston?',
+    q: "What is Let's Run Charleston?",
     a: "Let's Run Charleston — also known as the Cooldown Run Club — is a weekly community run event founded by Brad. It's open to all fitness levels, from first-time joggers to seasoned runners. No experience or registration required — just show up.",
   },
   {
@@ -90,23 +90,23 @@ export default function AboutPage() {
             <AboutHeroSection isLoading={isLoading} />
           </section>
 
-          {/* Bio quote */}
-          <AboutBioSection />
+          {/* Timeline — Our Journey */}
+          <AboutTimelineSection />
+
+          {/* Mission & Vision */}
+          <AboutMissionSection />
 
           {/* Stats bar */}
           <AboutStatsSection />
 
-          {/* Brad's origin story */}
-          <AboutOriginSection />
+          {/* Instagram Gallery */}
+          <AboutGallerySection />
 
-          {/* Coaching philosophy pillars */}
-          <AboutPhilosophySection />
+          {/* Recognition / Achievements list */}
+          <AboutRecognitionSection />
 
           {/* Let's Run Charleston */}
           <AboutRunClubSection />
-
-          {/* Instagram grid */}
-          <AboutInstagramSection />
 
           {/* Transformation results */}
           <TransformationSection />
