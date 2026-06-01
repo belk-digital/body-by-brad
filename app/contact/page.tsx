@@ -38,7 +38,7 @@ const CONTACT_FAQ = [
   },
   {
     q: "What's the best way to reach you on social media?",
-    a: "Instagram is the fastest channel — DM @bodybybrad for a quick response. You can also follow along for daily tips, event announcements, and client highlights.",
+    a: "Instagram is the fastest channel — DM @bradnboujee_ for a quick response. You can also follow along for daily tips, event announcements, and client highlights.",
   },
 ];
 

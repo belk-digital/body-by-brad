@@ -22,8 +22,8 @@ const en = {
 
   // ── About hero ───────────────────────────────────────────────────────────
   aboutHeroDesc: 'Body By Brad is built on discipline, community, and a results-driven approach to coaching, training, and lasting transformation.',
-  aboutHeroL1: 'MORE THAN A',
-  aboutHeroL2: 'FITNESS COACH',
+  aboutHeroL1: 'MORE THAN',
+  aboutHeroL2: 'A COACH.',
   aboutBioParagraphs: [
     'After playing football at The Citadel and graduating in 2019, I stepped into Corporate America with ambition and a full head of steam. It didn’t take long to realize that the traditional path wasn’t where I was meant to be.',
     'I walked away from the desk job, earned my ISSA certification, and built what would become Body By Brad — a fitness and lifestyle brand rooted in energy, community, and intentional movement.',

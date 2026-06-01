@@ -18,7 +18,7 @@ const BLOG_FAQ = [
   },
   {
     q: 'How often is new content published?',
-    a: "New posts go up regularly, with topics rotating across training, nutrition, mindset, and client stories. Follow @bodybybrad on Instagram to get notified the moment a new article drops.",
+    a: "New posts go up regularly, with topics rotating across training, nutrition, mindset, and client stories. Follow @bradnboujee_ on Instagram to get notified the moment a new article drops.",
   },
   {
     q: 'Who writes the blog posts?',

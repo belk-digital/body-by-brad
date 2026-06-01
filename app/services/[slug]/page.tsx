@@ -69,7 +69,7 @@ export default async function ServiceDetailPage({
         addressCountry: 'US',
       },
       sameAs: [
-        'https://www.instagram.com/bodybybrad',
+        'https://www.instagram.com/bradnboujee_',
       ],
     },
     serviceType: service.accentLabel,

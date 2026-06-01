@@ -36,7 +36,7 @@ const RESULTS_FAQ = [
   },
   {
     q: 'How do I start my own transformation?',
-    a: "Hit the button below, reach out through the Contact page, or DM @bodybybrad on Instagram. Brad will schedule a free 15-minute call to talk goals and map out your plan.",
+    a: "Hit the button below, reach out through the Contact page, or DM @bradnboujee_ on Instagram. Brad will schedule a free 15-minute call to talk goals and map out your plan.",
   },
 ];
 

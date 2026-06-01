@@ -31,7 +31,7 @@ const MERCH_FAQ = [
   },
   {
     q: 'Do you ship internationally?',
-    a: "Currently we ship within the United States only. International shipping is something we are actively working on — follow @bodybybrad on Instagram for updates.",
+    a: "Currently we ship within the United States only. International shipping is something we are actively working on — follow @bradnboujee_ on Instagram for updates.",
   },
   {
     q: 'Are some items limited edition or limited stock?',

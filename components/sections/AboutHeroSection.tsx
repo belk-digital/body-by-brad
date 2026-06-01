@@ -5,7 +5,7 @@ import { motion, type Variants } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const ABOUT_HERO_IMAGE =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1200/v1779735223/DSC00643_onxic2.webp';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1200/v1780294431/IMG_6571_qwzkcw.webp';
 
 type AboutHeroSectionProps = {
   isLoading: boolean;

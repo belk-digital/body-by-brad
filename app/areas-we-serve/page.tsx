@@ -61,7 +61,7 @@ export default function AreasWeServePage() {
       { '@type': 'City', name: "Sullivan's Island", containedInPlace: { '@type': 'State', name: 'South Carolina' } },
       { '@type': 'City', name: 'Ladson', containedInPlace: { '@type': 'State', name: 'South Carolina' } },
     ],
-    sameAs: ['https://www.instagram.com/bodybybrad'],
+    sameAs: ['https://www.instagram.com/bradnboujee_'],
   };
 
   return (

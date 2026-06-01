@@ -38,7 +38,7 @@ export default function AboutGallerySection() {
                 <FaInstagram size={14} className="text-white" />
               </div>
               <span className="text-sm font-extrabold uppercase tracking-[0.22em] text-zinc-950">
-                @bodybybrad
+                @bradnboujee_
               </span>
             </motion.div>
 
@@ -61,7 +61,7 @@ export default function AboutGallerySection() {
             transition={{ duration: 0.5, ease, delay: 0.12 }}
           >
             <a
-              href="https://instagram.com/bodybybrad"
+              href="https://instagram.com/bradnboujee_"
               target="_blank"
               rel="noreferrer noopener"
               className="group inline-flex items-center gap-2 rounded-full border-2 border-zinc-950 px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-zinc-950 hover:bg-zinc-950 hover:text-white transition-all duration-300"
@@ -77,7 +77,7 @@ export default function AboutGallerySection() {
           {IMAGES.map((src, i) => (
             <motion.a
               key={i}
-              href="https://instagram.com/bodybybrad"
+              href="https://instagram.com/bradnboujee_"
               target="_blank"
               rel="noreferrer noopener"
               initial={{ opacity: 0, y: 24 }}

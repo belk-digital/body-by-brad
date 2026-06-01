@@ -7,7 +7,7 @@ import { ArrowUpRight } from 'lucide-react';
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const PHOTO =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_900/v1779378587/New_Project_5_v1vfcy.webp';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_900/v1780294757/bradley_image_suayaz.webp';
 
 const TABS = {
   mission: {

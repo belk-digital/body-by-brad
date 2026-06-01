@@ -17,7 +17,7 @@ const ATHLETES = [
   {
     id: 1,
     name: 'Coach Brad',
-    username: 'bodybybrad',
+    username: 'bradnboujee_',
     avatar: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1779139268/IMG_3044_vsxjow.jpg',
     weeklyMiles: 38.4,
     weeklyActivities: 6,
