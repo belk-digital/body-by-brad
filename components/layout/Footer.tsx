@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
 import { logoUrl, socialMenuItems, policyMenuItems } from '@/lib/constants';
 import TextRoll from '@/components/ui/TextRoll';
 
@@ -29,16 +28,6 @@ export default function Footer() {
   const year = new Date().getFullYear();
   const brandRef = useRef<HTMLDivElement>(null);
   const [fitnessFontSize, setFitnessFontSize] = useState<number>(120);
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubscribed(true);
-    setEmail('');
-  };
-
   useEffect(() => {
     const measure = () => {
       const container = brandRef.current;
@@ -84,7 +73,7 @@ export default function Footer() {
           className="self-start flex flex-col gap-6"
         >
           {/* Logo + divider + tagline */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 mb-auto">
             <a href="/" aria-label="Body By Brad home" className="shrink-0">
               <img
                 src={logoUrl}
@@ -115,35 +104,7 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Newsletter */}
-          <div className="pt-5 border-t border-white/15">
-            {subscribed ? (
-              <p className="text-[#CCFF00] text-xs font-semibold uppercase tracking-widest">You&apos;re in — welcome to BBB.</p>
-            ) : (
-              <>
-                <form onSubmit={handleSubscribe} className="flex items-center gap-3 border-b border-white/15 pb-2.5">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your email address"
-                    className="flex-1 min-w-0 bg-transparent text-white/80 placeholder:text-white/30 text-sm outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="group flex items-center gap-1.5 text-xs font-semibold text-white/60 hover:text-white uppercase tracking-widest transition-colors shrink-0"
-                  >
-                    Subscribe
-                    <ArrowUpRight size={11} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </button>
-                </form>
-                <p className="text-white/40 text-xs leading-snug mt-3">
-                  Join our newsletter for training tips, event announcements, and exclusive updates.
-                </p>
-              </>
-            )}
-          </div>
+          {/* Newsletter — hidden for now */}
         </motion.div>
 
         {/* Right — two-column nav */}
