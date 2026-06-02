@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -165,10 +164,8 @@ function PageContent() {
 
 export default function PrivacyPolicyPage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <PageContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <PageContent />
+    </ReactLenis>
   );
 }

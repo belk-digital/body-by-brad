@@ -5,9 +5,10 @@ import { motion, useInView, type Variants } from 'framer-motion';
 import { Dumbbell } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const LEFT_IMAGE =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779378587/New_Project_2_zimcoc.webp';
+  'https://res.cloudinary.com/denskvdyt/image/upload/v1780429409/bradley_carter_image_x1fspz.webp';
 const RIGHT_IMAGE =
   'https://res.cloudinary.com/dgrrovta3/image/upload/v1779735223/DSC00643_onxic2.webp';
 
@@ -18,6 +19,7 @@ const AVATARS = [
 ];
 
 export default function WhoWeAreSection() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
 
@@ -54,24 +56,21 @@ export default function WhoWeAreSection() {
             <Dumbbell size={14} className="text-white" />
           </span>
           <span className="text-sm font-extrabold uppercase tracking-[0.22em] text-zinc-950">
-            About Us
+            {t.whoWeAreLabel}
           </span>
         </motion.div>
 
         {/* ── Headline ──────────────────────────────────────────────────── */}
         <motion.h2
           variants={fadeUp}
-          className="
-            mb-8 text-left font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950
-            text-[clamp(1rem,5vw,4.5rem)]
-            md:mb-20
-          "
+          className="mb-8 text-left font-extrabold uppercase leading-none tracking-tight text-zinc-950 text-[clamp(2rem,4.5vw,4.5rem)] md:mb-20"
+          style={{ fontFamily: 'Unbounded, sans-serif' }}
         >
-          WE BELIEVE FITNESS ISN&apos;T
+          {t.whoWeAreHeadingL1}
           <br />
-          JUST ABOUT LIFTING WEIGHTS
+          {t.whoWeAreHeadingL2}
           <br />
-          IT&apos;S ABOUT BUILDING
+          {t.whoWeAreHeadingL3}
         </motion.h2>
 
         {/* ── Three-column layout ───────────────────────────────────────── */}
@@ -107,10 +106,10 @@ export default function WhoWeAreSection() {
               </span>
               <div className="mb-2 flex flex-col">
                 <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-950 leading-tight">
-                  YEARS OF
+                  {t.yearsOfLabel}
                 </span>
                 <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-950 leading-tight">
-                  EXPERIENCE
+                  {t.experienceLabel}
                 </span>
               </div>
             </div>
@@ -120,18 +119,14 @@ export default function WhoWeAreSection() {
 
             {/* Body */}
             <p className="mb-4 text-sm leading-relaxed text-zinc-500 md:text-base">
-              We combine focused personal coaching, high-energy group classes, and
-              accountability-driven programming to deliver a premium fitness experience.
-              Whether your goal is strength, fat loss, or community.
+              {t.whoWeAreParagraph1}
             </p>
             <p className="mb-8 text-sm leading-relaxed text-zinc-500 md:text-base">
-              We don&apos;t just train bodies — we train mindsets. Step inside and experience a
-              fitness journey built around consistency, confidence, and showing up for yourself.
+              {t.whoWeAreParagraph2}
             </p>
 
             {/* Button + reviews row */}
             <div className="flex flex-wrap items-center gap-5">
-              {/* About Us button */}
               <motion.a
                 href="/about"
                 className="relative flex items-center gap-0 overflow-hidden rounded-full border-2 border-zinc-950 py-2 pl-5 pr-2 text-[11px] font-extrabold uppercase tracking-widest"
@@ -139,22 +134,19 @@ export default function WhoWeAreSection() {
                 whileHover="hover"
                 animate="rest"
               >
-                {/* Left-to-right fill */}
                 <motion.span
                   className="absolute inset-0 bg-zinc-950"
                   style={{ transformOrigin: 'left' }}
                   variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
                   transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }}
                 />
-                {/* Label */}
                 <motion.span
                   className="relative z-10 mr-2"
                   variants={{ rest: { color: '#09090b' }, hover: { color: '#ffffff' } }}
                   transition={{ duration: 0.32, ease: 'easeInOut' }}
                 >
-                  About Us
+                  {t.whoWeAreAboutBtn}
                 </motion.span>
-                {/* Chevron circle */}
                 <motion.span
                   className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full"
                   variants={{
@@ -187,7 +179,7 @@ export default function WhoWeAreSection() {
                     {'★★★★★'}
                   </div>
                   <p className="mt-0.5 text-[11px] font-semibold text-zinc-500">
-                    (500+ Clients)
+                    {t.whoWeAreClients}
                   </p>
                 </div>
               </div>

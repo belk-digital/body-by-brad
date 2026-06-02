@@ -7,7 +7,6 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { PauseIcon, PlayIcon, Dumbbell, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import { socialMenuItems } from '@/lib/constants';
 import type { CalendarEvent } from '@/components/ui/EventCalendar';
 import StairsPreloader from '@/components/StairsPreloader';
@@ -346,8 +345,7 @@ export default function EventsPage() {
   const visibleItems = showAllGallery ? MASONRY_ITEMS : MASONRY_INITIAL;
 
   return (
-    <LanguageProvider>
-      <ReactLenis root>
+    <ReactLenis root>
         <div className="relative w-full font-satoshi overflow-x-hidden">
 
           <AnimatePresence>
@@ -691,6 +689,5 @@ export default function EventsPage() {
 
         </div>
       </ReactLenis>
-    </LanguageProvider>
   );
 }

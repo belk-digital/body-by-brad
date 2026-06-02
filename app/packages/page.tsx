@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import PackagesHeroSection from '@/components/sections/PackagesHeroSection';
@@ -178,10 +177,8 @@ function PricingContent() {
 
 export default function PricingPage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <PricingContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <PricingContent />
+    </ReactLenis>
   );
 }

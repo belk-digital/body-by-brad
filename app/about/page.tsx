@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
-
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import AboutHeroSection from '@/components/sections/AboutHeroSection';
@@ -71,8 +69,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <LanguageProvider>
-      <ReactLenis root>
+    <ReactLenis root>
         <div className="relative w-full font-satoshi overflow-x-hidden bg-white">
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
@@ -120,6 +117,5 @@ export default function AboutPage() {
           <Footer />
         </div>
       </ReactLenis>
-    </LanguageProvider>
   );
 }

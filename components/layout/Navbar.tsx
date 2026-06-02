@@ -63,7 +63,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
           exit={{ opacity: 0, x: -8 }}
           transition={{ duration: 0.25 }}
         >
-          Close
+          {t.close}
         </motion.button>
       </div>
 
@@ -213,7 +213,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
                 <img
                   src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg"
                   alt="Body By Brad Events"
-                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover object-bottom transition-transform duration-500 group-hover:scale-105"
                   draggable={false}
                 />
               </div>
@@ -463,7 +463,7 @@ export default function Navbar({
                 className="hidden sm:flex items-center gap-1 font-semibold text-white sm:gap-1.5 sm:text-sm md:text-lg"
               >
                 <TextRoll className="whitespace-nowrap pb-[0.2em] pt-[0.1em]">
-                  get started
+                  {t.getStarted}
                 </TextRoll>
                 <span aria-hidden="true" className="text-lg leading-none md:text-xl">
                   ↗

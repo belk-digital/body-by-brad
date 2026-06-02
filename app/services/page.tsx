@@ -13,7 +13,6 @@ import { ReactLenis } from 'lenis/react';
 import { Dumbbell, Smartphone, Flame, Target, Trophy, Home, ArrowUpRight } from 'lucide-react';
 
 import Image from 'next/image';
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
@@ -291,10 +290,8 @@ function ServicesContent() {
 
 export default function ServicesPage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <ServicesContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <ServicesContent />
+    </ReactLenis>
   );
 }

@@ -13,7 +13,7 @@ import {
 } from 'framer-motion';
 import Image from 'next/image';
 import {
-  bradImagePool,
+  latestEventImages,
   heroBackgroundUrl,
   heroModelUrl,
 } from '@/lib/constants';
@@ -86,7 +86,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
     );
     return () => window.clearInterval(id);
   }, []);
-  const thumbnailImage = bradImagePool[thumbnailTick % bradImagePool.length];
+  const thumbnailImage = latestEventImages[thumbnailTick % latestEventImages.length];
 
   return (
     <>
@@ -235,21 +235,26 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
             >
               <Image
                 src={thumbnailImage}
-                alt="Body By Brad"
+                alt="Latest BBB Event"
                 fill
                 className="object-cover"
                 sizes="20vw"
+                loading="eager"
                 priority={thumbnailTick === 0}
               />
             </motion.div>
           </AnimatePresence>
+          <div className="absolute top-2 left-2 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-white">Latest Event</span>
+          </div>
         </motion.div>
 
         <h1
           className="
             absolute left-4 bottom-8 z-30 max-w-[88vw] font-bold uppercase leading-[0.95] tracking-tight text-white
-            text-[7.5vw] sm:left-6 sm:bottom-10 sm:max-w-[52vw] sm:text-[5.8vw]
-            md:left-10 md:bottom-14 md:max-w-[44vw] md:text-[4.4vw]
+            text-[6.2vw] sm:left-6 sm:bottom-10 sm:max-w-[52vw] sm:text-[4.8vw]
+            md:left-10 md:bottom-14 md:max-w-[44vw] md:text-[3.6vw]
           "
         >
           <motion.span variants={headlineLine} className="block">

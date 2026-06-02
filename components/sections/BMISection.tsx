@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Gauge, Mars, Venus } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 type Gender      = 'male' | 'female';
@@ -11,46 +12,13 @@ type GoalKey     = 'lose' | 'lose10' | 'maintain' | 'gain';
 type MealView    = 'day' | '3' | '4' | '5';
 type ProteinKey  = 0 | 1 | 2;
 
-// ── Data ─────────────────────────────────────────────────────────────────────
-const ACTIVITY = [
-  { label: 'LOW',       short: 'LOW',  desc: 'Little or no exercise. Desk job, sedentary lifestyle.' },
-  { label: 'MIDDLE',    short: 'MID',  desc: 'Activity that burns an additional 400–650 calories for females or 500–800 calories for males.' },
-  { label: 'HIGH',      short: 'HIGH', desc: 'Hard exercise 3–5 days/week. Burns 650+ extra calories daily.' },
-  { label: 'VERY HIGH', short: 'V.HI', desc: 'Intense training 6–7 days/week. Burns 800+ extra calories daily.' },
-];
+// ── Logic constants (not translated) ─────────────────────────────────────────
 const ACTIVITY_MULT = [1.2, 1.375, 1.55, 1.725] as const;
-
-const GOALS: { key: GoalKey; label: string }[] = [
-  { key: 'lose',     label: 'LOSE'     },
-  { key: 'lose10',   label: 'LOSE 10%' },
-  { key: 'maintain', label: 'MAINTAIN' },
-  { key: 'gain',     label: 'GAIN'     },
-];
 const GOAL_MULT: Record<GoalKey, number> = {
   lose: 0.75, lose10: 0.9, maintain: 1.0, gain: 1.15,
 };
-
-const PROTEIN_LEVELS = ['LOW', 'NORMAL', 'HIGH'] as const;
-const PROTEIN_MULT   = [1.5, 2.0, 2.5] as const;
-
-const SUGGESTED_PROGRAMS: Record<GoalKey, { title: string; desc: string; img: string; href: string }[]> = {
-  lose: [
-    { title: 'WEIGHT LOSS',     desc: 'Expert-guided programs to burn fat and reshape your body.', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=100&q=80', href: '/services' },
-    { title: 'ONLINE COACHING', desc: 'Accountability and structure from anywhere in the world.',   img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' },
-  ],
-  lose10: [
-    { title: 'WEIGHT LOSS',     desc: 'Expert-guided programs to burn fat and reshape your body.', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=100&q=80', href: '/services' },
-    { title: 'FITNESS CLASSES', desc: 'High-energy group sessions built around real results.',      img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=100&q=80', href: '/services' },
-  ],
-  maintain: [
-    { title: 'AT HOME TRAINING', desc: 'Complete training experience designed around your home setup.', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=100&q=80', href: '/services' },
-    { title: 'ONLINE COACHING',  desc: 'Accountability and structure from anywhere in the world.',      img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' },
-  ],
-  gain: [
-    { title: 'ELITE TRAINING',          desc: 'The highest level of 1-on-1 coaching with daily support.',   img: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=100&q=80', href: '/services' },
-    { title: 'ONLINE FITNESS TRAINING', desc: 'Fully custom programs built around your schedule and goals.', img: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=100&q=80', href: '/services' },
-  ],
-};
+const GOAL_KEYS: GoalKey[] = ['lose', 'lose10', 'maintain', 'gain'];
+const PROTEIN_MULT = [1.5, 2.0, 2.5] as const;
 
 // ── Calculation ───────────────────────────────────────────────────────────────
 interface Result { kcal: number }
@@ -67,10 +35,13 @@ function computeResult(
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
-function GenderToggle({ gender, onChange }: { gender: Gender; onChange: (g: Gender) => void }) {
+function GenderToggle({ gender, onChange, maleLabel, femaleLabel }: {
+  gender: Gender; onChange: (g: Gender) => void;
+  maleLabel: string; femaleLabel: string;
+}) {
   const options = [
-    { key: 'male'   as Gender, Icon: Mars,  label: 'MALE'   },
-    { key: 'female' as Gender, Icon: Venus, label: 'FEMALE' },
+    { key: 'male'   as Gender, Icon: Mars,  label: maleLabel   },
+    { key: 'female' as Gender, Icon: Venus, label: femaleLabel },
   ];
   return (
     <div className="grid grid-cols-2 gap-3">
@@ -114,16 +85,17 @@ function PillInput({ placeholder, value, onChange, suffix }: {
   );
 }
 
-function HeightInput({ value, onChange, unit, onUnitChange }: {
+function HeightInput({ value, onChange, unit, onUnitChange, heightLabel }: {
   value: string; onChange: (v: string) => void;
   unit: 'cm' | 'in'; onUnitChange: (u: 'cm' | 'in') => void;
+  heightLabel: string;
 }) {
   const [focused, setFocused] = useState(false);
   return (
     <div className="flex items-center rounded-full transition-colors"
       style={{ border: '1.5px solid rgba(255,255,255,0.25)', backgroundColor: focused ? '#fff' : 'rgba(255,255,255,0.06)' }}>
       <input
-        type="number" min="0" placeholder="Height" value={value}
+        type="number" min="0" placeholder={heightLabel} value={value}
         onChange={e => { const v = e.target.value; if (v === '' || parseFloat(v) >= 0) onChange(v); }}
         onKeyDown={e => { if (e.key === '-' || e.key === '+' || e.key === 'e') e.preventDefault(); }}
         onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
@@ -143,12 +115,15 @@ function HeightInput({ value, onChange, unit, onUnitChange }: {
   );
 }
 
-function ActivitySlider({ value, onChange }: { value: ActivityKey; onChange: (v: ActivityKey) => void }) {
+function ActivitySlider({ value, onChange, activityLevels }: {
+  value: ActivityKey; onChange: (v: ActivityKey) => void;
+  activityLevels: { label: string; short: string; desc: string }[];
+}) {
   return (
     <div>
       <p className="leading-relaxed mb-4 text-[14px] sm:text-[16px]"
         style={{ fontFamily: 'Roboto, sans-serif', color: 'rgba(255,255,255,0.6)' }}>
-        <span className="font-bold text-white">{ACTIVITY[value].label}:</span>{' '}{ACTIVITY[value].desc}
+        <span className="font-bold text-white">{activityLevels[value].label}:</span>{' '}{activityLevels[value].desc}
       </p>
       <div className="relative flex items-center h-5 mb-2">
         <div className="absolute left-0 right-0 h-px bg-white/20" />
@@ -160,7 +135,7 @@ function ActivitySlider({ value, onChange }: { value: ActivityKey; onChange: (v:
         ))}
       </div>
       <div className="flex justify-between">
-        {ACTIVITY.map((a, i) => (
+        {activityLevels.map((a, i) => (
           <span key={i} className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest"
             style={{ color: value === i ? '#fff' : 'rgba(255,255,255,0.35)' }}>
             <span className="hidden sm:inline">{a.label}</span>
@@ -172,13 +147,16 @@ function ActivitySlider({ value, onChange }: { value: ActivityKey; onChange: (v:
   );
 }
 
-function GoalButtons({ goal, onChange }: { goal: GoalKey; onChange: (g: GoalKey) => void }) {
+function GoalButtons({ goal, onChange, goalOptions }: {
+  goal: GoalKey; onChange: (g: GoalKey) => void;
+  goalOptions: { key: string; label: string }[];
+}) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-      {GOALS.map(g => (
-        <button key={g.key} onClick={() => onChange(g.key)}
+      {goalOptions.map((g, i) => (
+        <button key={GOAL_KEYS[i]} onClick={() => onChange(GOAL_KEYS[i])}
           className="py-3 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer"
-          style={{ backgroundColor: goal === g.key ? '#000' : 'transparent', color: goal === g.key ? '#fff' : 'rgba(255,255,255,0.35)', border: '1px solid rgba(255,255,255,0.15)' }}>
+          style={{ backgroundColor: goal === GOAL_KEYS[i] ? '#000' : 'transparent', color: goal === GOAL_KEYS[i] ? '#fff' : 'rgba(255,255,255,0.35)', border: '1px solid rgba(255,255,255,0.15)' }}>
           {g.label}
         </button>
       ))}
@@ -186,12 +164,15 @@ function GoalButtons({ goal, onChange }: { goal: GoalKey; onChange: (g: GoalKey)
   );
 }
 
-function ProteinSlider({ value, onChange }: { value: ProteinKey; onChange: (v: ProteinKey) => void }) {
+function ProteinSlider({ value, onChange, proteinLevelLabels, proteinTip }: {
+  value: ProteinKey; onChange: (v: ProteinKey) => void;
+  proteinLevelLabels: string[]; proteinTip: string;
+}) {
   return (
     <div>
       <p className="mb-3 text-[14px] sm:text-[16px]"
         style={{ fontFamily: 'Roboto, sans-serif', color: 'rgba(113,113,122,1)' }}>
-        We recommend to start with normal level. If you do a lot of lifting, try &quot;high&quot;.
+        {proteinTip}
       </p>
       <div className="relative flex items-center h-5 mb-2">
         <div className="absolute left-0 right-0 h-px bg-zinc-200" />
@@ -203,7 +184,7 @@ function ProteinSlider({ value, onChange }: { value: ProteinKey; onChange: (v: P
         ))}
       </div>
       <div className="flex justify-between">
-        {PROTEIN_LEVELS.map((l, i) => (
+        {proteinLevelLabels.map((l, i) => (
           <span key={i} className="text-[10px] font-bold uppercase tracking-widest"
             style={{ color: value === i ? '#111' : 'rgba(0,0,0,0.3)' }}>
             {l}
@@ -216,6 +197,8 @@ function ProteinSlider({ value, onChange }: { value: ProteinKey; onChange: (v: P
 
 // ── Main Component ─────────────────────────────────────────────────────────────
 export default function BMISection() {
+  const { t } = useLanguage();
+
   const [gender,       setGender]       = useState<Gender>('male');
   const [age,          setAge]          = useState('');
   const [weight,       setWeight]       = useState('');
@@ -239,7 +222,6 @@ export default function BMISection() {
     setResult(null); setMealView('day'); setProteinLevel(1);
   };
 
-  // Dynamic macros
   const w          = parseFloat(weight) || 0;
   const meals      = mealView === 'day' ? 1 : parseInt(mealView);
   const dynProtein = result ? Math.max(0, Math.round(w * PROTEIN_MULT[proteinLevel])) : 0;
@@ -249,34 +231,33 @@ export default function BMISection() {
   const carbPct    = Math.round((dynCarbs   * 4 / dynTotal) * 100);
   const protPct    = Math.round((dynProtein * 4 / dynTotal) * 100);
   const fatPct     = Math.round((dynFat     * 9 / dynTotal) * 100);
-  const suggested  = SUGGESTED_PROGRAMS[goal];
+  const suggested  = t.suggestedProgramsData[goal] ?? t.suggestedProgramsData['lose'];
 
   // ── Form ─────────────────────────────────────────────────────────────────────
   const FormContent = (
     <div className="flex flex-col gap-4 sm:gap-5">
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-3"
-          style={{ color: 'rgba(255,255,255,0.4)' }}>Body Parameters</p>
-        <GenderToggle gender={gender} onChange={setGender} />
+          style={{ color: 'rgba(255,255,255,0.4)' }}>{t.bodyParamsLabel}</p>
+        <GenderToggle gender={gender} onChange={setGender} maleLabel={t.maleLabel} femaleLabel={t.femaleLabel} />
       </div>
 
-      {/* Inputs: stack on xs, 3-col from sm */}
       <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
         <PillInput placeholder="Age"    value={age}    onChange={setAge} />
         <PillInput placeholder="Weight" value={weight} onChange={setWeight} suffix="KG" />
-        <HeightInput value={height} onChange={setHeight} unit={heightUnit} onUnitChange={setHeightUnit} />
+        <HeightInput value={height} onChange={setHeight} unit={heightUnit} onUnitChange={setHeightUnit} heightLabel={t.heightLabel} />
       </div>
 
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-3"
-          style={{ color: 'rgba(255,255,255,0.4)' }}>Activity Level</p>
-        <ActivitySlider value={activity} onChange={setActivity} />
+          style={{ color: 'rgba(255,255,255,0.4)' }}>{t.activityLevelLabel}</p>
+        <ActivitySlider value={activity} onChange={setActivity} activityLevels={t.activityLevels} />
       </div>
 
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-3"
-          style={{ color: 'rgba(255,255,255,0.4)' }}>Goals</p>
-        <GoalButtons goal={goal} onChange={setGoal} />
+          style={{ color: 'rgba(255,255,255,0.4)' }}>{t.goalsLabel}</p>
+        <GoalButtons goal={goal} onChange={setGoal} goalOptions={t.goalOptions} />
       </div>
 
       <div className="flex items-center justify-between pt-1">
@@ -285,13 +266,13 @@ export default function BMISection() {
           style={{ color: 'rgba(255,255,255,0.35)' }}
           onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
           onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}>
-          CLEAR
+          {t.clearBtn}
         </button>
         <button onClick={handleCalculate}
           className="rounded-lg px-6 sm:px-8 py-3 text-[11px] font-bold uppercase tracking-widest bg-black text-white transition-colors cursor-pointer"
           onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#E6FF2B'; e.currentTarget.style.color = '#000'; }}
           onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#000';    e.currentTarget.style.color = '#fff'; }}>
-          CALCULATE
+          {t.calculateCalcBtn}
         </button>
       </div>
     </div>
@@ -300,9 +281,8 @@ export default function BMISection() {
   // ── Results ───────────────────────────────────────────────────────────────────
   const ResultContent = result ? (
     <div className="py-6 sm:py-8">
-      <p className="text-sm text-zinc-500 mb-3">Your Result</p>
+      <p className="text-sm text-zinc-500 mb-3">{t.yourResultText}</p>
 
-      {/* Kcal + Macros — stack on narrow, row on wider panels */}
       <div className="flex flex-col sm:flex-row items-start gap-5 mb-6">
         <div className="shrink-0">
           <p className="font-extrabold leading-none text-zinc-950"
@@ -311,18 +291,18 @@ export default function BMISection() {
           </p>
           <p className="mt-2 leading-relaxed text-[14px] sm:text-[16px]"
             style={{ fontFamily: 'Roboto, sans-serif', color: 'rgba(113,113,122,1)' }}>
-            Suggested amount of calories<br /><strong className="text-zinc-700">per day</strong>.
+            {t.suggestedCaloriesText}<br /><strong className="text-zinc-700">{t.perDayText}</strong>.
           </p>
         </div>
         <div className="flex-1 w-full">
           <p className="text-[11px] font-extrabold uppercase tracking-widest text-zinc-950 mb-2 pb-2 border-b border-zinc-200">
-            MACRONUTRIENTS
+            {t.macrosLabel}
           </p>
           <div className="space-y-2 pt-1">
             {[
-              { label: 'Carbohydrate', g: dynCarbs,   pct: carbPct },
-              { label: 'Protein',      g: dynProtein,  pct: protPct },
-              { label: 'Fat',          g: dynFat,      pct: fatPct  },
+              { label: t.carbLabel,         g: dynCarbs,   pct: carbPct },
+              { label: t.proteinMacroLabel, g: dynProtein,  pct: protPct },
+              { label: t.fatLabel,          g: dynFat,      pct: fatPct  },
             ].map(m => (
               <div key={m.label} className="flex justify-between text-[14px] sm:text-[16px]"
                 style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -337,29 +317,31 @@ export default function BMISection() {
         </div>
       </div>
 
-      {/* Meal tabs — 2-col on xs, 4-col from sm */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
         {(['day', '3', '4', '5'] as const).map(v => (
           <button key={v} onClick={() => setMealView(v)}
             className="py-3 rounded-lg text-[10px] font-bold uppercase tracking-widest cursor-pointer transition-colors"
             style={{ backgroundColor: mealView === v ? '#111' : '#f3f3f3', color: mealView === v ? '#fff' : '#888' }}>
-            {v === 'day' ? 'Per Day' : `${v} Meals`}
+            {v === 'day' ? t.perDayOption : `${v} ${t.mealsText}`}
           </button>
         ))}
       </div>
 
-      {/* Adjust Protein */}
       <div className="mb-5 border-t border-zinc-100 pt-5">
         <p className="text-[11px] font-extrabold uppercase tracking-widest text-zinc-950 mb-3">
-          Adjust Protein
+          {t.adjustProteinLabel}
         </p>
-        <ProteinSlider value={proteinLevel} onChange={setProteinLevel} />
+        <ProteinSlider
+          value={proteinLevel}
+          onChange={setProteinLevel}
+          proteinLevelLabels={t.proteinLevelLabels}
+          proteinTip={t.proteinTipText}
+        />
       </div>
 
-      {/* Suggested Programs */}
       <div className="border-t border-zinc-100 pt-5">
         <p className="text-[11px] font-extrabold uppercase tracking-widest text-zinc-950 mb-4">
-          Suggested Programs
+          {t.suggestedProgramsLabel}
         </p>
         <div className="flex items-center gap-3">
           {suggested.map((p, i) => (
@@ -388,13 +370,13 @@ export default function BMISection() {
       <div className="mt-6 flex items-center justify-between">
         <button onClick={handleClear}
           className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer">
-          ← Recalculate
+          {t.recalculateText}
         </button>
         <a
           href={`/results?kcal=${result.kcal}&goal=${goal}&weight=${weight}`}
           className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-zinc-950 hover:text-[#111] transition-colors cursor-pointer"
         >
-          Full Plan →
+          {t.fullPlanText}
         </a>
       </div>
     </div>
@@ -415,11 +397,11 @@ export default function BMISection() {
           <Gauge size={36} strokeWidth={1.5} color="#1a1a1a" className="mb-5" />
           <h2 className="font-extrabold uppercase leading-tight text-zinc-950 mb-4"
             style={{ fontSize: 'clamp(2rem,10vw,3rem)' }}>
-            CALORIES<br />CALCULATOR
+            {t.caloriesHeadingL1}<br />{t.caloriesHeadingL2}
           </h2>
           <p className="leading-relaxed max-w-sm"
             style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: 'rgba(0,0,0,0.5)' }}>
-            Calculate your daily calorie needs and optimal macronutrient ratios. Enter your age, height, weight, gender, and activity level.
+            {t.caloriesDesc}
           </p>
         </motion.div>
 
@@ -448,7 +430,6 @@ export default function BMISection() {
       {/* ── Desktop (md+) ────────────────────────────────────────────────────── */}
       <div className="hidden md:block relative overflow-hidden" style={{ minHeight: 'clamp(620px,85vh,780px)' }}>
 
-        {/* Intro — left half, default state */}
         <AnimatePresence>
           {!result && (
             <motion.div key="intro"
@@ -459,18 +440,17 @@ export default function BMISection() {
               <Gauge size={48} strokeWidth={1.2} color="#1a1a1a" className="mb-8" />
               <h2 className="font-extrabold uppercase tracking-tight text-zinc-950 mb-6 leading-[0.9]"
                 style={{ fontSize: 'clamp(2.4rem,4vw,5.5rem)' }}>
-                CALORIES<br />CALCULATOR
+                {t.caloriesHeadingL1}<br />{t.caloriesHeadingL2}
               </h2>
               <p className="leading-relaxed mb-8"
                 style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: 'rgba(0,0,0,0.5)', maxWidth: '280px' }}>
-                Calculate your daily calorie needs and optimal macronutrient ratios. Enter your age, height, weight, gender, and activity level.
+                {t.caloriesDesc}
               </p>
               <span className="text-2xl" style={{ color: 'rgba(0,0,0,0.35)' }}>→</span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Results — right half, after calculate */}
         <AnimatePresence>
           {result && (
             <motion.div key="results"
@@ -483,7 +463,6 @@ export default function BMISection() {
           )}
         </AnimatePresence>
 
-        {/* Dark form panel — slides right → left */}
         <motion.div className="absolute top-0 h-full"
           style={{ width: '50%', left: '50%', backgroundColor: '#1a1a1a' }}
           animate={{ x: result ? '-100%' : '0%' }}

@@ -12,7 +12,6 @@ import {
 import { ReactLenis } from 'lenis/react';
 import { MapPin, Globe, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
@@ -612,10 +611,8 @@ function AreasPageContent() {
 
 export default function AreasContent() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <AreasPageContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <AreasPageContent />
+    </ReactLenis>
   );
 }

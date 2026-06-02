@@ -6,7 +6,6 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-
 import { ReactLenis } from 'lenis/react';
 import { ChevronRight, ShoppingBag } from 'lucide-react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import { supabaseBrowser } from '@/lib/supabase/browser';
 import type { Product } from '@/lib/types';
 
@@ -286,10 +285,8 @@ function MerchandiseContent() {
 
 export default function MerchandisePage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <MerchandiseContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <MerchandiseContent />
+    </ReactLenis>
   );
 }

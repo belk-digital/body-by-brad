@@ -6,8 +6,6 @@ import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
-
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import HeroSection from '@/components/sections/HeroSection';
@@ -54,7 +52,6 @@ export default function App() {
   }, []);
 
   return (
-    <LanguageProvider>
     <ReactLenis root>
       <div className="relative w-full bg-black overflow-x-hidden selection:bg-[#DFF994]/30 selection:text-[#DFF994]">
         <section className="relative h-dvh w-full overflow-hidden bg-black">
@@ -89,6 +86,5 @@ export default function App() {
         <Footer />
       </div>
     </ReactLenis>
-    </LanguageProvider>
   );
 }

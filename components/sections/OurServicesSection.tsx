@@ -63,9 +63,9 @@ export default function OurServicesSection() {
       gsap.set(imgs[2], { zIndex: 1 });
 
       gsap.set(title, { xPercent: -50, yPercent: -50, left: '50%', top: '55%', scale: 1, opacity: 1 });
-      gsap.set(texts[0], { opacity: 0, y: 0 });
-      gsap.set(texts[1], { opacity: 0, y: 18 });
-      gsap.set(texts[2], { opacity: 0, y: 18 });
+      gsap.set(texts[0], { opacity: 0, y: 0,  pointerEvents: 'none' });
+      gsap.set(texts[1], { opacity: 0, y: 18, pointerEvents: 'none' });
+      gsap.set(texts[2], { opacity: 0, y: 18, pointerEvents: 'none' });
 
       const tl = gsap.timeline();
       const toPos = (el: HTMLElement, p: PosState, at: number, dur = 1) =>
@@ -76,31 +76,47 @@ export default function OurServicesSection() {
           duration: dur, ease: 'none',
         }, at);
 
+      // Phase 0 → 1: title zooms out, card 1 enters
       tl.to(title, { scale: 2, y: '-35vh', duration: 0.75, ease: 'none' }, 0);
       tl.to(title, { opacity: 0, duration: 0.25, ease: 'none' }, 0.75);
-      toPos(imgs[0], POS.MAIN, 0.2, 0.8);
-      tl.to(texts[0], { opacity: 1, duration: 0.15, ease: 'none' }, 0.85);
+      toPos(imgs[0], POS.MAIN, 0.2, 0.9);
+      tl.to(texts[0], { opacity: 1, duration: 0.2, ease: 'none' }, 0.9);
+      tl.set(texts[0], { pointerEvents: 'auto' }, 0.9);
 
-      tl.set(imgs[1], { zIndex: 4 }, 1.5);
-      toPos(imgs[0], POS.PREV, 1);
-      toPos(imgs[1], POS.MAIN, 1);
-      toPos(imgs[2], POS.NEXT, 1);
-      tl.to(texts[0], { opacity: 0, y: -14, duration: 0.3, ease: 'none' }, 1.1);
-      tl.to(texts[1], { opacity: 1, y: 0,   duration: 0.3, ease: 'none' }, 1.7);
+      // Phase 1 → 2: hold — slow zoom on active image gives continuous feedback
+      tl.to(imgs[0], { scale: 1.04, duration: 1, ease: 'none' }, 1);
 
-      tl.set(imgs[2], { zIndex: 5 }, 2.5);
-      tl.to(imgs[0], { opacity: 0, duration: 0.4, ease: 'none' }, 2);
-      toPos(imgs[1], POS.PREV, 2);
-      toPos(imgs[2], POS.MAIN, 2);
-      tl.to(texts[1], { opacity: 0, y: -14, duration: 0.3, ease: 'none' }, 2.1);
-      tl.to(texts[2], { opacity: 1, y: 0,   duration: 0.3, ease: 'none' }, 2.7);
+      // Phase 2 → 3: card 2 enters
+      tl.set(texts[0], { pointerEvents: 'none' }, 2.0);
+      tl.set(imgs[1], { zIndex: 4 }, 2.0);
+      tl.to(imgs[0], { scale: 1, duration: 0.1, ease: 'none' }, 2.0);
+      toPos(imgs[0], POS.PREV, 2.0, 1.0);
+      toPos(imgs[1], POS.MAIN, 2.0, 1.0);
+      toPos(imgs[2], POS.NEXT, 2.0, 1.0);
+      tl.to(texts[0], { opacity: 0, y: -14, duration: 0.35, ease: 'none' }, 2.1);
+      tl.to(texts[1], { opacity: 1, y: 0,   duration: 0.35, ease: 'none' }, 2.8);
+      tl.set(texts[1], { pointerEvents: 'auto' }, 2.8);
+
+      // Phase 3 → 4: hold — slow zoom on card 2
+      tl.to(imgs[1], { scale: 1.04, duration: 1, ease: 'none' }, 3);
+
+      // Phase 4 → 5: card 3 enters
+      tl.set(texts[1], { pointerEvents: 'none' }, 4.0);
+      tl.set(imgs[2], { zIndex: 5 }, 4.0);
+      tl.to(imgs[1], { scale: 1, duration: 0.1, ease: 'none' }, 4.0);
+      tl.to(imgs[0], { opacity: 0, duration: 0.4, ease: 'none' }, 4.0);
+      toPos(imgs[1], POS.PREV, 4.0, 1.0);
+      toPos(imgs[2], POS.MAIN, 4.0, 1.0);
+      tl.to(texts[1], { opacity: 0, y: -14, duration: 0.35, ease: 'none' }, 4.1);
+      tl.to(texts[2], { opacity: 1, y: 0,   duration: 0.35, ease: 'none' }, 4.8);
+      tl.set(texts[2], { pointerEvents: 'auto' }, 4.8);
 
       ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: `+=${3 * window.innerHeight}`,
+        end: `+=${5 * window.innerHeight}`,
         pin: true,
-        scrub: 1.5,
+        scrub: 2,
         animation: tl,
       });
     }, sectionRef);
@@ -147,7 +163,7 @@ export default function OurServicesSection() {
                     {t.servicesSlides[i].heading}
                   </p>
                   <a
-                    href="#"
+                    href={slide.href ?? '#'}
                     className="w-fit text-sm font-semibold underline underline-offset-4 transition-colors uppercase"
                     style={{ color: 'rgba(26,26,26,0.6)' }}
                     onMouseEnter={e => (e.currentTarget.style.color = '#1A1A1A')}
@@ -207,7 +223,7 @@ export default function OurServicesSection() {
               {t.servicesSlides[i].heading}
             </p>
             <a
-              href="#"
+              href={slide.href ?? '#'}
               className="w-fit text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-60 uppercase"
               style={{ color: '#1A1A1A' }}
             >

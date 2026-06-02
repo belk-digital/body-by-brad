@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import { testimonialsData } from '@/lib/constants';
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider';
 import StairsPreloader from '@/components/StairsPreloader';
@@ -333,10 +332,8 @@ function ResultsPageContent() {
 
 export default function ResultsPage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <ResultsPageContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <ResultsPageContent />
+    </ReactLenis>
   );
 }

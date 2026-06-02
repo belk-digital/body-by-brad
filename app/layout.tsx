@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import ScrollBar from '@/components/ui/ScrollBar';
 import { CartProvider } from '@/lib/cart/CartContext';
 import { AuthProvider } from '@/lib/auth/AuthContext';
+import { LanguageProvider } from '@/lib/LanguageContext';
 import CartDrawer from '@/components/layout/CartDrawer';
 
 export const metadata: Metadata = {
@@ -35,13 +35,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body suppressHydrationWarning>
-        <AuthProvider>
-          <CartProvider>
-            <ScrollBar />
-            {children}
-            <CartDrawer />
-          </CartProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <CartProvider>
+              {children}
+              <CartDrawer />
+            </CartProvider>
+          </AuthProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

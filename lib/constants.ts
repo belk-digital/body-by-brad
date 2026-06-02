@@ -11,6 +11,15 @@ export const heroModelUrl =
 
 export const stairSteps = Array.from({ length: 9 });
 
+export const latestEventImages = [
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780318163/singles_couples_run_sponsored_by_good_views_tequila___Big_thank_you_to_saltymikesdeckbar_l4z9fv.jpg',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780318162/singles_couples_run_sponsored_by_good_views_tequila___Big_thank_you_to_saltymikesdeckbar_1_n6ofkx.jpg',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780318161/anyone_else_feeling_the_post_bridge_run_blues_1_ckfhx4.jpg',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780311283/Photo_Apr_28_2026_7_45_53_PM_slhtpk.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780311282/Photo_Apr_28_2026_6_50_48_PM_dpg8o8.webp',
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1780311653/608315322_17953619883051106_8749987046411868448_n_gfvmne.jpg',
+];
+
 export const bradImagePool = [
   'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1779378587/New_Project_2_zimcoc.webp',
   'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_800/v1779378588/New_Project_7_z0buwe.webp',
@@ -39,7 +48,6 @@ export const socialMenuItems = ['Instagram', 'YouTube', 'X', 'Facebook'];
 export const policyMenuItems = [
   'Privacy Policy',
   'Terms of Use',
-  'Client Agreement',
 ];
 
 export const STAGGER = 0.035;
@@ -76,25 +84,28 @@ export const merchItems = [
 
 export const serviceSlides = [
   {
-    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1200/v1780311283/Photo_Apr_28_2026_7_45_53_PM_slhtpk.webp',
     heading:
       'High-energy group bootcamps that build community, burn calories, and push limits.',
-    cta: 'View Upcoming Classes',
+    cta: 'View Upcoming Events',
     tagline: 'Move together',
+    href: '/events',
   },
   {
-    image: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1200/v1780318163/singles_couples_run_sponsored_by_good_views_tequila___Big_thank_you_to_saltymikesdeckbar_l4z9fv.jpg',
     heading:
       "Charleston's legendary Cooldown events — fitness, fun, and good vibes all in one.",
     cta: 'See Event Schedule',
     tagline: 'Train anywhere',
+    href: '/events#register',
   },
   {
-    image: 'https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_1200/v1780311282/Photo_Apr_28_2026_6_50_48_PM_dpg8o8.webp',
     heading:
       'Outdoor pop-up sessions and community challenges open to all fitness levels.',
     cta: 'Join the Community',
     tagline: 'Built for results',
+    href: '/register',
   },
 ];
 

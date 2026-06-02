@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView, useMotionValueEvent, useScroll, type Variants } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
@@ -318,10 +317,8 @@ function BlogContent() {
 
 export default function BlogPage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <BlogContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <BlogContent />
+    </ReactLenis>
   );
 }

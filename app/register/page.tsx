@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Dumbbell, CheckCircle2 } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -120,9 +119,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <div className="relative w-full min-h-screen font-satoshi bg-[#f5f4f3] overflow-x-hidden">
+    <ReactLenis root>
+      <div className="relative w-full min-h-screen font-satoshi bg-[#f5f4f3] overflow-x-hidden">
 
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
@@ -427,6 +425,5 @@ export default function RegisterPage() {
           <Footer />
         </div>
       </ReactLenis>
-    </LanguageProvider>
   );
 }

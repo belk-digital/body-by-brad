@@ -33,7 +33,6 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import CTASection from '@/components/sections/CTASection';
@@ -573,10 +572,8 @@ function ServiceDetailContent({ service }: { service: Service }) {
 
 export default function ServiceDetail({ service }: { service: Service }) {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <ServiceDetailContent service={service} />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <ServiceDetailContent service={service} />
+    </ReactLenis>
   );
 }

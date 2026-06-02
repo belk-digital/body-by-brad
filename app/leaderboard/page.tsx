@@ -7,7 +7,6 @@ import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useRef } from 'react';
 import { Dumbbell, Flame, TrendingUp, Activity, Trophy } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
-import { LanguageProvider } from '@/lib/LanguageContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
@@ -459,10 +458,8 @@ function LeaderboardContent() {
 
 export default function LeaderboardPage() {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <LeaderboardContent />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <LeaderboardContent />
+    </ReactLenis>
   );
 }

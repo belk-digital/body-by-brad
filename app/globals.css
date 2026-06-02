@@ -4,6 +4,16 @@
   font-family: 'Roboto', sans-serif;
 }
 
+@layer base {
+  p,
+  label,
+  li,
+  small {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+  }
+}
+
 html,
 body {
   height: 100%;
@@ -37,11 +47,28 @@ input[type=number] {
   appearance: textfield;
 }
 
-/* Hide native scrollbar — replaced by custom Framer Motion ScrollBar */
-::-webkit-scrollbar {
-  display: none;
+body {
+  --sb-track-color: #000000;
+  --sb-thumb-color: #e6ff2a;
+  --sb-size: 6px;
 }
 
-* {
-  scrollbar-width: none;
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 20px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 20px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 }

@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { HiArrowUpRight } from 'react-icons/hi2';
+import { useLanguage } from '@/lib/LanguageContext';
 
-const SUPPLEMENTS_URL = '#supplements-link'; // TODO: replace with your supplements website URL
+const SUPPLEMENTS_URL = 'https://shopmy.us/shop/bcarter123';
 
 const IMAGES = [
   {
@@ -20,9 +21,9 @@ const IMAGES = [
   },
 ];
 
-const TAGS = ['Protein', 'Creatine', 'Pre Workout', 'Electrolytes', 'Debloat', 'Fish Oil', 'Magnesium', 'Daily Nutrition'];
-
 export default function SupplementsSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="font-satoshi w-full bg-white py-20 md:py-28 px-4 sm:px-7 md:px-12 overflow-hidden">
       <div>
@@ -37,7 +38,7 @@ export default function SupplementsSection() {
               viewport={{ once: true, margin: '-10% 0px' }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
-              Recommended by Brad
+              {t.supplementsTagline}
             </motion.p>
 
             <div className="overflow-hidden">
@@ -48,7 +49,7 @@ export default function SupplementsSection() {
                 viewport={{ once: true, margin: '-10% 0px' }}
                 transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
               >
-                Fuel Your Gains
+                {t.supplementsHeading}
               </motion.h2>
             </div>
 
@@ -59,9 +60,7 @@ export default function SupplementsSection() {
               viewport={{ once: true, margin: '-10% 0px' }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
             >
-              Training hard is only half the equation. Fuel your body with supplements
-              Brad personally uses and recommends — quality products for performance,
-              recovery, and everyday health.
+              {t.supplementsDesc}
             </motion.p>
           </div>
 
@@ -88,7 +87,7 @@ export default function SupplementsSection() {
               variants={{ rest: { color: '#111827' }, hover: { color: '#ffffff' } }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
             >
-              Shop Supplements
+              {t.shopSupplements}
               <HiArrowUpRight size={14} />
             </motion.span>
           </motion.a>
@@ -111,7 +110,6 @@ export default function SupplementsSection() {
               whileHover="hover"
               animate="rest"
             >
-              {/* Image */}
               <motion.img
                 src={img.src}
                 alt={img.alt}
@@ -119,22 +117,16 @@ export default function SupplementsSection() {
                 variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               />
-
-              {/* Dark overlay on hover */}
               <motion.div
                 className="absolute inset-0 bg-black"
                 variants={{ rest: { opacity: 0 }, hover: { opacity: 0.25 } }}
                 transition={{ duration: 0.35 }}
               />
-
-              {/* Category badge */}
               <div className="absolute top-3 left-3 z-10">
                 <span className="bg-white/90 backdrop-blur-sm text-zinc-900 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-                  {TAGS[i]}
+                  {t.supplementsTags[i]}
                 </span>
               </div>
-
-              {/* Arrow icon on hover */}
               <motion.div
                 className="absolute bottom-4 right-4 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center"
                 variants={{ rest: { opacity: 0, scale: 0.8 }, hover: { opacity: 1, scale: 1 } }}
@@ -154,20 +146,18 @@ export default function SupplementsSection() {
           viewport={{ once: true, margin: '-5% 0px' }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
         >
-          {/* Mobile-only button */}
           <a
             href={SUPPLEMENTS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="sm:hidden flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-zinc-950 text-white text-sm font-semibold"
           >
-            Shop Supplements
+            {t.shopSupplements}
             <HiArrowUpRight size={14} />
           </a>
 
-          {/* Category tags */}
           <div className="flex flex-wrap gap-2">
-            {TAGS.slice(3).map((tag) => (
+            {t.supplementsTags.slice(3).map((tag) => (
               <a
                 key={tag}
                 href={SUPPLEMENTS_URL}

@@ -2,29 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import { logoUrl, socialMenuItems, policyMenuItems } from '@/lib/constants';
+import { logoUrl, socialMenuItems } from '@/lib/constants';
+import { useLanguage } from '@/lib/LanguageContext';
 import TextRoll from '@/components/ui/TextRoll';
 
-const NAV_COL_1 = ['About', 'Services', 'Packages', 'Events', 'Results'];
-const NAV_COL_2 = ['Blog', 'Merchandise', 'Areas We Serve', 'Contact', 'Register'];
-
-const navHref = (item: string): string => {
-  switch (item.toLowerCase()) {
-    case 'about':         return '/about';
-    case 'services':      return '/services';
-    case 'packages':      return '/packages';
-    case 'events':        return '/events';
-    case 'results':       return '/results';
-    case 'blog':          return '/blog';
-    case 'merchandise':   return '/merchandise';
-    case 'contact':       return '/contact';
-    case 'register':      return '/register';
-    case 'areas we serve': return '/areas-we-serve';
-    default:              return '#';
-  }
-};
-
 export default function Footer() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
   const brandRef = useRef<HTMLDivElement>(null);
   const [fitnessFontSize, setFitnessFontSize] = useState<number>(120);
@@ -83,7 +66,7 @@ export default function Footer() {
             </a>
             <div className="w-px self-stretch bg-white/25" />
             <p className="text-white text-base sm:text-lg md:text-xl font-semibold leading-snug max-w-[12rem] sm:max-w-xs">
-              Elite personal training &amp; outdoor fitness events in Charleston, SC.
+              {t.footerTagline}
             </p>
           </div>
 
@@ -103,8 +86,6 @@ export default function Footer() {
               </motion.a>
             ))}
           </div>
-
-          {/* Newsletter — hidden for now */}
         </motion.div>
 
         {/* Right — two-column nav */}
@@ -115,19 +96,19 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-0 self-start pt-2 md:pt-0 border-t border-white/15 md:border-t-0"
         >
-          {[NAV_COL_1, NAV_COL_2].map((col, ci) => (
+          {[t.footerNavCol1, t.footerNavCol2].map((col, ci) => (
             <div key={ci} className="flex flex-col">
               {col.map((item, i) => (
                 <motion.a
-                  key={item}
-                  href={navHref(item)}
+                  key={item.href}
+                  href={item.href}
                   initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: (ci * NAV_COL_1.length + i) * 0.04 }}
+                  transition={{ duration: 0.3, delay: (ci * t.footerNavCol1.length + i) * 0.04 }}
                   className="relative flex cursor-pointer overflow-visible text-sm text-white/60 hover:text-white py-2.5 border-b border-white/15 last:border-b-0"
                 >
-                  <TextRoll className="transition-colors uppercase tracking-wide">{item}</TextRoll>
+                  <TextRoll className="transition-colors uppercase tracking-wide">{item.label}</TextRoll>
                 </motion.a>
               ))}
             </div>
@@ -152,9 +133,9 @@ export default function Footer() {
       {/* Bottom bar — copyright + policy */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/15">
         <div className="flex flex-col items-center sm:items-start gap-1 text-xs text-white/50 text-center sm:text-left">
-          <p>&copy; {year} Body By Brad. All rights reserved.</p>
+          <p>&copy; {year} Body By Brad. {t.footerAllRights}</p>
           <p>
-            Designed and developed by{' '}
+            {t.footerDesignedBy}{' '}
             <a
               href="https://belkdigital.com"
               target="_blank"
@@ -166,13 +147,8 @@ export default function Footer() {
           </p>
         </div>
         <div className="flex flex-wrap justify-center sm:justify-end items-center gap-4 sm:gap-6">
-          {policyMenuItems.map((p) => {
-            const lower = p.toLowerCase();
-            const href =
-              lower.includes('privacy')   ? '/privacy-policy' :
-              lower.includes('terms')     ? '/terms' :
-              lower.includes('agreement') ? '/terms' :
-              '#';
+          {t.policyItems.map((p, i) => {
+            const href = i === 0 ? '/privacy-policy' : '/terms';
             return (
               <a key={p} href={href} className="text-white/50 text-xs hover:text-white transition-colors">
                 {p}

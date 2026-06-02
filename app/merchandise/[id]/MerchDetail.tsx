@@ -6,7 +6,6 @@ import { motion, useMotionValueEvent, useScroll, AnimatePresence } from 'framer-
 import { ReactLenis } from 'lenis/react';
 import { ShoppingCart, ChevronLeft, Check } from 'lucide-react';
 
-import { LanguageProvider } from '@/lib/LanguageContext';
 import { useCart } from '@/lib/cart/CartContext';
 import type { Product } from '@/lib/types';
 
@@ -343,10 +342,8 @@ function DetailContent({ product }: { product: Product }) {
 
 export default function MerchDetail({ product }: { product: Product }) {
   return (
-    <LanguageProvider>
-      <ReactLenis root>
-        <DetailContent product={product} />
-      </ReactLenis>
-    </LanguageProvider>
+    <ReactLenis root>
+      <DetailContent product={product} />
+    </ReactLenis>
   );
 }
