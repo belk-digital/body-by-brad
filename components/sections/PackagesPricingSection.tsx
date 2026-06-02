@@ -12,6 +12,7 @@ const PLANS = [
   {
     label: 'FOUNDATION',
     price: 50,
+    billing: 'one-time',
     tagline: 'Redefine Your Routine',
     image:
       'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=80',
@@ -29,6 +30,7 @@ const PLANS = [
   {
     label: 'PERFORMANCE',
     price: 250,
+    billing: 'recurring',
     tagline: 'Elevate Your Routine',
     image:
       'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=700&q=80',
@@ -49,12 +51,14 @@ const PLANS = [
   {
     label: 'ELITE',
     price: 500,
+    billing: 'recurring',
     tagline: 'Life Changing Routine',
     image:
       'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=700&q=80',
     isAccent: false,
     features: [
       'Everything in Performance',
+      'FaceTime Calls with Bradley Directly',
       'Concierge Coaching',
       'Daily Communication',
       'Same-Day Modifications',
@@ -68,7 +72,7 @@ const PLANS = [
   },
 ];
 
-type Plan = (typeof PLANS)[0];
+type Plan = (typeof PLANS)[number];
 
 function PlanCard({ plan, delay = 0 }: { plan: Plan; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -117,7 +121,7 @@ function PlanCard({ plan, delay = 0 }: { plan: Plan; delay?: number }) {
             ${plan.price}
           </span>
           <span className="mb-1 text-xs font-semibold" style={{ color: textMuted }}>
-            /month
+            {plan.billing === 'one-time' ? 'one-time' : '/month'}
           </span>
         </div>
 
@@ -246,7 +250,7 @@ export default function PackagesPricingSection() {
             className="font-extrabold uppercase leading-[1.0] tracking-tight text-white
                        text-[clamp(2rem,4.5vw,4.5rem)]"
           >
-            EXCLUSIVE GYM
+            EXCLUSIVE ONLINE
             <br />
             PACKAGES
           </motion.h2>
@@ -313,7 +317,7 @@ function EliteCard({ plan }: { plan: Plan }) {
             ${plan.price}
           </span>
           <span className="mb-1 text-xs font-semibold" style={{ color: textMuted }}>
-            /month
+            {plan.billing === 'one-time' ? 'one-time' : '/month'}
           </span>
         </div>
 

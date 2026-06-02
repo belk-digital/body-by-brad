@@ -20,7 +20,7 @@ const IMAGES = [
   },
 ];
 
-const TAGS = ['Protein', 'Pre-Workout', 'Creatine', 'Vitamins', 'Fat Burners', 'Recovery'];
+const TAGS = ['Protein', 'Creatine', 'Pre Workout', 'Electrolytes', 'Debloat', 'Fish Oil', 'Magnesium', 'Daily Nutrition'];
 
 export default function SupplementsSection() {
   return (

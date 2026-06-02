@@ -60,19 +60,19 @@ const TICKER_ITEMS = ['HIGHLIGHTS', 'PUSHING LIMITS', 'CHASING GOALS', 'BBB EVEN
 const TICKER_DOUBLED = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
 const UPCOMING_EVENTS = [
-  { title: 'Summer Cooldown 2026 Now Open',   desc: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed.',       href: '#' },
-  { title: 'BBB Outdoor HIIT – July Edition', desc: 'High-intensity interval training on the waterfront. Push your limits with Coach Brad and the BBB community.', href: '#' },
-  { title: 'Sunset Bootcamp at Folly Beach',  desc: 'End your summer with an unforgettable beachside bootcamp. Register early — spots are limited.',                href: '#' },
+  { title: "Let's Run CHS – Body By Brad Events",  desc: "Join Charleston's legendary run club Let's Run CHS for weekly community runs powered by Body By Brad. All paces welcome.", href: '#' },
+  { title: 'Body By Brad Events – Summer 2026',    desc: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed.',                    href: '#' },
+  { title: 'BBB Outdoor HIIT – July Edition',      desc: 'High-intensity interval training on the waterfront. Push your limits with Coach Brad and the BBB community.',            href: '#' },
 ];
 
 const CALENDAR_EVENTS: CalendarEvent[] = [
-  { id: 'ce-1', title: 'Summer Cooldown 2026',        date: '2026-08-15', time: '8:45 AM',  endTime: '10:30 AM', location: 'Marion Square, Charleston SC',    description: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed. Bring water and a great attitude.', type: 'workout',   href: '/register',     spots: 80, spotsLeft: 23 },
+  { id: 'ce-1', title: 'Body By Brad Events 2026',    date: '2026-08-15', time: '8:45 AM',  endTime: '10:30 AM', location: 'Marion Square, Charleston SC',    description: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed. Bring water and a great attitude.', type: 'workout',   href: '/register',     spots: 80, spotsLeft: 23 },
   { id: 'ce-2', title: 'BBB Outdoor HIIT – July',     date: '2026-07-12', time: '7:00 AM',  endTime: '8:15 AM',  location: 'Waterfront Park, Charleston SC', description: 'High-intensity interval training on the waterfront. Push your limits with Coach Brad and the BBB community.',                            type: 'hiit',      href: '/register',     spots: 40, spotsLeft: 11 },
   { id: 'ce-3', title: 'Sunset Bootcamp at Folly',    date: '2026-09-06', time: '6:00 PM',  endTime: '7:30 PM',  location: 'Folly Beach, SC',                description: 'End your summer with an unforgettable beachside bootcamp. Register early — spots are very limited.',                                       type: 'bootcamp',  href: '/register',     spots: 30, spotsLeft: 7  },
   { id: 'ce-4', title: 'BBB Community Run Club',      date: '2026-07-26', time: '6:30 AM',                       location: 'Battery Park, Charleston SC',     description: 'A laid-back group run through the historic streets of Charleston. All paces welcome — finish with coffee on us.',                         type: 'community', href: '/register',     spots: 60, spotsLeft: 34 },
   { id: 'ce-5', title: 'BBB Merch Drop — Summer',     date: '2026-08-01', time: '12:00 PM',                      location: 'Online & In-Person Pop-Up',       description: 'Limited summer merch drop. In-person pop-up at the studio plus simultaneous online release. Quantities strictly limited.',               type: 'merch',     href: '/merchandise'                       },
   { id: 'ce-6', title: 'Morning Mobility & Stretch',  date: '2026-06-21', time: '8:00 AM',  endTime: '9:00 AM',  location: 'Hampton Park, Charleston SC',     description: 'Kickstart your summer solstice with a deep stretch and mobility flow led by Coach Brad. Free and open to all.',                         type: 'workout',   href: '/register',     spots: 50, spotsLeft: 38 },
-  { id: 'ce-7', title: 'BBB HIIT & Chill – August',   date: '2026-08-15', time: '11:00 AM', endTime: '12:00 PM', location: 'Marion Square, Charleston SC',    description: 'Second session of the day — a shorter, high-energy HIIT block after the morning Cooldown event.',                                      type: 'hiit',      href: '/register',     spots: 40, spotsLeft: 18 },
+  { id: 'ce-7', title: 'BBB HIIT & Chill – August',   date: '2026-08-15', time: '11:00 AM', endTime: '12:00 PM', location: 'Marion Square, Charleston SC',    description: 'Second session of the day — a shorter, high-energy HIIT block after the morning Body By Brad Events workout.',                          type: 'hiit',      href: '/register',     spots: 40, spotsLeft: 18 },
 ];
 
 // ─── Isolated components ─────────────────────────────────────────────────────
@@ -376,7 +376,7 @@ export default function EventsPage() {
                 <div className="bg-[#E6FF2B] rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col justify-between min-h-[260px] sm:min-h-72 md:min-h-0">
                   <div>
                     <h2 className="text-zinc-950 font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-tight mb-2 sm:mb-3 uppercase">
-                      Charleston Cooldown<br />2026
+                      Body By Brad<br />Events 2026
                     </h2>
                     <p className="text-zinc-500 text-xs md:text-sm leading-relaxed max-w-xs">
                       Embark on the ultimate outdoor fitness experience — where every rep is a journey of community and self&#8209;discovery.
@@ -460,12 +460,12 @@ export default function EventsPage() {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 className="relative rounded-xl overflow-hidden mb-12 md:mb-20 min-h-[260px] sm:min-h-[360px] md:min-h-[480px]"
               >
-                <img src={HERO_IMAGES[0].src} alt="Summer Cooldown 2026" className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+                <img src={HERO_IMAGES[0].src} alt="Body By Brad Events 2026" className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/15" />
                 <div className="relative z-10 flex flex-col justify-between p-5 sm:p-7 md:p-10 min-h-[260px] sm:min-h-[360px] md:min-h-[480px]">
                   <div className="flex items-center gap-2 sm:gap-3">
                     <span className="bg-[#E6FF2B] text-black text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.18em] px-2.5 sm:px-3 py-1.5 rounded-sm">Featured</span>
-                    <span className="text-white/50 text-[10px] font-bold uppercase tracking-[0.2em] hidden sm:block">Summer Cooldown 2026</span>
+                    <span className="text-white/50 text-[10px] font-bold uppercase tracking-[0.2em] hidden sm:block">Body By Brad Events 2026</span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                     <div>
@@ -536,7 +536,7 @@ export default function EventsPage() {
                   {([
                     { date: 'JUN 21, 2026', title: 'Morning Mobility & Stretch', tagline: 'Kickstart your summer with a deep stretch and mobility flow.', location: 'Hampton Park, Charleston SC', time: '8:00 AM – 9:00 AM', spots: '50 spots', type: 'Free Admission', image: EVENT_IMAGES[5].src, featured: false },
                     { date: 'JUL 12, 2026', title: 'BBB Outdoor HIIT',           tagline: 'Push your limits with Coach Brad and the BBB community.',       location: 'Waterfront Park, Charleston SC', time: '7:00 AM – 8:15 AM', spots: '40 spots', type: 'Free Admission', image: EVENT_IMAGES[1].src, featured: false },
-                    { date: 'AUG 15, 2026', title: 'Summer Cooldown 2026',        tagline: 'Marion Square comes alive — the biggest BBB event of the year.', location: 'Marion Square, Charleston SC',  time: '8:45 AM – 10:30 AM', spots: '80 spots', type: 'Free Admission', image: HERO_IMAGES[0].src, featured: true  },
+                    { date: 'AUG 15, 2026', title: 'Body By Brad Events 2026',    tagline: 'Marion Square comes alive — the biggest BBB event of the year.', location: 'Marion Square, Charleston SC',  time: '8:45 AM – 10:30 AM', spots: '80 spots', type: 'Free Admission', image: HERO_IMAGES[0].src, featured: true  },
                   ] as const).map((ev, i) => {
                     const cardBg      = ev.featured ? '#E6FF2B' : '#252525';
                     const textPrimary = ev.featured ? '#09090b' : '#ffffff';

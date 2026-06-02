@@ -34,16 +34,39 @@ function AuthSlot({ theme }: { theme: 'light' | 'dark' }) {
 
 // ─── MenuOverlay ────────────────────────────────────────────────────────────
 
-function MenuOverlay() {
+function MenuOverlay({ onClose }: { onClose: () => void }) {
   const { lang, setLang, t } = useLanguage();
   return (
     <motion.div
-      className="font-satoshi fixed inset-0 z-50 overflow-hidden bg-[#1a1a1a] text-white"
+      className="font-satoshi fixed inset-0 overflow-hidden bg-[#1a1a1a] text-white"
+      style={{ zIndex: 70 }}
       initial={{ y: '-100%' }}
       animate={{ y: 0 }}
       exit={{ y: '-100%' }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
     >
+      {/* Close button — matches hero navbar position */}
+      <div className="absolute top-5 left-4 sm:top-7 sm:left-7 md:top-9 md:left-12 z-20 flex items-center gap-2 sm:gap-3">
+        <HamburgerMenu
+          checked={true}
+          onToggle={onClose}
+          size={42}
+          strokeWidth={2.2}
+          strokeColor="#FFFFFF"
+        />
+        <motion.button
+          type="button"
+          className="text-sm font-semibold sm:text-base text-white"
+          onClick={onClose}
+          initial={{ opacity: 0, x: -8 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -8 }}
+          transition={{ duration: 0.25 }}
+        >
+          Close
+        </motion.button>
+      </div>
+
       {/* Mobile language switcher - top left */}
       <motion.div
         className="absolute top-24 left-4 sm:hidden z-10"
@@ -171,7 +194,7 @@ function MenuOverlay() {
                   {t.latestEvents}
                 </p>
                 <p className="font-extrabold uppercase tracking-tight text-black leading-[0.95] text-lg">
-                  Cooldown<br />Events
+                  Body By Brad<br />Events
                 </p>
               </div>
               <div className="flex items-center gap-2 mt-4">
@@ -189,7 +212,7 @@ function MenuOverlay() {
               <div className="w-full overflow-hidden rounded-xl">
                 <img
                   src="https://res.cloudinary.com/dgrrovta3/image/upload/v1779049650/SaveClip.App_681681765_18028795517771345_8290600577097476417_n_xgbtih.jpg"
-                  alt="Cooldown Event"
+                  alt="Body By Brad Events"
                   className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   draggable={false}
                 />
@@ -288,7 +311,7 @@ export default function Navbar({
   return (
     <>
       <AnimatePresence>
-        {!isLoading && isMenuOpen && <MenuOverlay />}
+        {!isLoading && isMenuOpen && <MenuOverlay onClose={() => onMenuToggle(false)} />}
       </AnimatePresence>
 
       {/* Hero navbar — absolute, slides down after loading */}
@@ -361,9 +384,9 @@ export default function Navbar({
         </div>
       </motion.nav>
 
-      {/* Floating navbar — slides in from top when scrolling upward */}
+      {/* Floating navbar — slides in from top when scrolling upward, hidden when menu is open */}
       <AnimatePresence>
-        {!isLoading && isScrolled && (
+        {!isLoading && isScrolled && !isMenuOpen && (
           <motion.nav
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
