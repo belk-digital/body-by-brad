@@ -155,7 +155,15 @@ export default function ServicesGridSection() {
             style={{ backgroundColor: CARD_BG, gridColumn: '1', gridRow: '1 / span 2' }}
           >
             {iconBox(CARD_ICONS[0])}
-            <div className="flex-1" />
+            <div className="relative my-4 flex-1 min-h-0 overflow-hidden rounded-xl">
+              <img
+                src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=600&q=80"
+                alt="Online Fitness Training"
+                className="absolute inset-0 h-full w-full object-cover object-top"
+                loading="lazy"
+                draggable={false}
+              />
+            </div>
             <h3 className="mb-2 font-bold uppercase text-white text-[20px]" style={{ fontFamily: 'Unbounded, sans-serif' }}>
               {t.servicesGridCards[0].title}
             </h3>

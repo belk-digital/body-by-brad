@@ -10,6 +10,7 @@ import {
   type Variants,
 } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
+import Link from 'next/link';
 import { MapPin, Globe, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 import StairsPreloader from '@/components/StairsPreloader';
@@ -17,6 +18,7 @@ import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import Footer from '@/components/layout/Footer';
+import { AREAS_DATA, type AreaData } from '@/lib/areas-data';
 
 const AREAS_FAQ = [
   {
@@ -50,114 +52,6 @@ const AREAS_FAQ = [
 const ACCENT = '#E6FF2B';
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-type Area = {
-  name: string;
-  sub: string;
-  distance: string;
-  inPerson: boolean;
-  desc: string;
-};
-
-const AREAS: Area[] = [
-  {
-    name: 'Charleston',
-    sub: 'Downtown & Peninsula',
-    distance: 'Home Base',
-    inPerson: true,
-    desc: "Brad's primary training location. All services — elite 1-on-1, group classes, and full online coaching — are available.",
-  },
-  {
-    name: 'Mount Pleasant',
-    sub: 'East Cooper',
-    distance: '7 mi',
-    inPerson: true,
-    desc: 'One of Charleston\'s fastest-growing communities. In-person sessions and online coaching both available.',
-  },
-  {
-    name: 'North Charleston',
-    sub: 'Greater Charleston',
-    distance: '5 mi',
-    inPerson: true,
-    desc: 'In-person training and all online programs fully available to North Charleston residents.',
-  },
-  {
-    name: 'West Ashley',
-    sub: 'West of the Ashley River',
-    distance: '5 mi',
-    inPerson: true,
-    desc: 'Just across the Ashley River from downtown. In-person sessions and online coaching available.',
-  },
-  {
-    name: 'James Island',
-    sub: 'Greater Charleston',
-    distance: '6 mi',
-    inPerson: true,
-    desc: 'In-person and online programs fully available to James Island residents and surrounding areas.',
-  },
-  {
-    name: 'Daniel Island',
-    sub: 'Berkeley County',
-    distance: '9 mi',
-    inPerson: true,
-    desc: 'In-person training sessions and complete online coaching programs available.',
-  },
-  {
-    name: 'Johns Island',
-    sub: 'Greater Charleston',
-    distance: '12 mi',
-    inPerson: true,
-    desc: 'In-person training and full online coaching available to Johns Island residents.',
-  },
-  {
-    name: 'Summerville',
-    sub: 'Dorchester County',
-    distance: '24 mi',
-    inPerson: true,
-    desc: 'In-person training by arrangement. Full online coaching programs available to all Summerville residents.',
-  },
-  {
-    name: 'Goose Creek',
-    sub: 'Berkeley County',
-    distance: '18 mi',
-    inPerson: false,
-    desc: 'Complete online coaching and remote training programs available to Goose Creek residents.',
-  },
-  {
-    name: 'Hanahan',
-    sub: 'Berkeley County',
-    distance: '12 mi',
-    inPerson: true,
-    desc: 'In-person training and full online programs available to Hanahan residents.',
-  },
-  {
-    name: 'Isle of Palms',
-    sub: 'Barrier Islands',
-    distance: '18 mi',
-    inPerson: false,
-    desc: 'Online coaching and complete remote training programs available to IOP residents.',
-  },
-  {
-    name: "Sullivan's Island",
-    sub: 'Barrier Islands',
-    distance: '15 mi',
-    inPerson: false,
-    desc: 'Full online coaching and remote program delivery available.',
-  },
-  {
-    name: 'Folly Beach',
-    sub: 'Greater Charleston',
-    distance: '12 mi',
-    inPerson: true,
-    desc: 'In-person training and online coaching available to Folly Beach residents.',
-  },
-  {
-    name: 'Ladson',
-    sub: 'Berkeley & Dorchester',
-    distance: '20 mi',
-    inPerson: false,
-    desc: 'Full online coaching and remote training programs available.',
-  },
-];
 
 const ONLINE_PERKS = [
   'Custom program built for your schedule and equipment',
@@ -169,22 +63,24 @@ const ONLINE_PERKS = [
 
 // ── Area Card ─────────────────────────────────────────────────────────────────
 
-function AreaCard({ area, delay }: { area: Area; delay: number }) {
+function AreaCard({ area, delay }: { area: AreaData; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-6% 0px' });
 
   return (
+    <Link href={`/areas-we-serve/${area.slug}`} className="block">
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
       transition={{ duration: 0.65, ease, delay }}
-      className="group flex flex-col gap-4 rounded-2xl border border-zinc-100 bg-white p-6 transition-shadow duration-300 hover:shadow-md"
+      className="group flex flex-col gap-4 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20 hover:shadow-lg cursor-pointer"
+      style={{ backgroundColor: '#191919' }}
     >
       {/* Top row */}
       <div className="flex items-start justify-between gap-3">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-zinc-50">
-          <MapPin size={16} color={area.inPerson ? '#1a1a1a' : '#a1a1aa'} />
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10">
+          <MapPin size={16} color={area.inPerson ? ACCENT : '#52525b'} />
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
@@ -193,14 +89,14 @@ function AreaCard({ area, delay }: { area: Area; delay: number }) {
             style={
               area.inPerson
                 ? { backgroundColor: ACCENT, color: '#1a1a1a' }
-                : { backgroundColor: '#f4f4f5', color: '#71717a' }
+                : { backgroundColor: '#2a2a2a', color: '#71717a' }
             }
           >
             {area.inPerson ? 'In-Person' : 'Online Only'}
           </span>
 
           {area.inPerson && (
-            <span className="inline-flex items-center rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-500">
+            <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400" style={{ backgroundColor: '#2a2a2a' }}>
               + Online
             </span>
           )}
@@ -210,37 +106,38 @@ function AreaCard({ area, delay }: { area: Area; delay: number }) {
       {/* Name + sub */}
       <div>
         <h3
-          className="font-bold uppercase text-zinc-900 text-[17px] leading-tight"
+          className="font-bold uppercase text-white text-[17px] leading-tight"
           style={{ fontFamily: 'Unbounded, sans-serif' }}
         >
           {area.name}
         </h3>
-        <p className="mt-1 text-[12px] font-medium uppercase tracking-wider text-zinc-400">
+        <p className="mt-1 text-[12px] font-medium uppercase tracking-wider text-zinc-500">
           {area.sub}
         </p>
       </div>
 
       {/* Description */}
       <p
-        className="text-[13px] leading-relaxed text-zinc-500"
+        className="text-[13px] leading-relaxed text-zinc-400"
         style={{ fontFamily: 'Roboto, sans-serif' }}
       >
         {area.desc}
       </p>
 
       {/* Distance chip */}
-      <div className="mt-auto pt-2 border-t border-zinc-50 flex items-center justify-between">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-300">
+      <div className="mt-auto pt-2 border-t border-white/10 flex items-center justify-between">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-600">
           Distance from Charleston
         </span>
         <span
           className="text-[12px] font-bold uppercase tracking-wider"
-          style={{ fontFamily: 'Unbounded, sans-serif', color: area.distance === 'Home Base' ? '#1a1a1a' : '#a1a1aa' }}
+          style={{ fontFamily: 'Unbounded, sans-serif', color: area.distance === 'Home Base' ? ACCENT : '#71717a' }}
         >
           {area.distance}
         </span>
       </div>
     </motion.div>
+    </Link>
   );
 }
 
@@ -278,8 +175,8 @@ function AreasPageContent() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease } },
   };
 
-  const inPerson = AREAS.filter((a) => a.inPerson);
-  const onlineOnly = AREAS.filter((a) => !a.inPerson);
+  const inPerson = AREAS_DATA.filter((a) => a.inPerson);
+  const onlineOnly = AREAS_DATA.filter((a) => !a.inPerson);
 
   return (
     <div className="relative w-full font-satoshi overflow-x-hidden bg-[#F7F7F5]">
