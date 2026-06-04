@@ -23,16 +23,16 @@ const HEAR_OPTIONS = ['Instagram', 'Facebook', 'YouTube', 'Friend / Referral', '
 const BRING_ITEMS = ['Water bottle', 'Athletic shoes', 'Comfortable workout gear', 'Sunscreen & hat', 'Positive energy!'];
 
 type FormState = {
-  firstName: string; lastName: string; email: string; phone: string;
+  firstName: string; lastName: string; email: string;
   event: string; fitnessLevel: string; heardFrom: string;
-  emergencyName: string; emergencyPhone: string;
+  emergencyName: string;
   notes: string; agreed: boolean;
 };
 
 const EMPTY: FormState = {
-  firstName: '', lastName: '', email: '', phone: '',
+  firstName: '', lastName: '', email: '',
   event: '', fitnessLevel: '', heardFrom: '',
-  emergencyName: '', emergencyPhone: '', notes: '', agreed: false,
+  emergencyName: '', notes: '', agreed: false,
 };
 
 const inputCls =
@@ -99,11 +99,9 @@ export default function RegisterPage() {
     if (!form.lastName.trim())       e.lastName       = 'Required';
     if (!form.email.trim())          e.email          = 'Required';
     else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Invalid email';
-    if (!form.phone.trim())          e.phone          = 'Required';
     if (!form.event)                 e.event          = 'Please select an event';
     if (!form.fitnessLevel)          e.fitnessLevel   = 'Please select a level';
     if (!form.emergencyName.trim())  e.emergencyName  = 'Required';
-    if (!form.emergencyPhone.trim()) e.emergencyPhone = 'Required';
     if (!form.agreed)                e.agreed         = 'You must agree to continue';
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -234,9 +232,6 @@ export default function RegisterPage() {
                         <Field label="Email Address" required error={errors.email}>
                           <input type="email" placeholder="john@example.com" value={form.email} onChange={set('email')} className={inputCls} />
                         </Field>
-                        <Field label="Phone Number" required error={errors.phone}>
-                          <input type="tel" placeholder="+1 (555) 000-0000" value={form.phone} onChange={set('phone')} className={inputCls} />
-                        </Field>
                       </div>
                     </div>
 
@@ -280,9 +275,6 @@ export default function RegisterPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <Field label="Contact Name" required error={errors.emergencyName}>
                           <input type="text" placeholder="Jane Doe" value={form.emergencyName} onChange={set('emergencyName')} className={inputCls} />
-                        </Field>
-                        <Field label="Contact Phone" required error={errors.emergencyPhone}>
-                          <input type="tel" placeholder="+1 (555) 000-0000" value={form.emergencyPhone} onChange={set('emergencyPhone')} className={inputCls} />
                         </Field>
                       </div>
                     </div>

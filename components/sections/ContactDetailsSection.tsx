@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const SC_MAP_EMBED =
@@ -29,12 +29,6 @@ export default function ContactDetailsSection() {
       value: t.contactEmailValue,
       label: t.contactEmailLabel,
       href: `mailto:${t.contactEmailValue}`,
-    },
-    {
-      Icon: Phone,
-      value: t.contactPhoneNumber,
-      label: t.contactPhoneLabel,
-      href: `tel:${t.contactPhoneNumber.replace(/[\s()+-]/g, '')}`,
     },
     {
       Icon: MapPin,

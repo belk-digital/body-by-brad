@@ -34,7 +34,7 @@ function PrivacyContent() {
         <PolicySection title="1. Information We Collect">
           <p>We collect information you provide directly to us, including:</p>
           <ul className="list-disc pl-5 space-y-1.5">
-            <li>Name, email address, and phone number when you register or contact us</li>
+            <li>Name and email address when you register or contact us</li>
             <li>Billing and payment information processed securely through Stripe</li>
             <li>Health and fitness data you voluntarily provide (age, weight, height, fitness goals)</li>
             <li>Account credentials managed through our authentication provider</li>

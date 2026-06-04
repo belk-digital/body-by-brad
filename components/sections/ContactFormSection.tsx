@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
-import { Mail, Phone, ChevronRight } from 'lucide-react';
+import { Mail, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const FORM_IMAGE =
@@ -12,7 +12,7 @@ type FormState = {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+
   plan: string;
   location: string;
   date: string;
@@ -22,7 +22,7 @@ const initialForm: FormState = {
   firstName: '',
   lastName: '',
   email: '',
-  phone: '',
+
   plan: '',
   location: '',
   date: '',
@@ -87,24 +87,13 @@ export default function ContactFormSection() {
           </motion.div>
           <div className="absolute inset-0 bg-black/10" />
 
-          {/* Contact bars */}
+          {/* Contact bar */}
           <motion.div
             initial={{ y: 40, opacity: 0 }}
             animate={leftInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-            className="absolute bottom-0 left-0 right-0 grid grid-cols-2"
+            className="absolute bottom-0 left-0 right-0"
           >
-            {/* Emergency contact */}
-            <div className="bg-[#1c1c1c] px-5 py-5 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full border border-white/25 flex items-center justify-center flex-shrink-0">
-                <Phone className="w-3.5 h-3.5 text-white" strokeWidth={1.5} />
-              </div>
-              <div className="min-w-0">
-                <p className="text-white/55 text-[9px] uppercase tracking-widest mb-0.5">Emergency Contact</p>
-                <p className="text-white font-bold text-xs sm:text-sm truncate">{t.contactPhoneNumber}</p>
-              </div>
-            </div>
-
             {/* Support mail */}
             <div className="bg-[#CBFF00] px-5 py-5 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full border border-black/15 flex items-center justify-center flex-shrink-0">
@@ -177,36 +166,20 @@ export default function ContactFormSection() {
               </div>
             </motion.div>
 
-            {/* Email + Phone */}
-            <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 mb-3">
-              <div>
-                <label className={labelCls}>
-                  EMAIL <span className="text-red-500">*</span>
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="jane@example.com"
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className={labelCls}>
-                  PHONE <span className="text-red-500">*</span>
-                </label>
-                <input
-                  name="phone"
-                  type="tel"
-                  required
-                  value={form.phone}
-                  onChange={handleChange}
-                  placeholder="+1"
-                  className={inputCls}
-                />
-              </div>
+            {/* Email */}
+            <motion.div variants={fadeUp} className="mb-3">
+              <label className={labelCls}>
+                EMAIL <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                placeholder="jane@example.com"
+                className={inputCls}
+              />
             </motion.div>
 
             {/* Select Plan */}
