@@ -63,7 +63,7 @@ export default function WhoWeAreSection() {
         {/* ── Headline ──────────────────────────────────────────────────── */}
         <motion.h2
           variants={fadeUp}
-          className="mb-8 text-left font-extrabold uppercase leading-none tracking-tight text-zinc-950 text-[clamp(2rem,4.5vw,4.5rem)] md:mb-20"
+          className="mb-8 text-left font-extrabold uppercase leading-tight tracking-tight text-zinc-950 text-2xl md:text-3xl lg:text-[clamp(2rem,3vw,3.5rem)] md:mb-20"
           style={{ fontFamily: 'Unbounded, sans-serif' }}
         >
           {t.whoWeAreHeadingL1}
@@ -74,12 +74,12 @@ export default function WhoWeAreSection() {
         </motion.h2>
 
         {/* ── Three-column layout ───────────────────────────────────────── */}
-        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_1.5fr_1fr] md:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[3fr_2fr] md:gap-8 lg:grid-cols-[1fr_1.5fr_1fr] lg:gap-12">
 
           {/* Left image */}
           <motion.div
             variants={imageReveal}
-            className="hidden overflow-hidden rounded-2xl md:block"
+            className="hidden overflow-hidden rounded-2xl lg:block"
             style={{ aspectRatio: '4/5' }}
           >
             <img

@@ -131,21 +131,21 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar — copyright + policy */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/15">
-        <div className="flex flex-col items-center sm:items-start gap-1 text-xs text-white/50 text-center sm:text-left">
-          <p>&copy; {year} Body By Brad. {t.footerAllRights}</p>
-          <p>
-            {t.footerDesignedBy}{' '}
-            <a
-              href="https://belkdigital.com"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-white hover:text-white/90 underline"
-            >
-              Belk Digital
-            </a>
-          </p>
-        </div>
+      <div className="relative flex flex-col sm:flex-row items-center justify-between gap-3 py-6 border-t border-white/15">
+        <p className="text-xs text-white/50 text-center sm:text-left">
+          &copy; {year} Body By Brad. {t.footerAllRights}
+        </p>
+        <p className="text-xs text-white/50 text-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+          {t.footerDesignedBy}{' '}
+          <a
+            href="https://belkdigital.com"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-[#CCFF00] hover:text-[#CCFF00]/80 underline"
+          >
+            Belk Digital
+          </a>
+        </p>
         <div className="flex flex-wrap justify-center sm:justify-end items-center gap-4 sm:gap-6">
           {t.policyItems.map((p, i) => {
             const href = i === 0 ? '/privacy-policy' : '/terms';

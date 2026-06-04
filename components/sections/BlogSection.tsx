@@ -123,7 +123,7 @@ export default function BlogSection() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="font-extrabold uppercase leading-[0.92] mb-12 md:mb-16"
-        style={{ fontSize: 'clamp(1rem, 5vw, 4.5rem)', color: '#1A1A1A', letterSpacing: '-0.02em' }}
+        style={{ fontSize: 'clamp(1.5rem, 5vw, 4.5rem)', color: '#1A1A1A', letterSpacing: '-0.02em' }}
       >
         {t.blogHeadingL1}
         <br />

@@ -37,7 +37,7 @@ export default function FAQSection({ items }: { items?: FAQItem[] }) {
 
       {/* Content */}
       <div className="relative z-10 px-4 sm:px-7 md:px-12 py-14 sm:py-20 md:py-24 lg:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-[42%_58%] gap-8 sm:gap-10 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-[42fr_58fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16">
 
           {/* ── Left — heading ──────────────────────────────────────────── */}
           <div className="flex flex-col justify-start">
