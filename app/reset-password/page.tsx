@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { IoCheckmarkCircle, IoEllipseOutline } from 'react-icons/io5';
@@ -22,7 +22,6 @@ const IMAGE =
   'https://res.cloudinary.com/dgrrovta3/image/upload/v1779139268/IMG_3044_vsxjow.jpg';
 
 export default function ResetPasswordPage() {
-  const router = useRouter();
   const supabase = createSupabaseBrowserClient();
 
   const [password, setPassword]   = useState('');
@@ -31,13 +30,25 @@ export default function ResetPasswordPage() {
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState<string | null>(null);
   const [done, setDone]           = useState(false);
+  const [sessionReady, setSessionReady] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setSessionReady(true);
+      } else {
+        setError('This password reset link has expired or already been used. Please request a new one.');
+      }
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { results: pwResults, score: pwScore, allValid: pwValid } = useMemo(
     () => evaluatePassword(password),
     [password],
   );
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPwTouched(true);
     if (!pwValid) { setError('Password does not meet all requirements.'); return; }
@@ -85,6 +96,21 @@ export default function ResetPasswordPage() {
               className="inline-block bg-[#E6FF2B] text-[#1A1A1A] px-6 py-3 rounded-full text-[11px] font-extrabold uppercase tracking-widest hover:opacity-90 transition-opacity"
             >
               Go to sign in
+            </Link>
+          </div>
+        ) : !sessionReady ? (
+          <div className="w-full max-w-sm">
+            <h1 className="text-3xl font-extrabold uppercase tracking-tight text-white mb-2">
+              Invalid link
+            </h1>
+            {error && (
+              <p className="text-sm text-red-400 mb-6">{error}</p>
+            )}
+            <Link
+              href="/sign-in"
+              className="inline-block bg-[#E6FF2B] text-[#1A1A1A] px-6 py-3 rounded-full text-[11px] font-extrabold uppercase tracking-widest hover:opacity-90 transition-opacity"
+            >
+              Back to sign in
             </Link>
           </div>
         ) : (
