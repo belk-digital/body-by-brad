@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
+import { safeRedirect } from '@/lib/auth/redirect';
 
 type View = 'sign-in' | 'forgot' | 'sent';
 
 export default function SignInForm() {
   const router = useRouter();
   const params = useSearchParams();
-  const next = params.get('next') || '/account';
+  const next = safeRedirect(params.get('next'), '/account');
 
   const [view, setView]           = useState<View>('sign-in');
   const [email, setEmail]         = useState('');

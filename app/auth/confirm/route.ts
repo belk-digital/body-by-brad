@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import type { EmailOtpType } from '@supabase/supabase-js';
+import { safeRedirect } from '@/lib/auth/redirect';
 
 // Handles token_hash-based email confirmations (password reset, magic link, signup).
 // Unlike the PKCE /auth/callback route, token_hash verification is device-agnostic —
@@ -9,7 +10,7 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const token_hash = searchParams.get('token_hash');
   const type = searchParams.get('type') as EmailOtpType | null;
-  const next = searchParams.get('next') ?? '/account';
+  const next = safeRedirect(searchParams.get('next'), '/account');
 
   if (token_hash && type) {
     const redirectResponse = NextResponse.redirect(`${origin}${next}`);

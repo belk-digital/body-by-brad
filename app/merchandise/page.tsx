@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-
 import { ReactLenis } from 'lenis/react';
 import { ChevronRight, ShoppingBag } from 'lucide-react';
 
-import { supabaseBrowser } from '@/lib/supabase/browser';
+import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
 import type { Product } from '@/lib/types';
 
 import StairsPreloader from '@/components/StairsPreloader';
@@ -184,7 +184,7 @@ function MerchandiseContent() {
   }, []);
 
   useEffect(() => {
-    supabaseBrowser
+    createSupabaseBrowserClient()
       .from('products')
       .select('id, name, description, price_cents, original_price_cents, image, stock, active, category')
       .eq('active', true)

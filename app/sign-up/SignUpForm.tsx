@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoCheckmarkCircle, IoEllipseOutline } from 'react-icons/io5';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
 import { evaluatePassword, PASSWORD_RULES } from '@/lib/auth/password';
+import { safeRedirect } from '@/lib/auth/redirect';
 
 const STRENGTH_LABELS = ['Too weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very strong'] as const;
 const STRENGTH_COLORS = [
@@ -20,7 +21,7 @@ const STRENGTH_COLORS = [
 
 export default function SignUpForm() {
   const params = useSearchParams();
-  const next = params.get('next') || '/account';
+  const next = safeRedirect(params.get('next'), '/account');
 
   const [email, setEmail]         = useState('');
   const [password, setPassword]   = useState('');

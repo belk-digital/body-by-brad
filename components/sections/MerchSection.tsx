@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { IoCartOutline } from 'react-icons/io5';
-import { supabaseBrowser } from '@/lib/supabase/browser';
+import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
 import { useLanguage } from '@/lib/LanguageContext';
 import type { Product } from '@/lib/types';
 
@@ -15,7 +15,7 @@ export default function MerchSection() {
   const [products, setProducts] = useState<Product[] | null>(null);
 
   useEffect(() => {
-    supabaseBrowser
+    createSupabaseBrowserClient()
       .from('products')
       .select('id, name, description, price_cents, original_price_cents, image, stock, active, category')
       .eq('active', true)

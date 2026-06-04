@@ -9,6 +9,3 @@ export function createSupabaseBrowserClient() {
   );
 }
 
-// Convenience singleton for non-component reads (e.g. data fetches in client effects).
-// Auth-aware code should call createSupabaseBrowserClient() per usage to get a fresh handle.
-export const supabaseBrowser = createSupabaseBrowserClient();

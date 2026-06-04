@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { createSupabaseServerClient, supabaseAdmin } from '@/lib/supabase/server';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
 import UserDropdown from '@/components/layout/UserDropdown';
 
 type Order = {
@@ -43,12 +43,11 @@ export default async function AccountPage() {
 
   if (!user) redirect('/sign-in?next=/account');
 
-  // Use service role for the read since we have user.id verified server-side.
-  // (RLS policy also allows the user to read via auth.uid() — both work.)
-  const { data: orders, error } = await supabaseAdmin
+  // Use the user's own session — RLS enforces that auth.uid() = user_id.
+  // Never use the service role for user-facing reads.
+  const { data: orders, error } = await supabase
     .from('orders')
     .select('id, stripe_session_id, payment_status, fulfillment_status, total_cents, tracking_number, tracking_carrier, created_at')
-    .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .returns<Order[]>();
 
