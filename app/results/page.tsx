@@ -44,6 +44,9 @@ const TRANSFORMATIONS = [
   'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto/v1779233545/IMG_0593_nbc9pi.jpg',
   'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto/v1779233550/Untitled_design_5_rbsa0t.png',
   'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto/v1779233552/IMG_0591_cyzuem.jpg',
+  'https://res.cloudinary.com/denskvdyt/image/upload/v1780530730/client-transfromation-image_mdqgre.webp',
+  'https://res.cloudinary.com/denskvdyt/image/upload/v1780530730/transfromation-image_lexzt0.webp',
+  'https://res.cloudinary.com/denskvdyt/image/upload/v1780530730/client-results-image_e1r90d.webp',
 ];
 
 const STATS = [
@@ -243,11 +246,11 @@ function ResultsPageContent() {
           <div className="w-full h-px bg-zinc-100 mb-12 md:mb-16" />
 
           {/* Before/After grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {TRANSFORMATIONS.map((src, i) => (
               <motion.div
                 key={i}
-                className="relative rounded-2xl md:rounded-3xl overflow-hidden aspect-3/4"
+                className="relative rounded-2xl md:rounded-3xl overflow-hidden aspect-3/4 bg-[#191919]"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-5% 0px' }}
@@ -257,8 +260,8 @@ function ResultsPageContent() {
                   before={src}
                   beforeAlt={`Client transformation ${i + 1} — Before`}
                   afterContent={
-                    <div className="h-full w-full bg-zinc-50 flex items-center justify-center pb-8">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-300 text-center leading-relaxed">
+                    <div className="h-full w-full bg-[#191919] flex items-center justify-center pb-8">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/25 text-center leading-relaxed">
                         Slide right<br />to see<br />the results
                       </span>
                     </div>

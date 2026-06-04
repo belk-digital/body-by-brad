@@ -46,7 +46,7 @@ export default function BeforeAfterSlider({
           src={after}
           alt={afterAlt}
           draggable={false}
-          className="absolute inset-0 h-full w-full object-cover object-top"
+          className="absolute inset-0 h-full w-full object-contain"
         />
       ) : (
         <div className="absolute inset-0">
@@ -65,7 +65,7 @@ export default function BeforeAfterSlider({
         src={before}
         alt={beforeAlt}
         draggable={false}
-        className="absolute inset-0 h-full w-full object-cover object-top"
+        className="absolute inset-0 h-full w-full object-contain"
         style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
       />
 

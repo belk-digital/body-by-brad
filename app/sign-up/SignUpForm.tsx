@@ -4,7 +4,6 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook } from 'react-icons/fa';
 import { IoCheckmarkCircle, IoEllipseOutline } from 'react-icons/io5';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
 import { evaluatePassword, PASSWORD_RULES } from '@/lib/auth/password';
@@ -53,7 +52,7 @@ export default function SignUpForm() {
     setConfirmSent(true);
   };
 
-  const oauth = async (provider: 'google' | 'facebook') => {
+  const oauth = async (provider: 'google') => {
     setError(null);
     const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
     const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo } });
@@ -93,13 +92,6 @@ export default function SignUpForm() {
           className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-full bg-white/8 border border-white/10 text-white text-sm font-semibold hover:bg-white/12 transition-colors"
         >
           <FcGoogle size={18} /> Continue with Google
-        </button>
-        <button
-          type="button"
-          onClick={() => oauth('facebook')}
-          className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-full bg-[#1877F2] text-white text-sm font-semibold hover:bg-[#0e63d1] transition-colors"
-        >
-          <FaFacebook size={18} /> Continue with Facebook
         </button>
       </div>
 
