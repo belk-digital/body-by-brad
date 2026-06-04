@@ -56,8 +56,10 @@ export default function ResetPasswordPage() {
     setError(null);
     setLoading(true);
     const { error } = await supabase.auth.updateUser({ password });
+    if (error) { setLoading(false); setError(error.message); return; }
+    // Sign out all sessions so the user must re-authenticate with the new password.
+    await supabase.auth.signOut({ scope: 'global' });
     setLoading(false);
-    if (error) { setError(error.message); return; }
     setDone(true);
   };
 
