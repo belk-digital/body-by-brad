@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-const PUBLIC_PREFIXES = ['/_next', '/api/webhooks', '/sign-in', '/sign-up', '/auth/callback', '/favicon'];
+const PUBLIC_PREFIXES = ['/_next', '/api/webhooks', '/sign-in', '/sign-up', '/auth/callback', '/auth/confirm', '/favicon'];
 
 const PROTECTED_PREFIXES = ['/account', '/admin', '/api/admin'];
 
