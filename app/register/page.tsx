@@ -36,10 +36,10 @@ const EMPTY: FormState = {
 };
 
 const inputCls =
-  'w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 placeholder:text-zinc-400 outline-none focus:border-zinc-950 focus:ring-2 focus:ring-zinc-950/8 transition-all';
+  'w-full rounded-xl border border-zinc-700 bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-[#E6FF2B] focus:ring-2 focus:ring-[#E6FF2B]/10 transition-all';
 
 const selectCls =
-  'w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-950 outline-none focus:border-zinc-950 transition-all appearance-none cursor-pointer';
+  'w-full rounded-xl border border-zinc-700 bg-[#1a1a1a] px-4 py-3 text-sm text-white outline-none focus:border-[#E6FF2B] transition-all appearance-none cursor-pointer';
 
 function Field({ label, required, error, children }: {
   label: string; required?: boolean; error?: string; children: React.ReactNode;
@@ -47,7 +47,7 @@ function Field({ label, required, error, children }: {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-        {label}{required && <span className="text-[#1A1A1A] ml-0.5">*</span>}
+        {label}{required && <span className="text-[#E6FF2B] ml-0.5">*</span>}
       </label>
       {children}
       {error && <span className="text-red-500 text-xs">{error}</span>}
@@ -57,11 +57,11 @@ function Field({ label, required, error, children }: {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-zinc-100">
-      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1A1A1A] shrink-0">
-        <Dumbbell size={10} className="text-[#E6FF2B]" />
+    <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-zinc-700/50">
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E6FF2B] shrink-0">
+        <Dumbbell size={10} className="text-[#1A1A1A]" />
       </span>
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-950">{children}</h2>
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-white">{children}</h2>
     </div>
   );
 }
@@ -118,7 +118,7 @@ export default function RegisterPage() {
 
   return (
     <ReactLenis root>
-      <div className="relative w-full min-h-screen font-satoshi bg-[#f5f4f3] overflow-x-hidden">
+      <div className="relative w-full min-h-screen font-satoshi bg-[#191919] overflow-x-hidden">
 
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
@@ -217,7 +217,7 @@ export default function RegisterPage() {
                 >
 
                   {/* ── Left — main fields ──────────────────────────── */}
-                  <div className="bg-white rounded-3xl p-6 md:p-10 shadow-sm flex flex-col gap-8">
+                  <div className="bg-[#252525] rounded-3xl p-6 md:p-10 flex flex-col gap-8">
 
                     {/* Personal Info */}
                     <div>
@@ -303,20 +303,20 @@ export default function RegisterPage() {
                           <div
                             className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
                               form.agreed
-                                ? 'bg-[#1A1A1A] border-[#1A1A1A]'
-                                : 'border-zinc-300 group-hover:border-zinc-500'
+                                ? 'bg-[#E6FF2B] border-[#E6FF2B]'
+                                : 'border-zinc-600 group-hover:border-zinc-400'
                             }`}
                           >
                             {form.agreed && (
-                              <svg className="w-3 h-3 text-[#E6FF2B]" fill="none" viewBox="0 0 12 12">
+                              <svg className="w-3 h-3 text-[#1A1A1A]" fill="none" viewBox="0 0 12 12">
                                 <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
                             )}
                           </div>
                         </div>
-                        <span className="text-xs text-zinc-500 leading-relaxed">
+                        <span className="text-xs text-zinc-400 leading-relaxed">
                           I agree to the{' '}
-                          <a href="#" className="text-zinc-950 underline underline-offset-2 hover:opacity-60">Terms &amp; Conditions</a>
+                          <a href="#" className="text-white underline underline-offset-2 hover:opacity-60">Terms &amp; Conditions</a>
                           {' '}and confirm that the information provided is accurate.
                           I understand that participation in outdoor fitness events carries inherent risks.
                         </span>
@@ -346,14 +346,14 @@ export default function RegisterPage() {
                     </div>
 
                     {/* What to bring */}
-                    <div className="bg-white rounded-3xl p-6 shadow-sm">
+                    <div className="bg-[#252525] rounded-3xl p-6">
                       <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-400 mb-4">
                         What to Bring
                       </p>
                       <ul className="space-y-2.5">
                         {BRING_ITEMS.map((item) => (
-                          <li key={item} className="flex items-center gap-2.5 text-sm text-zinc-600">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#1A1A1A] shrink-0" />
+                          <li key={item} className="flex items-center gap-2.5 text-sm text-zinc-300">
+                            <span className="w-1.5 h-1.5 rounded-full bg-zinc-500 shrink-0" />
                             {item}
                           </li>
                         ))}
