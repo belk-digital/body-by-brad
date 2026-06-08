@@ -545,7 +545,7 @@ export default function EventsPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                   {([
-                    { date: 'JUN 21, 2026', title: 'Morning Mobility & Stretch', tagline: 'Kickstart your summer with a deep stretch and mobility flow.', location: 'Hampton Park, Charleston SC', time: '8:00 AM – 9:00 AM', spots: '50 spots', type: 'Free Admission', image: EVENT_IMAGES[5].src, featured: false },
+                    { date: 'JUN 21, 2026', title: 'Morning Mobility & Stretch', tagline: 'Kickstart your summer with a deep stretch and mobility flow.', location: 'Hampton Park, Charleston SC', time: '8:00 AM – 9:00 AM', spots: '50 spots', type: 'Free Admission', image: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780318161/everywhere_you_run_LRC_is_there_to_carry_you_home_Thank_you_thedropin___for_hosting_us_this_2_aq3be7.jpg', featured: false },
                     { date: 'JUL 12, 2026', title: 'BBB Outdoor HIIT',           tagline: 'Push your limits with Coach Brad and the BBB community.',       location: 'Waterfront Park, Charleston SC', time: '7:00 AM – 8:15 AM', spots: '40 spots', type: 'Free Admission', image: EVENT_IMAGES[1].src, featured: false },
                     { date: 'AUG 15, 2026', title: 'Body By Brad Events 2026',    tagline: 'Marion Square comes alive — the biggest BBB event of the year.', location: 'Marion Square, Charleston SC',  time: '8:45 AM – 10:30 AM', spots: '80 spots', type: 'Free Admission', image: HERO_IMAGES[0].src, featured: true  },
                   ] as const).map((ev, i) => {
