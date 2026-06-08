@@ -19,6 +19,24 @@ body {
   height: 100%;
 }
 
+/* Lenis smooth scroll — required so Lenis can override height: 100% on html */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 body {
   font-family: 'Unbounded', sans-serif;
   background: #000;
