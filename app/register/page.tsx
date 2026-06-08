@@ -118,7 +118,7 @@ export default function RegisterPage() {
 
   return (
     <ReactLenis root>
-      <div className="relative w-full min-h-screen font-satoshi bg-[#191919] overflow-x-hidden">
+      <div className="relative w-full min-h-screen font-satoshi bg-[#f5f4f3] overflow-x-hidden">
 
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
