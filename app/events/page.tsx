@@ -53,7 +53,6 @@ const MASONRY_ITEMS: MasonryItem[] = [
   { type: 'image', src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780318161/anyone_else_feeling_the_post_bridge_run_blues_1_ckfhx4.jpg', alt: 'Post Bridge Run Blues 1', ratio: '4/5' },
   { type: 'image', src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780318161/anyone_else_feeling_the_post_bridge_run_blues_2_ungwji.jpg', alt: 'Post Bridge Run Blues 2', ratio: '1/1' },
 ];
-const MASONRY_INITIAL = MASONRY_ITEMS.slice(0, 4);
 
 const TICKER_ITEMS = ['HIGHLIGHTS', 'PUSHING LIMITS', 'CHASING GOALS', 'BBB EVENTS', 'COMMUNITY FIRST', 'SHOW UP'];
 const TICKER_DOUBLED = [...TICKER_ITEMS, ...TICKER_ITEMS];
@@ -127,9 +126,8 @@ const MasonryCard = memo(function MasonryCard({
   index: number;
   onOpen: () => void;
 }) {
-  const [loaded, setLoaded] = useState(item.type === 'video');
+  const [loaded, setLoaded] = useState(false);
   const imgRef  = useRef<HTMLImageElement>(null);
-  const posterUrl = item.type === 'video' ? item.src.replace(/\.mp4(\?.*)?$/, '.jpg') : '';
 
   useEffect(() => {
     const img = imgRef.current;
@@ -146,27 +144,18 @@ const MasonryCard = memo(function MasonryCard({
       transition={{ duration: 0.5, delay: (index % 4) * 0.06, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
     >
       <div className="relative overflow-hidden" style={{ aspectRatio: item.ratio }}>
-        {!loaded && <div className="absolute inset-0 bg-zinc-800 animate-pulse" />}
+        {item.type === 'image' && !loaded && <div className="absolute inset-0 bg-zinc-800 animate-pulse" />}
 
         {item.type === 'video' ? (
-          <div className="relative w-full h-full">
-            <video
-              src={item.src}
-              poster={posterUrl}
-              muted
-              playsInline
-              preload="metadata"
-              onLoadedMetadata={() => setLoaded(true)}
-              className={`w-full h-full object-cover transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}
-            />
-            {loaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/40 transition-colors duration-300">
-                <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-white/90 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <PlayIcon className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-900 ml-0.5" />
-                </div>
-              </div>
-            )}
-          </div>
+          <video
+            src={item.src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover"
+          />
         ) : (
           <>
             <img
@@ -199,8 +188,7 @@ function LightboxModal({
   onClose: () => void;
   onChange: (i: number) => void;
 }) {
-  const item   = items[index];
-  const vidRef = useRef<HTMLVideoElement>(null);
+  const item = items[index];
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -212,12 +200,6 @@ function LightboxModal({
     return () => window.removeEventListener('keydown', onKey);
   }, [index, items.length, onClose, onChange]);
 
-  useEffect(() => {
-    const el = vidRef.current;
-    if (!el) return;
-    el.currentTime = 0;
-    el.play().catch(() => {});
-  }, [index]);
 
   return (
     <motion.div
@@ -267,8 +249,9 @@ function LightboxModal({
             />
           ) : (
             <video
-              ref={vidRef}
               src={item.src}
+              autoPlay
+              muted
               controls
               playsInline
               className="w-full rounded-2xl shadow-2xl"
@@ -342,7 +325,6 @@ export default function EventsPage() {
     return () => window.clearTimeout(t);
   }, []);
 
-  const visibleItems = showAllGallery ? MASONRY_ITEMS : MASONRY_INITIAL;
 
   return (
     <ReactLenis root>
@@ -458,7 +440,16 @@ export default function EventsPage() {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 className="relative rounded-xl overflow-hidden mb-12 md:mb-20 min-h-[260px] sm:min-h-[360px] md:min-h-[480px]"
               >
-                <img src={HERO_IMAGES[0].src} alt="Body By Brad Events 2026" className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+                <video
+                  src="https://res.cloudinary.com/denskvdyt/video/upload/v1780931603/Charleston_We_can_t_stop_thinking_about_last_week_A_huge_thanks_to_nuunhydration_redbull_s_ciq0cg.mp4"
+                  poster={HERO_IMAGES[0].src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/15" />
                 <div className="relative z-10 flex flex-col justify-between p-5 sm:p-7 md:p-10 min-h-[260px] sm:min-h-[360px] md:min-h-[480px]">
                   <div className="flex items-center gap-2 sm:gap-3">
@@ -485,10 +476,32 @@ export default function EventsPage() {
               </motion.div>
 
               {/* Masonry Gallery */}
-              <div className="columns-2 sm:columns-3 lg:columns-4 gap-2 sm:gap-3">
-                {visibleItems.map((item, i) => (
-                  <MasonryCard key={item.src} item={item} index={i} onOpen={() => setLightboxIndex(i)} />
-                ))}
+              <div
+                className="relative overflow-hidden"
+                style={!showAllGallery ? { maxHeight: 680 } : undefined}
+              >
+                <div className="columns-2 sm:columns-3 lg:columns-4 gap-2 sm:gap-3">
+                  {MASONRY_ITEMS.map((item, i) => (
+                    <MasonryCard key={item.src} item={item} index={i} onOpen={() => setLightboxIndex(i)} />
+                  ))}
+                </div>
+
+                {/* Blur + gradient fade — only when collapsed */}
+                {!showAllGallery && (
+                  <>
+                    <div
+                      className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                      style={{
+                        height: '55%',
+                        backdropFilter: 'blur(4px)',
+                        WebkitBackdropFilter: 'blur(4px)',
+                        maskImage: 'linear-gradient(to bottom, transparent, black 35%)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 35%)',
+                      }}
+                    />
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent from-[50%] via-[#0a0a0a]/60 via-[80%] to-[#0a0a0a]" />
+                  </>
+                )}
               </div>
 
               {/* Gallery toggle */}
@@ -679,7 +692,7 @@ export default function EventsPage() {
           <AnimatePresence>
             {lightboxIndex !== null && (
               <LightboxModal
-                items={visibleItems}
+                items={MASONRY_ITEMS}
                 index={lightboxIndex}
                 onClose={() => setLightboxIndex(null)}
                 onChange={setLightboxIndex}
