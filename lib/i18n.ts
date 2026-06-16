@@ -183,7 +183,7 @@ const en = {
   viewDetails: 'View Details',
   servicesGridCards: [
     { title: 'ONLINE FITNESS TRAINING', desc: 'Train smarter from anywhere with fully custom programs built around your schedule, goals, and equipment.', href: '/services/online-fitness-training' },
-    { title: 'ELITE PERSONAL TRAINING', desc: 'The highest level of 1-on-1 coaching with personalized programming and concierge-level attention.', href: '/services/elite-personal-training' },
+    { title: 'ONLINE COACHING', desc: 'Experience the structure and accountability of dynamic digital coaching programs from anywhere in the world.', href: '/services/online-coaching' },
     { title: 'AT HOME TRAINING', desc: 'No gym needed. A complete training experience designed around your home setup and schedule.', href: '/services/at-home-training' },
     { title: 'FITNESS CLASSES', desc: 'Our body fitness classes combine strength training, movements, and community energy built around real results.', href: '/services/fitness-classes' },
   ],
@@ -249,11 +249,11 @@ const en = {
     lose:     [{ title: 'WEIGHT LOSS',            desc: 'Expert-guided programs to burn fat and reshape your body.',          img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'ONLINE COACHING',           desc: 'Accountability and structure from anywhere in the world.',              img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' }],
     lose10:   [{ title: 'WEIGHT LOSS',            desc: 'Expert-guided programs to burn fat and reshape your body.',          img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'FITNESS CLASSES',           desc: 'High-energy group sessions built around real results.',                img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=100&q=80', href: '/services' }],
     maintain: [{ title: 'AT HOME TRAINING',       desc: 'Complete training experience designed around your home setup.',      img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'ONLINE COACHING',           desc: 'Accountability and structure from anywhere in the world.',              img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' }],
-    gain:     [{ title: 'ELITE TRAINING',         desc: 'The highest level of 1-on-1 coaching with daily support.',          img: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'ONLINE FITNESS TRAINING',  desc: 'Fully custom programs built around your schedule and goals.',         img: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=100&q=80', href: '/services' }],
+    gain:     [{ title: 'ONLINE COACHING',         desc: 'Structure and accountability from anywhere in the world.',            img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'ONLINE FITNESS TRAINING',  desc: 'Fully custom programs built around your schedule and goals.',         img: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=100&q=80', href: '/services' }],
   } as Record<string, { title: string; desc: string; img: string; href: string }[]>,
 
   // ── Footer ───────────────────────────────────────────────────────────────
-  footerTagline: 'Elite personal training & outdoor fitness events in Charleston, SC.',
+  footerTagline: 'Personal training & outdoor fitness events in Charleston, SC.',
   footerAllRights: 'All rights reserved.',
   footerDesignedBy: 'Designed and developed by',
   footerNavCol1: [
@@ -455,7 +455,7 @@ const es: typeof en = {
   viewDetails: 'Ver Detalles',
   servicesGridCards: [
     { title: 'ENTRENAMIENTO ONLINE', desc: 'Entrena de forma más inteligente desde cualquier lugar con programas totalmente personalizados según tu horario, metas y equipamiento.', href: '/services/online-fitness-training' },
-    { title: 'ENTRENAMIENTO PERSONAL ÉLITE', desc: 'El más alto nivel de coaching 1-a-1 con programación personalizada y atención de primer nivel.', href: '/services/elite-personal-training' },
+    { title: 'COACHING ONLINE', desc: 'Estructura, programación personalizada y rendición de cuentas desde cualquier parte del mundo.', href: '/services/online-coaching' },
     { title: 'ENTRENAMIENTO EN CASA', desc: 'Sin necesidad de gimnasio. Una experiencia de entrenamiento completa diseñada según tu espacio y horario en casa.', href: '/services/at-home-training' },
     { title: 'CLASES DE FITNESS', desc: 'Nuestras clases de fitness combinan entrenamiento de fuerza, movimientos y energía comunitaria orientados a resultados reales.', href: '/services/fitness-classes' },
   ],
@@ -521,11 +521,11 @@ const es: typeof en = {
     lose:     [{ title: 'PÉRDIDA DE PESO',           desc: 'Programas guiados por expertos para quemar grasa y remodelar tu cuerpo.',     img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'COACHING ONLINE',            desc: 'Responsabilidad y estructura desde cualquier parte del mundo.',               img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' }],
     lose10:   [{ title: 'PÉRDIDA DE PESO',           desc: 'Programas guiados por expertos para quemar grasa y remodelar tu cuerpo.',     img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'CLASES DE FITNESS',          desc: 'Sesiones grupales de alta energía orientadas a resultados reales.',           img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=100&q=80', href: '/services' }],
     maintain: [{ title: 'ENTRENAMIENTO EN CASA',     desc: 'Experiencia de entrenamiento completa diseñada para tu hogar.',              img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'COACHING ONLINE',            desc: 'Responsabilidad y estructura desde cualquier parte del mundo.',               img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' }],
-    gain:     [{ title: 'ENTRENAMIENTO ÉLITE',       desc: 'El más alto nivel de coaching 1-a-1 con apoyo diario.',                      img: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'ENTRENAMIENTO FITNESS ONLINE', desc: 'Programas totalmente personalizados según tu horario y metas.',            img: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=100&q=80', href: '/services' }],
+    gain:     [{ title: 'COACHING ONLINE',           desc: 'Estructura y rendición de cuentas desde cualquier parte del mundo.',         img: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=100&q=80', href: '/services' }, { title: 'ENTRENAMIENTO FITNESS ONLINE', desc: 'Programas totalmente personalizados según tu horario y metas.',            img: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=100&q=80', href: '/services' }],
   } as Record<string, { title: string; desc: string; img: string; href: string }[]>,
 
   // ── Footer ───────────────────────────────────────────────────────────────
-  footerTagline: 'Entrenamiento personal élite y eventos de fitness al aire libre en Charleston, SC.',
+  footerTagline: 'Entrenamiento personal y eventos de fitness al aire libre en Charleston, SC.',
   footerAllRights: 'Todos los derechos reservados.',
   footerDesignedBy: 'Diseñado y desarrollado por',
   footerNavCol1: [

@@ -38,7 +38,7 @@ export default function AreasWeServePage() {
     name: 'Body By Brad',
     url: 'https://www.bodybybrad.com',
     description:
-      'Elite personal training, group fitness classes, and online coaching based in Charleston, SC.',
+      'Personal training, group fitness classes, and online coaching based in Charleston, SC.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Charleston',

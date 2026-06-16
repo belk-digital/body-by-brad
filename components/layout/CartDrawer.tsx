@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoCartOutline } from 'react-icons/io5';
 import { useCart } from '@/lib/cart/CartContext';
@@ -7,6 +8,30 @@ import { useCart } from '@/lib/cart/CartContext';
 export default function CartDrawer() {
   const { items, isOpen, close, updateQuantity, removeItem, clear, subtotal } = useCart();
   const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    setCheckoutLoading(true);
+    setCheckoutError(null);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      });
+      const data = await res.json() as { url?: string; error?: string };
+      if (!res.ok || !data.url) {
+        setCheckoutError(data.error ?? 'Something went wrong. Please try again.');
+        return;
+      }
+      window.location.href = data.url;
+    } catch {
+      setCheckoutError('Network error. Please try again.');
+    } finally {
+      setCheckoutLoading(false);
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -124,8 +149,15 @@ export default function CartDrawer() {
                   <span className="text-zinc-500 text-sm">Subtotal</span>
                   <span className="font-semibold text-zinc-950">${subtotal.toFixed(2)}</span>
                 </div>
-                <button className="w-full bg-[#007AE5] text-white py-4 rounded-full font-semibold text-sm hover:bg-[#2d6bc4] transition-colors">
-                  Checkout
+                {checkoutError && (
+                  <p className="text-xs text-red-500 mb-3 text-center">{checkoutError}</p>
+                )}
+                <button
+                  onClick={handleCheckout}
+                  disabled={checkoutLoading}
+                  className="w-full bg-[#007AE5] text-white py-4 rounded-full font-semibold text-sm hover:bg-[#2d6bc4] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {checkoutLoading ? 'Redirecting…' : 'Checkout'}
                 </button>
                 <button
                   onClick={clear}

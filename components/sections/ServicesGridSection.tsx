@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
-import { Dumbbell, Trophy, Home, Flame } from 'lucide-react';
+import { Dumbbell, Smartphone, Home, Flame } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -12,7 +12,7 @@ const ACCENT  = '#E6FF2B';
 const CARD_IMAGE =
   'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=80';
 
-const CARD_ICONS = [Dumbbell, Trophy, Home, Flame];
+const CARD_ICONS = [Dumbbell, Smartphone, Home, Flame];
 
 export default function ServicesGridSection() {
   const { t } = useLanguage();

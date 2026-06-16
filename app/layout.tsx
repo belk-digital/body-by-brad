@@ -7,7 +7,7 @@ import CartDrawer from '@/components/layout/CartDrawer';
 
 export const metadata: Metadata = {
   title: 'Body By Brad',
-  description: 'Elite personal training, group fitness, and online coaching in Charleston, SC.',
+  description: 'Personal training, group fitness, and online coaching in Charleston, SC.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

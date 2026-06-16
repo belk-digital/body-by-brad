@@ -2,7 +2,8 @@
 
 import { useRef, useState, type FormEvent } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
-import { Mail, ChevronRight } from 'lucide-react';
+import { Mail, ChevronRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const FORM_IMAGE =
@@ -28,9 +29,15 @@ const initialForm: FormState = {
   date: '',
 };
 
+const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID!;
+const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
 export default function ContactFormSection() {
   const { t } = useLanguage();
-  const [form, setForm] = useState<FormState>(initialForm);
+  const [form, setForm]           = useState<FormState>(initialForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus]         = useState<'idle' | 'success' | 'error'>('idle');
 
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
@@ -56,9 +63,31 @@ export default function ContactFormSection() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('contact form submit', form);
+    setSubmitting(true);
+    setStatus('idle');
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name:  `${form.firstName} ${form.lastName}`,
+          from_email: form.email,
+          reply_to:   form.email,
+          plan:       form.plan    || 'Not specified',
+          location:   form.location || 'Not specified',
+          date:       form.date    || 'Not specified',
+        },
+        PUBLIC_KEY,
+      );
+      setStatus('success');
+      setForm(initialForm);
+    } catch {
+      setStatus('error');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputCls =
@@ -227,19 +256,49 @@ export default function ContactFormSection() {
               </div>
             </motion.div>
 
+            {/* Status messages */}
+            {status === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2.5 rounded-xl bg-green-50 border border-green-200 px-4 py-3 mb-4"
+              >
+                <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0" />
+                <p className="text-sm text-green-700 font-medium">Message sent! Brad will get back to you within 24 hours.</p>
+              </motion.div>
+            )}
+            {status === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2.5 rounded-xl bg-red-50 border border-red-200 px-4 py-3 mb-4"
+              >
+                <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                <p className="text-sm text-red-600 font-medium">Something went wrong. Please try again or email us directly.</p>
+              </motion.div>
+            )}
+
             {/* Submit */}
             <motion.div variants={fadeUp}>
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
+                disabled={submitting}
+                whileHover={submitting ? {} : { scale: 1.02 }}
+                whileTap={submitting ? {} : { scale: 0.97 }}
                 className="inline-flex items-center gap-3 bg-gray-900 text-white
                   pl-7 pr-2 py-2 rounded-full font-bold uppercase text-sm tracking-wider
-                  hover:bg-black transition-colors cursor-pointer"
+                  hover:bg-black transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                BOOK YOUR SPOT
+                {submitting ? 'SENDING…' : 'BOOK YOUR SPOT'}
                 <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15">
-                  <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+                  {submitting ? (
+                    <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                    </svg>
+                  ) : (
+                    <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+                  )}
                 </span>
               </motion.button>
             </motion.div>

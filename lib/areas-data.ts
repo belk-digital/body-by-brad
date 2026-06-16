@@ -81,7 +81,7 @@ export const AREAS_DATA: AreaData[] = [
     distance: 'Home Base',
     inPerson: true,
     desc: "Brad's primary training location. All services — elite 1-on-1, group classes, and full online coaching — are available.",
-    tagline: 'Elite Personal Training in the Heart of Charleston',
+    tagline: 'Personal Training in the Heart of Charleston',
     heroImage: HERO_IN_PERSON,
     overview:
       "Charleston is Brad's home base — where Body By Brad was built and where every service is fully available. From one-on-one elite sessions on the Peninsula to group Cooldown events at Marion Square, this is where the BBB experience runs deepest. Whether you want to train at your gym, at home, or outdoors, Brad knows Charleston and trains here every day.",
@@ -196,7 +196,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer Mount Pleasant SC | Body By Brad',
       description:
-        "Body By Brad offers elite personal training and online coaching in Mount Pleasant, SC. Serving East Cooper clients across Towne Centre, Old Village, and I'On.",
+        "Body By Brad offers personal training and online coaching in Mount Pleasant, SC. Serving East Cooper clients across Towne Centre, Old Village, and I'On.",
       keywords: [
         'personal trainer Mount Pleasant SC',
         'personal trainer East Cooper',
@@ -218,7 +218,7 @@ export const AREAS_DATA: AreaData[] = [
     tagline: 'Top Personal Trainer in North Charleston, SC',
     heroImage: HERO_IN_PERSON,
     overview:
-      "North Charleston sits just minutes from Brad's home base — making it one of the easiest service zones for in-person training. Residents across North Charleston get full access to BBB's in-person sessions and every online coaching program. From Mixson to Park Circle and beyond, Brad brings elite personal training to your neighborhood.",
+      "North Charleston sits just minutes from Brad's home base — making it one of the easiest service zones for in-person training. Residents across North Charleston get full access to BBB's in-person sessions and every online coaching program. From Mixson to Park Circle and beyond, Brad brings personal training to your neighborhood.",
     benefits: [
       {
         iconName: 'Clock',
@@ -253,7 +253,7 @@ export const AREAS_DATA: AreaData[] = [
       },
       {
         q: 'What types of training do you offer in North Charleston?',
-        a: 'Brad offers 1-on-1 elite personal training, at-home training, and complete online coaching in North Charleston. Group classes are primarily hosted in downtown Charleston.',
+        a: 'Brad offers 1-on-1 personal training, at-home training, and complete online coaching in North Charleston. Group classes are primarily hosted in downtown Charleston.',
       },
       {
         q: 'How do I book a session in North Charleston?',
@@ -263,7 +263,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer North Charleston SC | Body By Brad',
       description:
-        'Get elite personal training in North Charleston, SC with Body By Brad. In-person sessions and online coaching available across Park Circle, Mixson, and surrounding areas.',
+        'Get personal training in North Charleston, SC with Body By Brad. In-person sessions and online coaching available across Park Circle, Mixson, and surrounding areas.',
       keywords: [
         'personal trainer North Charleston SC',
         'fitness trainer North Charleston',
@@ -330,7 +330,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer West Ashley SC | Body By Brad',
       description:
-        'Body By Brad offers elite personal training and online coaching in West Ashley, SC. In-person sessions and custom online programs for residents across the Ashley River area.',
+        'Body By Brad offers personal training and online coaching in West Ashley, SC. In-person sessions and custom online programs for residents across the Ashley River area.',
       keywords: [
         'personal trainer West Ashley SC',
         'fitness trainer West Ashley Charleston',
@@ -397,7 +397,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer James Island SC | Body By Brad',
       description:
-        'Body By Brad provides elite personal training and online coaching on James Island, SC. In-person and remote options for all James Island residents.',
+        'Body By Brad provides personal training and online coaching on James Island, SC. In-person and remote options for all James Island residents.',
       keywords: [
         'personal trainer James Island SC',
         'fitness trainer James Island Charleston',
@@ -416,7 +416,7 @@ export const AREAS_DATA: AreaData[] = [
     distance: '9 mi',
     inPerson: true,
     desc: 'In-person training sessions and complete online coaching programs available.',
-    tagline: 'Elite Personal Training on Daniel Island, SC',
+    tagline: 'Personal Training on Daniel Island, SC',
     heroImage: HERO_IN_PERSON,
     overview:
       "Daniel Island is one of the Lowcountry's most established planned communities — and a regular stop on Brad's in-person training route. Residents have access to both in-person sessions and the full BBB online coaching program. Whether you train at a community gym or prefer at-home sessions, Brad brings the same elite standard to every session.",
@@ -464,7 +464,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer Daniel Island SC | Body By Brad',
       description:
-        'Body By Brad offers elite personal training and online coaching on Daniel Island, SC. In-person and remote sessions available for all Daniel Island residents.',
+        'Body By Brad offers personal training and online coaching on Daniel Island, SC. In-person and remote sessions available for all Daniel Island residents.',
       keywords: [
         'personal trainer Daniel Island SC',
         'fitness trainer Daniel Island Charleston',
@@ -732,7 +732,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer Hanahan SC | Body By Brad',
       description:
-        'Body By Brad provides elite personal training and online coaching in Hanahan, SC. In-person sessions and custom remote programs for Berkeley County residents.',
+        'Body By Brad provides personal training and online coaching in Hanahan, SC. In-person sessions and custom remote programs for Berkeley County residents.',
       keywords: [
         'personal trainer Hanahan SC',
         'fitness trainer Hanahan SC',
@@ -933,7 +933,7 @@ export const AREAS_DATA: AreaData[] = [
     seo: {
       title: 'Personal Trainer Folly Beach SC | Body By Brad',
       description:
-        'Body By Brad offers elite personal training and online coaching at Folly Beach, SC. In-person sessions, outdoor training, and BBB Cooldown events for Folly Beach residents.',
+        'Body By Brad offers personal training and online coaching at Folly Beach, SC. In-person sessions, outdoor training, and BBB Cooldown events for Folly Beach residents.',
       keywords: [
         'personal trainer Folly Beach SC',
         'fitness trainer Folly Beach Charleston',

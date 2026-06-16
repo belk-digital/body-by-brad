@@ -1,28 +1,45 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { isAdmin } from '@/lib/auth/isAdmin';
-import AdminTabs from './AdminTabs';
-import UserDropdown from '@/components/layout/UserDropdown';
+import AdminSideNav from './AdminTabs';
+import AdminHeader from './AdminHeader';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  if (!(await isAdmin())) {
-    redirect('/');
-  }
+  if (!(await isAdmin())) redirect('/');
 
   return (
-    <div className="font-satoshi min-h-dvh bg-[#f5f0e1]">
-      <header className="border-b border-zinc-200 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="font-bold text-zinc-950 text-sm uppercase tracking-widest">
-              Body By Brad <span className="text-zinc-400">/ Admin</span>
-            </Link>
-            <AdminTabs />
-          </div>
-          <UserDropdown theme="dark" />
+    <div className="flex h-dvh overflow-hidden font-satoshi">
+      <aside className="w-56 shrink-0 bg-zinc-950 flex flex-col overflow-y-auto">
+        <div className="px-5 pt-6 pb-5 border-b border-white/5">
+          <Link href="/" className="block">
+            <span className="text-white font-black text-xs uppercase tracking-widest">
+              Body By Brad
+            </span>
+            <span className="block text-lime-400 text-[9px] font-bold uppercase tracking-widest mt-0.5">
+              Admin Panel
+            </span>
+          </Link>
         </div>
-      </header>
-      <main className="max-w-6xl mx-auto px-4 sm:px-8 py-10">{children}</main>
+
+        <AdminSideNav />
+
+        <div className="px-5 py-4 border-t border-white/5 mt-auto">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to site</span>
+          </Link>
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <AdminHeader />
+        <main className="flex-1 overflow-auto bg-[#f5f4f3] px-8 py-8">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

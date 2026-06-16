@@ -10,7 +10,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 const LEFT_IMAGE =
   'https://res.cloudinary.com/denskvdyt/image/upload/v1780429409/bradley_carter_image_x1fspz.webp';
 const RIGHT_IMAGE =
-  'https://res.cloudinary.com/dgrrovta3/image/upload/v1779735223/DSC00643_onxic2.webp';
+  'https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto,w_900/v1780294757/bradley_image_suayaz.webp';
 
 const AVATARS = [
   'https://i.pravatar.cc/40?img=47',

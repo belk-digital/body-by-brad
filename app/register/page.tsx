@@ -6,9 +6,15 @@ import { useEffect, useRef, useState } from 'react';
 import { Dumbbell, CheckCircle2 } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 
+import emailjs from '@emailjs/browser';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
+
+const EMAILJS_SERVICE_ID   = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE_ID  = process.env.NEXT_PUBLIC_EMAILJS_REGISTER_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY   = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 const EVENTS = [
   'Summer Cooldown — Jun 20, 2026',
@@ -111,9 +117,43 @@ export default function RegisterPage() {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const { error } = await supabase.from('event_registrations').insert({
+        first_name:     form.firstName,
+        last_name:      form.lastName,
+        email:          form.email,
+        event:          form.event,
+        fitness_level:  form.fitnessLevel,
+        heard_from:     form.heardFrom   || null,
+        emergency_name: form.emergencyName,
+        notes:          form.notes       || null,
+      });
+      if (error) throw error;
+
+      // Notify Brad via email (fire-and-forget — don't block success on this)
+      emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          registrant_name:  `${form.firstName} ${form.lastName}`,
+          registrant_email: form.email,
+          event:            form.event,
+          fitness_level:    form.fitnessLevel,
+          heard_from:       form.heardFrom   || 'Not specified',
+          emergency_name:   form.emergencyName,
+          notes:            form.notes       || 'None',
+        },
+        EMAILJS_PUBLIC_KEY,
+      ).catch((err) => console.warn('EmailJS notification failed:', err));
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Registration error:', err);
+      setErrors({ agreed: 'Submission failed. Please try again.' });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

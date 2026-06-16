@@ -10,7 +10,7 @@ import {
   type Variants,
 } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
-import { Dumbbell, Smartphone, Flame, Target, Trophy, Home, ArrowUpRight } from 'lucide-react';
+import { Dumbbell, Smartphone, Flame, Target, Home, ArrowUpRight } from 'lucide-react';
 
 import Image from 'next/image';
 import StairsPreloader from '@/components/StairsPreloader';
@@ -22,7 +22,7 @@ import Footer from '@/components/layout/Footer';
 const SERVICES_FAQ = [
   {
     q: 'Which service is right for me?',
-    a: "It depends on your goals and lifestyle. If you want maximum accountability and results, Elite Personal Training is the top tier. Prefer flexibility? Online Coaching or Online Fitness Training lets you train from anywhere on your schedule. Not sure? Book a free 15-min call and Brad will point you in the right direction.",
+    a: "It depends on your goals and lifestyle. If you want structure and accountability from anywhere, Online Coaching is a great fit. Prefer training solo on your own schedule? Online Fitness Training delivers a fully custom plan to your phone. Not sure? Book a free 15-min call and Brad will point you in the right direction.",
   },
   {
     q: "What's the difference between online and in-person training?",
@@ -59,14 +59,6 @@ const SERVICES = [
     desc: 'Train smarter from anywhere with fully custom programs delivered to your phone, built around your schedule and goals.',
     image:
       'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=700&q=80',
-  },
-  {
-    Icon: Trophy,
-    title: 'ELITE PERSONAL TRAINING',
-    slug: 'elite-personal-training',
-    desc: 'The highest level of 1-on-1 coaching — fully personalized programming, daily support, and concierge-level attention.',
-    image:
-      'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=700&q=80',
   },
   {
     Icon: Home,
