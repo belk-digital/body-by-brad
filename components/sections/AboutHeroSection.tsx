@@ -95,7 +95,7 @@ export default function AboutHeroSection({ isLoading }: AboutHeroSectionProps) {
       >
         <Image
           src={heroImage}
-          alt="Body By Brad community"
+          alt="Brad coaching a personal training client in Charleston SC"
           fill
           priority
           className="object-cover"

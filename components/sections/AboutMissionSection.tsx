@@ -12,12 +12,12 @@ const PHOTO =
 
 const TABS = {
   mission: {
-    label: 'Mission',
-    body: "To push every client beyond what they think is possible — through personalized programming, relentless accountability, and a community that refuses to let you quit. Fitness isn't just about looking good; it's about becoming the strongest version of yourself.",
+    label: 'Philosophy',
+    body: "At Body By Brad, we believe success comes from small actions repeated consistently over time. Every training plan is tailored to individual goals and fitness levels. Clients receive practical nutrition coaching, regular accountability check-ins, and sustainable habits that create long-term results — not temporary progress.",
   },
   vision: {
-    label: 'Vision',
-    body: "A Charleston where fitness is a lifestyle, not a chore — where every person, regardless of experience level, has access to a coach and a community that believes in them. BBB is building that world one session, one run, one transformation at a time.",
+    label: 'Trust',
+    body: "Every client receives personalized guidance based on evidence-backed training principles and proven coaching methodologies. Clients consistently improve body composition, strength, confidence, and overall health through regular communication and progress reviews that keep them on track.",
   },
 } as const;
 
@@ -39,7 +39,7 @@ export default function AboutMissionSection() {
             transition={{ duration: 0.5, ease }}
             className="text-[11px] font-bold uppercase tracking-[0.28em] text-zinc-400 block mb-4"
           >
-            Mission Vision
+            Coaching Philosophy
           </motion.span>
 
           <motion.h2
@@ -50,7 +50,7 @@ export default function AboutMissionSection() {
             className="font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950 mb-8"
             style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)' }}
           >
-            Our Mission<br />&amp; Vision
+            Our Coaching<br />Philosophy
           </motion.h2>
 
           {/* Tabs */}
@@ -120,7 +120,7 @@ export default function AboutMissionSection() {
         >
           <Image
             src={PHOTO}
-            alt="Coach Brad Carter"
+            alt="Charleston fitness coach leading a workout session"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"

@@ -128,7 +128,7 @@ export default function WhoWeAreSection() {
             {/* Button + reviews row */}
             <div className="flex flex-wrap items-center gap-5">
               <motion.a
-                href="/about"
+                href="/about-brad"
                 className="relative flex items-center gap-0 overflow-hidden rounded-full border-2 border-zinc-950 py-2 pl-5 pr-2 text-[11px] font-extrabold uppercase tracking-widest"
                 initial="rest"
                 whileHover="hover"

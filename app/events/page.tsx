@@ -14,16 +14,67 @@ import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import Footer from '@/components/layout/Footer';
+import { CheckCircle2 } from 'lucide-react';
 
 const EventCalendar = dynamic(() => import('@/components/ui/EventCalendar'), { ssr: false });
+
+// ─── SEO Data ───────────────────────────────────────────────────────────────
+
+const EVENTS_FAQ = [
+  { q: 'What fitness events are available in Charleston?', a: 'Body By Brad offers outdoor fitness events, wellness workshops, HIIT sessions, transformation challenges, bootcamps, and community workout experiences throughout Charleston.' },
+  { q: 'Are fitness events beginner-friendly?', a: 'Yes. Our events are designed to accommodate all fitness levels, including complete beginners.' },
+  { q: 'How do fitness challenges work?', a: 'Participants follow structured workouts, receive coaching support, track progress, and stay accountable through community participation.' },
+  { q: 'What should I bring to a fitness event?', a: 'Comfortable workout clothing, athletic shoes, water, and a positive attitude.' },
+  { q: 'Can fitness challenges help with weight loss?', a: 'Yes. Fitness challenges provide structure, accountability, coaching, and consistent activity that support healthy weight-loss goals.' },
+  { q: 'Do I need previous training experience?', a: 'No. Exercises can be modified to match your fitness level.' },
+  { q: 'Are events held outdoors?', a: 'Many Body By Brad events take place outdoors throughout Charleston to create an engaging and energizing training environment.' },
+  { q: 'How quickly will I see results?', a: 'Results vary, but consistent participation combined with healthy habits often leads to improvements in fitness, energy, strength, and body composition.' },
+];
+
+const JSONLD_FAQ = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: EVENTS_FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const JSONLD_BREADCRUMB = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybrad.com' },
+    { '@type': 'ListItem', position: 2, name: 'Events', item: 'https://www.bodybybrad.com/events' },
+  ],
+};
+
+const JSONLD_EVENT = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'Body By Brad Events 2026 — Charleston Cooldown',
+  startDate: '2026-08-15T08:45:00-04:00',
+  endDate: '2026-08-15T10:30:00-04:00',
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: 'Marion Square',
+    address: { '@type': 'PostalAddress', addressLocality: 'Charleston', addressRegion: 'SC', addressCountry: 'US' },
+  },
+  organizer: { '@type': 'Organization', name: 'Body By Brad', url: 'https://www.bodybybrad.com' },
+  description: "Join Charleston's most anticipated outdoor fitness event. Trainer-led sessions, beginner-friendly environment, community accountability, and real fitness results.",
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://www.bodybybrad.com/register' },
+};
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const NEXT_EVENT = new Date('2026-08-15T08:45:00');
 
 const HERO_IMAGES = [
-  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780311283/Photo_Apr_28_2026_7_45_53_PM_slhtpk.webp', alt: 'BBB Event 1' },
-  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780311282/Photo_Apr_28_2026_6_50_48_PM_dpg8o8.webp', alt: 'BBB Event 2' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780311283/Photo_Apr_28_2026_7_45_53_PM_slhtpk.webp', alt: 'Participants attending a Charleston fitness event led by Body By Brad' },
+  { src: 'https://res.cloudinary.com/dgrrovta3/image/upload/v1780311282/Photo_Apr_28_2026_6_50_48_PM_dpg8o8.webp', alt: 'Outdoor group workout at Charleston fitness bootcamp' },
 ];
 
 const EVENT_IMAGES = [
@@ -328,7 +379,12 @@ export default function EventsPage() {
 
   return (
     <ReactLenis root>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_FAQ) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_BREADCRUMB) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_EVENT) }} />
         <div className="relative w-full font-satoshi overflow-x-hidden">
+
+          <h1 className="sr-only">Charleston Fitness Events &amp; Wellness Challenges</h1>
 
           <AnimatePresence>
             {isLoading && <StairsPreloader />}
@@ -356,10 +412,10 @@ export default function EventsPage() {
                 <div className="bg-[#E6FF2B] rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col justify-between min-h-[260px] sm:min-h-72 md:min-h-0">
                   <div>
                     <h2 className="text-zinc-950 font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-tight mb-2 sm:mb-3 uppercase">
-                      Body By Brad<br />Events 2026
+                      Charleston<br />Cooldown 2026
                     </h2>
                     <p className="text-zinc-500 text-xs md:text-sm leading-relaxed max-w-xs">
-                      Embark on the ultimate outdoor fitness experience — where every rep is a journey of community and self&#8209;discovery.
+                      Experience one of Charleston&apos;s most anticipated outdoor fitness events. Whether your goal is weight loss, muscle building, or improved endurance — our events provide the structure, accountability, and support needed to succeed.
                     </p>
                   </div>
                   <motion.a
@@ -685,7 +741,100 @@ export default function EventsPage() {
             </div>
           </section>
 
-          <FAQSection />
+          {/* ── Event Highlights ── */}
+          <section className="bg-zinc-950 px-4 py-20 sm:px-7 md:px-12 md:py-28">
+            <div className="max-w-7xl mx-auto">
+              <motion.span initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#E6FF2B] block mb-4">
+                Event Highlights
+              </motion.span>
+              <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.07 }} className="font-extrabold uppercase leading-tight tracking-tight text-white mb-12" style={{ fontSize: 'clamp(1.8rem,4vw,3.5rem)', fontFamily: 'Unbounded, sans-serif' }}>
+                What Makes Our Events Different
+              </motion.h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { title: 'Trainer-Led Fitness Experiences', desc: 'Every Body By Brad event combines professional coaching, structured workouts, and community support. Participants gain access to proven training methods focused on sustainable health improvement.' },
+                  { title: 'Fitness Challenges That Create Results', desc: "Our Charleston fitness challenges help participants improve consistency, build healthy habits, increase strength, and stay motivated through shared goals and accountability." },
+                  { title: 'Community-Focused Wellness', desc: "Fitness is more enjoyable when you're surrounded by people working toward similar goals. Our events create opportunities to connect, train, and grow with Charleston's fitness community." },
+                ].map((item, i) => (
+                  <motion.div key={item.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }} className="rounded-2xl border border-white/10 p-6">
+                    <h3 className="font-bold uppercase text-white text-[15px] leading-tight mb-3" style={{ fontFamily: 'Unbounded, sans-serif' }}>{item.title}</h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── Why Attend Fitness Events ── */}
+          <section className="bg-[#1a1a1a] px-4 py-20 sm:px-7 md:px-12 md:py-28">
+            <div className="max-w-7xl mx-auto">
+              <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="font-extrabold uppercase leading-tight tracking-tight text-white mb-12" style={{ fontSize: 'clamp(1.6rem,3.5vw,3rem)', fontFamily: 'Unbounded, sans-serif' }}>
+                Why Attend Fitness Events In Charleston?
+              </motion.h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { title: 'Accountability Drives Success', desc: 'Many people struggle to stay consistent when exercising alone. Fitness events provide structured support and community accountability that increases long-term success.' },
+                  { title: 'Expert Coaching', desc: 'Every event is guided by experienced fitness professionals who help participants train safely, effectively, and efficiently.' },
+                  { title: 'Real Community Support', desc: 'Training alongside others creates motivation, encouragement, and lasting relationships that make healthy habits easier to maintain.' },
+                ].map((item, i) => (
+                  <motion.div key={item.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }} className="rounded-2xl bg-[#252525] p-6">
+                    <h3 className="font-bold uppercase text-white text-[15px] leading-tight mb-3" style={{ fontFamily: 'Unbounded, sans-serif' }}>{item.title}</h3>
+                    <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── Workshops & Who Should Attend ── */}
+          <section className="bg-zinc-50 px-4 py-20 sm:px-7 md:px-12 md:py-28">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+              <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+                <h2 className="font-extrabold uppercase leading-tight tracking-tight text-zinc-950 mb-8" style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}>
+                  Fitness Workshops &amp; Wellness Education
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    { title: 'Nutrition For Sustainable Results', desc: 'Learn evidence-based nutrition principles that support weight loss, muscle development, recovery, and long-term health.' },
+                    { title: 'Strength Training Fundamentals', desc: 'Understand proper exercise technique, progressive overload, and injury prevention strategies.' },
+                    { title: 'Building Healthy Habits', desc: 'Develop systems that improve consistency, motivation, and long-term success.' },
+                  ].map((item) => (
+                    <div key={item.title}>
+                      <h3 className="text-sm font-extrabold uppercase tracking-tight text-zinc-950 mb-1.5">{item.title}</h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}>
+                <h2 className="font-extrabold uppercase leading-tight tracking-tight text-zinc-950 mb-8" style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}>
+                  Who Should Attend?
+                </h2>
+                <p className="text-base text-zinc-500 leading-relaxed mb-6">
+                  These Charleston fitness events are ideal for:
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    'Beginners starting their fitness journey',
+                    'Individuals seeking weight loss',
+                    'Busy professionals',
+                    'Athletes',
+                    'Adults wanting greater accountability',
+                    'Individuals looking for community support',
+                    'People preparing for transformation challenges',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2.5 text-sm text-zinc-700">
+                      <CheckCircle2 size={14} className="text-[#CCFF00] shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </section>
+
+          <FAQSection items={EVENTS_FAQ} />
           <CTASection />
           <Footer />
 

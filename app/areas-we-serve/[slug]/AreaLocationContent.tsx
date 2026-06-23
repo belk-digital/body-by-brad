@@ -300,7 +300,7 @@ function AreaLocationPageContent({ area }: { area: AreaData }) {
       <section className="bg-white border-b border-zinc-100 px-4 py-4 sm:px-7 md:px-12">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <nav className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            <a href="/areas-we-serve" className="hover:text-zinc-700 transition-colors">Areas We Serve</a>
+            <a href="/areas-we-serve-charleston-sc" className="hover:text-zinc-700 transition-colors">Areas We Serve</a>
             <span>/</span>
             <span className="text-zinc-700">{area.name}</span>
           </nav>
@@ -570,7 +570,7 @@ function AreaLocationPageContent({ area }: { area: AreaData }) {
               />
             </a>
             <a
-              href="/packages"
+              href="/fitness-coaching-packages"
               className="group inline-flex shrink-0 items-center gap-3 rounded-full border border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300 hover:border-white/40"
             >
               View Packages

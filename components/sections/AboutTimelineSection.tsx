@@ -6,26 +6,26 @@ import { bradImagePool } from '@/lib/constants';
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const MILESTONES = [
+const MILESTONES: { year: string; title: string; body: string }[] = [
   {
-    year: '2016',
-    title: 'The Beginning',
-    body: 'Brad started training clients in Charleston parks and community spaces — just passion, a plan, and a belief that fitness could change lives.',
+    year: "2016",
+    title: "Building More Than Workouts",
+    body: "Body By Brad was created with one goal: to help people discover what they are capable of when they have the right guidance, support, and accountability.",
   },
   {
-    year: '2018',
-    title: "Let's Run Charleston",
-    body: 'The Cooldown Run Club was born — bringing the community together through movement, sweat, and good energy on the streets of Charleston.',
+    year: "2018",
+    title: "Turning Experience Into Impact",
+    body: "Brad turned years of competitive athletics and study into a commitment to helping others through evidence-based coaching principles and real-world accountability systems.",
   },
   {
-    year: '2020',
-    title: 'Going Digital',
-    body: 'Online coaching launched, expanding BBB beyond Charleston. Clients coast to coast joined the movement during a time the world needed it most.',
+    year: "2020",
+    title: "Going Digital",
+    body: "Online coaching launched, expanding BBB beyond Charleston. Clients nationwide joined the movement for sustainable weight loss, strength development, and body transformation.",
   },
   {
-    year: '2025',
-    title: 'The Movement Grows',
-    body: '200+ clients transformed, 10K+ Instagram followers, and a thriving run club. The BBB community is just getting started.',
+    year: "2025",
+    title: "The Movement Grows",
+    body: "200+ clients transformed, community fitness events, and a thriving run club. Helping Charleston and beyond build confidence, discipline, and lifelong habits.",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function AboutTimelineSection() {
             className="font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950"
             style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)' }}
           >
-            From the pavement<br />to the community.
+            The story behind<br />Body By Brad.
           </motion.h2>
         </div>
 

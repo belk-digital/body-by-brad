@@ -6,7 +6,21 @@ import type { CartItem } from '@/lib/types';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
-  let body: { items?: CartItem[] };
+  let body: {
+    items?: CartItem[];
+    userId?: string | null;
+    customerEmail?: string | null;
+    shippingAddress?: {
+      firstName?: string;
+      lastName?: string;
+      phone?: string;
+      address?: string;
+      city?: string;
+      state?: string;
+      zip?: string;
+      country?: string;
+    } | null;
+  };
   try {
     body = await req.json();
   } catch {
@@ -14,6 +28,9 @@ export async function POST(req: Request) {
   }
 
   const items = body.items;
+  const userId = body.userId ?? null;
+  const customerEmail = body.customerEmail ?? null;
+  const shipping = body.shippingAddress ?? null;
   if (!Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
   }
@@ -55,6 +72,17 @@ export async function POST(req: Request) {
   try {
     session = await stripe.checkout.sessions.create({
       mode: 'payment',
+      ...(customerEmail ? { customer_email: customerEmail } : {}),
+      metadata: {
+        user_id: userId ?? '',
+        shipping_name: shipping ? `${shipping.firstName ?? ''} ${shipping.lastName ?? ''}`.trim() : '',
+        shipping_phone: shipping?.phone ?? '',
+        shipping_address: shipping?.address ?? '',
+        shipping_city: shipping?.city ?? '',
+        shipping_state: shipping?.state ?? '',
+        shipping_zip: shipping?.zip ?? '',
+        shipping_country: shipping?.country ?? 'US',
+      },
       line_items: items.map((item) => {
         const productId = item.id.split('|')[0];
         const product = productMap.get(productId)!;
@@ -77,7 +105,6 @@ export async function POST(req: Request) {
           },
         };
       }),
-      shipping_address_collection: { allowed_countries: ['US'] },
       success_url: `${siteUrl}/order-confirmed?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/merchandise`,
     });

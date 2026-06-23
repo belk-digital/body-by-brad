@@ -57,7 +57,7 @@ export default function PackagesHeroSection({ isLoading }: PackagesHeroSectionPr
       <motion.div variants={imageZoom} className="absolute inset-0">
         <Image
           src={PACKAGES_HERO_IMAGE}
-          alt="Body By Brad coaching packages"
+          alt="Fitness coaching packages for weight loss and transformation"
           fill
           priority
           className="object-cover object-center"
@@ -80,21 +80,24 @@ export default function PackagesHeroSection({ isLoading }: PackagesHeroSectionPr
           variants={fadeUp}
           className="max-w-xs text-[13px] leading-snug text-white/85 sm:max-w-sm sm:text-sm md:max-w-md md:text-base"
         >
-          Every plan includes Brad's full coaching attention. Choose the format that fits your life.
+          Personalized Coaching. Proven Systems. Sustainable Results.
         </motion.p>
 
         <h1
           className="
             font-bold uppercase tracking-tight text-white
             leading-[0.92]
-            text-[12vw] sm:text-[10vw] md:text-[7vw] lg:text-[6vw]
+            text-[10vw] sm:text-[8vw] md:text-[5.5vw] lg:text-[4.8vw]
           "
         >
           <motion.span variants={headlineLine} className="block">
-            INVEST IN
+            FITNESS COACHING
           </motion.span>
           <motion.span variants={headlineLine} className="block">
-            YOURSELF
+            PACKAGES DESIGNED
+          </motion.span>
+          <motion.span variants={headlineLine} className="block">
+            FOR REAL RESULTS
           </motion.span>
         </h1>
       </div>

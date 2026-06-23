@@ -6,29 +6,29 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const ACHIEVEMENTS = [
   {
-    title: "Founded Let's Run Charleston",
-    sub: "Built Charleston's premier community run club from the ground up — the Cooldown Run Club.",
-    year: '2018',
+    title: 'Personal Training & Fitness Coaching',
+    sub: 'Personalized programming for sustainable weight loss, strength development, and body transformation.',
+    year: 'Core',
   },
   {
-    title: 'Top Personal Trainer — Charleston',
-    sub: 'Recognized as a leading fitness coach across the Lowcountry fitness community.',
-    year: '2021',
+    title: 'Nutrition Guidance & Accountability',
+    sub: 'Practical nutrition coaching and regular check-ins that support real-world lifestyles and lasting results.',
+    year: 'Core',
   },
   {
-    title: '200+ Client Transformations',
-    sub: 'Helping clients achieve lasting, measurable results through personalized coaching programs.',
-    year: '2023',
+    title: 'Evidence-Based Training Principles',
+    sub: 'Coaching philosophy informed by ACSM, NSCA, and WHO Physical Activity Guidelines.',
+    year: 'Method',
   },
   {
-    title: 'Featured Fitness Creator',
-    sub: '10K+ Instagram followers — sharing workouts, events, and client wins daily.',
-    year: '2024',
+    title: 'Body Transformation & Muscle Building',
+    sub: 'Proven systems for improving body composition, strength, confidence, and overall health.',
+    year: 'Results',
   },
   {
-    title: '50+ Community Events Hosted',
-    sub: 'From outdoor bootcamps to run club events — building fitness culture in Charleston, SC.',
-    year: '2025',
+    title: 'Fitness Challenges & Lifestyle Coaching',
+    sub: 'Community-driven fitness challenges and holistic coaching for long-term habit formation.',
+    year: 'Community',
   },
 ];
 
@@ -46,7 +46,7 @@ export default function AboutRecognitionSection() {
             transition={{ duration: 0.5, ease }}
             className="text-[11px] font-bold uppercase tracking-[0.28em] text-zinc-400 block mb-4"
           >
-            Achievements
+            Expertise
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -56,7 +56,7 @@ export default function AboutRecognitionSection() {
             className="font-extrabold uppercase leading-[1.02] tracking-tight text-zinc-950"
             style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)' }}
           >
-            Recognized for<br />excellence.
+            Certifications &amp;<br />expertise.
           </motion.h2>
         </div>
 

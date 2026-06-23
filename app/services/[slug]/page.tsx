@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({
     },
     offers: {
       '@type': 'Offer',
-      url: 'https://www.bodybybrad.com/packages',
+      url: 'https://www.bodybybrad.com/fitness-coaching-packages',
       priceCurrency: 'USD',
     },
     image: service.heroImage,

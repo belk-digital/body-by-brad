@@ -120,8 +120,8 @@ export default function AboutGallerySection() {
           </motion.div>
         </div>
 
-        {/* 3-col masonry grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        {/* 3-col masonry via CSS columns */}
+        <div className="columns-2 md:columns-3 gap-3 md:gap-4 [&>a]:mb-3 md:[&>a]:mb-4">
           {ITEMS.map((item, i) => (
             <motion.a
               key={i}
@@ -132,7 +132,7 @@ export default function AboutGallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-5% 0px' }}
               transition={{ duration: 0.6, ease, delay: i * 0.07 }}
-              className={`group relative rounded-xl overflow-hidden block ${item.aspect}`}
+              className={`group relative rounded-xl overflow-hidden block break-inside-avoid ${item.aspect}`}
             >
               {item.type === 'video' ? (
                 <VideoTile
@@ -142,7 +142,7 @@ export default function AboutGallerySection() {
               ) : (
                 <Image
                   src={item.src}
-                  alt={`Brad Carter Instagram post ${i + 1}`}
+                  alt={`Body By Brad transformation coaching and community fitness in Charleston SC ${i + 1}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"

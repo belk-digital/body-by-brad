@@ -47,17 +47,17 @@ export default function AboutRunClubSection() {
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
             className="text-zinc-400 text-base leading-relaxed"
           >
-            What started as a small group of friends hitting the pavement has grown into Charleston&apos;s most
-            energetic community run club. Brad founded <span className="text-white font-semibold">Let&apos;s Run Charleston</span> — also known as the
-            Cooldown Run Club — to bring people together through movement, sweat, and good vibes.
+            Body By Brad has become known for bringing people together through fitness.
+            Brad founded <span className="text-white font-semibold">Let&apos;s Run Charleston</span> — also known as the
+            Cooldown Run Club — creating an environment where people support one another while working toward their goals.
           </motion.p>
 
           <motion.p
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
             className="text-zinc-400 text-base leading-relaxed"
           >
-            No experience required. No pressure. Just show up, run your pace, and cool down with the community.
-            Whether you&apos;re a first-time jogger or a seasoned runner, there&apos;s a place for you in this crew.
+            Whether you&apos;re a beginner or experienced athlete, you&apos;ll find a community committed to growth, health, and accountability.
+            Our outdoor fitness events, transformation programs, group challenges, and community initiatives make fitness something you look forward to.
           </motion.p>
 
           {/* Detail chips */}
@@ -97,7 +97,7 @@ export default function AboutRunClubSection() {
         >
           <Image
             src={RUN_IMAGE}
-            alt="Let's Run Charleston run club"
+            alt="Community fitness event led by Brad in Charleston South Carolina"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"

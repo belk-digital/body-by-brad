@@ -10,64 +10,63 @@ const CARD_BG = '#252525';
 
 const PLANS = [
   {
-    label: 'FOUNDATION',
+    label: 'STARTER',
     price: 50,
     billing: 'one-time',
-    tagline: 'Redefine Your Routine',
+    tagline: 'Perfect For Fitness Beginners',
     image:
       'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=80',
     isAccent: false,
     features: [
-      '8-Week Training Program',
-      'App-Based Delivery',
-      'Exercise Demos Included',
-      'Weekly Habit Tracking',
-      'Basic Nutrition Guidance',
+      'Personalized Fitness Assessment',
+      'Customized Workout Plan',
+      'Goal-Setting Consultation',
       'Monthly Progress Review',
-      'Lifestyle Guidance',
+      'Exercise Technique Guidance',
+      'Basic Nutrition Guidance',
+      'Lifestyle Coaching',
     ],
   },
   {
-    label: 'PERFORMANCE',
+    label: 'TRANSFORMATION',
     price: 250,
     billing: 'recurring',
-    tagline: 'Elevate Your Routine',
+    tagline: 'Complete Body Transformation',
     image:
       'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=700&q=80',
     isAccent: true,
     features: [
-      'Everything in Foundation',
-      'Personalized Program',
-      'Custom Macro Targets',
+      'Personalized Workout Programming',
+      'Nutrition Coaching Package',
+      'Weekly Accountability Coaching',
+      'Progress Tracking',
+      'Habit Development Support',
+      'Direct Coach Communication',
       'Cardio & Recovery Plans',
-      'Weekly Check-In Call',
       'Form Review & Feedback',
-      'Unlimited Messaging',
-      'Travel Modifications',
       'Monthly Analytics',
       'Bonus Event Access',
     ],
   },
   {
-    label: 'ELITE',
+    label: 'PREMIUM',
     price: 500,
     billing: 'recurring',
-    tagline: 'Life Changing Routine',
+    tagline: 'Most Comprehensive Coaching',
     image:
       'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=700&q=80',
     isAccent: false,
     features: [
-      'Everything in Performance',
-      'FaceTime Calls with Bradley Directly',
-      'Concierge Coaching',
-      'Daily Communication',
-      'Same-Day Modifications',
-      'Mobility Protocols',
+      'Advanced Personalized Programming',
+      'Nutrition Strategy & Meal Guidance',
+      'Weekly Coaching Calls',
+      'Unlimited Messaging Support',
+      'Recovery & Lifestyle Coaching',
+      'Detailed Performance Tracking',
       'Supplement Guidance',
-      'Meal Strategy Planning',
       'Mindset Coaching',
       'VIP Event Access',
-      'Quarterly In-Person',
+      'Quarterly In-Person Session',
     ],
   },
 ];
@@ -200,7 +199,7 @@ function PlanCard({ plan, delay = 0 }: { plan: Plan; delay?: number }) {
         >
           <img
             src={plan.image}
-            alt={plan.label}
+            alt={`${plan.label} fitness coaching package`}
             className="h-full w-full object-cover object-top"
             loading="lazy"
             draggable={false}
@@ -242,7 +241,7 @@ export default function PackagesPricingSection() {
               <Dumbbell size={12} className="text-zinc-950" />
             </span>
             <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E6FF2B]">
-              Our Pricing
+              Coaching Packages
             </span>
           </motion.div>
           <motion.h2
@@ -250,9 +249,9 @@ export default function PackagesPricingSection() {
             className="font-extrabold uppercase leading-[1.0] tracking-tight text-white
                        text-[clamp(2rem,4.5vw,4.5rem)]"
           >
-            EXCLUSIVE ONLINE
+            CHOOSE YOUR
             <br />
-            PACKAGES
+            PROGRAM
           </motion.h2>
         </div>
 
@@ -385,7 +384,7 @@ function EliteCard({ plan }: { plan: Plan }) {
         <div className="w-full overflow-hidden rounded-xl">
           <img
             src={plan.image}
-            alt={plan.label}
+            alt={`${plan.label} fitness coaching package`}
             className="h-full w-full object-cover object-top"
             loading="lazy"
             draggable={false}

@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
+  async rewrites() {
+    return [
+      { source: '/areas-we-serve-charleston-sc', destination: '/areas-we-serve' },
+      { source: '/areas-we-serve-charleston-sc/:slug', destination: '/areas-we-serve/:slug' },
+      { source: '/fitness-coaching-packages', destination: '/packages' },
+    ];
+  },
+  async redirects() {
+    return [
+      { source: '/about', destination: '/about-brad', permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

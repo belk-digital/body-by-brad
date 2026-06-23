@@ -100,7 +100,7 @@ export default function PackagesPreviewSection() {
           {/* See All Packages button */}
           <motion.div variants={fadeUp}>
             <motion.a
-              href="/packages"
+              href="/fitness-coaching-packages"
               className="relative flex items-center gap-0 overflow-hidden rounded-full border-2
                          border-[#E6FF2B] py-2 pl-6 pr-2 text-[11px] font-extrabold uppercase tracking-widest"
               initial="rest"

@@ -144,9 +144,9 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
             const lower = item.toLowerCase();
             const href =
               lower === 'home'        || lower === 'inicio'     ? '/' :
-              lower === 'about'       || lower === 'nosotros'   ? '/about' :
+              lower === 'about'       || lower === 'nosotros'   ? '/about-brad' :
               lower === 'services'    || lower === 'servicios'  ? '/services' :
-              lower === 'packages'    || lower === 'paquetes'   ? '/packages' :
+              lower === 'packages'    || lower === 'paquetes'   ? '/fitness-coaching-packages' :
               lower === 'events'      || lower === 'eventos'    ? '/events' :
               lower === 'results'     || lower === 'resultados' ? '/results' :
               lower === 'blog'                                  ? '/blog' :

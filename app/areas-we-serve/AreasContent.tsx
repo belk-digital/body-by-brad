@@ -22,28 +22,36 @@ import { AREAS_DATA, type AreaData } from '@/lib/areas-data';
 
 const AREAS_FAQ = [
   {
-    q: 'Which areas do you serve for in-person training?',
-    a: "Brad serves 14+ neighborhoods across the Charleston Lowcountry including Downtown Charleston, Mount Pleasant, North Charleston, West Ashley, James Island, Daniel Island, Johns Island, Summerville, Goose Creek, Folly Beach, Isle of Palms, and more.",
+    q: 'What areas around Charleston do you serve?',
+    a: 'We serve Charleston, Mount Pleasant, North Charleston, Summerville, Goose Creek, Hanahan, Daniel Island, Johns Island, James Island, and West Ashley.',
   },
   {
-    q: 'How far do you travel for in-person sessions?',
-    a: "Brad travels approximately 25 miles from downtown Charleston for in-person training. If you are just outside that radius, reach out — he may be able to accommodate depending on your schedule and location.",
+    q: 'Do you offer online fitness coaching?',
+    a: 'Yes. We provide online coaching programs for clients nationwide with customized workout programming, nutrition guidance, weekly check-ins, and accountability coaching.',
   },
   {
-    q: 'Can I train with Brad if I am not in the Charleston area?',
-    a: "Absolutely. Online coaching is available to clients anywhere in the world. You get the same personalized programming, weekly check-ins, and direct access to Brad — just delivered through your phone.",
+    q: 'Can I join from Mount Pleasant?',
+    a: 'Absolutely. We work with clients throughout Mount Pleasant and the surrounding Lowcountry with both in-person and online coaching options.',
   },
   {
-    q: 'Is online coaching as effective as training in person?',
-    a: "For most clients, yes. Online coaching delivers fully custom programming, regular progress tracking, and consistent accountability. Many BBB clients have achieved their biggest transformations entirely through online coaching.",
+    q: 'What fitness services do you offer?',
+    a: 'We offer personal training, body transformation coaching, nutrition guidance, accountability coaching, fitness challenges, and online coaching.',
   },
   {
-    q: 'Do you offer outdoor training sessions?',
-    a: "Yes. Outdoor sessions are a big part of the BBB experience — from one-on-one sessions in Charleston parks to the legendary Cooldown community events at Marion Square and Folly Beach.",
+    q: 'Can fitness coaching help me lose weight?',
+    a: 'Yes. Our coaching programs focus on sustainable weight loss through personalized training and nutrition support.',
   },
   {
-    q: 'What if my area is not listed?',
-    a: "Reach out through the Contact page or DM on Instagram with your location. If you are within a reasonable distance, Brad will let you know what in-person options are available — and online coaching is always an option regardless of where you are.",
+    q: 'How often do I receive support?',
+    a: 'Most coaching programs include regular check-ins, progress tracking, and ongoing communication to keep you accountable and on track.',
+  },
+  {
+    q: 'Do you provide nutrition coaching?',
+    a: 'Yes. Nutrition guidance is integrated into many of our coaching programs to support real-world lifestyles and long-term health.',
+  },
+  {
+    q: 'How do I get started?',
+    a: "Schedule a consultation and we'll recommend the best coaching option for your goals. Reach out through the Contact page or DM on Instagram.",
   },
 ];
 
@@ -54,11 +62,11 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 
 const ONLINE_PERKS = [
-  'Custom program built for your schedule and equipment',
-  'Weekly check-ins and progress tracking',
-  'Unlimited messaging with Brad',
-  'Nutrition guidance included',
-  'Works at any gym or from home',
+  'Customized workout programming',
+  'Nutrition guidance',
+  'Weekly check-ins',
+  'Progress monitoring',
+  'Accountability coaching',
 ];
 
 // ── Area Card ─────────────────────────────────────────────────────────────────
@@ -68,7 +76,7 @@ function AreaCard({ area, delay }: { area: AreaData; delay: number }) {
   const inView = useInView(ref, { once: true, margin: '-6% 0px' });
 
   return (
-    <Link href={`/areas-we-serve/${area.slug}`} className="block">
+    <Link href={`/areas-we-serve-charleston-sc/${area.slug}`} className="block">
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 28 }}
@@ -187,7 +195,7 @@ function AreasPageContent() {
       {/* ── Hero ────────────────────────────────────────────────────────────── */}
       <section
         className="relative w-full overflow-hidden bg-[#F7F7F5]"
-        style={{ minHeight: 'clamp(380px, 58vh, 660px)' }}
+        style={{ minHeight: 'clamp(520px, 72vh, 860px)' }}
       >
         <Navbar
           isLoading={isLoading}
@@ -234,19 +242,19 @@ function AreasPageContent() {
           <div>
             <h1
               className="font-extrabold uppercase leading-[0.9] tracking-tight text-zinc-900"
-              style={{ fontSize: 'clamp(3.4rem,9vw,8.5rem)', fontFamily: 'Unbounded, sans-serif' }}
+              style={{ fontSize: 'clamp(2.8rem,7.5vw,7rem)', fontFamily: 'Unbounded, sans-serif' }}
             >
-              <motion.span variants={slideUp} className="block">AREAS</motion.span>
-              <motion.span variants={slideUp} className="block">WE SERVE</motion.span>
+              <motion.span variants={slideUp} className="block">Personal Training</motion.span>
+              <motion.span variants={slideUp} className="block">&amp; Fitness Coaching</motion.span>
+              <motion.span variants={slideUp} className="block">Throughout Charleston SC</motion.span>
             </h1>
 
             <motion.p
               variants={fadeIn}
-              className="mt-5 max-w-md text-base leading-relaxed text-zinc-500 md:text-lg"
+              className="mt-5 max-w-lg text-base leading-relaxed text-zinc-500 md:text-lg"
               style={{ fontFamily: 'Roboto, sans-serif' }}
             >
-              In-person training across the greater Lowcountry.
-              Online coaching available anywhere in the world.
+              Helping Charleston and the Lowcountry get stronger, healthier, and more confident through expert coaching, accountability, and community-driven fitness experiences.
             </motion.p>
           </div>
         </motion.div>
@@ -291,7 +299,7 @@ function AreasPageContent() {
               className="text-[14px] leading-relaxed text-zinc-500"
               style={{ fontFamily: 'Roboto, sans-serif' }}
             >
-              Based in Charleston and serving clients across the entire Lowcountry — in the gym, at home, or through fully remote online coaching.
+              Whether you are looking to lose weight, build muscle, improve athletic performance, or transform your lifestyle, Body By Brad serves clients throughout Charleston and surrounding communities.
             </p>
           </motion.div>
         </div>
@@ -325,7 +333,7 @@ function AreasPageContent() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease, delay: 0.08 }}
         >
-          Greater Charleston &amp; Lowcountry
+          Areas We Serve Across The Lowcountry
         </motion.h2>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -360,6 +368,171 @@ function AreasPageContent() {
           </div>
         </section>
       )}
+
+      {/* ── City Coaching Sections ────────────────────────────────────────── */}
+      <section className="bg-white px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24">
+        <div className="max-w-7xl mx-auto space-y-20">
+
+          {/* Charleston SC */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <h2
+              className="font-extrabold uppercase leading-tight tracking-tight text-zinc-900 mb-6"
+              style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Fitness Coaching In Charleston SC
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-2xl bg-zinc-50 p-6">
+                <h3 className="text-sm font-extrabold uppercase tracking-tight text-zinc-950 mb-2">Weight Loss Coaching</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed">Our Charleston fitness coaching programs help individuals create sustainable habits that support long-term fat loss and improved health.</p>
+              </div>
+              <div className="rounded-2xl bg-zinc-50 p-6">
+                <h3 className="text-sm font-extrabold uppercase tracking-tight text-zinc-950 mb-2">Body Transformation Programs</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed">Through personalized workouts, accountability systems, and nutrition support, clients achieve lasting body composition changes.</p>
+              </div>
+              <div className="rounded-2xl bg-zinc-50 p-6">
+                <h3 className="text-sm font-extrabold uppercase tracking-tight text-zinc-950 mb-2">Fitness Challenges</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed">Join Charleston&apos;s growing fitness community through our signature fitness challenges designed to inspire motivation and consistency.</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Mount Pleasant SC */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <h2
+              className="font-extrabold uppercase leading-tight tracking-tight text-zinc-900 mb-4"
+              style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Fitness Coaching In Mount Pleasant SC
+            </h2>
+            <p className="text-base text-zinc-500 leading-relaxed mb-6">
+              Clients in Mount Pleasant benefit from personalized fitness coaching, transformation programs, and expert accountability support.
+            </p>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {['Weight loss coaching', 'Strength training', 'Muscle building programs', 'Personalized workout plans', 'Nutrition coaching'].map((s) => (
+                <li key={s} className="flex items-center gap-2 text-sm text-zinc-700">
+                  <CheckCircle2 size={14} className="text-[#E6FF2B] shrink-0" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* North Charleston SC */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <h2
+              className="font-extrabold uppercase leading-tight tracking-tight text-zinc-900 mb-4"
+              style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Fitness Coaching In North Charleston SC
+            </h2>
+            <p className="text-base text-zinc-500 leading-relaxed mb-6">
+              We help North Charleston residents improve fitness, increase strength, and achieve sustainable weight loss through structured coaching systems.
+            </p>
+            <ul className="grid grid-cols-2 gap-3">
+              {['Beginners', 'Busy professionals', 'Athletes', 'Transformation clients'].map((s) => (
+                <li key={s} className="flex items-center gap-2 text-sm text-zinc-700">
+                  <CheckCircle2 size={14} className="text-[#E6FF2B] shrink-0" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Summerville SC */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <h2
+              className="font-extrabold uppercase leading-tight tracking-tight text-zinc-900 mb-4"
+              style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Fitness Coaching In Summerville SC
+            </h2>
+            <p className="text-base text-zinc-500 leading-relaxed mb-6">
+              Our coaching programs help Summerville residents develop healthier habits and achieve long-term fitness success.
+            </p>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {['Fitness assessments', 'Personalized coaching', 'Weekly accountability', 'Progress tracking', 'Lifestyle coaching'].map((s) => (
+                <li key={s} className="flex items-center gap-2 text-sm text-zinc-700">
+                  <CheckCircle2 size={14} className="text-[#E6FF2B] shrink-0" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ── Why Charleston Chooses Body By Brad ─────────────────────────────── */}
+      <section className="bg-zinc-950 px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24">
+        <div className="max-w-7xl mx-auto">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease }}
+            className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#E6FF2B] block mb-4"
+          >
+            Why Us
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease, delay: 0.07 }}
+            className="font-extrabold uppercase leading-tight tracking-tight text-white mb-12"
+            style={{ fontSize: 'clamp(1.8rem,4vw,3.5rem)', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Why Charleston Chooses Body By Brad
+          </motion.h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: 'Personalized Coaching', desc: 'No cookie-cutter plans. Every client receives customized coaching tailored to their goals and lifestyle.' },
+              { title: 'Community Support', desc: 'Our fitness challenges and community events help clients stay motivated and connected.' },
+              { title: 'Evidence-Based Training', desc: 'Programs built around proven strength and conditioning principles supported by ACSM and NSCA.' },
+              { title: 'Sustainable Results', desc: 'We focus on long-term success rather than quick fixes through habit formation and accountability.' },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease, delay: i * 0.08 }}
+                className="rounded-2xl border border-white/10 p-6"
+              >
+                <h3
+                  className="font-bold uppercase text-white text-[15px] leading-tight mb-3"
+                  style={{ fontFamily: 'Unbounded, sans-serif' }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Online Coaching — Anywhere ──────────────────────────────────────── */}
       <section className="bg-[#111111] px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24">
@@ -396,9 +569,9 @@ function AreasPageContent() {
               viewport={{ once: true }}
               transition={{ duration: 0.75, ease, delay: 0.08 }}
             >
-              Not in Charleston?
+              Online Coaching
               <br />
-              No Problem.
+              Available Anywhere
             </motion.h2>
 
             <motion.p
@@ -409,9 +582,9 @@ function AreasPageContent() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease, delay: 0.15 }}
             >
-              Online coaching brings the full BBB experience wherever you are —
-              custom programming, daily accountability, and real results delivered
-              entirely through your phone.
+              Not located in Charleston? Our online fitness coaching programs allow clients across
+              the country to receive expert support. This flexibility allows you to train anywhere while
+              still receiving personalized programming and accountability.
             </motion.p>
 
             <motion.div
@@ -477,20 +650,20 @@ function AreasPageContent() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
-              Not sure which option fits you?
+              Ready to transform your fitness?
             </p>
             <h2
               className="font-extrabold uppercase leading-tight text-zinc-950"
               style={{ fontSize: 'clamp(1.4rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}
             >
-              Let&apos;s Figure It Out Together
+              Book Your Consultation
             </h2>
           </div>
           <a
             href="/contact"
             className="group inline-flex shrink-0 items-center gap-3 rounded-full bg-zinc-950 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-zinc-800"
           >
-            Get in Touch
+            Book Your Consultation
             <ArrowUpRight
               size={16}
               className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

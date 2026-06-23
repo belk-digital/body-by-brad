@@ -11,33 +11,61 @@ import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import Footer from '@/components/layout/Footer';
+import { CheckCircle2, ArrowUpRight } from 'lucide-react';
 
 const RESULTS_FAQ = [
   {
-    q: 'Are these real client results?',
-    a: "Every transformation on this page is from a real Body By Brad client. No filters, no staging — just the results of consistent training and coaching. Names and photos are shared with client permission.",
+    q: 'What results can I expect from personal training?',
+    a: 'Most clients experience improvements in strength, fitness consistency, energy levels, body composition, and overall health when following a structured training program.',
   },
   {
-    q: 'How long does it take to see real results?',
-    a: "Most clients notice meaningful changes within 4–8 weeks of consistent training and nutrition. Bigger transformations — the ones you see here — typically reflect 3–6 months of committed work. Your timeline depends on your starting point and how consistently you execute the plan.",
+    q: 'How long does it take to see fitness results?',
+    a: 'Many individuals begin noticing improvements in energy and performance within a few weeks, while visible body composition changes often occur within several months of consistent effort.',
   },
   {
-    q: 'What do I need to commit to on my end?',
-    a: "Consistency is everything. Brad builds the plan and holds you accountable, but you have to show up and execute. That means training as scheduled, dialing in your nutrition, and communicating openly during weekly check-ins.",
+    q: 'Are transformation results sustainable?',
+    a: 'Yes. Sustainable results come from healthy habits, structured coaching, and realistic lifestyle changes rather than quick-fix solutions.',
   },
   {
-    q: 'Do you work with people of all fitness levels?',
-    a: "Yes — from people who have never worked out before to competitive athletes looking to level up. Brad meets you where you are and builds a progressive plan that challenges you without overwhelming you.",
+    q: 'Can beginners achieve body transformation results?',
+    a: 'Absolutely. Many of our most successful clients started with little or no fitness experience.',
   },
   {
-    q: 'Can I submit my own transformation?',
-    a: "Absolutely. Brad loves celebrating client wins. If you have completed a program and want to share your results, reach out via Instagram DM or the Contact page.",
+    q: 'How is progress measured?',
+    a: 'We track body composition changes, strength gains, performance improvements, consistency, and overall wellness markers.',
   },
   {
-    q: 'How do I start my own transformation?',
-    a: "Hit the button below, reach out through the Contact page, or DM @bradnboujee_ on Instagram. Brad will schedule a free 15-minute call to talk goals and map out your plan.",
+    q: 'Is nutrition included?',
+    a: 'Nutrition guidance is incorporated into coaching recommendations to help clients maximize results.',
+  },
+  {
+    q: 'What factors influence transformation success?',
+    a: 'Consistency, accountability, nutrition, training quality, recovery, and mindset all play important roles.',
+  },
+  {
+    q: 'How do I get started?',
+    a: 'Schedule a consultation to discuss your goals and receive a personalized fitness roadmap.',
   },
 ];
+
+const JSONLD_FAQ = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: RESULTS_FAQ.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const JSONLD_BREADCRUMB = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybrad.com' },
+    { '@type': 'ListItem', position: 2, name: 'Results', item: 'https://www.bodybybrad.com/results' },
+  ],
+};
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const TRANSFORMATIONS = [
@@ -133,12 +161,14 @@ function ResultsPageContent() {
 
   return (
     <div className="relative w-full bg-white overflow-x-hidden font-satoshi">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_FAQ) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_BREADCRUMB) }} />
       <AnimatePresence>
         {isLoading && <StairsPreloader />}
       </AnimatePresence>
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative h-[50dvh] min-h-85 w-full overflow-hidden bg-black">
+      <section className="relative h-[60dvh] min-h-[420px] w-full overflow-hidden bg-black">
         <Navbar
           isLoading={isLoading}
           isMenuOpen={isMenuOpen}
@@ -160,10 +190,10 @@ function ResultsPageContent() {
               </span>
             </div>
             <h1
-              className="font-extrabold uppercase text-white leading-none"
-              style={{ fontSize: 'clamp(2.8rem, 9vw, 6rem)' }}
+              className="font-extrabold uppercase text-white leading-[0.95]"
+              style={{ fontSize: 'clamp(2rem, 5.5vw, 4.2rem)' }}
             >
-              CLIENT<br />RESULTS
+              REAL PEOPLE. REAL RESULTS.<br />REAL TRANSFORMATIONS.
             </h1>
           </motion.div>
         </div>
@@ -218,14 +248,13 @@ function ResultsPageContent() {
                   className="font-bold uppercase tracking-tight text-zinc-950 leading-none mb-3"
                   style={{ fontSize: 'clamp(2rem, 6vw, 4rem)' }}
                 >
-                  REAL PEOPLE.<br />REAL RESULTS.
+                  REAL CLIENT<br />TRANSFORMATIONS
                 </h2>
                 <p
                   className="text-zinc-500 text-sm sm:text-base max-w-md leading-relaxed"
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 >
-                  Slide to reveal each transformation. Every result is built on
-                  consistency, coaching, and commitment.
+                  Discover how Charleston clients have achieved sustainable weight loss, improved body composition, increased strength, and long-term health improvements through personalized coaching and accountability.
                 </p>
               </div>
               <a
@@ -258,7 +287,7 @@ function ResultsPageContent() {
               >
                 <BeforeAfterSlider
                   before={src}
-                  beforeAlt={`Client transformation ${i + 1} — Before`}
+                  beforeAlt={`Charleston fitness transformation client before and after results ${i + 1}`}
                   afterContent={
                     <div className="h-full w-full bg-[#191919] flex items-center justify-center pb-8">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-white/25 text-center leading-relaxed">
@@ -323,6 +352,102 @@ function ResultsPageContent() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── What Makes These Results Different ────────────────────────── */}
+      <section className="w-full bg-zinc-950 py-16 md:py-24 px-4 sm:px-7 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="font-extrabold uppercase leading-tight tracking-tight text-white mb-12"
+            style={{ fontSize: 'clamp(1.8rem,4vw,3.5rem)', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            What Makes These Results Different
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { title: 'Personalized Coaching', desc: 'Every client receives individualized guidance based on their goals, experience level, schedule, and lifestyle.' },
+              { title: 'Accountability That Creates Consistency', desc: "Most people don't fail because of lack of knowledge. They struggle because of inconsistency. Our accountability coaching helps clients stay committed." },
+              { title: 'Sustainable Fitness Habits', desc: 'Crash diets and extreme programs rarely create lasting results. Our coaching focuses on behavior change, habit formation, and realistic strategies.' },
+            ].map((item, i) => (
+              <motion.div key={item.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }} className="rounded-2xl border border-white/10 p-6">
+                <h3 className="font-bold uppercase text-white text-[15px] leading-tight mb-3" style={{ fontFamily: 'Unbounded, sans-serif' }}>{item.title}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why Clients Achieve Results ───────────────────────────────── */}
+      <section className="w-full bg-[#1a1a1a] py-16 md:py-24 px-4 sm:px-7 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="font-extrabold uppercase leading-tight tracking-tight text-white mb-12"
+            style={{ fontSize: 'clamp(1.6rem,3.5vw,3rem)', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Why Clients Achieve Results
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: 'Evidence-Based Training', desc: 'Every program is built on proven exercise science principles that maximize results while minimizing injury risk.' },
+              { title: 'Nutrition Support', desc: 'Results are accelerated when effective training is paired with sustainable nutrition strategies.' },
+              { title: 'Progress Tracking', desc: 'Regular assessments help clients see measurable improvements and stay motivated throughout their journey.' },
+              { title: 'Community & Support', desc: 'Fitness is easier when you are surrounded by people who support your success.' },
+            ].map((item, i) => (
+              <motion.div key={item.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }} className="rounded-2xl bg-[#252525] p-6">
+                <h3 className="font-bold uppercase text-white text-[15px] leading-tight mb-3" style={{ fontFamily: 'Unbounded, sans-serif' }}>{item.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Results Beyond Physical Appearance ────────────────────────── */}
+      <section className="w-full bg-white py-16 md:py-24 px-4 sm:px-7 md:px-12">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+            <h2 className="font-extrabold uppercase leading-tight tracking-tight text-zinc-950 mb-4" style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)', fontFamily: 'Unbounded, sans-serif' }}>
+              Results Beyond Physical Appearance
+            </h2>
+            <p className="text-base text-zinc-500 leading-relaxed mb-6">
+              The most meaningful transformations extend beyond aesthetics. Clients frequently report:
+            </p>
+            <ul className="space-y-3">
+              {['Increased confidence', 'Better energy', 'Reduced stress', 'Improved sleep', 'Greater discipline', 'Higher productivity', 'Enhanced quality of life'].map((item) => (
+                <li key={item} className="flex items-center gap-2.5 text-sm text-zinc-700">
+                  <CheckCircle2 size={14} className="text-[#CCFF00] shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}>
+            <div className="rounded-2xl bg-zinc-50 p-8">
+              <h2 className="font-extrabold uppercase leading-tight tracking-tight text-zinc-950 mb-4" style={{ fontSize: 'clamp(1.4rem,3vw,2.2rem)', fontFamily: 'Unbounded, sans-serif' }}>
+                Charleston Fitness Results That Last
+              </h2>
+              <p className="text-base text-zinc-500 leading-relaxed mb-6">
+                Unlike short-term fitness programs, Body By Brad focuses on helping Charleston residents create habits that produce lasting change. The goal is not simply getting results — the goal is keeping them.
+              </p>
+              <a
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-zinc-950 text-white px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#CCFF00] hover:text-zinc-950 transition-colors duration-300"
+              >
+                Start Your Transformation
+                <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 

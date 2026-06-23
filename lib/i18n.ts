@@ -21,9 +21,9 @@ const en = {
   sessionsLabel: 'clients served',
 
   // ── About hero ───────────────────────────────────────────────────────────
-  aboutHeroDesc: 'Body By Brad is built on discipline, community, and a results-driven approach to coaching, training, and lasting transformation.',
-  aboutHeroL1: 'MORE THAN',
-  aboutHeroL2: 'A COACH.',
+  aboutHeroDesc: 'Body By Brad is more than a fitness brand. It’s a movement built around helping everyday people become stronger, healthier, more confident, and more accountable through expert coaching, proven training methods, and supportive community.',
+  aboutHeroL1: 'MEET BRAD —',
+  aboutHeroL2: 'THE COACH BEHIND THE MOVEMENT',
   aboutBioParagraphs: [
     'After playing football at The Citadel and graduating in 2019, I stepped into Corporate America with ambition and a full head of steam. It didn’t take long to realize that the traditional path wasn’t where I was meant to be.',
     'I walked away from the desk job, earned my ISSA certification, and built what would become Body By Brad — a fitness and lifestyle brand rooted in energy, community, and intentional movement.',
@@ -257,16 +257,16 @@ const en = {
   footerAllRights: 'All rights reserved.',
   footerDesignedBy: 'Designed and developed by',
   footerNavCol1: [
-    { label: 'About',    href: '/about'    },
+    { label: 'About',    href: '/about-brad' },
     { label: 'Services', href: '/services' },
-    { label: 'Packages', href: '/packages' },
+    { label: 'Packages', href: '/fitness-coaching-packages' },
     { label: 'Events',   href: '/events'   },
     { label: 'Results',  href: '/results'  },
   ] as { label: string; href: string }[],
   footerNavCol2: [
     { label: 'Blog',           href: '/blog'           },
     { label: 'Merchandise',    href: '/merchandise'    },
-    { label: 'Areas We Serve', href: '/areas-we-serve' },
+    { label: 'Areas We Serve', href: '/areas-we-serve-charleston-sc' },
     { label: 'Contact',        href: '/contact'        },
     { label: 'Register',       href: '/register'       },
   ] as { label: string; href: string }[],
@@ -293,9 +293,9 @@ const es: typeof en = {
   sessionsLabel: 'clientes atendidos',
 
   // ── About hero ───────────────────────────────────────────────────────────
-  aboutHeroDesc: 'Body By Brad se construye sobre disciplina, comunidad y un enfoque orientado a resultados en coaching, entrenamiento y transformación duradera.',
-  aboutHeroL1: 'MÁS QUE UN',
-  aboutHeroL2: 'COACH DE FITNESS',
+  aboutHeroDesc: 'Body By Brad es más que una marca de fitness. Es un movimiento dedicado a ayudar a las personas a ser más fuertes, saludables, seguras y responsables a través de coaching experto, métodos de entrenamiento probados y una comunidad de apoyo.',
+  aboutHeroL1: 'CONOCE A BRAD —',
+  aboutHeroL2: 'EL COACH DETRÁS DEL MOVIMIENTO',
   aboutBioParagraphs: [
     'Después de jugar fútbol americano en The Citadel y graduarme en 2019, di el salto al mundo corporativo con ambición y todo el ímpetu. No tardé mucho en darme cuenta de que el camino tradicional no era para mí.',
     'Dejé el trabajo de escritorio, obtuve mi certificación ISSA y construí lo que se convertiría en Body By Brad — una marca de fitness y estilo de vida basada en energía, comunidad y movimiento intencional.',
@@ -529,16 +529,16 @@ const es: typeof en = {
   footerAllRights: 'Todos los derechos reservados.',
   footerDesignedBy: 'Diseñado y desarrollado por',
   footerNavCol1: [
-    { label: 'Nosotros',  href: '/about'    },
+    { label: 'Nosotros',  href: '/about-brad' },
     { label: 'Servicios', href: '/services' },
-    { label: 'Paquetes',  href: '/packages' },
+    { label: 'Paquetes',  href: '/fitness-coaching-packages' },
     { label: 'Eventos',   href: '/events'   },
     { label: 'Resultados', href: '/results' },
   ] as { label: string; href: string }[],
   footerNavCol2: [
     { label: 'Blog',           href: '/blog'           },
     { label: 'Merch',          href: '/merchandise'    },
-    { label: 'Áreas de Servicio', href: '/areas-we-serve' },
+    { label: 'Áreas de Servicio', href: '/areas-we-serve-charleston-sc' },
     { label: 'Contacto',       href: '/contact'        },
     { label: 'Registrarse',    href: '/register'       },
   ] as { label: string; href: string }[],
