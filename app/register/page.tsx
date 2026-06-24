@@ -6,15 +6,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Dumbbell, CheckCircle2 } from 'lucide-react';
 import { IoChevronForward } from 'react-icons/io5';
 
-import emailjs from '@emailjs/browser';
+import { Turnstile } from 'react-turnstile';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
-
-const EMAILJS_SERVICE_ID   = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-const EMAILJS_TEMPLATE_ID  = process.env.NEXT_PUBLIC_EMAILJS_REGISTER_TEMPLATE_ID!;
-const EMAILJS_PUBLIC_KEY   = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 const EVENTS = [
   'Summer Cooldown — Jun 20, 2026',
@@ -80,6 +76,7 @@ export default function RegisterPage() {
   const [errors, setErrors]         = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted]   = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const prevScrollY = useRef(0);
 
   const { scrollY } = useScroll();
@@ -131,25 +128,23 @@ export default function RegisterPage() {
       });
       if (error) throw error;
 
-      // Notify Brad via email (fire-and-forget — don't block success on this)
-      emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          registrant_name:  `${form.firstName} ${form.lastName}`,
-          registrant_email: form.email,
-          event:            form.event,
-          fitness_level:    form.fitnessLevel,
-          heard_from:       form.heardFrom   || 'Not specified',
-          emergency_name:   form.emergencyName,
-          notes:            form.notes       || 'None',
-        },
-        EMAILJS_PUBLIC_KEY,
-      ).catch((err) => console.warn('EmailJS notification failed:', err));
+      fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          registrantName: `${form.firstName} ${form.lastName}`,
+          registrantEmail: form.email,
+          event: form.event,
+          fitnessLevel: form.fitnessLevel,
+          heardFrom: form.heardFrom || 'Not specified',
+          emergencyName: form.emergencyName,
+          notes: form.notes || 'None',
+          turnstileToken,
+        }),
+      }).catch(() => {});
 
       setSubmitted(true);
-    } catch (err) {
-      console.error('Registration error:', err);
+    } catch {
       setErrors({ agreed: 'Submission failed. Please try again.' });
     } finally {
       setSubmitting(false);
@@ -330,6 +325,15 @@ export default function RegisterPage() {
                       />
                     </Field>
 
+                    {/* Turnstile CAPTCHA */}
+                    <div>
+                      <Turnstile
+                        sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                        onVerify={(token) => setTurnstileToken(token)}
+                        theme="dark"
+                      />
+                    </div>
+
                     {/* Terms */}
                     <div>
                       <label className="flex items-start gap-3 cursor-pointer group">
@@ -403,7 +407,7 @@ export default function RegisterPage() {
                     {/* Submit */}
                     <motion.button
                       type="submit"
-                      disabled={submitting}
+                      disabled={submitting || !turnstileToken}
                       className="relative overflow-hidden rounded-full border-2 border-[#1A1A1A] py-4 px-8 text-[11px] font-extrabold uppercase tracking-widest w-full cursor-pointer disabled:opacity-50 flex items-center justify-between"
                       initial="rest"
                       whileHover={submitting ? 'rest' : 'hover'}

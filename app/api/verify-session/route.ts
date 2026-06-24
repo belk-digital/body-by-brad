@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { rateLimit } from '@/lib/rate-limit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function GET(req: Request) {
+  const limited = rateLimit(req, { limit: 10, windowMs: 60_000 });
+  if (limited) return limited;
+
   const { searchParams } = new URL(req.url);
   const sessionId = searchParams.get('session_id');
 
@@ -79,7 +83,6 @@ export async function GET(req: Request) {
     .single();
 
   if (orderError || !order) {
-    console.error('[verify-session] Failed to insert order:', orderError);
     return NextResponse.json({ error: 'Failed to create order' }, { status: 500 });
   }
 
@@ -96,7 +99,7 @@ export async function GET(req: Request) {
       }))
     );
     if (itemsError) {
-      console.error('[verify-session] Failed to insert order_items:', itemsError);
+      // order_items insert failed but order was created — non-fatal
     }
   }
 

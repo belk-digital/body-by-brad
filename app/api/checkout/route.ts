@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { rateLimit } from '@/lib/rate-limit';
 import type { CartItem } from '@/lib/types';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
+  const limited = rateLimit(req, { limit: 10, windowMs: 60_000 });
+  if (limited) return limited;
+
   let body: {
     items?: CartItem[];
     userId?: string | null;

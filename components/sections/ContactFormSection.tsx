@@ -3,7 +3,7 @@
 import { useRef, useState, type FormEvent } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 import { Mail, ChevronRight, CheckCircle2, AlertCircle } from 'lucide-react';
-import emailjs from '@emailjs/browser';
+import { Turnstile } from 'react-turnstile';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const FORM_IMAGE =
@@ -29,15 +29,12 @@ const initialForm: FormState = {
   date: '',
 };
 
-const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID!;
-const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
-
 export default function ContactFormSection() {
   const { t } = useLanguage();
   const [form, setForm]           = useState<FormState>(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus]         = useState<'idle' | 'success' | 'error'>('idle');
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
@@ -68,19 +65,20 @@ export default function ContactFormSection() {
     setSubmitting(true);
     setStatus('idle');
     try {
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          from_name:  `${form.firstName} ${form.lastName}`,
-          from_email: form.email,
-          reply_to:   form.email,
-          plan:       form.plan    || 'Not specified',
-          location:   form.location || 'Not specified',
-          date:       form.date    || 'Not specified',
-        },
-        PUBLIC_KEY,
-      );
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          plan: form.plan,
+          location: form.location,
+          date: form.date,
+          turnstileToken,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed');
       setStatus('success');
       setForm(initialForm);
     } catch {
@@ -278,11 +276,20 @@ export default function ContactFormSection() {
               </motion.div>
             )}
 
+            {/* Turnstile CAPTCHA */}
+            <motion.div variants={fadeUp} className="mb-4">
+              <Turnstile
+                sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                onVerify={(token) => setTurnstileToken(token)}
+                theme="light"
+              />
+            </motion.div>
+
             {/* Submit */}
             <motion.div variants={fadeUp}>
               <motion.button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || !turnstileToken}
                 whileHover={submitting ? {} : { scale: 1.02 }}
                 whileTap={submitting ? {} : { scale: 0.97 }}
                 className="inline-flex items-center gap-3 bg-gray-900 text-white

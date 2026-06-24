@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-const PUBLIC_PREFIXES = ['/_next', '/api/webhooks', '/sign-in', '/sign-up', '/auth/callback', '/auth/confirm', '/favicon'];
+const PUBLIC_PREFIXES = ['/_next', '/sign-in', '/sign-up', '/auth/callback', '/auth/confirm', '/favicon'];
 
 const PROTECTED_PREFIXES = ['/account', '/admin', '/api/admin'];
 
@@ -38,13 +38,13 @@ function applySecurityHeaders(response: NextResponse): NextResponse {
   // - frame-src: Stripe payment iframes
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://images.unsplash.com https://placehold.co https://i.pravatar.cc",
     "media-src 'self' https://res.cloudinary.com",
     `connect-src 'self' https://${process.env.NEXT_PUBLIC_SUPABASE_URL?.replace('https://', '')} wss://${process.env.NEXT_PUBLIC_SUPABASE_URL?.replace('https://', '')} https://api.stripe.com`,
-    "frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com",
+    "frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com https://challenges.cloudflare.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
