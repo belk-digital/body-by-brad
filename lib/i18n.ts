@@ -1,4 +1,4 @@
-export type Language = 'en' | 'es';
+﻿export type Language = 'en' | 'es';
 
 const en = {
   // ── Navbar / Menu overlay ─────────────────────────────────────────────────
@@ -12,24 +12,24 @@ const en = {
   merchandiseLabel: 'Merchandise',
 
   // ── Hero ─────────────────────────────────────────────────────────────────
-  heroDescRight: "Charleston's premier destination for elite fitness, bringing high-performance coaching and results-driven training to South Carolina.",
+  heroDescRight: "1-on-1 personal training, group fitness classes, and online coaching — tailored to your body, your goals, and your schedule.",
   heroDescLeft: 'personal training built around your goals, strength level, schedule, and long-term fitness',
-  heroHeadline1: 'WHERE EFFORT',
-  heroHeadline2: 'BECOMES',
-  heroHeadline3: 'TRANSFORMATION',
-  yearsLabel: 'years of clients',
-  sessionsLabel: 'clients served',
+  heroHeadline1: "CHARLESTON'S #1",
+  heroHeadline2: 'PERSONAL TRAINER',
+  heroHeadline3: '— BUILT FOR YOU.',
+  yearsLabel: 'Years Training Charleston Clients',
+  sessionsLabel: 'Sessions Coached',
 
   // ── About hero ───────────────────────────────────────────────────────────
-  aboutHeroDesc: 'Body By Brad is more than a fitness brand. It’s a movement built around helping everyday people become stronger, healthier, more confident, and more accountable through expert coaching, proven training methods, and supportive community.',
+  aboutHeroDesc: "Body By Brad is more than a fitness brand. It's a movement built around helping everyday people become stronger, healthier, more confident, and more accountable through expert coaching, proven training methods, and supportive community.",
   aboutHeroL1: 'MEET BRAD —',
   aboutHeroL2: 'THE COACH BEHIND THE MOVEMENT',
   aboutBioParagraphs: [
-    'After playing football at The Citadel and graduating in 2019, I stepped into Corporate America with ambition and a full head of steam. It didn’t take long to realize that the traditional path wasn’t where I was meant to be.',
-    'I walked away from the desk job, earned my ISSA certification, and built what would become Body By Brad — a fitness and lifestyle brand rooted in energy, community, and intentional movement.',
-    'Since then, I’ve had the opportunity to inspire thousands of people through high-energy workouts, unforgettable events, online coaching, and a mindset built around consistency, confidence, and showing up for yourself. Known for my motivating coaching style, contagious energy, and fire playlists, my goal has always been to make fitness something people genuinely look forward to.',
-    'Whether you’re training with me in a group class, joining a community run, following an online program, or working one-on-one, my focus is the same: helping people build strength, confidence, discipline, and routines that actually last.',
-    'Fitness changed my life — and now I’m here to help others change theirs. Come redefine your routine with me!',
+    "After playing football at The Citadel and graduating in 2019, I stepped into Corporate America with ambition and a full head of steam. It didn't take long to realize that the traditional path wasn't where I was meant to be.",
+    "I walked away from the desk job, earned my ISSA certification, and built what would become Body By Brad — a fitness and lifestyle brand rooted in energy, community, and intentional movement.",
+    "Since then, I've had the opportunity to inspire thousands of people through high-energy workouts, unforgettable events, online coaching, and a mindset built around consistency, confidence, and showing up for yourself. Known for my motivating coaching style, contagious energy, and fire playlists, my goal has always been to make fitness something people genuinely look forward to.",
+    "Whether you're training with me in a group class, joining a community run, following an online program, or working one-on-one, my focus is the same: helping people build strength, confidence, discipline, and routines that actually last.",
+    "Fitness changed my life — and now I'm here to help others change theirs. Come redefine your routine with me!",
   ],
   aboutBioName: 'Coach Brad',
   aboutBioRole: 'Founder & Head Coach',
@@ -81,9 +81,9 @@ const en = {
 
   // ── BMI ──────────────────────────────────────────────────────────────────
   healthTools: 'Health Tools',
-  bmiHeadingL1: 'Know your',
-  bmiHeadingL2: 'numbers.',
-  bmiDesc: 'Use our BMI calculator to understand your body composition and take the first step toward your fitness goals.',
+  bmiHeadingL1: 'Know Your',
+  bmiHeadingL2: 'Numbers.',
+  bmiDesc: 'Every Body By Brad program starts with understanding where you are right now. Use our free BMI calculator as a starting point — then book a free strategy call so we can dig into what the numbers actually mean for your specific goals.',
   heightLabel: 'Height',
   weightLabel: 'Weight',
   feetLabel: 'Feet',
@@ -91,7 +91,7 @@ const en = {
   calculateBtn: 'Calculate BMI',
   yourBMI: 'Your BMI',
   bmiPlaceholder: 'Enter your details and\ncalculate your BMI',
-  bookSession: 'Book a session ↗',
+  bookSession: 'Book a Free Call ↗',
   scaleUnder: 'Under',
   scaleNormal: 'Normal',
   scaleOver: 'Over',
@@ -106,21 +106,25 @@ const en = {
   bmiObeseTip: "A structured program can get you back on track. Let's get started today.",
 
   // ── Testimonials ─────────────────────────────────────────────────────────
-  testimonialsL1: 'WHAT THEY',
-  testimonialsL2: 'ARE SAYING',
+  testimonialsL1: 'WHAT CHARLESTON',
+  testimonialsL2: 'CLIENTS SAY',
 
   // ── FAQ ──────────────────────────────────────────────────────────────────
   faqLabel: 'FAQ',
-  faqHeadingL1: 'Frequently',
-  faqHeadingL2: 'Asked',
-  faqSubtitle: 'Find answers to common questions',
+  faqHeadingL1: 'Frequently Asked',
+  faqHeadingL2: 'Questions',
+  faqSubtitle: "Got questions about working with Body By Brad? Here are the ones we hear most — answered directly.",
   faqItems: [
-    { q: 'What types of training do you offer?', a: "I offer one-on-one personal training, high-energy group fitness classes, and fully structured online coaching programs. Whether you want to train in person in Charleston or from anywhere in the world, there's a plan built for you." },
-    { q: 'How do I get started?', a: "Getting started is simple — reach out through the contact form or DM me on Instagram. We'll schedule a quick call to talk about your goals, current fitness level, and which program is the best fit for you." },
-    { q: 'Do I need any equipment for online coaching?', a: "Not necessarily. Programs are tailored to what you have available — whether that's a full gym, a set of dumbbells, or just your bodyweight. I'll build around your setup." },
-    { q: 'How quickly will I see results?', a: "Most clients notice real changes within 4–8 weeks when they're consistent with training and nutrition. Results vary depending on your starting point, goals, and commitment — but I'll be checking in every step of the way to make sure you're on track." },
-    { q: 'What are the Cooldown events?', a: "Cooldown events are community fitness experiences I host in Charleston — think group workouts, great music, and good people. They're open to all fitness levels and a great way to experience the BBB community before committing to a program." },
-    { q: 'What is your cancellation policy?', a: 'For in-person sessions, I ask for at least 24 hours notice for cancellations. Online coaching is billed monthly and can be paused or cancelled before the next billing cycle with no hidden fees.' },
+    { q: 'What types of training does Body By Brad offer?', a: "Body By Brad offers three core services in Charleston, SC: (1) 1-on-1 personal training — fully customized sessions built around your goals and schedule; (2) Group fitness classes — high-energy, community-driven workouts focused on sustainable fat loss; and (3) Online coaching — custom programming with weekly check-ins and video reviews for clients anywhere in the world." },
+    { q: 'How do I get started with personal training at Body By Brad?', a: "Getting started is simple. Book a free strategy call — no commitment required. During the call, we'll discuss your goals, current fitness level, and which BBB program is the right fit. From there, we'll schedule your first session or set up your online coaching account within 48 hours." },
+    { q: 'Do I need gym equipment to use the online coaching program?', a: "No — you don't need a fully equipped gym to start. Every BBB online coaching program is customized to the equipment you have available, whether that's a full commercial gym, a basic home setup, or just your bodyweight. Coach Brad designs your program around your resources, not the other way around." },
+    { q: 'How quickly will I see results from personal training?', a: "Most BBB clients notice visible changes within 4 to 8 weeks — improved energy, better sleep, and early physical changes. Significant body composition changes typically take 10 to 16 weeks with consistent training and nutritional habits. The clients who show up and follow the plan consistently are the ones who transform." },
+    { q: 'How much does a personal trainer cost in Charleston, SC?', a: "Personal trainer rates in Charleston, SC typically range from $50 to $120 per session, depending on credentials, experience, and session format. Body By Brad offers flexible packages for 1-on-1 training, group fitness classes, and online coaching — book a free consultation to discuss which package fits your goals and budget." },
+    { q: 'What are the BBB Cooldown Events?', a: "The BBB Cooldown Events are Body By Brad's signature fitness community events held throughout Charleston, SC. Part workout, part social gathering, these events are open to clients and non-clients alike — a chance to train together, connect with Charleston's fitness community, and experience what BBB is about before committing to a program." },
+    { q: 'Is online personal training as effective as in-person training?', a: "Yes — when the coaching is structured correctly. Research consistently shows that online personal training produces comparable fat loss and strength gains to in-person training when accountability and check-ins are in place. BBB's online coaching includes weekly progress check-ins, video form reviews, and direct access to Coach Brad." },
+    { q: 'What certifications does Coach Brad hold?', a: "Coach Brad is an ISSA Certified Personal Trainer — one of the most widely recognized personal training certifications in the fitness industry. He also brings a competitive athletic background as a former football player at The Citadel, a Division I military college in Charleston, SC." },
+    { q: 'Do you serve clients outside of Charleston, SC?', a: "Absolutely. While Body By Brad is based in Charleston, SC and serves clients throughout the greater Charleston area — including Mount Pleasant, West Ashley, North Charleston, James Island, and Summerville — the online coaching program is available to clients anywhere in the United States." },
+    { q: 'What is your cancellation policy?', a: "BBB asks for at least 24 hours' notice to cancel or reschedule a session without a charge. Late cancellations or no-shows are subject to a session fee. For online coaching, programs can be paused or adjusted — contact Coach Brad directly and we'll work something out." },
   ],
 
   // ── Transformation ───────────────────────────────────────────────────────
@@ -136,10 +140,10 @@ const en = {
 
   // ── CTA ──────────────────────────────────────────────────────────────────
   ctaLabel: 'Body By Brad',
-  ctaL1: 'Join The',
-  ctaL2: 'Movement',
-  ctaDesc: "Train harder. Live better. Build the physique you’ve always wanted with Charleston’s elite coach.",
-  ctaBtn: 'Book a Free Call',
+  ctaL1: 'BUILD THE BODY',
+  ctaL2: "YOU'VE ALWAYS WANTED.",
+  ctaDesc: "Train with Charleston's most trusted personal coach. Whether you want to lose fat, build real strength, or just feel better in your own body — there's a BBB program built exactly for where you are right now. The first call is free. The only cost is showing up.",
+  ctaBtn: 'Book My Free Consultation',
 
   // ── Contact ──────────────────────────────────────────────────────────────
   contactHeroDesc: "A record of defining moments that reflect Body By Brad's pursuit of excellence and transformation.",
@@ -177,28 +181,28 @@ const en = {
 
   // ── Services Grid ─────────────────────────────────────────────────────────
   servicesGridLabel: 'Our Services',
-  servicesGridHeadingL1: 'WHERE STRENGTH',
-  servicesGridHeadingL2: 'MEETS POWER',
+  servicesGridHeadingL1: 'PERSONAL TRAINING',
+  servicesGridHeadingL2: 'SERVICES IN CHARLESTON, SC',
   servicesGridMore: 'More Services',
   viewDetails: 'View Details',
   servicesGridCards: [
-    { title: 'ONLINE FITNESS TRAINING', desc: 'Train smarter from anywhere with fully custom programs built around your schedule, goals, and equipment.', href: '/services/online-fitness-training' },
-    { title: 'ONLINE COACHING', desc: 'Experience the structure and accountability of dynamic digital coaching programs from anywhere in the world.', href: '/services/online-coaching' },
-    { title: 'AT HOME TRAINING', desc: 'No gym needed. A complete training experience designed around your home setup and schedule.', href: '/services/at-home-training' },
-    { title: 'FITNESS CLASSES', desc: 'Our body fitness classes combine strength training, movements, and community energy built around real results.', href: '/services/fitness-classes' },
+    { title: '1-ON-1 PERSONAL TRAINING', desc: 'Fully customized sessions built around your goals, fitness level, and schedule. Fat loss, muscle gain, or athletic performance — no generic plans, just precise programming with full attention on you.', href: '/personal-training' },
+    { title: 'GROUP FITNESS CLASSES', desc: 'High-energy, community workouts focused on sustainable fat loss. Strategically programmed sessions that hold you accountable and make training something you look forward to.', href: '/group-fitness' },
+    { title: 'ONLINE COACHING', desc: "Custom programming, weekly check-ins, video form reviews, and real accountability — no matter where you are. You get a coach, not a PDF.", href: '/online-coaching' },
+    { title: 'FITNESS CLASSES', desc: 'Our fitness classes combine strength training, functional movements, and community energy built around real, sustainable results for every level.', href: '/services/fitness-classes' },
   ],
 
   // ── Who We Are Section ───────────────────────────────────────────────────
-  whoWeAreLabel: 'About Us',
-  whoWeAreHeadingL1: "WE BELIEVE FITNESS ISN'T",
-  whoWeAreHeadingL2: 'JUST ABOUT LIFTING WEIGHTS',
-  whoWeAreHeadingL3: "IT'S ABOUT BUILDING",
+  whoWeAreLabel: 'About Coach Brad',
+  whoWeAreHeadingL1: 'THE COACH BEHIND',
+  whoWeAreHeadingL2: 'THE MOVEMENT —',
+  whoWeAreHeadingL3: 'ISSA CERTIFIED.',
   yearsOfLabel: 'YEARS OF',
   experienceLabel: 'EXPERIENCE',
-  whoWeAreParagraph1: 'We combine focused personal coaching, high-energy group classes, and accountability-driven programming to deliver a premium fitness experience. Whether your goal is strength, fat loss, or community.',
-  whoWeAreParagraph2: "We don't just train bodies — we train mindsets. Step inside and experience a fitness journey built around consistency, confidence, and showing up for yourself.",
-  whoWeAreAboutBtn: 'About Us',
-  whoWeAreClients: '(500+ Clients)',
+  whoWeAreParagraph1: "After four years playing football at The Citadel — one of the most demanding academic and athletic institutions in the country — I walked away from Corporate America, earned my ISSA personal training certification, and built Body By Brad — a fitness brand rooted in accountability, progressive hard work, and genuine results.",
+  whoWeAreParagraph2: "Since then, I've coached hundreds of people across Charleston through 1-on-1 training, group fitness classes, online programming, and community events unlike anything else in the city. Whether you're starting from scratch or breaking through a plateau, I'll meet you exactly where you are — with a plan built around your body, your goals, and your schedule.",
+  whoWeAreAboutBtn: 'Learn More About Brad',
+  whoWeAreClients: '(200+ Transformations)',
 
   // ── Supplements ──────────────────────────────────────────────────────────
   supplementsTagline: 'Recommended by Brad',
@@ -284,13 +288,13 @@ const es: typeof en = {
   merchandiseLabel: 'Merch',
 
   // ── Hero ─────────────────────────────────────────────────────────────────
-  heroDescRight: 'El destino premier de Charleston para el fitness de élite, con coaching de alto rendimiento y entrenamiento orientado a resultados en Carolina del Sur.',
+  heroDescRight: 'Entrenamiento personal 1-a-1, clases grupales de fitness y coaching online — diseñados para tu cuerpo, tus metas y tu horario.',
   heroDescLeft: 'entrenamiento personalizado diseñado en torno a tus metas, nivel de fuerza, horario y bienestar a largo plazo',
-  heroHeadline1: 'DONDE EL ESFUERZO',
-  heroHeadline2: 'SE CONVIERTE EN',
-  heroHeadline3: 'TRANSFORMACIÓN',
-  yearsLabel: 'años de clientes',
-  sessionsLabel: 'clientes atendidos',
+  heroHeadline1: 'EL #1 ENTRENADOR',
+  heroHeadline2: 'PERSONAL EN',
+  heroHeadline3: 'CHARLESTON, SC',
+  yearsLabel: 'Años Entrenando Clientes',
+  sessionsLabel: 'Sesiones Realizadas',
 
   // ── About hero ───────────────────────────────────────────────────────────
   aboutHeroDesc: 'Body By Brad es más que una marca de fitness. Es un movimiento dedicado a ayudar a las personas a ser más fuertes, saludables, seguras y responsables a través de coaching experto, métodos de entrenamiento probados y una comunidad de apoyo.',
@@ -378,8 +382,8 @@ const es: typeof en = {
   bmiObeseTip: 'Un programa estructurado puede ponerte de nuevo en camino. Empecemos hoy.',
 
   // ── Testimonials ─────────────────────────────────────────────────────────
-  testimonialsL1: 'LO QUE DICEN',
-  testimonialsL2: 'NUESTROS CLIENTES',
+  testimonialsL1: 'LO QUE DICEN LOS',
+  testimonialsL2: 'CLIENTES DE CHARLESTON',
 
   // ── FAQ ──────────────────────────────────────────────────────────────────
   faqLabel: 'PREGUNTAS',
@@ -408,10 +412,10 @@ const es: typeof en = {
 
   // ── CTA ──────────────────────────────────────────────────────────────────
   ctaLabel: 'Body By Brad',
-  ctaL1: 'Únete Al',
-  ctaL2: 'Movimiento',
-  ctaDesc: 'Entrena más duro. Vive mejor. Construye el físico que siempre quisiste con el entrenador élite de Charleston.',
-  ctaBtn: 'Reserva una Llamada',
+  ctaL1: 'CONSTRUYE EL CUERPO',
+  ctaL2: 'QUE SIEMPRE QUISISTE.',
+  ctaDesc: 'Entrena con el entrenador más confiable de Charleston. Ya sea que quieras perder grasa, ganar fuerza real o simplemente sentirte mejor — hay un programa BBB diseñado exactamente para donde estás ahora.',
+  ctaBtn: 'Reserva Mi Consulta Gratis',
 
   // ── Contact ──────────────────────────────────────────────────────────────
   contactHeroDesc: 'Un registro de momentos definitorios que reflejan la búsqueda de excelencia y transformación de Body By Brad.',

@@ -84,7 +84,7 @@ export default function WhoWeAreSection() {
           >
             <img
               src={LEFT_IMAGE}
-              alt="Body By Brad training"
+              alt="Coach Brad — ISSA certified personal trainer and founder of Body By Brad, Charleston SC"
               className="h-full w-full object-cover"
               loading="lazy"
               draggable={false}
@@ -194,7 +194,7 @@ export default function WhoWeAreSection() {
           >
             <img
               src={RIGHT_IMAGE}
-              alt="Body By Brad coaching"
+              alt="Body By Brad training session in Charleston SC — personal coaching and fitness community"
               className="h-full w-full object-cover object-top"
               loading="lazy"
               draggable={false}

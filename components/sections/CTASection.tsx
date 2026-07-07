@@ -81,7 +81,7 @@ export default function CTASection() {
           <motion.h2
             variants={fadeUp}
             className="font-extrabold uppercase leading-[0.88] tracking-tight text-white mb-7"
-            style={{ fontSize: 'clamp(3rem, 8vw, 8.5rem)', fontFamily: 'Unbounded, sans-serif' }}
+            style={{ fontSize: 'clamp(1.8rem, 4vw, 5rem)', fontFamily: 'Unbounded, sans-serif' }}
           >
             <span className="block">{t.ctaL1}</span>
             <span className="block">{t.ctaL2}</span>

@@ -120,7 +120,7 @@ export default function ServicesGridSection() {
             >
               {iconBox(CARD_ICONS[i])}
               <h3 className="mb-2 mt-5 font-bold uppercase text-white text-[20px]" style={{ fontFamily: 'Unbounded, sans-serif' }}>{title}</h3>
-              <p className="text-[16px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>{desc}</p>
+              <p className="text-[14px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>{desc}</p>
               <motion.a
                 href={href}
                 className="relative mt-4 w-fit text-xs font-bold uppercase tracking-widest text-[#E6FF2B]"
@@ -145,7 +145,7 @@ export default function ServicesGridSection() {
           style={{
             gridTemplateColumns: '1fr 1fr 2fr',
             gridTemplateRows:    '1fr 1fr',
-            height:              '540px',
+            height:              '600px',
           }}
         >
           {/* Col 1: card[0] — full height */}
@@ -155,10 +155,10 @@ export default function ServicesGridSection() {
             style={{ backgroundColor: CARD_BG, gridColumn: '1', gridRow: '1 / span 2' }}
           >
             {iconBox(CARD_ICONS[0])}
-            <div className="relative my-4 flex-1 min-h-0 overflow-hidden rounded-xl">
+            <div className="relative my-4 flex-1 min-h-[100px] overflow-hidden rounded-xl">
               <img
                 src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=600&q=80"
-                alt="Online Fitness Training"
+                alt="1-on-1 personal training session in Charleston SC — Body By Brad"
                 className="absolute inset-0 h-full w-full object-cover object-top"
                 loading="lazy"
                 draggable={false}
@@ -167,7 +167,7 @@ export default function ServicesGridSection() {
             <h3 className="mb-2 font-bold uppercase text-white text-[20px]" style={{ fontFamily: 'Unbounded, sans-serif' }}>
               {t.servicesGridCards[0].title}
             </h3>
-            <p className="mb-5 text-[16px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
+            <p className="mb-5 text-[14px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
               {t.servicesGridCards[0].desc}
             </p>
             <motion.a
@@ -196,7 +196,7 @@ export default function ServicesGridSection() {
             <h3 className="mb-2 mt-5 font-bold uppercase text-white text-[20px]" style={{ fontFamily: 'Unbounded, sans-serif' }}>
               {t.servicesGridCards[1].title}
             </h3>
-            <p className="text-[16px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
+            <p className="text-[14px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
               {t.servicesGridCards[1].desc}
             </p>
             <motion.a
@@ -223,7 +223,7 @@ export default function ServicesGridSection() {
             <h3 className="mb-2 mt-5 font-bold uppercase text-white text-[20px]" style={{ fontFamily: 'Unbounded, sans-serif' }}>
               {t.servicesGridCards[2].title}
             </h3>
-            <p className="text-[16px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
+            <p className="text-[14px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
               {t.servicesGridCards[2].desc}
             </p>
             <motion.a
@@ -252,7 +252,7 @@ export default function ServicesGridSection() {
               <h3 className="mb-2 font-bold uppercase text-white text-[20px]" style={{ fontFamily: 'Unbounded, sans-serif' }}>
                 {t.servicesGridCards[3].title}
               </h3>
-              <p className="text-[16px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
+              <p className="text-[14px] leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif', color: '#FFFFFFBF' }}>
                 {t.servicesGridCards[3].desc}
               </p>
               <motion.a

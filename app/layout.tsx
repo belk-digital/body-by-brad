@@ -6,8 +6,15 @@ import { LanguageProvider } from '@/lib/LanguageContext';
 import CartDrawer from '@/components/layout/CartDrawer';
 
 export const metadata: Metadata = {
-  title: 'Body By Brad',
-  description: 'Personal training, group fitness, and online coaching in Charleston, SC.',
+  title: 'Body By Brad | Personal Trainer in Charleston, SC',
+  description: "Charleston's elite personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals. ISSA certified. Real results. Book your free call today.",
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Body By Brad | Personal Trainer in Charleston, SC',
+    description: "Charleston's elite personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals. ISSA certified. Real results.",
+    url: '/',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

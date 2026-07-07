@@ -98,7 +98,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
       >
         <Image
           src={heroBackgroundUrl}
-          alt="Body By Brad"
+          alt="Personal trainer coaching client in Charleston SC gym — Body By Brad"
           fill
           priority
           className="object-cover"
@@ -133,7 +133,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
         >
           <Image
             src={heroModelUrl}
-            alt="Body By Brad model"
+            alt="Coach Brad — ISSA certified personal trainer in Charleston SC, Body By Brad"
             fill
             priority
             className="object-cover object-bottom grayscale select-none sm:object-contain"
@@ -235,7 +235,7 @@ export default function HeroSection({ isLoading }: HeroSectionProps) {
             >
               <Image
                 src={thumbnailImage}
-                alt="Latest BBB Event"
+                alt="Body By Brad Cooldown fitness community event in Charleston SC"
                 fill
                 className="object-cover"
                 sizes="20vw"
