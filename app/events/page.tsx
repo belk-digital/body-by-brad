@@ -45,8 +45,8 @@ const JSONLD_BREADCRUMB = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybrad.com' },
-    { '@type': 'ListItem', position: 2, name: 'Events', item: 'https://www.bodybybrad.com/events' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybradfitness.com' },
+    { '@type': 'ListItem', position: 2, name: 'Events', item: 'https://www.bodybybradfitness.com/events' },
   ],
 };
 
@@ -63,9 +63,9 @@ const JSONLD_EVENT = {
     name: 'Marion Square',
     address: { '@type': 'PostalAddress', addressLocality: 'Charleston', addressRegion: 'SC', addressCountry: 'US' },
   },
-  organizer: { '@type': 'Organization', name: 'Body By Brad', url: 'https://www.bodybybrad.com' },
+  organizer: { '@type': 'Organization', name: 'Body By Brad', url: 'https://www.bodybybradfitness.com' },
   description: "Join Charleston's most anticipated outdoor fitness event. Trainer-led sessions, beginner-friendly environment, community accountability, and real fitness results.",
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://www.bodybybrad.com/register' },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://www.bodybybradfitness.com/register' },
 };
 
 // ─── Data ────────────────────────────────────────────────────────────────────

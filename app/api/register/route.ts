@@ -5,7 +5,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
-const TO_EMAIL = process.env.NOTIFICATION_EMAIL ?? 'brad@bodybybrad.com';
+const TO_EMAIL = process.env.NOTIFICATION_EMAIL ?? 'bradley@bodybybradfitness.com';
 const FROM_EMAIL = 'Body By Brad <onboarding@resend.dev>';
 
 export async function POST(req: Request) {

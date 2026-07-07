@@ -56,11 +56,11 @@ export default async function ServiceDetailPage({
     '@type': 'Service',
     name: service.title,
     description: service.seo.description,
-    url: `https://www.bodybybrad.com/services/${service.slug}`,
+    url: `https://www.bodybybradfitness.com/services/${service.slug}`,
     provider: {
       '@type': 'LocalBusiness',
       name: 'Body By Brad',
-      url: 'https://www.bodybybrad.com',
+      url: 'https://www.bodybybradfitness.com',
       telephone: '',
       address: {
         '@type': 'PostalAddress',
@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({
     },
     offers: {
       '@type': 'Offer',
-      url: 'https://www.bodybybrad.com/fitness-coaching-packages',
+      url: 'https://www.bodybybradfitness.com/fitness-coaching-packages',
       priceCurrency: 'USD',
     },
     image: service.heroImage,

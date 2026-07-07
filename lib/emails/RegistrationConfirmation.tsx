@@ -13,7 +13,7 @@ interface Props {
 export default function RegistrationConfirmation({
   firstName = 'there',
   event = 'Summer Cooldown',
-  siteUrl = 'https://bodybybrad.com',
+  siteUrl = 'https://bodybybradfitness.com',
 }: Props) {
   return (
     <Html>
@@ -107,7 +107,7 @@ export default function RegistrationConfirmation({
               BBB FITNESS<br />Charleston, SC
             </Text>
             <Link href={siteUrl} style={s.footerLink}>
-              bodybybrad.com
+              bodybybradfitness.com
             </Link>
           </Section>
 

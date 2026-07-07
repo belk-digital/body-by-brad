@@ -49,7 +49,7 @@ export default function AreasWeServePage() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Body By Brad',
-    url: 'https://www.bodybybrad.com',
+    url: 'https://www.bodybybradfitness.com',
     description:
       'Body By Brad provides personal training, fitness coaching, weight loss programs, body transformation coaching, and fitness challenges throughout Charleston and surrounding Lowcountry communities.',
     address: {
@@ -90,8 +90,8 @@ export default function AreasWeServePage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybrad.com' },
-      { '@type': 'ListItem', position: 2, name: 'Areas We Serve', item: 'https://www.bodybybrad.com/areas-we-serve-charleston-sc' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybradfitness.com' },
+      { '@type': 'ListItem', position: 2, name: 'Areas We Serve', item: 'https://www.bodybybradfitness.com/areas-we-serve-charleston-sc' },
     ],
   };
 
@@ -102,7 +102,7 @@ export default function AreasWeServePage() {
     provider: {
       '@type': 'LocalBusiness',
       name: 'Body By Brad',
-      url: 'https://www.bodybybrad.com',
+      url: 'https://www.bodybybradfitness.com',
     },
     areaServed: [
       'Charleston, SC', 'Mount Pleasant, SC', 'North Charleston, SC', 'Summerville, SC',

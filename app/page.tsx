@@ -8,7 +8,7 @@ const JSONLD_LOCAL_BUSINESS = {
   name: 'Body By Brad',
   alternateName: 'BBB',
   description: 'Elite personal training, group fitness classes, and online coaching in Charleston, SC. ISSA certified coach Brad, former Citadel football player.',
-  url: 'https://bodybybrad.com/',
+  url: 'https://bodybybradfitness.com/',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Charleston',
@@ -35,7 +35,7 @@ const JSONLD_LOCAL_BUSINESS = {
       credentialCategory: 'Professional Certification',
       name: 'ISSA Certified Personal Trainer',
     },
-    url: 'https://bodybybrad.com/about-brad',
+    url: 'https://bodybybradfitness.com/about-brad',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -69,10 +69,10 @@ const JSONLD_WEBSITE = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Body By Brad',
-  url: 'https://bodybybrad.com/',
+  url: 'https://bodybybradfitness.com/',
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://bodybybrad.com/?s={search_term_string}',
+    target: 'https://bodybybradfitness.com/?s={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 };

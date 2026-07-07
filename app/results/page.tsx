@@ -62,8 +62,8 @@ const JSONLD_BREADCRUMB = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybrad.com' },
-    { '@type': 'ListItem', position: 2, name: 'Results', item: 'https://www.bodybybrad.com/results' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybradfitness.com' },
+    { '@type': 'ListItem', position: 2, name: 'Results', item: 'https://www.bodybybradfitness.com/results' },
   ],
 };
 

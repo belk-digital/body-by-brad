@@ -3,7 +3,7 @@ import { getAllServiceSlugs } from '@/lib/services-data';
 import { getAllAreaSlugs } from '@/lib/areas-data';
 import { supabaseAdmin } from '@/lib/supabase/server';
 
-const SITE_URL = 'https://bodybybrad.com';
+const SITE_URL = 'https://bodybybradfitness.com';
 
 const STATIC_ROUTES = [
   '',

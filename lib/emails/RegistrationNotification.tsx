@@ -102,8 +102,8 @@ export default function RegistrationNotification({
             <Text style={s.footerText}>
               BBB FITNESS<br />Charleston, SC
             </Text>
-            <Link href="https://bodybybrad.com" style={s.footerLink}>
-              bodybybrad.com
+            <Link href="https://bodybybradfitness.com" style={s.footerLink}>
+              bodybybradfitness.com
             </Link>
           </Section>
 

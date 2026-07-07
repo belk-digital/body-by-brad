@@ -46,7 +46,7 @@ export default async function AreaLocationPage({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Body By Brad',
-    url: `https://www.bodybybrad.com/areas-we-serve-charleston-sc/${area.slug}`,
+    url: `https://www.bodybybradfitness.com/areas-we-serve-charleston-sc/${area.slug}`,
     description: area.seo.description,
     address: {
       '@type': 'PostalAddress',

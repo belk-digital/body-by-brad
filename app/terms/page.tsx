@@ -41,7 +41,7 @@ function TermsContent() {
         </PolicySection>
 
         <PolicySection title="3. Account Registration">
-          <p>To access certain features, you must create an account. You are responsible for maintaining the confidentiality of your credentials and for all activity under your account. Notify us immediately of any unauthorized use at <a href="mailto:hello@bodybybrad.com" className="text-zinc-950 underline hover:no-underline">hello@bodybybrad.com</a>.</p>
+          <p>To access certain features, you must create an account. You are responsible for maintaining the confidentiality of your credentials and for all activity under your account. Notify us immediately of any unauthorized use at <a href="mailto:bradley@bodybybradfitness.com" className="text-zinc-950 underline hover:no-underline">bradley@bodybybradfitness.com</a>.</p>
         </PolicySection>
 
         <PolicySection title="4. Payment & Billing">
@@ -94,7 +94,7 @@ function TermsContent() {
         <PolicySection title="12. Contact">
           <p>For any questions about these Terms, please contact us:</p>
           <ul className="list-disc pl-5 space-y-1.5">
-            <li>Email: <a href="mailto:hello@bodybybrad.com" className="text-zinc-950 underline hover:no-underline">hello@bodybybrad.com</a></li>
+            <li>Email: <a href="mailto:bradley@bodybybradfitness.com" className="text-zinc-950 underline hover:no-underline">bradley@bodybybradfitness.com</a></li>
             <li>Location: Charleston, SC, United States</li>
             <li>Website: <a href="/contact" className="text-zinc-950 underline hover:no-underline">Contact form</a></li>
           </ul>

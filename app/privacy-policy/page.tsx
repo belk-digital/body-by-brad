@@ -77,7 +77,7 @@ function PrivacyContent() {
             <li>Request a portable copy of your data</li>
             <li>Withdraw consent at any time where processing is based on consent</li>
           </ul>
-          <p>To exercise any of these rights, contact us at <a href="mailto:hello@bodybybrad.com" className="text-zinc-950 underline hover:no-underline">hello@bodybybrad.com</a>.</p>
+          <p>To exercise any of these rights, contact us at <a href="mailto:bradley@bodybybradfitness.com" className="text-zinc-950 underline hover:no-underline">bradley@bodybybradfitness.com</a>.</p>
         </PolicySection>
 
         <PolicySection title="6. Cookies">
@@ -95,7 +95,7 @@ function PrivacyContent() {
         <PolicySection title="9. Contact Us">
           <p>If you have any questions or concerns about this Privacy Policy, please reach out:</p>
           <ul className="list-disc pl-5 space-y-1.5">
-            <li>Email: <a href="mailto:hello@bodybybrad.com" className="text-zinc-950 underline hover:no-underline">hello@bodybybrad.com</a></li>
+            <li>Email: <a href="mailto:bradley@bodybybradfitness.com" className="text-zinc-950 underline hover:no-underline">bradley@bodybybradfitness.com</a></li>
             <li>Location: Charleston, SC, United States</li>
             <li>Website: <a href="/contact" className="text-zinc-950 underline hover:no-underline">Contact form</a></li>
           </ul>

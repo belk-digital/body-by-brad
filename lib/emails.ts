@@ -5,7 +5,7 @@ import ContactConfirmation from './emails/ContactConfirmation';
 import RegistrationNotification from './emails/RegistrationNotification';
 import RegistrationConfirmation from './emails/RegistrationConfirmation';
 
-const SITE_URL_DEFAULT = 'https://bodybybrad.com';
+const SITE_URL_DEFAULT = 'https://bodybybradfitness.com';
 
 export async function contactNotificationEmail(data: {
   firstName: string;

@@ -11,7 +11,7 @@ interface Props {
 
 export default function ContactConfirmation({
   firstName = 'there',
-  siteUrl = 'https://bodybybrad.com',
+  siteUrl = 'https://bodybybradfitness.com',
 }: Props) {
   return (
     <Html>
@@ -85,7 +85,7 @@ export default function ContactConfirmation({
               BBB FITNESS<br />Charleston, SC
             </Text>
             <Link href={siteUrl} style={s.footerLink}>
-              bodybybrad.com
+              bodybybradfitness.com
             </Link>
           </Section>
 

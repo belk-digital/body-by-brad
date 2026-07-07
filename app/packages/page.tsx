@@ -76,7 +76,7 @@ const JSONLD_SERVICE = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Body By Brad',
-    url: 'https://www.bodybybrad.com',
+    url: 'https://www.bodybybradfitness.com',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '466 Savannah Hwy',
@@ -98,9 +98,9 @@ const JSONLD_BREADCRUMB = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybrad.com' },
-    { '@type': 'ListItem', position: 2, name: 'Coaching Services', item: 'https://www.bodybybrad.com/services' },
-    { '@type': 'ListItem', position: 3, name: 'Fitness Coaching Packages', item: 'https://www.bodybybrad.com/fitness-coaching-packages' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybradfitness.com' },
+    { '@type': 'ListItem', position: 2, name: 'Coaching Services', item: 'https://www.bodybybradfitness.com/services' },
+    { '@type': 'ListItem', position: 3, name: 'Fitness Coaching Packages', item: 'https://www.bodybybradfitness.com/fitness-coaching-packages' },
   ],
 };
 

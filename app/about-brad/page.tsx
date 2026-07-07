@@ -71,7 +71,7 @@ const JSONLD_PERSON = {
   jobTitle: 'Personal Trainer & Fitness Coach',
   description:
     'Charleston-based fitness coach, personal trainer, and community leader dedicated to helping individuals achieve sustainable weight loss, body transformation, improved strength, and long-term health through personalized coaching and accountability.',
-  url: 'https://bodybybrad.com/about-brad',
+  url: 'https://bodybybradfitness.com/about-brad',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Charleston',
@@ -96,7 +96,7 @@ const JSONLD_LOCAL_BUSINESS = {
   name: 'Body By Brad',
   description:
     'Body By Brad combines personalized coaching, evidence-based training, nutrition guidance, accountability systems, and community support to help clients achieve sustainable fitness results.',
-  url: 'https://bodybybrad.com',
+  url: 'https://bodybybradfitness.com',
   address: {
     '@type': 'PostalAddress',
     streetAddress: '466 Savannah Hwy',
@@ -123,8 +123,8 @@ const JSONLD_BREADCRUMB = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://bodybybrad.com' },
-    { '@type': 'ListItem', position: 2, name: 'About Brad', item: 'https://bodybybrad.com/about-brad' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://bodybybradfitness.com' },
+    { '@type': 'ListItem', position: 2, name: 'About Brad', item: 'https://bodybybradfitness.com/about-brad' },
   ],
 };
 
