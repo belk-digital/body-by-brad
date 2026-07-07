@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { CartProvider } from '@/lib/cart/CartContext';
 import { AuthProvider } from '@/lib/auth/AuthContext';
 import { LanguageProvider } from '@/lib/LanguageContext';
 import CartDrawer from '@/components/layout/CartDrawer';
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export const metadata: Metadata = {
   title: 'Body By Brad | Personal Trainer in Charleston, SC',
@@ -40,6 +43,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://res.cloudinary.com/dgrrovta3/image/upload/f_auto,q_auto/v1778894870/Untitled_flr1cs.png"
           fetchPriority="high"
         />
+        {GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body suppressHydrationWarning>
         <LanguageProvider>
