@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
+import type Stripe from 'stripe';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { getStripe } from '@/lib/stripe';
 import { rateLimit } from '@/lib/rate-limit';
 import type { CartItem } from '@/lib/types';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   const limited = rateLimit(req, { limit: 10, windowMs: 60_000 });
@@ -74,7 +73,7 @@ export async function POST(req: Request) {
 
   let session: Stripe.Checkout.Session;
   try {
-    session = await stripe.checkout.sessions.create({
+    session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       ...(customerEmail ? { customer_email: customerEmail } : {}),
       metadata: {

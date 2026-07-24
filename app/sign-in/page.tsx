@@ -1,6 +1,12 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import SignInForm from './SignInForm';
+
+export const metadata: Metadata = {
+  title: 'Sign In | Body By Brad',
+  robots: { index: false, follow: false },
+};
 
 const IMAGE =
   'https://res.cloudinary.com/dgrrovta3/image/upload/v1779139268/IMG_3044_vsxjow.jpg';

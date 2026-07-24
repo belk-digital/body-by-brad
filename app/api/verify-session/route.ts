@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
+import type Stripe from 'stripe';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { getStripe } from '@/lib/stripe';
 import { rateLimit } from '@/lib/rate-limit';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function GET(req: Request) {
   const limited = rateLimit(req, { limit: 10, windowMs: 60_000 });
@@ -30,7 +29,7 @@ export async function GET(req: Request) {
   // Retrieve the Stripe session
   let session: Stripe.Checkout.Session;
   try {
-    session = await stripe.checkout.sessions.retrieve(sessionId, {
+    session = await getStripe().checkout.sessions.retrieve(sessionId, {
       expand: ['line_items.data.price.product'],
     });
   } catch {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'About Body By Brad | Charleston Personal Trainer & Fitness Coach',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
       "Meet Brad, Charleston's trusted fitness coach helping individuals transform their health through personal training, fitness coaching, nutrition guidance, accountability, and community-driven fitness challenges.",
     url: '/about-brad',
     type: 'profile',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

@@ -20,10 +20,13 @@ export async function generateMetadata({
     title: area.seo.title,
     description: area.seo.description,
     keywords: area.seo.keywords,
+    alternates: { canonical: `/areas-we-serve/${area.slug}` },
     openGraph: {
       title: area.seo.title,
       description: area.seo.description,
+      url: `/areas-we-serve/${area.slug}`,
       type: 'website',
+      images: [{ url: area.heroImage, width: 1920, height: 1080, alt: area.tagline }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -46,7 +49,7 @@ export default async function AreaLocationPage({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Body By Brad',
-    url: `https://www.bodybybradfitness.com/areas-we-serve-charleston-sc/${area.slug}`,
+    url: `https://www.bodybybradfitness.com/areas-we-serve/${area.slug}`,
     description: area.seo.description,
     address: {
       '@type': 'PostalAddress',

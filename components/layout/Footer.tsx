@@ -3,8 +3,13 @@
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import { logoUrl, socialMenuItems } from '@/lib/constants';
+import { INSTAGRAM_URL } from '@/lib/site';
 import { useLanguage } from '@/lib/LanguageContext';
 import TextRoll from '@/components/ui/TextRoll';
+
+const SOCIAL_LINKS: Record<string, string> = {
+  Instagram: INSTAGRAM_URL,
+};
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -75,7 +80,9 @@ export default function Footer() {
             {socialMenuItems.map((s, i) => (
               <motion.a
                 key={s}
-                href="#"
+                href={SOCIAL_LINKS[s] ?? '#'}
+                target={SOCIAL_LINKS[s] ? '_blank' : undefined}
+                rel={SOCIAL_LINKS[s] ? 'noreferrer noopener' : undefined}
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

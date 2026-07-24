@@ -20,9 +20,11 @@ export async function generateMetadata({
     title: service.seo.title,
     description: service.seo.description,
     keywords: service.seo.keywords,
+    alternates: { canonical: `/services/${service.slug}` },
     openGraph: {
       title: service.seo.title,
       description: service.seo.description,
+      url: `/services/${service.slug}`,
       images: [
         {
           url: service.heroImage,

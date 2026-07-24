@@ -5,19 +5,30 @@ import { CartProvider } from '@/lib/cart/CartContext';
 import { AuthProvider } from '@/lib/auth/AuthContext';
 import { LanguageProvider } from '@/lib/LanguageContext';
 import CartDrawer from '@/components/layout/CartDrawer';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '@/lib/site';
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export const metadata: Metadata = {
-  title: 'Body By Brad | Personal Trainer in Charleston, SC',
-  description: "Charleston's elite personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals. ISSA certified. Real results. Book your free call today.",
+  metadataBase: new URL(SITE_URL),
+  title: 'Body By Brad | Top Personal Trainer in Charleston, SC',
+  description: "Charleston's top-rated personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals. ISSA certified. Real results. Book your free call today.",
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Body By Brad | Personal Trainer in Charleston, SC',
-    description: "Charleston's elite personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals. ISSA certified. Real results.",
+    title: 'Body By Brad | Top Personal Trainer in Charleston, SC',
+    description: "Charleston's top-rated personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals. ISSA certified. Real results.",
     url: '/',
     type: 'website',
+    siteName: 'Body By Brad',
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Body By Brad | Top Personal Trainer in Charleston, SC',
+    description: "Charleston's top-rated personal trainer. 1-on-1 coaching, group fitness classes, and online programs built around your goals.",
+    images: [DEFAULT_OG_IMAGE.url],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

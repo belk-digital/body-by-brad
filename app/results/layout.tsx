@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Real Fitness Transformation Results in Charleston | Body By Brad',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
       'See real fitness transformation results from Charleston clients. Weight loss success stories, body transformations, and strength gains through expert coaching.',
     url: '/results',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

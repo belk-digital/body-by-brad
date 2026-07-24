@@ -8,7 +8,7 @@ const JSONLD_LOCAL_BUSINESS = {
   name: 'Body By Brad',
   alternateName: 'BBB',
   description: 'Elite personal training, group fitness classes, and online coaching in Charleston, SC. ISSA certified coach Brad, former Citadel football player.',
-  url: 'https://bodybybradfitness.com/',
+  url: 'https://www.bodybybradfitness.com/',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Charleston',
@@ -35,8 +35,9 @@ const JSONLD_LOCAL_BUSINESS = {
       credentialCategory: 'Professional Certification',
       name: 'ISSA Certified Personal Trainer',
     },
-    url: 'https://bodybybradfitness.com/about-brad',
+    url: 'https://www.bodybybradfitness.com/about-brad',
   },
+  sameAs: ['https://www.instagram.com/bradnboujee_'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Personal Training Services',
@@ -69,12 +70,7 @@ const JSONLD_WEBSITE = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Body By Brad',
-  url: 'https://bodybybradfitness.com/',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://bodybybradfitness.com/?s={search_term_string}',
-    'query-input': 'required name=search_term_string',
-  },
+  url: 'https://www.bodybybradfitness.com/',
 };
 import { AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';

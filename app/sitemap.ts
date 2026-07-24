@@ -1,9 +1,13 @@
 import type { MetadataRoute } from 'next';
 import { getAllServiceSlugs } from '@/lib/services-data';
 import { getAllAreaSlugs } from '@/lib/areas-data';
+import { getAllPostSlugs } from '@/lib/blog-data';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { SITE_URL } from '@/lib/site';
 
-const SITE_URL = 'https://bodybybradfitness.com';
+// Rendered per request: product entries come from Supabase, which isn't
+// reachable during the build.
+export const dynamic = 'force-dynamic';
 
 const STATIC_ROUTES = [
   '',
@@ -36,15 +40,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
   }));
 
-  const { data: products } = await supabaseAdmin
-    .from('products')
-    .select('id')
-    .eq('active', true);
-
-  const productEntries: MetadataRoute.Sitemap = (products ?? []).map(({ id }) => ({
-    url: `${SITE_URL}/merchandise/${id}`,
+  const blogEntries: MetadataRoute.Sitemap = getAllPostSlugs().map((slug) => ({
+    url: `${SITE_URL}/blog/${slug}`,
     lastModified: new Date(),
   }));
 
-  return [...staticEntries, ...serviceEntries, ...areaEntries, ...productEntries];
+  // A Supabase outage shouldn't take the whole sitemap down with it.
+  let productEntries: MetadataRoute.Sitemap = [];
+  try {
+    const { data: products } = await supabaseAdmin
+      .from('products')
+      .select('id')
+      .eq('active', true);
+
+    productEntries = (products ?? []).map(({ id }) => ({
+      url: `${SITE_URL}/merchandise/${id}`,
+      lastModified: new Date(),
+    }));
+  } catch (err) {
+    console.error('sitemap: failed to load products', err);
+  }
+
+  return [...staticEntries, ...serviceEntries, ...areaEntries, ...blogEntries, ...productEntries];
 }

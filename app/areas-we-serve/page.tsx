@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import AreasContent from './AreasContent';
+import { DEFAULT_OG_IMAGE } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Personal Trainer Charleston SC | Areas We Serve | Fitness Coaching by Body By Brad',
@@ -19,13 +20,14 @@ export const metadata: Metadata = {
     'online personal trainer',
     'fitness training Lowcountry SC',
   ],
-  alternates: { canonical: '/areas-we-serve-charleston-sc' },
+  alternates: { canonical: '/areas-we-serve' },
   openGraph: {
     title: 'Personal Training & Fitness Coaching Throughout Charleston SC | Areas We Serve',
     description:
       'Body By Brad provides personal training, fitness coaching, weight loss programs, and body transformation coaching throughout Charleston and surrounding Lowcountry communities.',
-    url: '/areas-we-serve-charleston-sc',
+    url: '/areas-we-serve',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
@@ -91,7 +93,7 @@ export default function AreasWeServePage() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.bodybybradfitness.com' },
-      { '@type': 'ListItem', position: 2, name: 'Areas We Serve', item: 'https://www.bodybybradfitness.com/areas-we-serve-charleston-sc' },
+      { '@type': 'ListItem', position: 2, name: 'Areas We Serve', item: 'https://www.bodybybradfitness.com/areas-we-serve' },
     ],
   };
 

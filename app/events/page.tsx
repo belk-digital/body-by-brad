@@ -8,6 +8,7 @@ import { PauseIcon, PlayIcon, Dumbbell, Calendar, ChevronLeft, ChevronRight } fr
 import { IoChevronForward } from 'react-icons/io5';
 
 import { socialMenuItems } from '@/lib/constants';
+import { INSTAGRAM_URL } from '@/lib/site';
 import type { CalendarEvent } from '@/components/ui/EventCalendar';
 import StairsPreloader from '@/components/StairsPreloader';
 import Navbar from '@/components/layout/Navbar';
@@ -109,9 +110,9 @@ const TICKER_ITEMS = ['HIGHLIGHTS', 'PUSHING LIMITS', 'CHASING GOALS', 'BBB EVEN
 const TICKER_DOUBLED = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
 const UPCOMING_EVENTS = [
-  { title: "Let's Run CHS – Body By Brad Events",  desc: "Join Charleston's legendary run club Let's Run CHS for weekly community runs powered by Body By Brad. All paces welcome.", href: '#' },
-  { title: 'Body By Brad Events – Summer 2026',    desc: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed.',                    href: '#' },
-  { title: 'BBB Outdoor HIIT – July Edition',      desc: 'High-intensity interval training on the waterfront. Push your limits with Coach Brad and the BBB community.',            href: '#' },
+  { title: "Let's Run CHS – Body By Brad Events",  desc: "Join Charleston's legendary run club Let's Run CHS for weekly community runs powered by Body By Brad. All paces welcome.", href: '/events#calendar' },
+  { title: 'Body By Brad Events – Summer 2026',    desc: 'Join us at Marion Square for a free outdoor workout open to all fitness levels — no equipment needed.',                    href: '/register' },
+  { title: 'BBB Outdoor HIIT – July Edition',      desc: 'High-intensity interval training on the waterfront. Push your limits with Coach Brad and the BBB community.',            href: '/register' },
 ];
 
 const CALENDAR_EVENTS: CalendarEvent[] = [
@@ -725,7 +726,7 @@ export default function EventsPage() {
                 </motion.h2>
                 <div className="flex flex-col">
                   {socialMenuItems.map((item, i) => (
-                    <motion.a key={item} href="#" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }} className="flex items-center justify-between py-3.5 sm:py-4 border-b border-zinc-200 group">
+                    <motion.a key={item} href={item === 'Instagram' ? INSTAGRAM_URL : '#'} target={item === 'Instagram' ? '_blank' : undefined} rel={item === 'Instagram' ? 'noreferrer noopener' : undefined} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }} className="flex items-center justify-between py-3.5 sm:py-4 border-b border-zinc-200 group">
                       <span className="text-[11px] font-extrabold uppercase tracking-widest text-zinc-950 group-hover:text-[#1A1A1A] transition-colors duration-200">{item}</span>
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 group-hover:bg-[#1A1A1A] transition-all duration-200">
                         <IoChevronForward size={11} className="text-zinc-950 group-hover:text-[#E6FF2B] transition-colors duration-200" />

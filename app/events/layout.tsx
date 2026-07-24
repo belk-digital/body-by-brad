@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Charleston Fitness Events & Wellness Challenges | Body By Brad',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
       "Join Charleston's premier fitness events, outdoor workouts, wellness workshops, and transformation challenges. Train with expert coaches and build healthy habits.",
     url: '/events',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

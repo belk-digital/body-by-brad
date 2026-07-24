@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { AnimatePresence, motion, useInView, useMotionValueEvent, useScroll, type Variants } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
@@ -9,102 +10,41 @@ import Navbar from '@/components/layout/Navbar';
 import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import Footer from '@/components/layout/Footer';
+import { BLOG_POSTS } from '@/lib/blog-data';
+import { bradImagePool } from '@/lib/constants';
 
 const BLOG_FAQ = [
   {
     q: 'What topics does the BBB blog cover?',
-    a: "The blog covers everything that drives real transformation — training techniques, nutrition strategies, mindset shifts, discipline-building habits, and behind-the-scenes looks at the BBB coaching method.",
+    a: "The blog covers what actually drives results — training plans, how to prepare for Charleston running events like the Cooper River Bridge Run, and straight answers to common coaching questions.",
   },
   {
     q: 'How often is new content published?',
-    a: "New posts go up regularly, with topics rotating across training, nutrition, mindset, and client stories. Follow @bradnboujee_ on Instagram to get notified the moment a new article drops.",
+    a: "New posts go up as they're written — no fixed schedule. Follow @bradnboujee_ on Instagram to get notified when a new article drops.",
   },
   {
     q: 'Who writes the blog posts?',
-    a: "Most articles are written by Coach Brad himself, drawing from his 5+ years of coaching experience and 200+ client transformations. Some posts feature guest contributions from the BBB community.",
+    a: "Articles are written by Coach Brad, ISSA Certified Personal Trainer and founder of Body By Brad.",
   },
   {
     q: 'Can I apply the blog advice to my own training?',
-    a: "Absolutely — the content is designed to be immediately actionable. That said, for personalized guidance tailored to your body and goals, working directly with Brad through a coaching program will always get you there faster.",
+    a: "Yes — the content is written to be immediately actionable. For guidance tailored specifically to your body and goals, a coaching program will always get you there faster than a general guide.",
   },
   {
     q: 'Is there a way to suggest a blog topic?',
-    a: "Yes! Reach out through the Contact page or DM on Instagram with your question or topic idea. Brad loves hearing what the community wants to read about next.",
-  },
-  {
-    q: 'Can I share blog posts with friends?',
-    a: "Please do. Every article is free to read and share. If a post helps you, chances are it will help someone you know too — pass it along.",
+    a: "Yes. Reach out through the Contact page or DM on Instagram with a question or topic idea.",
   },
 ];
 
-// ── Data ─────────────────────────────────────────────────────────────────────
+const HERO_IMAGE = BLOG_POSTS[0]?.heroImage;
+const featuredPost = BLOG_POSTS[0];
+const restPosts = BLOG_POSTS.slice(1);
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1600&q=80';
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+}
 
-const FEATURED_POSTS = [
-  {
-    id: 1,
-    category: 'MINDSET',
-    date: 'APR 4, 2026',
-    title: 'THE MINDSET BEHIND EVERY TRANSFORMATION',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80',
-    authorName: 'Coach Brad',
-    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
-  },
-  {
-    id: 2,
-    category: 'TRAINING',
-    date: 'APR 10, 2026',
-    title: "FROM THE GYM TO YOUR GOALS: BRAD'S METHOD",
-    image: 'https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=900&q=80',
-    authorName: 'Coach Brad',
-    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
-  },
-  {
-    id: 3,
-    category: 'NUTRITION',
-    date: 'APR 18, 2026',
-    title: 'FITNESS, NUTRITION, AND PEAK PERFORMANCE',
-    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80',
-    authorName: 'Rita M.',
-    authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=80&q=80',
-  },
-  {
-    id: 4,
-    category: 'ROUTINE',
-    date: 'APR 25, 2026',
-    title: 'BUILDING DISCIPLINE: THE BODY BY BRAD APPROACH',
-    image: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80',
-    authorName: 'Gladys A.',
-    authorAvatar: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?auto=format&fit=crop&w=80&q=80',
-  },
-];
-
-const LATEST_POSTS = [
-  {
-    id: 5,
-    category: 'FITNESS',
-    date: 'APR 29, 2026',
-    title: 'LESSONS FROM 500+ CLIENT TRANSFORMATIONS',
-    image: 'https://images.unsplash.com/photo-1554284126-aa88f22d8b74?auto=format&fit=crop&w=900&q=80',
-    authorName: 'Amanda B.',
-    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80',
-  },
-  {
-    id: 6,
-    category: 'WORKOUT',
-    date: 'MAY 2, 2026',
-    title: 'FROM FIRST REP TO FULL ROUTINE: THE BBB MINDSET',
-    image: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=900&q=80',
-    authorName: 'Coach Brad',
-    authorAvatar: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?auto=format&fit=crop&w=80&q=80',
-  },
-];
-
-// ── Sub-components ────────────────────────────────────────────────────────────
-
-function BlogCard({ post, delay = 0 }: { post: typeof FEATURED_POSTS[0]; delay?: number }) {
+function BlogCard({ post, delay = 0 }: { post: (typeof BLOG_POSTS)[0]; delay?: number }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-8% 0px' });
 
@@ -114,50 +54,54 @@ function BlogCard({ post, delay = 0 }: { post: typeof FEATURED_POSTS[0]; delay?:
       initial={{ opacity: 0, y: 44 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 44 }}
       transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay }}
-      className="group cursor-pointer"
+      className="group"
     >
-      {/* Image */}
-      <div className="relative rounded-2xl overflow-hidden aspect-4/3">
-        <img
-          src={post.image}
-          alt={post.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
-          draggable={false}
-        />
-        {/* Category / date bar */}
-        <div
-          className="absolute bottom-0 left-0 right-0 flex items-center gap-2 px-4 py-3"
-          style={{ background: 'rgba(0,0,0,0.65)' }}
+      <Link href={`/blog/${post.slug}`} className="block">
+        {/* Image */}
+        <div className="relative rounded-2xl overflow-hidden aspect-4/3">
+          <img
+            src={post.heroImage}
+            alt={post.heroImageAlt}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+            draggable={false}
+          />
+          {/* Category / date bar */}
+          <div
+            className="absolute bottom-0 left-0 right-0 flex items-center gap-2 px-4 py-3"
+            style={{ background: 'rgba(0,0,0,0.65)' }}
+          >
+            <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#E6FF2B' }}>
+              {post.category}
+            </span>
+            <span className="text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              / {formatDate(post.datePublished)}
+            </span>
+          </div>
+        </div>
+
+        {/* Title */}
+        <h3
+          className="mt-4 font-extrabold uppercase leading-tight"
+          style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: '#1A1A1A', letterSpacing: '0.01em' }}
         >
-          <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: '#E6FF2B' }}>
-            {post.category}
-          </span>
-          <span className="text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            / {post.date}
+          {post.title}
+        </h3>
+
+        <p className="mt-2 text-sm text-zinc-500 leading-relaxed line-clamp-2">{post.excerpt}</p>
+
+        {/* Author */}
+        <div className="mt-3 flex items-center gap-2.5">
+          <img
+            src={bradImagePool[0]}
+            alt={post.author.name}
+            className="w-7 h-7 rounded-full object-cover shrink-0"
+          />
+          <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: '#1A1A1A' }}>
+            {post.author.name}
           </span>
         </div>
-      </div>
-
-      {/* Title */}
-      <h3
-        className="mt-4 font-extrabold uppercase leading-tight"
-        style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', color: '#1A1A1A', letterSpacing: '0.01em' }}
-      >
-        {post.title}
-      </h3>
-
-      {/* Author */}
-      <div className="mt-3 flex items-center gap-2.5">
-        <img
-          src={post.authorAvatar}
-          alt={post.authorName}
-          className="w-7 h-7 rounded-full object-cover shrink-0"
-        />
-        <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: '#1A1A1A' }}>
-          {post.authorName}
-        </span>
-      </div>
+      </Link>
     </motion.article>
   );
 }
@@ -170,9 +114,7 @@ function BlogContent() {
   const [isScrolled, setIsScrolled] = useState(false);
   const prevScrollY = useRef(0);
 
-  const featuredRef = useRef<HTMLElement>(null);
   const latestRef = useRef<HTMLElement>(null);
-  const featuredInView = useInView(featuredRef, { once: true, margin: '-10% 0px' });
   const latestInView = useInView(latestRef, { once: true, margin: '-10% 0px' });
 
   const { scrollY } = useScroll();
@@ -217,7 +159,7 @@ function BlogContent() {
         {isLoading && <StairsPreloader />}
       </AnimatePresence>
 
-      {/* ── Hero ───────────────────────────────────────────────────────────── */}
+      {/* ── Hero — featured post ─────────────────────────────────────────── */}
       <section className="relative w-full overflow-hidden bg-black" style={{ height: 'clamp(380px, 58vh, 680px)' }}>
         <Navbar
           isLoading={isLoading}
@@ -236,7 +178,7 @@ function BlogContent() {
           <motion.img
             variants={imageZoom}
             src={HERO_IMAGE}
-            alt="Body By Brad community"
+            alt={featuredPost?.heroImageAlt ?? 'Body By Brad'}
             className="absolute inset-0 h-full w-full object-cover object-center"
             loading="eager"
             fetchPriority="high"
@@ -248,63 +190,42 @@ function BlogContent() {
           <div className="absolute bottom-0 left-0 right-0 px-4 pb-8 sm:px-7 md:px-12 md:pb-12">
             <motion.p
               variants={fadeUp}
-              className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#007AE5]"
+              className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#E6FF2B]"
             >
               Featured Post
             </motion.p>
-            <h1 className="font-bold uppercase leading-[0.95] tracking-tight text-white text-[5.5vw] sm:text-[4vw] md:text-[2.8vw] lg:text-[2.2rem] max-w-xl">
-              <motion.span variants={headlineLine} className="block">
-                THE MINDSET BEHIND
-              </motion.span>
-              <motion.span variants={headlineLine} className="block">
-                EVERY TRANSFORMATION
-              </motion.span>
-            </h1>
+            {featuredPost && (
+              <Link href={`/blog/${featuredPost.slug}`}>
+                <motion.h1
+                  variants={headlineLine}
+                  className="font-bold uppercase leading-[0.95] tracking-tight text-white text-[5.5vw] sm:text-[4vw] md:text-[2.8vw] lg:text-[2.2rem] max-w-xl hover:text-[#E6FF2B] transition-colors"
+                >
+                  {featuredPost.title}
+                </motion.h1>
+              </Link>
+            )}
           </div>
         </motion.div>
-      </section>
-
-      {/* ── Featured Blog ───────────────────────────────────────────────────── */}
-      <section
-        ref={featuredRef}
-        className="w-full bg-white px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24"
-      >
-        <motion.h2
-          variants={sectionHead}
-          initial="hidden"
-          animate={featuredInView ? 'visible' : 'hidden'}
-          className="mb-10 text-center font-bold uppercase tracking-tight text-zinc-950 text-3xl sm:text-4xl md:text-5xl md:mb-14"
-        >
-          FEATURED BLOG
-        </motion.h2>
-
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 md:gap-10">
-          {FEATURED_POSTS.map((post, i) => (
-            <BlogCard key={post.id} post={post} delay={i * 0.1} />
-          ))}
-        </div>
       </section>
 
       {/* ── Latest Blog ────────────────────────────────────────────────────── */}
       <section
         ref={latestRef}
-        className="w-full bg-[#F9F7F2] px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24"
+        className="w-full bg-white px-4 py-16 sm:px-7 sm:py-20 md:px-12 md:py-24"
       >
-        <div className="mx-auto max-w-6xl">
-          <motion.h2
-            variants={sectionHead}
-            initial="hidden"
-            animate={latestInView ? 'visible' : 'hidden'}
-            className="mb-10 font-bold uppercase tracking-tight text-zinc-950 text-3xl sm:text-4xl md:text-5xl md:mb-14"
-          >
-            LATEST BLOG
-          </motion.h2>
+        <motion.h2
+          variants={sectionHead}
+          initial="hidden"
+          animate={latestInView ? 'visible' : 'hidden'}
+          className="mb-10 text-center font-bold uppercase tracking-tight text-zinc-950 text-3xl sm:text-4xl md:text-5xl md:mb-14"
+        >
+          Latest Articles
+        </motion.h2>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:gap-10">
-            {LATEST_POSTS.map((post, i) => (
-              <BlogCard key={post.id} post={post} delay={i * 0.12} />
-            ))}
-          </div>
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 md:gap-10">
+          {(restPosts.length > 0 ? restPosts : BLOG_POSTS).map((post, i) => (
+            <BlogCard key={post.slug} post={post} delay={i * 0.1} />
+          ))}
         </div>
       </section>
 

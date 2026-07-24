@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { getResend } from '@/lib/resend';
 import { contactNotificationEmail, contactConfirmationEmail } from '@/lib/emails';
 import { rateLimit } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
 const TO_EMAIL = process.env.NOTIFICATION_EMAIL ?? 'bradley@bodybybradfitness.com';
 const FROM_EMAIL = 'Body By Brad <onboarding@resend.dev>';
 
@@ -45,6 +44,7 @@ export async function POST(req: Request) {
       contactConfirmationEmail({ firstName, siteUrl }),
     ]);
 
+    const resend = getResend();
     await Promise.all([
       resend.emails.send({
         from: FROM_EMAIL,
