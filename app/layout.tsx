@@ -6,6 +6,7 @@ import { AuthProvider } from '@/lib/auth/AuthContext';
 import { LanguageProvider } from '@/lib/LanguageContext';
 import CartDrawer from '@/components/layout/CartDrawer';
 import { SITE_URL, DEFAULT_OG_IMAGE } from '@/lib/site';
+import { logoUrl } from '@/lib/constants';
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: logoUrl },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
