@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
